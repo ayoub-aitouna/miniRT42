@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "main.h": "c",
+        "types.h": "c",
+        "limits.h": "c",
+        "image.h": "c",
+        "__cxx_version": "c",
+        "functional": "c",
+        "vector": "c",
+        "iosfwd": "c",
+        "iterator": "c",
+        "camera.h": "c",
+        "vectormath.h": "c",
+        "matrex.h": "c"
+    }
+}

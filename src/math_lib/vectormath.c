@@ -16,7 +16,7 @@ vector_t *copy_vector(vector_t v)
 
 float vector_lenght2(vector_t v)
 {
-	return sqrt(v.x) + sqrt(v.y) + sqrt(v.z); 
+	return sqrt(v.x) + sqrt(v.y) + sqrt(v.z);
 }
 
 float vector_lenght(vector_t v)
@@ -40,59 +40,65 @@ float normalize(vector_t *v)
 
 vector_t *equal(vector_t *target, vector_t *v)
 {
-	target->x = v->x;
-	target->y = v->y;
-	target->z = v->z;
-	return target;
+	vector_t *new = copy_vector(*target);
+	new->x = v->x;
+	new->y = v->y;
+	new->z = v->z;
+	return new;
 }
 
 vector_t *minus(vector_t *target, vector_t *v)
 {
-	target->x -= v->x;
-	target->y -= v->y;
-	target->z -= v->z;
-	return target;
+	vector_t *new = copy_vector(*target);
+	new->x -= v->x;
+	new->y -= v->y;
+	new->z -= v->z;
+	return new;
 }
 
 vector_t *pluse(vector_t *target, vector_t *v)
 {
-	target->x += v->x;
-	target->y += v->y;
-	target->z += v->z;
-	return target;
+	vector_t *new = copy_vector(*target);
+	new->x += v->x;
+	new->y += v->y;
+	new->z += v->z;
+	return new;
 }
 
 vector_t *muliplication(vector_t *target, vector_t *v)
 {
-	target->x *= v->x;
-	target->y *= v->y;
-	target->z *= v->z;
-	return target;
+	vector_t *new = copy_vector(*target);
+	new->x *= v->x;
+	new->y *= v->y;
+	new->z *= v->z;
+	return new;
 }
 
 vector_t *num_muliplication(vector_t *target, float num)
 {
-	target->x *= num;
-	target->y *= num;
-	target->z *= num;
-	return target;
-
+	vector_t *new = copy_vector(*target);
+	new->x *= num;
+	new->y *= num;
+	new->z *= num;
+	return new;
 }
 
 vector_t *division(vector_t *target, vector_t *v)
 {
-	target->x /= v->x;
-	target->y /= v->y;
-	target->z /= v->z;
-	return target;
+	vector_t *new = copy_vector(*target);
+	new->x /= v->x;
+	new->y /= v->y;
+	new->z /= v->z;
+	return new;
 }
 
 vector_t *num_division(vector_t *target, float num)
 {
-	target->x /= num;
-	target->y /= num;
-	target->z /= num;
-	return target;
+	vector_t *new = copy_vector(*target);
+	new->x /= num;
+	new->y /= num;
+	new->z /= num;
+	return new;
 }
 
 float dot(vector_t v, vector_t u)
@@ -102,14 +108,12 @@ float dot(vector_t v, vector_t u)
 
 vector_t *cross(vector_t v, vector_t u)
 {
-	return vector(v.y * u.z - v.z * u.y, v.z * u.x - v.x * u.z,  v.x * u.y - v.y * u.x);
+	return vector(v.y * u.z - v.z * u.y, v.z * u.x - v.x * u.z, v.x * u.y - v.y * u.x);
 }
 
 vector_t *from_mt_to_vt(matrex_t mt)
 {
-	if(mt.cols != 3 || mt.rows != 1)
+	if (mt.cols != 3 || mt.rows != 1)
 		return (NULL);
-	return (vector(mt.matrex[0][0], mt.matrex[0][1],mt.matrex[0][2])); 
+	return (vector(mt.matrex[0][0], mt.matrex[0][1], mt.matrex[0][2]));
 }
-
-
