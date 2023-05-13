@@ -1,5 +1,4 @@
 #include "headers/camera.h"
-#include "headers/types.h"
 
 camera_t *Camera()
 {

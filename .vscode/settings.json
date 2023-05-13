@@ -1,5 +1,7 @@
 {
     "files.associations": {
+        "*.h": "c",
+        "*.c": "c",
         "main.h": "c",
         "types.h": "c",
         "limits.h": "c",
@@ -11,6 +13,10 @@
         "iterator": "c",
         "camera.h": "c",
         "vectormath.h": "c",
-        "matrex.h": "c"
+        "matrex.h": "c",
+        "s": "c",
+        "*.tcc": "c",
+        "random": "c",
+        "memory_resource": "c"
     }
 }

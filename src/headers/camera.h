@@ -2,18 +2,10 @@
 #define RT_CAMERA
 #include "../math_lib/headers/types.h"
 #include "../math_lib/headers/vectormath.h"
+#include "types.h"
 
-typedef struct camera
-{
-    vector_t *position;
-    vector_t *loockat;
-    vector_t *up;
-    vector_t *screen_u;
-    vector_t *screen_v;
-    vector_t *screen_center;
-    double lenght;
-    double horizontal_size;
-    double aspect_ration;
-} camera_t;
+camera_t *Camera();
+void calculat_geometry(camera_t *camera);
+ray_t *generate_ray(camera_t *camera, int screenX, int screenY);
 
 #endif

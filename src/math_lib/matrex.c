@@ -1,20 +1,21 @@
 #include <stdio.h>
 #include "headers/matrex.h"
+#include "headers/types.h"
 
 void print_matrex(matrex_t *matrex)
 {
-	int	i;
-	int	j;
+	int i;
+	int j;
 
-	if(!matrex)
+	if (!matrex)
 		return;
 	i = 0;
 	printf("[ \n");
-	while(i < matrex->rows )
+	while (i < matrex->rows)
 	{
 		j = 0;
 		printf("\t[ ");
-		while(j < matrex->cols)
+		while (j < matrex->cols)
 		{
 			printf("<%f>%c", matrex->matrex[i][j], j < (matrex->cols - 1) ? ',' : ' ');
 			j++;
@@ -24,10 +25,16 @@ void print_matrex(matrex_t *matrex)
 	}
 	printf("]\n");
 }
-
-void fill_mt(matrex_t *mt, double* values)
+matrex_t *matrix(int rows, int cols, double *values)
 {
-	int k = 0;  // index of current value
+	matrex_t *mt = creat_matrex(rows, cols);
+	fill_mt(mt, values);
+	return (mt);
+}
+
+void fill_mt(matrex_t *mt, double *values)
+{
+	int k = 0; // index of current value
 	for (int i = 0; i < mt->rows; i++)
 	{
 		for (int j = 0; j < mt->cols; j++)
@@ -57,10 +64,10 @@ double *create_cols(int c)
 
 matrex_t *creat_matrex(int rows, int cols)
 {
-	matrex_t	*new_mt;
-	int			i;
-	double		**mt; 
-	if(rows <= 0 || cols <= 0)
+	matrex_t *new_mt;
+	int i;
+	double **mt;
+	if (rows <= 0 || cols <= 0)
 		return (NULL);
 	new_mt = malloc(sizeof(matrex_t));
 	i = 0;
@@ -73,21 +80,21 @@ matrex_t *creat_matrex(int rows, int cols)
 	return (new_mt);
 }
 
-matrex_t	*mt_multiplication(matrex_t *mt1, matrex_t * mt2)
+matrex_t *mt_multiplication(matrex_t *mt1, matrex_t *mt2)
 {
-	matrex_t	*result;
-	int			i;
-	int			j;
-	int			k;
+	matrex_t *result;
+	int i;
+	int j;
+	int k;
 
 	i = 0;
-	if(!mt1 || !mt2 || mt1->cols != mt2->rows)
+	if (!mt1 || !mt2 || mt1->cols != mt2->rows)
 		return (NULL);
 	result = creat_matrex(mt1->rows, mt2->cols);
 	while (i < mt1->rows)
 	{
 		k = 0;
-		while ( k < mt2->cols)
+		while (k < mt2->cols)
 		{
 			j = 0;
 			while (j < mt1->cols)
@@ -101,4 +108,3 @@ matrex_t	*mt_multiplication(matrex_t *mt1, matrex_t * mt2)
 	}
 	return (result);
 }
-
