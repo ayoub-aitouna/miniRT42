@@ -4,6 +4,7 @@
 #include "math_lib/headers/vectormath.h"
 #include "math_lib/headers/matrex.h"
 #include "headers/camera.h"
+#include "headers/image.h"
 
 scene_t *Scene()
 {

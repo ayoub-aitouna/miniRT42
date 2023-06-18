@@ -4,7 +4,6 @@
 #include "../math_lib/headers/types.h"
 #include "../lib/lib.h"
 
-typedef int (*test_intersection)(struct ray, vector_t *, vector_t *, vector_t *);
 
 typedef struct s_data
 {
@@ -21,6 +20,7 @@ typedef struct ray
 	vector_t *point2;
 	vector_t *m_lab;
 } ray_t;
+typedef int (*test_intersection)(struct ray, vector_t *, vector_t *, vector_t *);
 
 typedef struct Object
 {
@@ -55,4 +55,6 @@ typedef struct Scene
 	t_list *m_light_list;
 	camera_t *m_camera;
 } scene_t;
+
+
 #endif

@@ -18,6 +18,12 @@ void bg(void *mlx, void *win, t_image *image)
 	display(mlx, win, image);
 }
 
+int m_exit(void)
+{
+	printf("Stoped Runnig \n");
+	exit(0);
+}
+
 int main(int ac, char **av)
 {
 	void *mlx;
@@ -25,8 +31,9 @@ int main(int ac, char **av)
 	t_data img;
 
 	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "Hello world!");
+	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "RayTracing");
 	t_image *image = initialize(mlx);
 	bg(mlx, mlx_win, image);
+	mlx_hook(mlx_win, 17, 0l, m_exit, NULL);
 	mlx_loop(mlx);
 }
