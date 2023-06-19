@@ -9,7 +9,6 @@
 scene_t *Scene()
 {
 	scene_t *scene = malloc(sizeof(scene_t));
-	// objects
 	scene->m_object_list = NULL;
 	double values[] = 
 	{	1,0,0,0,
@@ -29,7 +28,6 @@ scene_t *Scene()
 
 t_image *Render(scene_t *scene)
 {
-
-
+	return NULL;
 }
 

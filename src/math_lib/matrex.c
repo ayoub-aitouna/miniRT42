@@ -17,7 +17,7 @@ void print_matrex(matrex_t *matrex)
 		printf("\t[ ");
 		while (j < matrex->cols)
 		{
-			printf("<%f>%c", matrex->matrex[i][j], j < (matrex->cols - 1) ? ',' : ' ');
+			printf(" %.2f  %c", matrex->matrex[i][j], j < (matrex->cols - 1) ? ',' : ' ');
 			j++;
 		}
 		printf("],\n");
@@ -25,6 +25,7 @@ void print_matrex(matrex_t *matrex)
 	}
 	printf("]\n");
 }
+
 matrex_t *matrix(int rows, int cols, double *values)
 {
 	matrex_t *mt = creat_matrex(rows, cols);
@@ -107,4 +108,20 @@ matrex_t *mt_multiplication(matrex_t *mt1, matrex_t *mt2)
 		i++;
 	}
 	return (result);
+}
+
+/**
+ * 1: |a b|
+ * 2: |c d|
+ * det = ad - bc;
+ */
+double determinant(matrex_t *mt)
+{
+	double d;
+
+	if (mt->cols != 2 || mt->rows != 2)
+		return 0;
+	printf("%.2f * %.2f - %.2f * %.2f", mt->matrex[0][0], mt->matrex[1][1], mt->matrex[0][1], mt->matrex[1][0]);
+	d = (mt->matrex[0][0] * mt->matrex[1][1]) - (mt->matrex[0][1] * mt->matrex[1][0]);
+	return d;
 }

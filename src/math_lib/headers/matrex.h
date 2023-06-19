@@ -11,4 +11,5 @@ matrex_t *mt_multiplication(matrex_t *mt1, matrex_t *mt2);
 void fill_mt(matrex_t *mt, double *values);
 void print_matrex(matrex_t *matrex);
 matrex_t *matrix(int rows, int cols, double *values);
+double determinant(matrex_t *mt);
 #endif

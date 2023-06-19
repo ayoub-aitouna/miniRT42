@@ -1,9 +1,17 @@
 SRC		:= $(wildcard src/*.c) $(wildcard src/**/*.c)
-OBJ_DIR	:= OBJECT_FILES
+OBJ_DIR	:= Compiled
 OBJ		:= $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC))
 NAME	:= App
 cc		:= gcc
-MLXFLAG = -lmlx -lXext -lX11
+MLXFLAG := -lmlx 
+OS 	:= $(shell uname)
+
+ifeq ($(OS), Darwin)
+	MLXFLAG += -framework OpenGl -framework Appkit
+else
+	MLXFLAG += -lXext -lX11
+endif
+
 all: $(NAME)
 
 $(OBJ_DIR)/%.o : %.c
@@ -16,10 +24,10 @@ $(NAME) : $(OBJ)
 	$(cc) $(CFLAGS) $(OBJ) $(MLXFLAG) -lm -o $(NAME)
 
 clean:
-	@rm -rf $(OBJ)
+	@rm -rf $(OBJ) $(OBJ_DIR)
 
 fclean: clean
-	@rm -rf $(NAME)
+	@rm -rf $(NAME) 
 
 re: clean fclean $(NAME)
 
