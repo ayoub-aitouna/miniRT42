@@ -1,6 +1,6 @@
 #include "headers/types.h"
-#include "math_lib/headers/types.h"
-#include "math_lib/headers/vectormath.h"
+#include "lib/math/headers/types.h"
+#include "lib/math/headers/vectormath.h"
 
 // void Generat_rays()
 // {

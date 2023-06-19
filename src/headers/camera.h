@@ -1,7 +1,7 @@
 #ifndef RT_CAMERA
 #define RT_CAMERA
-#include "../math_lib/headers/types.h"
-#include "../math_lib/headers/vectormath.h"
+#include "../lib/math/headers/types.h"
+#include "../lib/math/headers/vectormath.h"
 #include "types.h"
 
 camera_t *Camera();

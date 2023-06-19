@@ -16,4 +16,5 @@ matrix_t *submatrix(matrix_t *mt, int row, int column);
 double minor(matrix_t *mt, int row, int column);
 double cofactor(matrix_t *mt, int row, int column);
 matrix_t *inverse(matrix_t *mt);
+void set_to_indentity(matrix_t *mt);
 #endif

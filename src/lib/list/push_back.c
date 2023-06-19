@@ -1,4 +1,4 @@
-#include "lib.h"
+#include "../lib.h"
 
 void push_back(t_list **lst, t_list *new)
 {

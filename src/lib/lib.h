@@ -1,7 +1,7 @@
 #ifndef LIB_H
 #define LIB_H
 #include "stdlib.h"
-
+#include "math/headers/types.h"
 typedef struct list
 {
     void *content;

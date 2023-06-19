@@ -1,9 +1,8 @@
 #ifndef M_TYPES_H
 #define M_TYPES_H
 #include <stdlib.h>
-#include "../math_lib/headers/types.h"
 #include "../lib/lib.h"
-
+typedef struct Object object_t;
 
 typedef struct s_data
 {
@@ -20,7 +19,9 @@ typedef struct ray
 	vector_t *point2;
 	vector_t *m_lab;
 } ray_t;
-typedef int (*test_intersection)(struct ray, vector_t *, vector_t *, vector_t *);
+
+
+typedef int (*test_intersection)(object_t *, struct ray *, vector_t *, vector_t *, vector_t *);
 
 typedef struct Object
 {
@@ -34,6 +35,7 @@ typedef struct Light
 {
 	vector_t *base_color;
 	vector_t *position;
+	double m_intensity;
 } light_t;
 
 typedef struct camera
@@ -55,6 +57,5 @@ typedef struct Scene
 	t_list *m_light_list;
 	camera_t *m_camera;
 } scene_t;
-
 
 #endif

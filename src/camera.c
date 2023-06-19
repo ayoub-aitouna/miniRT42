@@ -12,6 +12,7 @@ camera_t *Camera(void)
     camera->horizontal_size = 1.0;
     camera->lenght = 1.0;
     camera->aspect_ration = 1.0;
+    calculat_geometry(camera);
     return (camera);
 }
 

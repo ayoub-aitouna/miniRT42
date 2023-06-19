@@ -1,31 +1,64 @@
-#include "headers/types.h"
-#include "lib/lib.h"
-#include "Objects/headers/spher.h"
-#include "math_lib/headers/vectormath.h"
-#include "math_lib/headers/matrix.h"
-#include "headers/camera.h"
-#include "headers/image.h"
+
+#include "headers/scene.h"
 
 scene_t *Scene()
 {
 	scene_t *scene = malloc(sizeof(scene_t));
 	scene->m_object_list = NULL;
-	double values[] =
-		{1, 0, 0, 0,
-		 0, 1, 0, 0,
-		 0, 0, 1, 0,
-		 0, 0, 0, 1};
-	object_t *sphere = create_sphere(matrix(4, 4, values), matrix(4, 4, values), matrix(4, 4, values), vector(1, 1, 1));
-
+	object_t *sphere = create_sphere(vector(1, 1, 1), vector(1, 1, 1), vector(1, 1, 1), vector(1, 1, 1));
 	push_back(&scene->m_object_list, ft_lstnew(sphere));
-
 	scene->m_camera = Camera();
-	calculat_geometry(scene->m_camera);
-
 	return (scene);
 }
 
-t_image *Render(scene_t *scene)
+void printProgress(int y)
 {
-	return NULL;
+	int progress = (((float)(y) / (float)HEIGHT) * 100) + 1;
+	if (progress < 100)
+		printf("\033[A\33[2K\r %d%%\n", progress);
+	else
+		printf("\033[A\33[2K\r DONE.\n");
+}
+
+t_image *Render(scene_t *scene, void *mlx)
+{
+	t_image *image;
+	image = initialize(mlx);
+
+	int y = 0, x = 0;
+	double xFact = 1.0 / (((double)WIDTH) / 2.0);
+	double yFact = 1.0 / (((double)HEIGHT) / 2.0);
+	while (y < HEIGHT)
+	{
+		x = 0;
+		printProgress(y);
+		while (x < WIDTH)
+		{
+			double normX = (((double)WIDTH) * xFact) - 1.0;
+			double normY = (((double)HEIGHT) * yFact) - 1.0;
+			ray_t *ray = generate_ray(scene->m_camera, normX, normY);
+			if (cast_ray(ray, scene))
+				set_pixel(image, x, y, .9, .9, .9);
+			x++;
+		}
+		y++;
+	}
+	return image;
+}
+
+int cast_ray(ray_t *ray, scene_t *scene)
+{
+	int valide_int = 0;
+	t_list *tmp = scene->m_object_list;
+
+	vector_t intPoint;
+	vector_t localNormal;
+	vector_t localColor;
+
+	while (tmp)
+	{
+		valide_int = ((object_t *)tmp->content)->test_inter((object_t *)tmp->content, ray, &intPoint, &localNormal, &localColor);
+		tmp = tmp->next;
+	}
+	return (valide_int);
 }

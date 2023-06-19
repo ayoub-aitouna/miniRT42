@@ -18,7 +18,6 @@ void bg(void *mlx, void *win, t_image *image)
 		}
 		i++;
 	}
-	display(mlx, win, image);
 }
 
 int m_exit(void)
@@ -27,17 +26,16 @@ int m_exit(void)
 	exit(0);
 }
 
-// int main(int ac, char **av)
-// {
-// 	void *mlx;
-// 	void *mlx_win;
-// 	t_data img;
-// 	t_image *image;
-
-// 	mlx = mlx_init();
-// 	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "RayTracing");
-// 	image = initialize(mlx);
-// 	bg(mlx, mlx_win, image);
-// 	mlx_hook(mlx_win, 17, 0l, m_exit, NULL);
-// 	mlx_loop(mlx);
-// }
+int main(int ac, char **av)
+{
+	void *mlx;
+	void *mlx_win;
+	t_data img;
+	mlx = mlx_init();
+	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "RayTracing");
+	scene_t *scene = Scene();
+	t_image *image = Render(scene, mlx);
+	display(mlx, mlx_win, image);
+	mlx_hook(mlx_win, 17, 0l, m_exit, NULL);
+	mlx_loop(mlx);
+}

@@ -17,7 +17,7 @@ void print_matrix(matrix_t *matrix)
 		printf("\t[ ");
 		while (j < matrix->cols)
 		{
-			printf(" %.2f  %c", matrix->matrix[i][j], j < (matrix->cols - 1) ? ',' : ' ');
+			printf(" %f  %c", matrix->matrix[i][j], j < (matrix->cols - 1) ? ',' : ' ');
 			j++;
 		}
 		printf("],\n");
@@ -96,7 +96,12 @@ matrix_t *mt_multiplication(matrix_t *mt1, matrix_t *mt2)
 
 	i = 0;
 	if (!mt1 || !mt2 || mt1->cols != mt2->rows)
-		return (NULL);
+	{
+		// printf("error trying to multiplicat 2 matrixes \n");
+		// fflush(stdout);
+		return (mt1);
+	}
+
 	result = create_matrix(mt1->rows, mt2->cols);
 	while (i < mt1->rows)
 	{
@@ -126,15 +131,21 @@ double determinant(matrix_t *mt)
 	double d;
 	int column_index;
 
+	column_index = 0;
+	d = 0;
 	if (mt->cols != mt->rows)
 		return 0;
 	if (mt->cols == 2 || mt->rows == 2)
 		d = (mt->matrix[0][0] * mt->matrix[1][1]) - (mt->matrix[0][1] * mt->matrix[1][0]);
 	else
 	{
-		column_index = 0;
 		while (column_index < mt->cols)
-			d += mt->matrix[0][column_index] * cofactor(mt, 0, column_index++);
+		{
+			// printf("%.1f += %.1f * %.1f ", d, mt->matrix[0][column_index], cofactor(mt, 0, column_index));
+			d += mt->matrix[0][column_index] * cofactor(mt, 0, column_index);
+			column_index++;
+		}
+		// printf("\n");
 	}
 	return (d);
 }
@@ -165,7 +176,11 @@ matrix_t *submatrix(matrix_t *mt, int row, int column)
 		while (j < mt->cols)
 		{
 			if (j != column)
-				new_matrix->matrix[filer_row_index][filer_col_index++] = mt->matrix[i][j];
+			{
+				new_matrix->matrix[filer_row_index][filer_col_index] = mt->matrix[i][j];
+				filer_col_index++;
+			}
+
 			j++;
 		}
 		filer_row_index++;
@@ -178,6 +193,7 @@ double minor(matrix_t *mt, int row, int column)
 {
 	return (determinant(submatrix(mt, row, column)));
 }
+
 double cofactor(matrix_t *mt, int row, int column)
 {
 	int sign;
@@ -194,13 +210,11 @@ matrix_t *inverse(matrix_t *mt)
 	int row_index;
 	int col_index;
 	double c;
-	double determinant_value;
-
-	if (determinant(mt) == 0)
+	double dt;
+	dt = determinant(mt);
+	if (dt == 0)
 		return (NULL);
-	determinant_value = determinant(mt);
 	Invers = create_matrix(mt->rows, mt->cols);
-	printf("%d ,%d \n", mt->rows, mt->cols);
 	row_index = 0;
 	while (row_index < mt->rows)
 	{
@@ -208,11 +222,16 @@ matrix_t *inverse(matrix_t *mt)
 		while (col_index < mt->cols)
 		{
 			c = cofactor(mt, row_index, col_index);
-			Invers->matrix[col_index][row_index] = (c / determinant_value);
+			Invers->matrix[col_index][row_index] = (c / dt);
 			col_index++;
 		}
 		printf("\n");
 		row_index++;
 	}
 	return (Invers);
+}
+
+void set_to_indentity(matrix_t *mt)
+{
+	print_matrix(mt_multiplication(mt, inverse(mt)));
 }
