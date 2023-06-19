@@ -9,11 +9,11 @@
 #define HALFPI  1.5707963f
 #endif
 
-typedef struct matrex{
+typedef struct matrix{
 	int rows;
 	int cols;
-	double **matrex;
-} matrex_t;
+	double **matrix;
+} matrix_t;
 
 typedef struct vector
 {

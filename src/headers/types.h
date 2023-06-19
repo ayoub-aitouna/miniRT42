@@ -24,8 +24,8 @@ typedef int (*test_intersection)(struct ray, vector_t *, vector_t *, vector_t *)
 
 typedef struct Object
 {
-	matrex_t *fwd_tfm;
-	matrex_t *bck_tfm;
+	matrix_t *fwd_tfm;
+	matrix_t *bck_tfm;
 	vector_t *base_color;
 	test_intersection test_inter;
 } object_t;

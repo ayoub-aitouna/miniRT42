@@ -1,23 +1,23 @@
-#include <stdio.h>
-#include "headers/matrex.h"
+#include "headers/matrix.h"
 #include "headers/types.h"
+#include <stdio.h>
 
-void print_matrex(matrex_t *matrex)
+void print_matrix(matrix_t *matrix)
 {
 	int i;
 	int j;
 
-	if (!matrex)
+	if (!matrix)
 		return;
 	i = 0;
 	printf("[ \n");
-	while (i < matrex->rows)
+	while (i < matrix->rows)
 	{
 		j = 0;
 		printf("\t[ ");
-		while (j < matrex->cols)
+		while (j < matrix->cols)
 		{
-			printf(" %.2f  %c", matrex->matrex[i][j], j < (matrex->cols - 1) ? ',' : ' ');
+			printf(" %.2f  %c", matrix->matrix[i][j], j < (matrix->cols - 1) ? ',' : ' ');
 			j++;
 		}
 		printf("],\n");
@@ -26,64 +26,70 @@ void print_matrex(matrex_t *matrex)
 	printf("]\n");
 }
 
-matrex_t *matrix(int rows, int cols, double *values)
+matrix_t *matrix(int rows, int cols, double *values)
 {
-	matrex_t *mt = creat_matrex(rows, cols);
+	matrix_t *mt;
+
+	mt = create_matrix(rows, cols);
 	fill_mt(mt, values);
 	return (mt);
 }
 
-void fill_mt(matrex_t *mt, double *values)
+void fill_mt(matrix_t *mt, double *values)
 {
 	int k = 0; // index of current value
 	for (int i = 0; i < mt->rows; i++)
 	{
 		for (int j = 0; j < mt->cols; j++)
-			mt->matrex[i][j] = values[k++];
+			mt->matrix[i][j] = values[k++];
 	}
 }
 
-matrex_t *from_vector_to_matrex(vector_t vt, matrex_t mt)
+matrix_t *from_vector_to_matrix(vector_t vt, matrix_t mt)
 {
-	matrex_t *new_mt;
+	matrix_t *new_mt;
 
-	new_mt = creat_matrex(1, 3);
-	new_mt->matrex[0][0] = vt.x;
-	new_mt->matrex[0][1] = vt.y;
-	new_mt->matrex[0][2] = vt.z;
+	new_mt = create_matrix(1, 3);
+	new_mt->matrix[0][0] = vt.x;
+	new_mt->matrix[0][1] = vt.y;
+	new_mt->matrix[0][2] = vt.z;
 	return (new_mt);
 }
 
 double *create_cols(int c)
 {
-	int i = 0;
-	double *new_col = malloc(c * sizeof(double));
+	int i;
+	double *new_col;
+
+	i = 0;
+	new_col = malloc(c * sizeof(double));
 	while (i < c)
 		new_col[i++] = .0;
 	return (new_col);
 }
 
-matrex_t *creat_matrex(int rows, int cols)
+matrix_t *create_matrix(int rows, int cols)
 {
-	matrex_t *new_mt;
+	matrix_t *new_mt;
 	int i;
 	double **mt;
+
 	if (rows <= 0 || cols <= 0)
 		return (NULL);
-	new_mt = malloc(sizeof(matrex_t));
+	new_mt = malloc(sizeof(matrix_t));
 	i = 0;
 	new_mt->rows = rows;
 	new_mt->cols = cols;
 	mt = malloc(sizeof(double *) * rows);
 	while (i < rows)
 		mt[i++] = create_cols(cols);
-	new_mt->matrex = mt;
+	new_mt->matrix = mt;
 	return (new_mt);
 }
 
-matrex_t *mt_multiplication(matrex_t *mt1, matrex_t *mt2)
+matrix_t *mt_multiplication(matrix_t *mt1, matrix_t *mt2)
 {
-	matrex_t *result;
+	matrix_t *result;
 	int i;
 	int j;
 	int k;
@@ -91,7 +97,7 @@ matrex_t *mt_multiplication(matrex_t *mt1, matrex_t *mt2)
 	i = 0;
 	if (!mt1 || !mt2 || mt1->cols != mt2->rows)
 		return (NULL);
-	result = creat_matrex(mt1->rows, mt2->cols);
+	result = create_matrix(mt1->rows, mt2->cols);
 	while (i < mt1->rows)
 	{
 		k = 0;
@@ -100,7 +106,7 @@ matrex_t *mt_multiplication(matrex_t *mt1, matrex_t *mt2)
 			j = 0;
 			while (j < mt1->cols)
 			{
-				result->matrex[i][k] += (mt1->matrex[i][j] * mt2->matrex[j][k]);
+				result->matrix[i][k] += (mt1->matrix[i][j] * mt2->matrix[j][k]);
 				j++;
 			}
 			k++;
@@ -115,13 +121,98 @@ matrex_t *mt_multiplication(matrex_t *mt1, matrex_t *mt2)
  * 2: |c d|
  * det = ad - bc;
  */
-double determinant(matrex_t *mt)
+double determinant(matrix_t *mt)
 {
 	double d;
+	int column_index;
 
-	if (mt->cols != 2 || mt->rows != 2)
+	if (mt->cols != mt->rows)
 		return 0;
-	printf("%.2f * %.2f - %.2f * %.2f", mt->matrex[0][0], mt->matrex[1][1], mt->matrex[0][1], mt->matrex[1][0]);
-	d = (mt->matrex[0][0] * mt->matrex[1][1]) - (mt->matrex[0][1] * mt->matrex[1][0]);
-	return d;
+	if (mt->cols == 2 || mt->rows == 2)
+		d = (mt->matrix[0][0] * mt->matrix[1][1]) - (mt->matrix[0][1] * mt->matrix[1][0]);
+	else
+	{
+		column_index = 0;
+		while (column_index < mt->cols)
+			d += mt->matrix[0][column_index] * cofactor(mt, 0, column_index++);
+	}
+	return (d);
+}
+
+matrix_t *submatrix(matrix_t *mt, int row, int column)
+{
+	int i;
+	int j;
+	int filer_col_index;
+	int filer_row_index;
+	matrix_t *new_matrix;
+
+	if (mt->rows <= 1 || mt->cols <= 1)
+		return (mt);
+	new_matrix = create_matrix(mt->rows - 1, mt->rows - 1);
+	i = 0;
+	filer_col_index = 0;
+	filer_row_index = 0;
+	while (i < mt->rows)
+	{
+		j = 0;
+		filer_col_index = 0;
+		if (i == row)
+		{
+			i++;
+			continue;
+		}
+		while (j < mt->cols)
+		{
+			if (j != column)
+				new_matrix->matrix[filer_row_index][filer_col_index++] = mt->matrix[i][j];
+			j++;
+		}
+		filer_row_index++;
+		i++;
+	}
+	return (new_matrix);
+}
+
+double minor(matrix_t *mt, int row, int column)
+{
+	return (determinant(submatrix(mt, row, column)));
+}
+double cofactor(matrix_t *mt, int row, int column)
+{
+	int sign;
+
+	sign = 1;
+	if ((row + column) % 2 != 0)
+		sign = -1;
+	return (sign * minor(mt, row, column));
+}
+
+matrix_t *inverse(matrix_t *mt)
+{
+	matrix_t *Invers;
+	int row_index;
+	int col_index;
+	double c;
+	double determinant_value;
+
+	if (determinant(mt) == 0)
+		return (NULL);
+	determinant_value = determinant(mt);
+	Invers = create_matrix(mt->rows, mt->cols);
+	printf("%d ,%d \n", mt->rows, mt->cols);
+	row_index = 0;
+	while (row_index < mt->rows)
+	{
+		col_index = 0;
+		while (col_index < mt->cols)
+		{
+			c = cofactor(mt, row_index, col_index);
+			Invers->matrix[col_index][row_index] = (c / determinant_value);
+			col_index++;
+		}
+		printf("\n");
+		row_index++;
+	}
+	return (Invers);
 }
