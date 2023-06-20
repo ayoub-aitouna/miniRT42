@@ -117,3 +117,7 @@ vector_t *from_mt_to_vt(matrix_t mt)
 		return (NULL);
 	return (vector(mt.matrix[0][0], mt.matrix[0][1], mt.matrix[0][2]));
 }
+void print_vector(vector_t v)
+{
+	printf("x : %f, y: %f, z: %f \n", v.x, v.y, v.z);
+}

@@ -5,7 +5,8 @@
 #include <unistd.h>
 #include <math.h>
 #include "types.h"
-
+#include <stdio.h>
+void print_vector(vector_t v);
 float vector_lenght(vector_t v);
 float vector_lenght2(vector_t v);
 vector_t *normalized(vector_t *v);

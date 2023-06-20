@@ -30,11 +30,12 @@ int main(int ac, char **av)
 {
 	void *mlx;
 	void *mlx_win;
+	t_image *image = NULL;
 	t_data img;
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "RayTracing");
 	scene_t *scene = Scene();
-	t_image *image = Render(scene, mlx);
+	image = Render(scene, mlx);
 	display(mlx, mlx_win, image);
 	mlx_hook(mlx_win, 17, 0l, m_exit, NULL);
 	mlx_loop(mlx);

@@ -28,11 +28,11 @@ t_image *Render(scene_t *scene, void *mlx)
 	int y = 0, x = 0;
 	double xFact = 1.0 / (((double)WIDTH) / 2.0);
 	double yFact = 1.0 / (((double)HEIGHT) / 2.0);
-	while (y < HEIGHT)
+	while (y < 1)
 	{
 		x = 0;
 		printProgress(y);
-		while (x < WIDTH)
+		while (x < 1)
 		{
 			double normX = (((double)WIDTH) * xFact) - 1.0;
 			double normY = (((double)HEIGHT) * yFact) - 1.0;
@@ -60,5 +60,7 @@ int cast_ray(ray_t *ray, scene_t *scene)
 		valide_int = ((object_t *)tmp->content)->test_inter((object_t *)tmp->content, ray, &intPoint, &localNormal, &localColor);
 		tmp = tmp->next;
 	}
+	if (valide_int)
+		printf("valide_int : true \n");
 	return (valide_int);
 }

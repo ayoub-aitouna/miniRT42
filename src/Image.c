@@ -32,6 +32,8 @@ void set_pixel(t_image *image, int x, int y, double r, double g, double b)
 void display(void *mlx, void *win, t_image *image)
 {
     int i = 0, j = 0;
+    if (!image)
+        return;
     t_data img;
     double max = calculat_max(image->red);
     double max_g = calculat_max(image->green);

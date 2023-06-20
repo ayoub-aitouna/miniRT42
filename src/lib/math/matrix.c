@@ -97,11 +97,9 @@ matrix_t *mt_multiplication(matrix_t *mt1, matrix_t *mt2)
 	i = 0;
 	if (!mt1 || !mt2 || mt1->cols != mt2->rows)
 	{
-		// printf("error trying to multiplicat 2 matrixes \n");
-		// fflush(stdout);
-		return (mt1);
+		printf("error trying to multiplicat 2 matrixes \n");
+		return (NULL);
 	}
-
 	result = create_matrix(mt1->rows, mt2->cols);
 	while (i < mt1->rows)
 	{
@@ -225,7 +223,6 @@ matrix_t *inverse(matrix_t *mt)
 			Invers->matrix[col_index][row_index] = (c / dt);
 			col_index++;
 		}
-		printf("\n");
 		row_index++;
 	}
 	return (Invers);
@@ -233,5 +230,16 @@ matrix_t *inverse(matrix_t *mt)
 
 void set_to_indentity(matrix_t *mt)
 {
-	print_matrix(mt_multiplication(mt, inverse(mt)));
+	int i = 0, j = 0;
+	while (i < mt->rows)
+	{
+		j = 0;
+		while (j < mt->cols)
+		{
+			if (i == j)
+				mt->matrix[i][j] = 1;
+			j++;
+		}
+		i++;
+	}
 }

@@ -3,6 +3,18 @@
 #include "../../headers/types.h"
 #include "headers/gtfm.h"
 
+matrix_t *safe_matrix_multy(matrix_t *mt1, matrix_t *mt2)
+{
+    if (!mt1 || !mt2)
+        return (NULL);
+    matrix_t *result = mt_multiplication(mt1, mt2);
+    free(mt1);
+    free(mt2);
+    if (!result)
+        printf("error in safe mt \n");
+    return (result);
+}
+
 matrix_t *Set_transform(vector_t *translation, vector_t *rotation, vector_t *scal)
 {
     if (!translation || !rotation || !scal)
@@ -12,7 +24,6 @@ matrix_t *Set_transform(vector_t *translation, vector_t *rotation, vector_t *sca
     }
     // define a matrix for each component of the transform
     matrix_t *translation_matrix = create_matrix(4, 4);
-    printf("%p %p\n", translation_matrix, translation);
     matrix_t *rotationMatriX = create_matrix(4, 4);
     matrix_t *rotationMatriY = create_matrix(4, 4);
     matrix_t *rotationMatriZ = create_matrix(4, 4);
@@ -25,6 +36,12 @@ matrix_t *Set_transform(vector_t *translation, vector_t *rotation, vector_t *sca
     // [0,1,0,0]
     // [0,0,1,0]
     // [0,0,0,1]
+    set_to_indentity(translation_matrix);
+    set_to_indentity(rotationMatriX);
+    set_to_indentity(rotationMatriY);
+    set_to_indentity(rotationMatriZ);
+    set_to_indentity(scalMatrix);
+
     translation_matrix->matrix[0][3] = translation->x;
     translation_matrix->matrix[1][3] = translation->y;
     translation_matrix->matrix[2][3] = translation->z;
@@ -65,9 +82,13 @@ matrix_t *Set_transform(vector_t *translation, vector_t *rotation, vector_t *sca
     scalMatrix->matrix[1][1] = scal->y;
     scalMatrix->matrix[2][2] = scal->z;
     // combine to give the  final transform matrix
-    return mt_multiplication(mt_multiplication(mt_multiplication(translation_matrix, rotationMatriX),
-                                               mt_multiplication(rotationMatriY, rotationMatriZ)),
-                             scalMatrix);
+
+    matrix_t *result = NULL;
+    result = safe_matrix_multy(translation_matrix, rotationMatriX);
+    result = safe_matrix_multy(result, rotationMatriY);
+    result = safe_matrix_multy(result, rotationMatriZ);
+    result = safe_matrix_multy(result, scalMatrix);
+    return (result);
 }
 
 ray_t *Apply_transform(ray_t *input_ray, object_t *this, int dirFlag)
@@ -81,7 +102,7 @@ ray_t *Apply_transform(ray_t *input_ray, object_t *this, int dirFlag)
 
 vector_t *Apply_transform_vector(vector_t *inputVector, int dirFlag, object_t *this)
 {
-    matrix_t *tmp = create_matrix(1, 4);
+    matrix_t *tmp = create_matrix(4, 1);
     matrix_t *resultmt = NULL;
     double values[] = {inputVector->x, inputVector->y, inputVector->z, 1.0f};
     fill_mt(tmp, values);
@@ -89,10 +110,6 @@ vector_t *Apply_transform_vector(vector_t *inputVector, int dirFlag, object_t *t
         resultmt = mt_multiplication(this->fwd_tfm, tmp);
     else
         resultmt = mt_multiplication(this->bck_tfm, tmp);
-    printf("%p \n", resultmt);
-    print_matrix(resultmt);
-    print_matrix(this->fwd_tfm);
-    print_matrix(this->bck_tfm);
     vector_t *result = vector(0, 0, 0);
     free(resultmt);
     free(tmp);
