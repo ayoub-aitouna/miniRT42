@@ -6,6 +6,6 @@
 
 camera_t *Camera();
 void calculat_geometry(camera_t *camera);
-ray_t *generate_ray(camera_t *camera, int screenX, int screenY);
+ray_t *generate_ray(camera_t *camera, double screenX, double screenY);
 
 #endif

@@ -5,7 +5,8 @@ scene_t *Scene()
 {
 	scene_t *scene = malloc(sizeof(scene_t));
 	scene->m_object_list = NULL;
-	object_t *sphere = create_sphere(vector(1, 1, 1), vector(1, 1, 1), vector(1, 1, 1), vector(1, 1, 1));
+	object_t *sphere = create_sphere(vector(0, 0, 0), vector(0, 0, 0),
+			vector(1, 1, 1), vector(.9, .5, .2));
 	push_back(&scene->m_object_list, ft_lstnew(sphere));
 	scene->m_camera = Camera();
 	return (scene);
@@ -19,7 +20,6 @@ void printProgress(int y)
 	else
 		printf("\033[A\33[2K\r DONE.\n");
 }
-
 t_image *Render(scene_t *scene, void *mlx)
 {
 	t_image *image;
@@ -28,17 +28,22 @@ t_image *Render(scene_t *scene, void *mlx)
 	int y = 0, x = 0;
 	double xFact = 1.0 / (((double)WIDTH) / 2.0);
 	double yFact = 1.0 / (((double)HEIGHT) / 2.0);
-	while (y < 1)
+	y = 0;
+	while (y < HEIGHT )
 	{
 		x = 0;
-		printProgress(y);
-		while (x < 1)
+		// printProgress(y);
+		while (x < WIDTH )
 		{
-			double normX = (((double)WIDTH) * xFact) - 1.0;
-			double normY = (((double)HEIGHT) * yFact) - 1.0;
+			double normX = (((double)x) * xFact) - 1.0;
+			double normY = (((double)y) * yFact) - 1.0;
 			ray_t *ray = generate_ray(scene->m_camera, normX, normY);
 			if (cast_ray(ray, scene))
-				set_pixel(image, x, y, .9, .9, .9);
+				set_pixel(image, x, y, 1, 1, 1);
+			else
+			{
+				set_pixel(image, x, y, .0, .0, .0);
+			}
 			x++;
 		}
 		y++;

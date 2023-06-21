@@ -1,23 +1,25 @@
 #include "../headers/types.h"
 #include "headers/spher.h"
-
+void printf_with_name(char *name, vector_t *v);
 int sh_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point, vector_t *local_normal, vector_t *local_color)
 {
-
+    // transform ray into the object world cords
     ray_t *bck_ray = Apply_transform(camera_ray, this, 0);
+    // PrintRay(bck_ray);
+    // normilez the ray deriction ray
     vector_t *vhat = bck_ray->m_lab;
-    print_vector(*vhat);
     normalize(vhat);
-    print_vector(*vhat);
+ 
     double b = 2 * dot(*bck_ray->point1, *vhat);
     double raduis = 1.0f;
     double c = dot(*bck_ray->point1, *bck_ray->point1) - sqrtf(raduis);
-    double test = (b * b) - (4 * c);
-    if (test <= 0)
+    double thelta = pow(b, 2) - 4 * c;
+    // printf("∆ = (%f * %f) - (4 * %f * 1) = %f \n\n", b, b, c, thelta);
+    if (thelta <= 0)
         return 0;
-    double numSqrt = sqrtf(test);
-    double t1 = (-b + numSqrt) / 2.0f;
-    double t2 = (-b - numSqrt) / 2.0f;
+    double numSqrt = sqrtf(thelta);
+    double t1 = (-b + numSqrt) / 2.0;
+    double t2 = (-b - numSqrt) / 2.0;
     if (t1 < 0.0 || t2 < 0.0)
         return 0;
     // vector_t *poi;

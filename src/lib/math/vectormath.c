@@ -16,12 +16,12 @@ vector_t *copy_vector(vector_t v)
 
 float vector_lenght2(vector_t v)
 {
-	return sqrt(v.x) + sqrt(v.y) + sqrt(v.z);
+	return (pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2));
 }
 
 float vector_lenght(vector_t v)
 {
-	return sqrt(vector_lenght2(v));
+	return sqrtf(vector_lenght2(v));
 }
 
 vector_t *normalized(vector_t *v)
@@ -34,7 +34,9 @@ vector_t *normalized(vector_t *v)
 float normalize(vector_t *v)
 {
 	float l = vector_lenght(*v);
-	num_division(v, l);
+	v->x /= l;
+	v->y /= l;
+	v->z /= l;
 	return (l);
 }
 
@@ -119,5 +121,5 @@ vector_t *from_mt_to_vt(matrix_t mt)
 }
 void print_vector(vector_t v)
 {
-	printf("x : %f, y: %f, z: %f \n", v.x, v.y, v.z);
+	printf("| %f, %f, %f |\n", v.x, v.y, v.z);
 }
