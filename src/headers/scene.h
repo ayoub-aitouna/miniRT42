@@ -1,11 +1,13 @@
 #ifndef SCENE_H
-#define SCENE_H
-#include "types.h"
-#include "../lib/lib.h"
-#include "../Objects/headers/spher.h"
-#include "../lib/math/headers/vectormath.h"
-#include "../lib/math/headers/matrix.h"
-#include "camera.h"
-#include "image.h"
-int cast_ray(ray_t *ray, scene_t *scene);
+# define SCENE_H
+# include "../Objects/headers/spher.h"
+# include "../lib/lib.h"
+# include "../lib/math/headers/matrix.h"
+# include "../lib/math/headers/vectormath.h"
+# include "camera.h"
+# include "image.h"
+# include "types.h"
+
+int	cast_ray(ray_t *ray, scene_t *scene, vector_t *c_intersection_point,
+		void *c_object, vector_t *c_norm, vector_t *c_color);
 #endif
