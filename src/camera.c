@@ -5,10 +5,10 @@ camera_t	*Camera(void)
 	camera_t	*camera;
 
 	camera = malloc(sizeof(camera_t));
-	camera->position = vector(3.0, -5.0, -2.0);
+	camera->position = vector(0.0, -5.0, -2.0);
 	camera->loockat = vector(0.0, 0.0, 0.0);
-	camera->up = vector(0.0, 0.0, 0.1);
-	camera->horizontal_size = 0.75;
+	camera->up = vector(0.0, 0.0, .1);
+	camera->horizontal_size = 0.45;
 	camera->lenght = 1.0;
 	camera->aspect_ration = 16.0 / 9.0;
 	calculat_geometry(camera);

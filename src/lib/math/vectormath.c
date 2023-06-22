@@ -145,3 +145,14 @@ void	print_vector(vector_t v)
 {
 	printf("| %f, %f, %f |\n", v.x, v.y, v.z);
 }
+
+
+vector_t *normalized_sub(vector_t *u, vector_t* v)
+{
+	vector_t *re;
+	re = minus(u, v);
+	normalize(re);
+	return (re);
+}
+
+

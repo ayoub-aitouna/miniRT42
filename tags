@@ -1,0 +1,163 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Apply_transform	src/lib/math/gtfm.c	/^ray_t *Apply_transform(ray_t *input_ray, object_t *this, int dirFlag)$/;"	f
+Apply_transform_vector	src/lib/math/gtfm.c	/^vector_t *Apply_transform_vector(vector_t *inputVector, int dirFlag, object_t *this)$/;"	f
+CalculatDiffuseColor	src/scene.c	/^vector_t	*CalculatDiffuseColor(scene_t *scene, vector_t *localNormal,$/;"	f
+Camera	src/camera.c	/^camera_t	*Camera(void)$/;"	f
+GTFM_H	src/lib/math/headers/gtfm.h	2;"	d
+Generat_rays	src/ray.c	/^void Generat_rays()$/;"	f
+HALFPI	src/lib/math/headers/types.h	9;"	d
+HEIGHT	src/headers/main.h	15;"	d
+LIB_H	src/lib/lib.h	2;"	d
+Light	src/headers/types.h	/^typedef struct Light$/;"	s
+MATH_H	src/lib/math/headers/vectormath.h	2;"	d
+MAX	src/Image.c	/^double MAX(t_image *image)$/;"	f
+MLXFLAG	Makefile	/^MLXFLAG := -lmlx $/;"	m
+M_TYPES_H	src/headers/types.h	2;"	d
+NAME	Makefile	/^NAME	:= App$/;"	m
+OBJ	Makefile	/^OBJ		:= $(patsubst %.c, $(OBJ_DIR)\/%.o, $(SRC))$/;"	m
+OBJ_DIR	Makefile	/^OBJ_DIR	:= .compiled$/;"	m
+OS	Makefile	/^OS 	:= $(shell uname)$/;"	m
+Object	src/headers/types.h	/^typedef struct Object$/;"	s
+PI	src/lib/math/headers/types.h	5;"	d
+POINT_LIGHT_H	src/Lights/headers/pointlight.h	2;"	d
+PrintRay	src/camera.c	/^void	PrintRay(ray_t *ray)$/;"	f
+RT	src/headers/main.h	2;"	d
+RTCIMAGE_H	src/headers/image.h	2;"	d
+RT_CAMERA	src/headers/camera.h	2;"	d
+Render	src/scene.c	/^t_image	*Render(scene_t *scene, void *mlx)$/;"	f
+SCENE_H	src/headers/scene.h	2;"	d
+SPHER_H	src/Objects/headers/spher.h	2;"	d
+SRC	Makefile	/^SRC		:= $(wildcard src\/*.c) $(wildcard src\/**\/*.c) $(wildcard src\/**\/**\/*.c)$/;"	m
+Scene	src/headers/types.h	/^typedef struct Scene$/;"	s
+Scene	src/scene.c	/^scene_t	*Scene(void)$/;"	f
+Set_transform	src/lib/math/gtfm.c	/^matrix_t *Set_transform(vector_t *translation, vector_t *rotation, vector_t *scal)$/;"	f
+TYPES_H	src/lib/math/headers/types.h	2;"	d
+WIDTH	src/headers/main.h	14;"	d
+addr	src/headers/types.h	/^	char *addr;$/;"	m	struct:s_data
+aspect_ration	src/headers/types.h	/^	double aspect_ration;$/;"	m	struct:camera
+base_color	src/headers/types.h	/^	vector_t *base_color;$/;"	m	struct:Light
+base_color	src/headers/types.h	/^	vector_t *base_color;$/;"	m	struct:Object
+bck_tfm	src/headers/types.h	/^	matrix_t *bck_tfm;$/;"	m	struct:Object
+bg	src/main.c	/^void	bg(void *mlx, void *win, t_image *image)$/;"	f
+bits_per_pixel	src/headers/types.h	/^	int bits_per_pixel;$/;"	m	struct:s_data
+blue	src/headers/image.h	/^    double **blue;$/;"	m	struct:image
+calculatIlumination	src/Lights/pointlight.c	/^int	calculatIlumination(light_t *this, vector_t *localNormal,$/;"	f
+calculat_geometry	src/camera.c	/^void	calculat_geometry(camera_t *camera)$/;"	f
+calculat_int_point	src/Objects/spher.c	/^vector_t	*calculat_int_point(ray_t *bck_ray, vector_t vhat, int *status)$/;"	f
+camera	src/headers/types.h	/^typedef struct camera$/;"	s
+camera_t	src/headers/types.h	/^} camera_t;$/;"	t	typeref:struct:camera
+cast_ray	src/scene.c	/^int	cast_ray(ray_t *ray, scene_t *scene, vector_t *c_int_point, void **c_object,$/;"	f
+cc	Makefile	/^cc		:= gcc $/;"	m
+cofactor	src/lib/math/matrix.c	/^double	cofactor(matrix_t *mt, int row, int column)$/;"	f
+cols	src/lib/math/headers/types.h	/^	int cols;$/;"	m	struct:matrix
+content	src/lib/lib.h	/^    void *content;$/;"	m	struct:list
+convert	src/Image.c	/^int convert(double red, double green, double blue, double max, int endian)$/;"	f
+copy_vector	src/lib/math/vectormath.c	/^vector_t	*copy_vector(vector_t v)$/;"	f
+create_cols	src/lib/math/matrix.c	/^double	*create_cols(int c)$/;"	f
+create_matrix	src/lib/math/matrix.c	/^matrix_t	*create_matrix(int rows, int cols)$/;"	f
+create_sphere	src/Objects/spher.c	/^object_t	*create_sphere(vector_t *translation, vector_t *rotation,$/;"	f
+cross	src/lib/math/vectormath.c	/^vector_t	*cross(vector_t v, vector_t u)$/;"	f
+determinant	src/lib/math/matrix.c	/^double	determinant(matrix_t *mt)$/;"	f
+display	src/Image.c	/^void display(void *mlx, void *win, t_image *image)$/;"	f
+division	src/lib/math/vectormath.c	/^vector_t	*division(vector_t *target, vector_t *v)$/;"	f
+dot	src/lib/math/vectormath.c	/^float	dot(vector_t v, vector_t u)$/;"	f
+endian	src/headers/types.h	/^	int endian;$/;"	m	struct:s_data
+equal	src/lib/math/vectormath.c	/^vector_t	*equal(vector_t *target, vector_t *v)$/;"	f
+fill_mt	src/lib/math/matrix.c	/^void	fill_mt(matrix_t *mt, double *values)$/;"	f
+from_mt_to_vt	src/lib/math/vectormath.c	/^vector_t	*from_mt_to_vt(matrix_t mt)$/;"	f
+from_vector_to_matrix	src/lib/math/matrix.c	/^matrix_t	*from_vector_to_matrix(vector_t vt, matrix_t mt)$/;"	f
+fs_pluse	src/Objects/spher.c	/^vector_t	*fs_pluse(vector_t *u, vector_t *v)$/;"	f
+ft_lstiter	src/lib/list/ft_lstiter.c	/^void ft_lstiter(t_list *lst, void (*f)(void *))$/;"	f
+ft_lstnew	src/lib/list/ft_lstnew.c	/^t_list *ft_lstnew(void *content)$/;"	f
+ft_lstsize	src/lib/list/ft_lstsize.c	/^int ft_lstsize(t_list *lst)$/;"	f
+fwd_tfm	src/headers/types.h	/^	matrix_t *fwd_tfm;$/;"	m	struct:Object
+generate_ray	src/camera.c	/^ray_t	*generate_ray(camera_t *camera, double screenX, double screenY)$/;"	f
+green	src/headers/image.h	/^    double **green;$/;"	m	struct:image
+horizontal_size	src/headers/types.h	/^	double horizontal_size;$/;"	m	struct:camera
+image	src/headers/image.h	/^typedef struct image$/;"	s
+img	src/headers/types.h	/^	void *img;$/;"	m	struct:s_data
+init_channel	src/Image.c	/^double **init_channel(void)$/;"	f
+initialize	src/Image.c	/^t_image *initialize(void *mlx)$/;"	f
+int_point_propreties	src/Objects/spher.c	/^vector_t	*int_point_propreties(vector_t *poi, object_t *this,$/;"	f
+inverse	src/lib/math/matrix.c	/^matrix_t	*inverse(matrix_t *mt)$/;"	f
+lenght	src/headers/types.h	/^	double lenght;$/;"	m	struct:camera
+light_t	src/headers/types.h	/^} light_t;$/;"	t	typeref:struct:Light
+line_length	src/headers/types.h	/^	int line_length;$/;"	m	struct:s_data
+list	src/lib/lib.h	/^typedef struct list$/;"	s
+loockat	src/headers/types.h	/^	vector_t *loockat;$/;"	m	struct:camera
+m_camera	src/headers/types.h	/^	camera_t *m_camera;$/;"	m	struct:Scene
+m_exit	src/main.c	/^int	m_exit(void)$/;"	f
+m_intensity	src/headers/types.h	/^	double m_intensity;$/;"	m	struct:Light
+m_lab	src/headers/types.h	/^	vector_t *m_lab;$/;"	m	struct:ray
+m_light_list	src/headers/types.h	/^	t_list *m_light_list;$/;"	m	struct:Scene
+m_object_list	src/headers/types.h	/^	t_list *m_object_list;$/;"	m	struct:Scene
+main	src/main.c	/^int	main(int ac, char **av)$/;"	f
+matrix	src/lib/math/headers/types.h	/^	double **matrix;$/;"	m	struct:matrix
+matrix	src/lib/math/headers/types.h	/^typedef struct matrix{$/;"	s
+matrix	src/lib/math/matrix.c	/^matrix_t	*matrix(int rows, int cols, double *values)$/;"	f
+matrix_H	src/lib/math/headers/matrix.h	2;"	d
+matrix_t	src/lib/math/headers/types.h	/^} matrix_t;$/;"	t	typeref:struct:matrix
+min_t	src/Objects/spher.c	/^double	min_t(double numsqrt, double b, int *status)$/;"	f
+minor	src/lib/math/matrix.c	/^double	minor(matrix_t *mt, int row, int column)$/;"	f
+minus	src/lib/math/vectormath.c	/^vector_t	*minus(vector_t *target, vector_t *v)$/;"	f
+mt_multiplication	src/lib/math/matrix.c	/^matrix_t	*mt_multiplication(matrix_t *mt1, matrix_t *mt2)$/;"	f
+muliplication	src/lib/math/vectormath.c	/^vector_t	*muliplication(vector_t *target, vector_t *v)$/;"	f
+my_mlx_pixel_put	src/Image.c	/^void my_mlx_pixel_put(t_data *data, int x, int y, int color)$/;"	f
+new_light	src/Lights/pointlight.c	/^light_t	*new_light(vector_t *position, vector_t *color, double intensity)$/;"	f
+next	src/lib/lib.h	/^    struct list *next;$/;"	m	struct:list	typeref:struct:list::list
+normalize	src/lib/math/vectormath.c	/^float	normalize(vector_t *v)$/;"	f
+normalized	src/lib/math/vectormath.c	/^vector_t	*normalized(vector_t *v)$/;"	f
+normalized_sub	src/lib/math/vectormath.c	/^vector_t *normalized_sub(vector_t *u, vector_t* v)$/;"	f
+num_division	src/lib/math/vectormath.c	/^vector_t	*num_division(vector_t *target, float num)$/;"	f
+num_muliplication	src/lib/math/vectormath.c	/^vector_t	*num_muliplication(vector_t *target, float num)$/;"	f
+object_t	src/headers/types.h	/^typedef struct Object object_t;$/;"	t	typeref:struct:Object
+object_t	src/headers/types.h	/^} object_t;$/;"	t	typeref:struct:Object
+pluse	src/lib/math/vectormath.c	/^vector_t	*pluse(vector_t *target, vector_t *v)$/;"	f
+point1	src/headers/types.h	/^	vector_t *point1;$/;"	m	struct:ray
+point2	src/headers/types.h	/^	vector_t *point2;$/;"	m	struct:ray
+point_t	src/lib/math/headers/types.h	/^typedef		vector_t point_t;$/;"	t
+position	src/headers/types.h	/^	vector_t *position;$/;"	m	struct:Light
+position	src/headers/types.h	/^	vector_t *position;$/;"	m	struct:camera
+printProgress	src/scene.c	/^void	printProgress(int y)$/;"	f
+print_matrix	src/lib/math/matrix.c	/^void	print_matrix(matrix_t *matrix)$/;"	f
+print_vector	src/lib/math/vectormath.c	/^void	print_vector(vector_t v)$/;"	f
+printf_with_name	src/camera.c	/^void	printf_with_name(char *name, vector_t *v)$/;"	f
+printv	src/lib/math/main.c	/^void printv(vector_t vector)$/;"	f
+push_back	src/lib/list/push_back.c	/^void push_back(t_list **lst, t_list *new)$/;"	f
+ray	src/headers/types.h	/^typedef struct ray$/;"	s
+ray_t	src/headers/types.h	/^} ray_t;$/;"	t	typeref:struct:ray
+red	src/headers/image.h	/^    double **red;$/;"	m	struct:image
+rows	src/lib/math/headers/types.h	/^	int rows;$/;"	m	struct:matrix
+s_data	src/headers/types.h	/^typedef struct s_data$/;"	s
+safe_matrix_multy	src/lib/math/gtfm.c	/^matrix_t *safe_matrix_multy(matrix_t *mt1, matrix_t *mt2)$/;"	f
+scene_t	src/headers/types.h	/^} scene_t;$/;"	t	typeref:struct:Scene
+screen_center	src/headers/types.h	/^	vector_t *screen_center;$/;"	m	struct:camera
+screen_u	src/headers/types.h	/^	vector_t *screen_u;$/;"	m	struct:camera
+screen_v	src/headers/types.h	/^	vector_t *screen_v;$/;"	m	struct:camera
+set_pixel	src/Image.c	/^void set_pixel(t_image *image, int x, int y, double r, double g, double b)$/;"	f
+set_to_indentity	src/lib/math/matrix.c	/^void	set_to_indentity(matrix_t *mt)$/;"	f
+sh_int_test	src/Objects/spher.c	/^int	sh_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,$/;"	f
+submatrix	src/lib/math/matrix.c	/^matrix_t	*submatrix(matrix_t *mt, int row, int column)$/;"	f
+t_data	src/headers/types.h	/^} t_data;$/;"	t	typeref:struct:s_data
+t_image	src/headers/image.h	/^} t_image;$/;"	t	typeref:struct:image
+t_list	src/lib/lib.h	/^} t_list;$/;"	t	typeref:struct:list
+test_inter	src/headers/types.h	/^	test_intersection test_inter;$/;"	m	struct:Object
+test_intersection	src/headers/types.h	/^typedef int (*test_intersection)(object_t *, struct ray *, vector_t *, vector_t *, vector_t *);$/;"	t
+up	src/headers/types.h	/^	vector_t *up;$/;"	m	struct:camera
+vector	src/lib/math/headers/types.h	/^typedef struct vector$/;"	s
+vector	src/lib/math/vectormath.c	/^vector_t	*vector(float x, float y, float z)$/;"	f
+vector2	src/lib/math/headers/types.h	/^typedef struct vector2{$/;"	s
+vector2_t	src/lib/math/headers/types.h	/^} vector2_t;$/;"	t	typeref:struct:vector2
+vector_lenght	src/lib/math/vectormath.c	/^float	vector_lenght(vector_t v)$/;"	f
+vector_lenght2	src/lib/math/vectormath.c	/^float	vector_lenght2(vector_t v)$/;"	f
+vector_t	src/lib/math/headers/types.h	/^} vector_t;$/;"	t	typeref:struct:vector
+x	src/lib/math/headers/types.h	/^	float x, y, z;$/;"	m	struct:vector
+x	src/lib/math/headers/types.h	/^	float x,y;$/;"	m	struct:vector2
+y	src/lib/math/headers/types.h	/^	float x, y, z;$/;"	m	struct:vector
+y	src/lib/math/headers/types.h	/^	float x,y;$/;"	m	struct:vector2
+z	src/lib/math/headers/types.h	/^	float x, y, z;$/;"	m	struct:vector

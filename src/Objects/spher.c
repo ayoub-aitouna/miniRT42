@@ -1,65 +1,107 @@
 #include "../headers/types.h"
 #include "headers/spher.h"
 
-int sh_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,
-				vector_t *local_normal, vector_t *local_color)
+vector_t	*int_point_propreties(vector_t *poi, object_t *this,
+		vector_t *int_point, vector_t *local_normal, vector_t *local_color)
 {
-	vector_t *poi;
-	vector_t *int_poi;
-	ray_t *bck_ray;
-	vector_t *vhat;
-	double b;
-	double raduis;
-	double c;
-	double thelta;
-	double numSqrt;
-	double t1;
-	double t2;
-
-	bck_ray = Apply_transform(camera_ray, this, 0);
-	vhat = bck_ray->m_lab;
-	normalize(vhat);
-	b = 2 * dot(*bck_ray->point1, *vhat);
-	raduis = 1.0f;
-	c = dot(*bck_ray->point1, *bck_ray->point1) - sqrtf(raduis);
-	thelta = pow(b, 2) - 4 * c;
-	if (thelta <= 0)
-		return (0);
-	numSqrt = sqrtf(thelta);
-	t1 = (-b + numSqrt) / 2.0;
-	t2 = (-b - numSqrt) / 2.0;
-	if (t1 < 0.0 || t2 < 0.0)
-		return (0);
-	// TODO: calculat the intersection point localNormal
-	if (t1 < t2)
-		poi = pluse(bck_ray->point1, num_muliplication(vhat, t1));
-	else
-		poi = pluse(bck_ray->point1, num_muliplication(vhat, t2));
+	vector_t	*Origin;
+	vector_t	*newOrigin;
+	vector_t	*m_normal;
+	vector_t	*int_poi;
 
 	int_poi = Apply_transform_vector(poi, 1, this);
-	*int_point =  *int_poi;
-	vector_t *Origin = vector(0.0,0.0,0.0);
-	vector_t *newOrigin = Apply_transform_vector(Origin, 1, this);
-	vector_t *m_normal = minus(int_point, newOrigin);
+	Origin = vector(0.0, 0.0, 0.0);
+	newOrigin = Apply_transform_vector(Origin, 1, this);
+	m_normal = minus(int_poi, newOrigin);
 	normalize(m_normal);
+	*int_point = *int_poi;
 	*local_normal = *m_normal;
 	*local_color = *this->base_color;
-	// free(m_normal);
-	// free(local_color);
-	// free(int_poi);
+	free(int_poi);
+	free(Origin);
+	free(newOrigin);
+	free(m_normal);
+}
+
+double	min_t(double numsqrt, double b, int *status)
+{
+	double	t1;
+	double	t2;
+
+	t1 = (-b + numsqrt) / 2.0;
+	t2 = (-b - numsqrt) / 2.0;
+	if (t1 < 0.0 || t2 < 0.0)
+	{
+		*status = 0;
+		return (0);
+	}
+	if (t1 < t2)
+		return (t1);
+	return (t2);
+}
+
+vector_t	*fs_pluse(vector_t *u, vector_t *v)
+{
+	vector_t	*re;
+
+	re = pluse(u, v);
+	free(v);
+	return (re);
+}
+
+vector_t	*calculat_int_point(ray_t *bck_ray, vector_t vhat, int *status)
+{
+	double	b;
+	double	c;
+	double	thelta;
+	double	t;
+
+	b = 2 * dot(*bck_ray->point1, vhat);
+	c = dot(*bck_ray->point1, *bck_ray->point1) - 1.0f;
+	thelta = pow(b, 2) - (4 * c);
+	t = min_t(sqrtf(thelta), b, status);
+	if (thelta <= 0)
+	{
+		*status = 0;
+		return (NULL);
+	}
+	if (*status == 0)
+		return (NULL);
+	return (fs_pluse(bck_ray->point1, num_muliplication(&vhat, t)));
+}
+
+int	sh_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,
+		vector_t *local_normal, vector_t *local_color)
+{
+	vector_t	*poi;
+	ray_t		*bck_ray;
+	vector_t	vhat;
+	int			status;
+
+	status = 1;
+	bck_ray = Apply_transform(camera_ray, this, 0);
+	vhat = *bck_ray->m_lab;
+	normalize(&vhat);
+	poi = calculat_int_point(bck_ray, vhat, &status);
+	if (status == 0)
+		return (0);
+	int_point_propreties(poi, this, int_point, local_normal, local_color);
+	free(bck_ray);
+	free(poi);
 	return (1);
 }
 
-
-object_t *create_sphere(vector_t *translation, vector_t *rotation,
-						vector_t *scal, vector_t *color)
+object_t	*create_sphere(vector_t *translation, vector_t *rotation,
+		vector_t *scal, vector_t *color)
 {
-	object_t *shphere;
+	object_t	*shphere;
 
 	shphere = (object_t *)malloc(sizeof(object_t));
 	shphere->fwd_tfm = Set_transform(translation, rotation, scal);
 	shphere->bck_tfm = inverse(shphere->fwd_tfm);
 	shphere->test_inter = sh_int_test;
-	shphere->base_color = vector(.9, .5, .2);
+	shphere->base_color = color;
+	free(rotation);
+	free(translation);
 	return (shphere);
 }

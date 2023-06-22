@@ -2,7 +2,7 @@ SRC		:= $(wildcard src/*.c) $(wildcard src/**/*.c) $(wildcard src/**/**/*.c)
 OBJ_DIR	:= .compiled
 OBJ		:= $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC))
 NAME	:= App
-cc		:= gcc -fsanitize=address -g3
+cc		:= gcc 
 MLXFLAG := -lmlx 
 OS 	:= $(shell uname)
 

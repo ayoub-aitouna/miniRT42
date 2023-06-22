@@ -120,6 +120,9 @@ matrix_t	*mt_multiplication(matrix_t *mt1, matrix_t *mt2)
 	return (result);
 }
 
+
+
+
 /**
  * 1: |a b|
  * 2: |c d|

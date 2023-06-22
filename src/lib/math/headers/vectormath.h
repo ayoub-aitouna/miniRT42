@@ -23,4 +23,5 @@ vector_t *num_division(vector_t *target, float l);
 float dot(vector_t v, vector_t u);
 vector_t *cross(vector_t v, vector_t u);
 vector_t *from_mt_to_vt(matrix_t mt);
+vector_t *normalized_sub(vector_t *u, vector_t* v);
 #endif
