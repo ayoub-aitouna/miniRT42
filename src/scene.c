@@ -6,13 +6,12 @@ scene_t *Scene(void)
 	object_t *sphere;
 	object_t *sphere1;
 	object_t *plan;
-	t_list *tmp;
 
 	scene = malloc(sizeof(scene_t));
 	scene->m_object_list = NULL;
 	scene->m_light_list = NULL;
-	sphere = create_sphere(vector(-1, -1.0, -0.5), vector(0, 0, 0), vector(.5, .5, .5), vector(.9, .0, .2));
-	sphere1 = create_sphere(vector(0.0, 0, -0.5), vector(0, 0, 0), vector(.5, .5, .5), vector(1, 1, 1));
+	sphere = create_sphere(vector(-1, -1.0, -0.8), vector(0, 0, 0), vector(.5, .5, .5), vector(.9, .0, .2));
+	sphere1 = create_sphere(vector(0.0, 0, -0.8), vector(0, 0, 0), vector(.5, .5, .5), vector(1, 1, 1));
 	plan = plane(vector(0, 0, 0.0), vector(0, 0, 0), vector(4, 4, 1.0), vector(.1, .5, .2));
 
 	push_back(&scene->m_object_list, ft_lstnew(plan));
@@ -43,12 +42,11 @@ void printProgress(int y)
 vector_t *CalculatDiffuseColor(scene_t *scene, vector_t *localNormal,
 							   vector_t *initPoint, vector_t *base_color, object_t *cur_object)
 {
-	vector_t *diffuse_color;
+	vector_t Color;
+	t_list *tmp;
 	double intensity;
 	int validIlum;
 	double r;
-	vector_t Color;
-	t_list *tmp;
 	double g;
 	double b;
 
@@ -72,7 +70,7 @@ vector_t *CalculatDiffuseColor(scene_t *scene, vector_t *localNormal,
 	return (vector(r * base_color->x, g * base_color->y, b * base_color->z));
 }
 
-t_image *Render(scene_t *scene, void *mlx)
+t_image *Render(scene_t *scene)
 {
 	t_image *image;
 	int y;
@@ -88,7 +86,7 @@ t_image *Render(scene_t *scene, void *mlx)
 	int x;
 	vector_t *color;
 
-	image = initialize(mlx);
+	image = initialize();
 	y = 0;
 	x = 0;
 	xFact = 1.0 / (((double)WIDTH) / 2.0);

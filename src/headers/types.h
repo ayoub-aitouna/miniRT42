@@ -22,7 +22,7 @@ typedef struct ray
 } ray_t;
 
 
-typedef int (*test_intersection)(object_t *, struct ray *, vector_t *, vector_t *, vector_t *);
+typedef int (*test_intersection)(object_t *this, struct ray *ray, vector_t *ip, vector_t *normal, vector_t *color);
 
 struct Object;
 

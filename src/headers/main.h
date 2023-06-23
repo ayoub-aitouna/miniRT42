@@ -14,5 +14,5 @@
 #define WIDTH 1280
 #define HEIGHT 720
 scene_t *Scene();
-t_image *Render(scene_t *scene, void *mlx);
+t_image *Render(scene_t *scene);
 #endif

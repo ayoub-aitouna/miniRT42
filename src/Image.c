@@ -14,7 +14,7 @@ double **init_channel(void)
 	return (channel);
 }
 
-t_image *initialize(void *mlx)
+t_image *initialize(void)
 {
 	t_image *image;
 
@@ -31,21 +31,19 @@ void set_pixel(t_image *image, int x, int y, double r, double g, double b)
 	image->green[y][x] = g;
 	image->blue[y][x] = b;
 }
-double MAX(t_image *image);
+
 void display(void *mlx, void *win, t_image *image)
 {
 	int i;
 	t_data img;
 	double max;
-	double max_g;
-	double max_b;
 	int j;
 
 	i = 0;
 	j = 0;
 	if (!image)
 		return;
-	max = MAX(image);
+	max = max_color_value(image);
 	img.img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 								 &img.endian);
@@ -54,7 +52,7 @@ void display(void *mlx, void *win, t_image *image)
 		j = 0;
 		while (j < WIDTH)
 		{
-			my_mlx_pixel_put(&img, j, i, convert(image->red[i][j], image->green[i][j], image->blue[i][j], max, img.endian));
+			my_mlx_pixel_put(&img, j, i, convert(image->red[i][j], image->green[i][j], image->blue[i][j], max));
 			j++;
 		}
 		i++;
@@ -62,30 +60,8 @@ void display(void *mlx, void *win, t_image *image)
 	mlx_put_image_to_window(mlx, win, img.img, 0, 0);
 }
 
-// double calculat_max(double **channel)
-// {
-// 	int i;
-// 	double max;
-// 	int j;
 
-// 	i = 0;
-// 	j = 0;
-// 	max = 0.0;
-// 	while (i < HEIGHT)
-// 	{
-// 		j = 0;
-// 		while (j < WIDTH)
-// 		{
-// 			if (channel[i][j] > max)
-// 				max = channel[i][j];
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	return (max);
-// }
-
-double MAX(t_image *image)
+double max_color_value(t_image *image)
 {
 	double m_max_red = 0.0;
 	double m_max_green = 0.0;
@@ -118,7 +94,7 @@ double MAX(t_image *image)
 	return (m_overall_max);
 }
 
-int convert(double red, double green, double blue, double max, int endian)
+int convert(double red, double green, double blue, double max)
 {
 	unsigned char r;
 	unsigned char g;

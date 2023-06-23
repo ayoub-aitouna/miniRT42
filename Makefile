@@ -2,8 +2,9 @@ SRC		:= $(wildcard src/*.c) $(wildcard src/**/*.c) $(wildcard src/**/**/*.c)
 OBJ_DIR	:= .compiled
 OBJ		:= $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC))
 NAME	:= Raytracing
-cc		:= gcc -fsanitize=address -g3
-MLXFLAG := -lmlx 
+cc		:= gcc
+CFLAGS  := -Wall -Wextra -Werror -Ofast
+MLXFLAG := -lmlx
 GREEN	:= \033[32m
 RESET	:= \033[0m
 OS 	:= $(shell uname)

@@ -37,7 +37,7 @@ matrix_t *matrix(int rows, int cols, double *values)
 
 void fill_mt(matrix_t *mt, double *values)
 {
-	int k = 0; // index of current value
+	int k = 0;
 	for (int i = 0; i < mt->rows; i++)
 	{
 		for (int j = 0; j < mt->cols; j++)
@@ -45,7 +45,7 @@ void fill_mt(matrix_t *mt, double *values)
 	}
 }
 
-matrix_t *from_vector_to_matrix(vector_t vt, matrix_t mt)
+matrix_t *from_vector_to_matrix(vector_t vt)
 {
 	matrix_t *new_mt;
 
