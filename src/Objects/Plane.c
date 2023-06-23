@@ -7,7 +7,7 @@ int close_enough(double v1, double v2)
 
 vector_t *false(int *status)
 {
-    *status = 0;
+    *status = FALSE;
     return (NULL);
 }
 

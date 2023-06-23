@@ -4,19 +4,19 @@ scene_t *Scene(void)
 {
 	scene_t *scene;
 	object_t *sphere;
-	object_t *sphere1;
+	object_t *m_triangle;
 	object_t *plan;
 
 	scene = malloc(sizeof(scene_t));
 	scene->m_object_list = NULL;
 	scene->m_light_list = NULL;
 	sphere = create_sphere(vector(-1, -1.0, -0.8), vector(0, 0, 0), vector(.5, .5, .5), vector(.9, .0, .2));
-	sphere1 = create_sphere(vector(0.0, 0, -0.8), vector(0, 0, 0), vector(.5, .5, .5), vector(1, 1, 1));
+	m_triangle = triangle(vector(0.0, -1.0, -0.8), vector(-1.5708, .0f, -0.5708), vector(.8, .5, .5), vector(1, 1, 1));
 	plan = plane(vector(0, 0, 0.0), vector(0, 0, 0), vector(4, 4, 1.0), vector(.1, .5, .2));
 
 	push_back(&scene->m_object_list, ft_lstnew(plan));
 	push_back(&scene->m_object_list, ft_lstnew(sphere));
-	push_back(&scene->m_object_list, ft_lstnew(sphere1));
+	push_back(&scene->m_object_list, ft_lstnew(m_triangle));
 
 	push_back(&scene->m_light_list, ft_lstnew(new_light(vector(.0, -10.0, -5.0),
 														vector(1.0, 1.0, 1.0), 1.0)));

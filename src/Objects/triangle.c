@@ -55,7 +55,7 @@ vector_t *t_calculat_int_point(ray_t *ray, vector_t k, int *status)
     u = a.x + (t * k.x);
     v = a.y + (t * k.y);
 
-    if (fabs(u) >= 1.0 || fabs(v) >= 1.0)
+    if (u < .0 || v < .0 || (u + v) > 1)
         return (false(status));
     else
         return (pluse(ray->point1, num_muliplication(&k, t)));
