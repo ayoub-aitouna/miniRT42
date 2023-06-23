@@ -9,6 +9,26 @@
 #define HALFPI  1.5707963f
 #endif
 
+#ifndef EPSILON
+#define EPSILON 1e-21f
+#endif
+
+#ifndef FALSE
+#define FALSE 0
+#endif
+
+#ifndef TRUE
+#define TRUE 1
+#endif
+
+
+#ifndef FRWRD
+#define FRWRD 1
+#endif
+
+#ifndef BCKWRD
+#define BCKWRD 0
+#endif
 typedef struct matrix{
 	int rows;
 	int cols;

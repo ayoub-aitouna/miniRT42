@@ -1,6 +1,7 @@
 #ifndef SCENE_H
 # define SCENE_H
 # include "../Objects/headers/spher.h"
+# include "../Objects/headers/plane.h"
 #include "../Lights/headers/pointlight.h"
 # include "../lib/lib.h"
 # include "../lib/math/headers/matrix.h"

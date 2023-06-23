@@ -2,12 +2,12 @@ SRC		:= $(wildcard src/*.c) $(wildcard src/**/*.c) $(wildcard src/**/**/*.c)
 OBJ_DIR	:= .compiled
 OBJ		:= $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC))
 NAME	:= App
-cc		:= gcc 
+cc		:= gcc -fsanitize=address -g3
 MLXFLAG := -lmlx 
 OS 	:= $(shell uname)
 
 ifeq ($(OS), Darwin)
-	MLXFLAG += -framework OpenGl -framework Appkit
+	MLXFLAG += -framework OpenGl -framework Appkit 
 else
 	MLXFLAG += -lXext -lX11
 endif

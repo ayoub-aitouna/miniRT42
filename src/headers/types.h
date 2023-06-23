@@ -2,6 +2,7 @@
 #define M_TYPES_H
 #include <stdlib.h>
 #include "../lib/lib.h"
+
 typedef struct Object object_t;
 
 typedef struct s_data
@@ -22,6 +23,8 @@ typedef struct ray
 
 
 typedef int (*test_intersection)(object_t *, struct ray *, vector_t *, vector_t *, vector_t *);
+
+struct Object;
 
 typedef struct Object
 {

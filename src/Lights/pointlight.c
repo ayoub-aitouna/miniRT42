@@ -18,24 +18,25 @@ light_t	*new_light(vector_t *position, vector_t *color, double intensity)
 int	calculatIlumination(light_t *this, vector_t *localNormal,
 		vector_t *initPoint, double *intensity, vector_t *Color, scene_t *scene, object_t* cur_Object)
 {
-	vector_t *lightDir = normalized_sub(this->position, initPoint);
-	double light_dist = vector_lenght(*minus(this->position, initPoint));
+	vector_t *lightDir = minus(this->position, initPoint);
+	normalize(lightDir);
+	// double light_dist = vector_lenght(*minus(this->position, initPoint));
+	// t_list *tmp = scene->m_object_list;
+	// object_t* object = NULL;
+	// int ip = 0;
 
-	t_list *tmp = scene->m_object_list;
-	object_t* object = NULL;
-	int ip = 0;
+	// while (tmp) {
 
-	while (tmp) {
-
-		object = ((object_t*) tmp->content);
-		if(object != NULL)
-		{
-			if(object != cur_Object)
-			{
-			}
-		}
-		tmp = tmp->next;
-	}
+	// 	object = ((object_t*) tmp->content);
+	// 	if(object != NULL)
+	// 	{
+	// 		if(object != cur_Object)
+	// 		{
+	// 			// test_intersenction from object tell light;
+	// 		}
+	// 	}
+	// 	tmp = tmp->next;
+	// }
 
 	double angle = acos(dot(*localNormal, *lightDir));
 	if (angle > HALFPI)

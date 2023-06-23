@@ -110,6 +110,8 @@ vector_t *Apply_transform_vector(vector_t *inputVector, int dirFlag, object_t *t
         resultmt = mt_multiplication(this->fwd_tfm, tmp);
     else
         resultmt = mt_multiplication(this->bck_tfm, tmp);
+    if(!resultmt)
+        return (vector(0,0,0));
     vector_t *result = vector(resultmt->matrix[0][0], resultmt->matrix[1][0], resultmt->matrix[2][0]);
     free(resultmt);
     free(tmp);
