@@ -1,45 +1,59 @@
 #include "headers/camera.h"
 
-camera_t	*Camera(void)
+camera_t *Camera(double horizontal_size, double lenght, double aspect_ration)
 {
-	camera_t	*camera;
+	camera_t *camera;
 
 	camera = malloc(sizeof(camera_t));
-	camera->position = vector(3.0, -5.0, -2.0);
-	camera->loockat = vector(0.0, 0.0, 0.0);
-	camera->up = vector(0.0, 0.0, .1);
-	camera->horizontal_size = 0.75f;
-	camera->lenght = 1.0f;
-	camera->aspect_ration =(16.0f / 9.0f);
-	calculat_geometry(camera);
+	camera->position = NULL;
+	camera->loockat = NULL;
+	camera->up = NULL;
+	camera->horizontal_size = horizontal_size;
+	camera->lenght = lenght;
+	camera->aspect_ration = aspect_ration;
 	return (camera);
 }
-void	printf_with_name(char *name, vector_t *v)
+
+void SetPosition(camera_t *this, vector_t *position)
+{
+	this->position = position;
+}
+
+void SetUp(camera_t *this, vector_t *Up)
+{
+	this->up = Up;
+}
+
+void Setloockat(camera_t *this, vector_t *loockat)
+{
+	this->loockat = loockat;
+}
+
+void printf_with_name(char *name, vector_t *v)
 {
 	printf("%s\n\t", name);
 	print_vector(*v);
 }
 
-void	calculat_geometry(camera_t *camera)
+void calculat_geometry(camera_t *this)
 {
-	vector_t	*aligment;
+	vector_t *aligment;
 
-	aligment = minus(camera->loockat, camera->position);
+	aligment = minus(this->loockat, this->position);
 	normalize(aligment);
-	camera->screen_u = cross(*aligment, *camera->up);
-	normalize(camera->screen_u);
-	camera->screen_v = cross(*camera->screen_u, *aligment);
-	normalize(camera->screen_v);
-	camera->screen_center = pluse(camera->position, num_muliplication(aligment,
-				camera->lenght));
-	camera->screen_u = num_muliplication(camera->screen_u,
-											camera->horizontal_size);
-	camera->screen_v = num_muliplication(camera->screen_v,
-											camera->horizontal_size
-												/ camera->aspect_ration);
+	this->screen_u = cross(*aligment, *this->up);
+	normalize(this->screen_u);
+	this->screen_v = cross(*this->screen_u, *aligment);
+	normalize(this->screen_v);
+	this->screen_center = pluse(this->position, num_muliplication(aligment,
+																  this->lenght));
+	this->screen_u = num_muliplication(this->screen_u,
+									   this->horizontal_size);
+	this->screen_v = num_muliplication(this->screen_v,
+									   this->horizontal_size / this->aspect_ration);
 }
 
-void	PrintRay(ray_t *ray)
+void PrintRay(ray_t *ray)
 {
 	for (int i = 0; i < 10; i++)
 		printf("-");
@@ -55,23 +69,18 @@ void	PrintRay(ray_t *ray)
 	printf("\n\n");
 }
 
-ray_t	*generate_ray(camera_t *camera, double screenX, double screenY)
+ray_t *generate_ray(camera_t *this, double screenX, double screenY)
 {
-	vector_t	*w_part1;
-	vector_t	*dst_cords;
-	ray_t		*new_ray;
+	vector_t *w_part1;
+	vector_t *dst_cords;
+	ray_t *new_ray;
 
-	w_part1 = pluse(camera->screen_center, num_muliplication(camera->screen_u,
-				screenX));
-	dst_cords = pluse(w_part1, num_muliplication(camera->screen_v, screenY));
+	w_part1 = pluse(this->screen_center, num_muliplication(this->screen_u,
+														   screenX));
+	dst_cords = pluse(w_part1, num_muliplication(this->screen_v, screenY));
 	new_ray = malloc(sizeof(ray_t));
-	new_ray->point1 = copy_vector(*camera->position);
+	new_ray->point1 = copy_vector(*this->position);
 	new_ray->point2 = dst_cords;
-	new_ray->m_lab = minus(dst_cords, camera->position);
-	// printf("-------------------------------------- \n");
-	// printf_with_name("new_ray->point1", new_ray->point1);
-	// printf_with_name("new_ray->point2", new_ray->point2);
-	// printf_with_name("new_ray->m_lab", new_ray->m_lab);
-	// printf("-------------------------------------- \n");
+	new_ray->m_lab = minus(dst_cords, this->position);
 	return (new_ray);
 }

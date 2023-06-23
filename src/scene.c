@@ -11,17 +11,21 @@ scene_t *Scene(void)
 	scene = malloc(sizeof(scene_t));
 	scene->m_object_list = NULL;
 	scene->m_light_list = NULL;
-	sphere = create_sphere(vector(-1, -1.0, -1.0), vector(0, 0, 0), vector(.5, .5, .5), vector(.9, .5, .2));
-	sphere1 = create_sphere(vector(0.0, 0, -1.0), vector(0, 0, 0), vector(.5, .5, .5), vector(1, 1, 1));
-	plan = plane(vector(0, 0, 0.0), vector(0, 0, 0), vector(4, 4, 1.0), vector(.9, .5, .2));\
+	sphere = create_sphere(vector(-1, -1.0, -0.5), vector(0, 0, 0), vector(.5, .5, .5), vector(.9, .5, .2));
+	sphere1 = create_sphere(vector(0.0, 0, -0.5), vector(0, 0, 0), vector(.5, .5, .5), vector(1, 1, 1));
+	plan = plane(vector(0, 0, 0.0), vector(0, 0, 0), vector(4, 4, 1.0), vector(.9, .5, .2));
 
 	push_back(&scene->m_object_list, ft_lstnew(plan));
 	push_back(&scene->m_object_list, ft_lstnew(sphere));
 	push_back(&scene->m_object_list, ft_lstnew(sphere1));
-	
+
 	push_back(&scene->m_light_list, ft_lstnew(new_light(vector(.0, -10.0, -5.0),
 														vector(1.0, 1.0, 1.0), 1.0)));
-	scene->m_camera = Camera();
+	scene->m_camera = Camera(0.75f, 1.0f, (16.0f / 9.0f));
+	SetPosition(scene->m_camera, vector(.0, -5.0, -1.0));
+	SetUp(scene->m_camera, vector(.0, .0, .1));
+	Setloockat(scene->m_camera, vector(.0, .0, .0));
+	calculat_geometry(scene->m_camera);
 	return (scene);
 }
 
@@ -104,7 +108,7 @@ t_image *Render(scene_t *scene, void *mlx)
 			{
 				color = CalculatDiffuseColor(scene, &c_norm,
 											 &c_intersection_point, &c_color, c_object);
-				set_pixel(image, x, y, color->x, color->y, color->z);	
+				set_pixel(image, x, y, color->x, color->y, color->z);
 			}
 			else
 				set_pixel(image, x, y, 0.0, 0.0, 0.0);
