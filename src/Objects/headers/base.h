@@ -8,4 +8,5 @@
 
 object_t *object_base(vector_t *translation, vector_t *rotation,
                       vector_t *scal, vector_t *color);
+void deleteObjectBase(object_t *this);
 #endif

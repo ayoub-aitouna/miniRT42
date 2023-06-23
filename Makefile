@@ -1,9 +1,11 @@
 SRC		:= $(wildcard src/*.c) $(wildcard src/**/*.c) $(wildcard src/**/**/*.c)
 OBJ_DIR	:= .compiled
 OBJ		:= $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC))
-NAME	:= App
+NAME	:= Raytracing
 cc		:= gcc -fsanitize=address -g3
 MLXFLAG := -lmlx 
+GREEN	:= \033[32m
+RESET	:= \033[0m
 OS 	:= $(shell uname)
 
 ifeq ($(OS), Darwin)
@@ -16,12 +18,12 @@ all: $(NAME)
 
 $(OBJ_DIR)/%.o : %.c
 	@mkdir -p $(dir $@)
-	@echo "$< Created."
+	@echo " *$<  ${GREEN}Created.${RESET} "
 	@$(cc) $(CFLAGS) $(I_SDL) -c $< -o $@
 
 $(NAME) : $(OBJ)
-	@echo "$(NAME) Created."
-	$(cc) $(CFLAGS) $(OBJ) $(MLXFLAG) -lm -o $(NAME)
+	@echo "to run the Program Type : ${GREEN}./$(NAME)${RESET}"
+	@ $(cc) $(CFLAGS) $(OBJ) $(MLXFLAG) -lm -o $(NAME)
 
 clean:
 	@rm -rf $(OBJ) $(OBJ_DIR)

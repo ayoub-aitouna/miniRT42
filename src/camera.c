@@ -73,14 +73,16 @@ ray_t *generate_ray(camera_t *this, double screenX, double screenY)
 {
 	vector_t *w_part1;
 	vector_t *dst_cords;
-	ray_t *new_ray;
+	vector_t *scalled_u;
+	vector_t *scalled_v;
 
-	w_part1 = pluse(this->screen_center, num_muliplication(this->screen_u,
-														   screenX));
-	dst_cords = pluse(w_part1, num_muliplication(this->screen_v, screenY));
-	new_ray = malloc(sizeof(ray_t));
-	new_ray->point1 = copy_vector(*this->position);
-	new_ray->point2 = dst_cords;
-	new_ray->m_lab = minus(dst_cords, this->position);
-	return (new_ray);
+	scalled_u = num_muliplication(this->screen_u,
+								  screenX);
+	scalled_v = num_muliplication(this->screen_v, screenY);
+	w_part1 = pluse(this->screen_center, scalled_u);
+	dst_cords = pluse(w_part1, scalled_v);
+	free(w_part1);
+	free(scalled_v);
+	free(scalled_u);
+	return (ray(copy_vector(*this->position), dst_cords));
 }

@@ -3,6 +3,7 @@
 #include "../lib/math/headers/types.h"
 #include "../lib/math/headers/vectormath.h"
 #include "types.h"
+#include "ray.h"
 
 camera_t *Camera(double horizontal_size, double lenght, double aspect_ration);
 void Setloockat(camera_t *this, vector_t *loockat);

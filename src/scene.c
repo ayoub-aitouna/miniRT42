@@ -11,9 +11,9 @@ scene_t *Scene(void)
 	scene = malloc(sizeof(scene_t));
 	scene->m_object_list = NULL;
 	scene->m_light_list = NULL;
-	sphere = create_sphere(vector(-1, -1.0, -0.5), vector(0, 0, 0), vector(.5, .5, .5), vector(.9, .5, .2));
+	sphere = create_sphere(vector(-1, -1.0, -0.5), vector(0, 0, 0), vector(.5, .5, .5), vector(.9, .0, .2));
 	sphere1 = create_sphere(vector(0.0, 0, -0.5), vector(0, 0, 0), vector(.5, .5, .5), vector(1, 1, 1));
-	plan = plane(vector(0, 0, 0.0), vector(0, 0, 0), vector(4, 4, 1.0), vector(.9, .5, .2));
+	plan = plane(vector(0, 0, 0.0), vector(0, 0, 0), vector(4, 4, 1.0), vector(.1, .5, .2));
 
 	push_back(&scene->m_object_list, ft_lstnew(plan));
 	push_back(&scene->m_object_list, ft_lstnew(sphere));
