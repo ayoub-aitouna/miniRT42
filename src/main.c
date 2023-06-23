@@ -2,24 +2,6 @@
 #include "headers/main.h"
 #include "headers/types.h"
 
-void	bg(void *mlx, void *win, t_image *image)
-{
-	int	i;
-	int	j;
-
-	i = 0, j = 0;
-	while (i < HEIGHT)
-	{
-		j = 0;
-		while (j < WIDTH)
-		{
-			set_pixel(image, j, i, .9, .5, .2);
-			j++;
-		}
-		i++;
-	}
-}
-
 int	m_exit(void)
 {
 	printf("Stoped Runnig \n");

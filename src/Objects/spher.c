@@ -22,7 +22,7 @@ int sh_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,
 	normalize(&vhat);
 	poi = calculat_int_point(bck_ray, vhat, &status);
 	if (!status)
-		return (TRUE);
+		return (FALSE);
 	int_point_propreties(poi, this, int_point, local_normal, local_color);
 	free(bck_ray);
 	free(poi);

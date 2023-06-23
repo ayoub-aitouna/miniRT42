@@ -34,7 +34,6 @@ void p_int_point_propreties(vector_t *poi, object_t *this,
     *int_point = *int_poi;
 	*local_normal = *m_normal;
 	*local_color = *this->base_color;
-    
 }
 
 /**

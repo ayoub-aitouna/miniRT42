@@ -9,7 +9,7 @@ vector_t	*vector(float x, float y, float z)
 	vector->y = y;
 	vector->z = z;
 	return (vector);
-}
+} 
 
 vector_t	*copy_vector(vector_t v)
 {
