@@ -2,10 +2,10 @@
 #include "headers/main.h"
 #include "headers/types.h"
 
-double **init_channel(void)
+double	**init_channel(void)
 {
-	double **channel;
-	int i;
+	double	**channel;
+	int		i;
 
 	channel = malloc(sizeof(double *) * HEIGHT);
 	i = 0;
@@ -14,9 +14,9 @@ double **init_channel(void)
 	return (channel);
 }
 
-t_image *initialize(void)
+t_image	*initialize(void)
 {
-	t_image *image;
+	t_image	*image;
 
 	image = malloc(sizeof(t_image));
 	image->red = init_channel();
@@ -25,34 +25,35 @@ t_image *initialize(void)
 	return (image);
 }
 
-void set_pixel(t_image *image, int x, int y, double r, double g, double b)
+void	set_pixel(t_image *image, int x, int y, double r, double g, double b)
 {
 	image->red[y][x] = r;
 	image->green[y][x] = g;
 	image->blue[y][x] = b;
 }
 
-void display(void *mlx, void *win, t_image *image)
+void	display(void *mlx, void *win, t_image *image)
 {
-	int i;
-	t_data img;
-	double max;
-	int j;
+	int		i;
+	t_data	img;
+	double	max;
+	int		j;
 
 	i = 0;
 	j = 0;
 	if (!image)
-		return;
+		return ;
 	max = max_color_value(image);
 	img.img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-								 &img.endian);
+			&img.endian);
 	while (i < HEIGHT)
 	{
 		j = 0;
 		while (j < WIDTH)
 		{
-			my_mlx_pixel_put(&img, j, i, convert(image->red[i][j], image->green[i][j], image->blue[i][j], max));
+			my_mlx_pixel_put(&img, j, i, convert(image->red[i][j],
+						image->green[i][j], image->blue[i][j], max));
 			j++;
 		}
 		i++;
@@ -60,46 +61,12 @@ void display(void *mlx, void *win, t_image *image)
 	mlx_put_image_to_window(mlx, win, img.img, 0, 0);
 }
 
-
-double max_color_value(t_image *image)
+int	convert(double red, double green, double blue, double max)
 {
-	double m_max_red = 0.0;
-	double m_max_green = 0.0;
-	double m_max_blue = 0.0;
-	double m_overall_max = 0.0;
-	for (int x = 0; x < WIDTH; x++)
-	{
-
-		for (int y = 0; y < HEIGHT; y++)
-		{
-			double redValue = image->red[y][x];
-			double greenValue = image->green[y][x];
-			double blueValue = image->blue[y][x];
-
-			if (redValue > m_max_red)
-				m_max_red = redValue;
-			if (blueValue > m_max_blue)
-				m_max_blue = blueValue;
-			if (greenValue > m_max_green)
-				m_max_green = greenValue;
-
-			if (m_max_red > m_overall_max)
-				m_overall_max = m_max_red;
-			if (m_max_green > m_overall_max)
-				m_overall_max = m_max_green;
-			if (m_max_blue > m_overall_max)
-				m_overall_max = m_max_blue;
-		}
-	}
-	return (m_overall_max);
-}
-
-int convert(double red, double green, double blue, double max)
-{
-	unsigned char r;
-	unsigned char g;
-	unsigned char b;
-	int value;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+	int				value;
 
 	r = (red / max) * 255;
 	g = (green / max) * 255;
@@ -108,9 +75,51 @@ int convert(double red, double green, double blue, double max)
 	return (value);
 }
 
-void my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	char *dst;
+	char	*dst;
+
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
+}
+
+double	max_in_channel(double **channel)
+{
+	int		x;
+	int		y;
+	double	max;
+	double	value;
+
+	value = 0;
+	max = 0;
+	x = 0;
+	y = 0;
+	while (x < WIDTH)
+	{
+		y = 0;
+		while (y < HEIGHT)
+		{
+			value = channel[y][x];
+			if (value > max)
+				max = value;
+			y++;
+		}
+		x++;
+	}
+	return (max);
+}
+
+double	max_color_value(t_image *image)
+{
+	double m_overall_max;
+	double value;
+
+	m_overall_max = max_in_channel(image->red);
+	value = max_in_channel(image->green);
+	if (value > m_overall_max)
+		m_overall_max = value;
+	value = max_in_channel(image->blue);
+	if (value > m_overall_max)
+		m_overall_max = value;
+	return (m_overall_max);
 }
