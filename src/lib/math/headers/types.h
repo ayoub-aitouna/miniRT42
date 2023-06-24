@@ -29,6 +29,11 @@
 #ifndef BCKWRD
 #define BCKWRD 0
 #endif
+
+#ifndef MAX_V
+#define MAX_V 100e6
+#endif
+
 typedef struct matrix{
 	int rows;
 	int cols;

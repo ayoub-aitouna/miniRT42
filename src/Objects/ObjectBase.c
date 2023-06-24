@@ -29,3 +29,14 @@ void deleteObjectBase(object_t *this)
         free(this);
     }
 }
+
+int close_enough(double v1, double v2)
+{
+    return (fabs(v1 - v2) < EPSILON);
+}
+
+vector_t *false(int *status)
+{
+    *status = FALSE;
+    return (NULL);
+}

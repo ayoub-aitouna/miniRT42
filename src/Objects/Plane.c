@@ -1,15 +1,5 @@
 #include "../headers/types.h"
 #include "headers/spher.h"
-int close_enough(double v1, double v2)
-{
-    return (fabs(v1 - v2) < EPSILON);
-}
-
-vector_t *false(int *status)
-{
-    *status = FALSE;
-    return (NULL);
-}
 
 void p_int_point_propreties(vector_t *poi, object_t *this,
 						  vector_t *int_point, vector_t *local_normal,

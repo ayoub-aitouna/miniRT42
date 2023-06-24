@@ -3,6 +3,7 @@
 #include "../Objects/headers/spher.h"
 #include "../Objects/headers/plane.h"
 #include "../Objects/headers/triangle.h"
+#include "../Objects/headers/cylinder.h"
 #include "../Lights/headers/pointlight.h"
 #include "../lib/lib.h"
 #include "../lib/math/headers/matrix.h"

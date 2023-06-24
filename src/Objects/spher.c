@@ -42,15 +42,11 @@ vector_t *calculat_int_point(ray_t *bck_ray, vector_t vhat, int *status)
 	thelta = pow(b, 2) - (4 * c);
 	t = min_t(sqrtf(thelta), b, status);
 	if (thelta <= 0)
-	{
-		*status = FALSE;
-		return (NULL);
-	}
+		return (false(status));
 	if (*status == FALSE)
 		return (NULL);
 	return (fs_pluse(bck_ray->point1, num_muliplication(&vhat, t)));
 }
-
 
 void int_point_propreties(vector_t *poi, object_t *this,
 						  vector_t *int_point, vector_t *local_normal, vector_t *local_color)
