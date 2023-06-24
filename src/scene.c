@@ -1,30 +1,51 @@
 #include "headers/scene.h"
 
+t_list *Objects()
+{
+	object_t *sphere, *m_cylinder, *m_triangle, *plan;
+
+	t_list *data = NULL;
+	sphere = create_sphere(vector(-1.5, -1.0, -0.8), vector(0, 0, 0), vector(1, 1, 1), vector(139, .0, .0));
+	m_cylinder = cylinder(vector(0.0, 0.0, 0.0), vector(0.0, 0, 0), vector(1, 1, 1), vector(0.04, 0.78, 0.94));
+	m_triangle = triangle(vector(1.5, 0.0, -0.8), vector(-1.5708, .0f, -0.5708), vector(.8, .5, .5), vector(255, 215, 0));
+	plan = plane(vector(0, 0, 0.5), vector(0.0, 0, 0), vector(4.5, 4.0, 1.0), vector(1.0, 1.0, 1.0));
+
+	// push_back(&data, ft_lstnew(plan));
+	// push_back(&data, ft_lstnew(sphere));
+	push_back(&data, ft_lstnew(m_cylinder));
+	// push_back(&data, ft_lstnew(m_triangle));
+	return (data);
+}
+
+t_list *LightSorces()
+{
+	object_t *sphere, *m_cylinder, *m_triangle, *plan;
+
+	t_list *data = NULL;
+	push_back(&data, ft_lstnew(new_light(vector(.0, -10.0, -5.0),
+										 vector(1.0, 1.0, 1.0), 1.0)));
+	push_back(&data, ft_lstnew(new_light(vector(.0, -10.0, -10.0),
+										 vector(1.0, 1.0, 1.0), 1.0)));
+	return (data);
+}
+
+void setupCamera(scene_t *this)
+{
+	this->m_camera = Camera(0.75f, 1.0f, (double)WIDTH / (double)HEIGHT);
+	SetPosition(this->m_camera, vector(.0, -5.0, -2.0));
+	SetUp(this->m_camera, vector(.0, .0, .1));
+	Setloockat(this->m_camera, vector(.0, .0, .0));
+	calculat_geometry(this->m_camera);
+}
+
 scene_t *Scene(void)
 {
 	scene_t *scene;
-	object_t *sphere, *m_cylinder, *m_triangle, *plan;
 
 	scene = malloc(sizeof(scene_t));
-	scene->m_object_list = NULL;
-	scene->m_light_list = NULL;
-	sphere = create_sphere(vector(-1.5, -1.0, -0.8), vector(0, 0, 0), vector(1, 1, 1), vector(139, .0, .0));
-	m_cylinder = cylinder(vector(0.0, 1.0, -0.8), vector(0, 0, 0), vector(1, 1, 1), vector(139, .0, .0));
-	m_triangle = triangle(vector(1.5, 0.0, -0.8), vector(-1.5708, .0f, -0.5708), vector(.8, .5, .5), vector(255, 215, 0));
-	plan = plane(vector(0, 0, 0.0), vector(0, 0, 0), vector(4, 4, 1.0), vector(255, 127, 80));
-
-	push_back(&scene->m_object_list, ft_lstnew(plan));
-	push_back(&scene->m_object_list, ft_lstnew(sphere));
-	push_back(&scene->m_object_list, ft_lstnew(m_cylinder));
-	push_back(&scene->m_object_list, ft_lstnew(m_triangle));
-
-	push_back(&scene->m_light_list, ft_lstnew(new_light(vector(.0, -5.0, -1.0),
-														vector(1.0, 1.0, 1.0), 1.0)));
-	scene->m_camera = Camera(0.75f, 1.0f, (16.0f / 9.0f));
-	SetPosition(scene->m_camera, vector(.0, -5.0, -2.0));
-	SetUp(scene->m_camera, vector(.0, .0, .1));
-	Setloockat(scene->m_camera, vector(.0, .0, .0));
-	calculat_geometry(scene->m_camera);
+	scene->m_object_list = Objects();
+	scene->m_light_list = LightSorces();
+	setupCamera(scene);
 	return (scene);
 }
 
@@ -110,7 +131,7 @@ t_image *Render(scene_t *scene)
 			}
 			else
 				//, ,
-				set_pixel(image, x, y, 135.0f, 206.0f, 235.0f);
+				set_pixel(image, x, y, 0, 0, 0);
 
 			x++;
 		}

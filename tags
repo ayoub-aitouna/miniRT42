@@ -7,29 +7,32 @@
 Apply_transform	src/lib/math/gtfm.c	/^ray_t *Apply_transform(ray_t *input_ray, object_t *this, int dirFlag)$/;"	f
 Apply_transform_vector	src/lib/math/gtfm.c	/^vector_t *Apply_transform_vector(vector_t *inputVector, int dirFlag, object_t *this)$/;"	f
 BCKWRD	src/lib/math/headers/types.h	30;"	d
-CFLAGS	Makefile	/^CFLAGS  :=   #-Werror -Ofast$/;"	m
+CFLAGS	Makefile	/^CFLAGS  :=   #-Werror -Ofast $/;"	m
+CYLINDER_H	src/Objects/headers/cylinder.h	2;"	d
 CalculatDiffuseColor	src/scene.c	/^vector_t *CalculatDiffuseColor(scene_t *scene, vector_t *localNormal,$/;"	f
 Camera	src/camera.c	/^camera_t *Camera(double horizontal_size, double lenght, double aspect_ration)$/;"	f
 EPSILON	src/lib/math/headers/types.h	13;"	d
+ESC	src/main.c	4;"	d	file:
 FALSE	src/lib/math/headers/types.h	17;"	d
 FRWRD	src/lib/math/headers/types.h	26;"	d
 GREEN	Makefile	/^GREEN	:= \\033[32m$/;"	m
 GTFM_H	src/lib/math/headers/gtfm.h	2;"	d
 HALFPI	src/lib/math/headers/types.h	9;"	d
-HEIGHT	src/headers/main.h	17;"	d
+HEIGHT	src/headers/main.h	15;"	d
 LIB_H	src/lib/lib.h	2;"	d
 Light	src/headers/types.h	/^typedef struct Light$/;"	s
+LightSorces	src/scene.c	/^t_list *LightSorces()$/;"	f
 MATH_H	src/lib/math/headers/vectormath.h	2;"	d
-MATH_MAIN_H	src/lib/math/headers/main.h	2;"	d
+MAX_V	src/lib/math/headers/types.h	34;"	d
 MLXFLAG	Makefile	/^MLXFLAG := -lmlx$/;"	m
 M_TYPES_H	src/headers/types.h	2;"	d
-NAME	Makefile	/^NAME	:= Raytracing$/;"	m
+NAME	Makefile	/^NAME	:= miniRT$/;"	m
 OBJ	Makefile	/^OBJ		:= $(patsubst %.c, $(OBJ_DIR)\/%.o, $(SRC))$/;"	m
-OBJECTS_MAIN_H	src/Objects/headers/main.h	2;"	d
 OBJECT_BASE_HPP	src/Objects/headers/base.h	2;"	d
 OBJ_DIR	Makefile	/^OBJ_DIR	:= .compiled$/;"	m
 OS	Makefile	/^OS 	:= $(shell uname)$/;"	m
 Object	src/headers/types.h	/^typedef struct Object$/;"	s
+Objects	src/scene.c	/^t_list *Objects()$/;"	f
 PI	src/lib/math/headers/types.h	5;"	d
 PLANE_H	src/Objects/headers/plane.h	2;"	d
 POINT_LIGHT_H	src/Lights/headers/pointlight.h	2;"	d
@@ -52,8 +55,9 @@ Setloockat	src/camera.c	/^void Setloockat(camera_t *this, vector_t *loockat)$/;"
 TRIANGLE_H	src/Objects/headers/triangle.h	2;"	d
 TRUE	src/lib/math/headers/types.h	21;"	d
 TYPES_H	src/lib/math/headers/types.h	2;"	d
-WIDTH	src/headers/main.h	16;"	d
+WIDTH	src/headers/main.h	14;"	d
 addr	src/headers/types.h	/^	char *addr;$/;"	m	struct:s_data
+all_true	src/Objects/Cylinder.c	/^int all_true(int *list, int size)$/;"	f
 aspect_ration	src/headers/types.h	/^	double aspect_ration;$/;"	m	struct:camera
 base_color	src/headers/types.h	/^	vector_t *base_color;$/;"	m	struct:Light
 base_color	src/headers/types.h	/^	vector_t *base_color;$/;"	m	struct:Object
@@ -65,10 +69,10 @@ calculat_geometry	src/camera.c	/^void calculat_geometry(camera_t *this)$/;"	f
 calculat_int_point	src/Objects/spher.c	/^vector_t *calculat_int_point(ray_t *bck_ray, vector_t vhat, int *status)$/;"	f
 camera	src/headers/types.h	/^typedef struct camera$/;"	s
 camera_t	src/headers/types.h	/^} camera_t;$/;"	t	typeref:struct:camera
+cap_int_point_propreties	src/Objects/Cylinder.c	/^void cap_int_point_propreties(vector_t *poi, object_t *this,$/;"	f
 cast_ray	src/scene.c	/^int cast_ray(ray_t *ray, scene_t *scene, vector_t *c_int_point, void **c_object,$/;"	f
-cc	Makefile	/^cc		:= gcc$/;"	m
-close_enough	src/Objects/Plane.c	/^int close_enough(double v1, double v2)$/;"	f
-close_enough	src/lib/math/utils.c	/^int close_enough(double v1, double v2)$/;"	f
+cc	Makefile	/^cc		:= gcc #-fsanitize=address -g3$/;"	m
+close_enough	src/Objects/ObjectBase.c	/^int close_enough(double v1, double v2)$/;"	f
 cofactor	src/lib/math/matrix.c	/^double cofactor(matrix_t *mt, int row, int column)$/;"	f
 cols	src/lib/math/headers/types.h	/^	int cols;$/;"	m	struct:matrix
 content	src/lib/lib.h	/^    void *content;$/;"	m	struct:list
@@ -78,6 +82,10 @@ create_cols	src/lib/math/matrix.c	/^double *create_cols(int c)$/;"	f
 create_matrix	src/lib/math/matrix.c	/^matrix_t *create_matrix(int rows, int cols)$/;"	f
 create_sphere	src/Objects/spher.c	/^object_t *create_sphere(vector_t *translation, vector_t *rotation,$/;"	f
 cross	src/lib/math/vectormath.c	/^vector_t	*cross(vector_t v, vector_t u)$/;"	f
+cy_calculat_int_point	src/Objects/Cylinder.c	/^vector_t *cy_calculat_int_point(ray_t *ray, vector_t n, int *status)$/;"	f
+cy_int_point_propreties	src/Objects/Cylinder.c	/^void cy_int_point_propreties(vector_t *poi, object_t *this,$/;"	f
+cy_int_test	src/Objects/Cylinder.c	/^int cy_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,$/;"	f
+cylinder	src/Objects/Cylinder.c	/^object_t *cylinder(vector_t *translation, vector_t *rotation,$/;"	f
 deleteObjectBase	src/Objects/ObjectBase.c	/^void deleteObjectBase(object_t *this)$/;"	f
 delete_ray	src/ray.c	/^void delete_ray(ray_t *this)$/;"	f
 determinant	src/lib/math/matrix.c	/^double determinant(matrix_t *mt)$/;"	f
@@ -86,7 +94,7 @@ division	src/lib/math/vectormath.c	/^vector_t	*division(vector_t *target, vector
 dot	src/lib/math/vectormath.c	/^float	dot(vector_t v, vector_t u)$/;"	f
 endian	src/headers/types.h	/^	int endian;$/;"	m	struct:s_data
 equal	src/lib/math/vectormath.c	/^vector_t	*equal(vector_t *target, vector_t *v)$/;"	f
-false	src/Objects/Plane.c	/^vector_t *false(int *status)$/;"	f
+false	src/Objects/ObjectBase.c	/^vector_t *false(int *status)$/;"	f
 fill_mt	src/lib/math/matrix.c	/^void fill_mt(matrix_t *mt, double *values)$/;"	f
 from_mt_to_vt	src/lib/math/vectormath.c	/^vector_t	*from_mt_to_vt(matrix_t mt)$/;"	f
 from_vector_to_matrix	src/lib/math/matrix.c	/^matrix_t *from_vector_to_matrix(vector_t vt)$/;"	f
@@ -104,19 +112,19 @@ init_channel	src/Image.c	/^double	**init_channel(void)$/;"	f
 initialize	src/Image.c	/^t_image	*initialize(void)$/;"	f
 int_point_propreties	src/Objects/spher.c	/^void int_point_propreties(vector_t *poi, object_t *this,$/;"	f
 inverse	src/lib/math/matrix.c	/^matrix_t *inverse(matrix_t *mt)$/;"	f
-key_hook	src/main.c	/^int	key_hook(int keycode, void *vars)$/;"	f
+key_hook	src/main.c	/^int key_hook(int keycode, void *vars)$/;"	f
 lenght	src/headers/types.h	/^	double lenght;$/;"	m	struct:camera
 light_t	src/headers/types.h	/^} light_t;$/;"	t	typeref:struct:Light
 line_length	src/headers/types.h	/^	int line_length;$/;"	m	struct:s_data
 list	src/lib/lib.h	/^typedef struct list$/;"	s
 loockat	src/headers/types.h	/^	vector_t *loockat;$/;"	m	struct:camera
 m_camera	src/headers/types.h	/^	camera_t *m_camera;$/;"	m	struct:Scene
-m_exit	src/main.c	/^int	m_exit(void)$/;"	f
+m_exit	src/main.c	/^int m_exit(void)$/;"	f
 m_intensity	src/headers/types.h	/^	double m_intensity;$/;"	m	struct:Light
 m_lab	src/headers/types.h	/^	vector_t *m_lab;$/;"	m	struct:ray
 m_light_list	src/headers/types.h	/^	t_list *m_light_list;$/;"	m	struct:Scene
 m_object_list	src/headers/types.h	/^	t_list *m_object_list;$/;"	m	struct:Scene
-main	src/main.c	/^int	main(void)$/;"	f
+main	src/main.c	/^int main(void)$/;"	f
 matrix	src/lib/math/headers/types.h	/^	double **matrix;$/;"	m	struct:matrix
 matrix	src/lib/math/headers/types.h	/^typedef struct matrix{$/;"	s
 matrix	src/lib/math/matrix.c	/^matrix_t *matrix(int rows, int cols, double *values)$/;"	f
@@ -168,6 +176,7 @@ screen_u	src/headers/types.h	/^	vector_t *screen_u;$/;"	m	struct:camera
 screen_v	src/headers/types.h	/^	vector_t *screen_v;$/;"	m	struct:camera
 set_pixel	src/Image.c	/^void	set_pixel(t_image *image, int x, int y, double r, double g, double b)$/;"	f
 set_to_indentity	src/lib/math/matrix.c	/^void set_to_indentity(matrix_t *mt)$/;"	f
+setupCamera	src/scene.c	/^void setupCamera(scene_t *this)$/;"	f
 sh_int_test	src/Objects/spher.c	/^int sh_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,$/;"	f
 submatrix	src/lib/math/matrix.c	/^matrix_t *submatrix(matrix_t *mt, int row, int column)$/;"	f
 t_calculat_int_point	src/Objects/triangle.c	/^vector_t *t_calculat_int_point(ray_t *ray, vector_t k, int *status)$/;"	f
