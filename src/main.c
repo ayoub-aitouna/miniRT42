@@ -11,6 +11,7 @@ int m_exit(void)
 
 int key_hook(int keycode, void *vars)
 {
+	(void) vars;
 	if (keycode == ESC)
 		m_exit();
 	return (0);

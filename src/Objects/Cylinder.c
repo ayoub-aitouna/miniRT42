@@ -1,5 +1,5 @@
 #include "headers/triangle.h"
-
+void delete_ray(ray_t *);
 int min_index(double *list, int size)
 {
 	int i = 0;
@@ -110,7 +110,7 @@ vector_t *set_cylider_properiesties(object_t *this, vector_t *poi,
 	m_normal = normalized_sub(gb_normal, global_origin);
 	*local_normal = *m_normal;
 	*local_color = *this->base_color;
-	// free_list((void *[]){(void *)origin, (void *)normal_fp, (void *)global_origin, (void *)m_normal}, 4);
+	free_list((void *[]){(void *)origin, (void *)normal_fp, (void *)global_origin, (void *)m_normal}, 4);
 	return (int_poi);
 }
 

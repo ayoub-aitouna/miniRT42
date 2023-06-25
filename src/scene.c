@@ -2,24 +2,25 @@
 
 t_list *Objects()
 {
-	object_t *sphere, *m_cylinder, *m_triangle, *plan;
+	object_t *sphere, *m_cylinder, *m_triangle, *plan, *m_cone;
 
 	t_list *data = NULL;
-	sphere = create_sphere(vector(-1.0, 0.0, -2.0), vector(0, 0, 0), vector(1, 1, 1), vector(139.0f / 255.0f, .0, .0));
-	m_cylinder = cylinder(vector(0.0, 0.0, 0.0), vector(0.0, 0, 0), vector(1, 1, 1), vector(0.04, 0.78, 0.94));
-	m_triangle = triangle(vector(1.5, 0.0, -0.8), vector(-1.5708, .0f, -0.5708), vector(.8, .5, .5), vector(255 / 255.0f, 215 / 255.0f, 0));
-	plan = plane(vector(0, 0, 1), vector(0.0, 0, 0), vector(4.5, 4.0, 1.0), vector(1.0, 1.0, 1.0));
+	sphere = create_sphere(vector(-1.5, 0.0, 0.0), vector(0, 0, 0), vector(.5f, .5f, .5f), vector(139.0f / 255.0f, .0, .0));
+	// m_cylinder = cylinder(vector(0.0, 0.0, 0.0), vector(0.0, 0, 0), vector(.5f, .5f, .5f), vector(0.04, 0.78, 0.94));
+	// m_triangle = triangle(vector(1.5, 0.0, -0.8), vector(-1.5708, .0f, -0.5708), vector(.8, .5, .5), vector(255 / 255.0f, 215 / 255.0f, 0));
+	plan = plane(vector(.0, .0, 1), vector(0.0, 0, 0), vector(4.5, 4.0, 1.0), vector(.8, .3, 1.0));
+	m_cone = cone(vector(.0, .0, .0), vector(0, 0, 0), vector(.5f, .5f, .5f), vector(.04, .78, .94));
 
 	push_back(&data, ft_lstnew(plan));
+	push_back(&data, ft_lstnew(m_cone));
 	push_back(&data, ft_lstnew(sphere));
-	push_back(&data, ft_lstnew(m_cylinder));
-	push_back(&data, ft_lstnew(m_triangle));
+	// push_back(&data, ft_lstnew(m_conecylinder));
+	// push_back(&data, ft_lstnew(m_triangle));
 	return (data);
 }
 
 t_list *LightSorces()
 {
-	object_t *sphere, *m_cylinder, *m_triangle, *plan;
 
 	t_list *data = NULL;
 	push_back(&data, ft_lstnew(new_light(vector(.0, -10.0, -5.0),
@@ -87,10 +88,10 @@ vector_t *CalculatDiffuseColor(scene_t *scene, vector_t *localNormal,
 										&intensity, &Color, scene, cur_object);
 		if (validIlum)
 		{
-			vector_t ambient_color = ambient_lighing(0.2, (vector_t){.x = 1.0f, .y = 1.0f, .z = 1.0f});
-			r += (Color.x * intensity) + ambient_color.x;
-			g += (Color.y * intensity) + ambient_color.x;
-			b += (Color.z * intensity) + ambient_color.x;
+			// vector_t ambient_color = ambient_lighing(0.2, (vector_t){.x = 1.0f, .y = 1.0f, .z = 1.0f});
+			r += (Color.x * intensity) + 0.2f;
+			g += (Color.y * intensity) + 0.2f;
+			b += (Color.z * intensity) + 0.2f;
 		}
 		tmp = tmp->next;
 	}
@@ -119,6 +120,7 @@ t_image *Render(scene_t *scene)
 	xFact = 1.0 / (((double)WIDTH) / 2.0);
 	yFact = 1.0 / (((double)HEIGHT) / 2.0);
 	y = 0;
+	c_object = NULL;
 	while (y < HEIGHT)
 	{
 		x = 0;
@@ -136,7 +138,6 @@ t_image *Render(scene_t *scene)
 				set_pixel(image, x, y, color->x, color->y, color->z);
 			}
 			else
-				//, ,
 				set_pixel(image, x, y, 0, 0, 0);
 
 			x++;
