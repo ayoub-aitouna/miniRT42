@@ -40,3 +40,16 @@ vector_t *false(int *status)
     *status = FALSE;
     return (NULL);
 }
+
+/// @brief Delete[] Operator Overload
+/// @param object_t *
+void delete_object_list(t_list *list)
+{
+    while (list)
+    {
+        printf("deleting object %p \n", list);
+        deleteObjectBase(list->content);
+        free(list);
+        list = list->next;
+    }
+}

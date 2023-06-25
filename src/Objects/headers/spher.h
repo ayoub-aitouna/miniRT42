@@ -3,7 +3,7 @@
 #include "base.h"
 
 object_t *create_sphere(vector_t *translation, vector_t *rotation, vector_t *scal, vector_t *color);
-vector_t *fs_pluse(vector_t *u, vector_t *v);
+vector_t *fs_addition(vector_t *u, vector_t *v);
 double min_t(double numsqrt, double b, int *status);
 void int_point_propreties(vector_t *poi, object_t *this,
                           vector_t *int_point, vector_t *local_normal, vector_t *local_color);

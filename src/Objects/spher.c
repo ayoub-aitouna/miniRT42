@@ -45,7 +45,7 @@ vector_t *calculat_int_point(ray_t *bck_ray, vector_t vhat, int *status)
 		return (false(status));
 	if (*status == FALSE)
 		return (NULL);
-	return (fs_pluse(bck_ray->point1, num_muliplication(&vhat, t)));
+	return (fs_addition(bck_ray->point1, num_muliplication(&vhat, t)));
 }
 
 void int_point_propreties(vector_t *poi, object_t *this,
@@ -87,11 +87,11 @@ double min_t(double numsqrt, double b, int *status)
 	return (t2);
 }
 
-vector_t *fs_pluse(vector_t *u, vector_t *v)
+vector_t *fs_addition(vector_t *u, vector_t *v)
 {
 	vector_t *re;
 
-	re = pluse(u, v);
+	re = addition(u, v);
 	free(v);
 	return (re);
 }

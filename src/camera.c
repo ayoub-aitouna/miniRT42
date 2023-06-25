@@ -45,7 +45,7 @@ void calculat_geometry(camera_t *this)
 	normalize(this->screen_u);
 	this->screen_v = cross(*this->screen_u, *aligment);
 	normalize(this->screen_v);
-	this->screen_center = pluse(this->position, num_muliplication(aligment,
+	this->screen_center = addition(this->position, num_muliplication(aligment,
 																  this->lenght));
 	this->screen_u = num_muliplication(this->screen_u,
 									   this->horizontal_size);
@@ -79,8 +79,8 @@ ray_t *generate_ray(camera_t *this, double screenX, double screenY)
 	scalled_u = num_muliplication(this->screen_u,
 								  screenX);
 	scalled_v = num_muliplication(this->screen_v, screenY);
-	w_part1 = pluse(this->screen_center, scalled_u);
-	dst_cords = pluse(w_part1, scalled_v);
+	w_part1 = addition(this->screen_center, scalled_u);
+	dst_cords = addition(w_part1, scalled_v);
 	free(w_part1);
 	free(scalled_v);
 	free(scalled_u);

@@ -12,4 +12,6 @@ void push_back(t_list **lst, t_list *node);
 void ft_lstiter(t_list *lst, void (*f)(void *));
 t_list *ft_lstnew(void *content);
 int ft_lstsize(t_list *lst);
+void free_list(void **ptrs, int size);
+
 #endif

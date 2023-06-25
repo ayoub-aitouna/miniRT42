@@ -98,7 +98,7 @@ false	src/Objects/ObjectBase.c	/^vector_t *false(int *status)$/;"	f
 fill_mt	src/lib/math/matrix.c	/^void fill_mt(matrix_t *mt, double *values)$/;"	f
 from_mt_to_vt	src/lib/math/vectormath.c	/^vector_t	*from_mt_to_vt(matrix_t mt)$/;"	f
 from_vector_to_matrix	src/lib/math/matrix.c	/^matrix_t *from_vector_to_matrix(vector_t vt)$/;"	f
-fs_pluse	src/Objects/spher.c	/^vector_t *fs_pluse(vector_t *u, vector_t *v)$/;"	f
+fs_addition	src/Objects/spher.c	/^vector_t *fs_addition(vector_t *u, vector_t *v)$/;"	f
 ft_lstiter	src/lib/list/ft_lstiter.c	/^void ft_lstiter(t_list *lst, void (*f)(void *))$/;"	f
 ft_lstnew	src/lib/list/ft_lstnew.c	/^t_list *ft_lstnew(void *content)$/;"	f
 ft_lstsize	src/lib/list/ft_lstsize.c	/^int ft_lstsize(t_list *lst)$/;"	f
@@ -152,7 +152,7 @@ p_calculat_int_point	src/Objects/Plane.c	/^vector_t *p_calculat_int_point(ray_t 
 p_int_point_propreties	src/Objects/Plane.c	/^void p_int_point_propreties(vector_t *poi, object_t *this,$/;"	f
 p_int_test	src/Objects/Plane.c	/^int p_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,$/;"	f
 plane	src/Objects/Plane.c	/^object_t *plane(vector_t *translation, vector_t *rotation,$/;"	f
-pluse	src/lib/math/vectormath.c	/^vector_t	*pluse(vector_t *target, vector_t *v)$/;"	f
+addition	src/lib/math/vectormath.c	/^vector_t	*addition(vector_t *target, vector_t *v)$/;"	f
 point1	src/headers/types.h	/^	vector_t *point1;$/;"	m	struct:ray
 point2	src/headers/types.h	/^	vector_t *point2;$/;"	m	struct:ray
 point_t	src/lib/math/headers/types.h	/^typedef		vector_t point_t;$/;"	t

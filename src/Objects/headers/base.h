@@ -10,4 +10,5 @@ int close_enough(double v1, double v2);
 object_t *object_base(vector_t *translation, vector_t *rotation,
                       vector_t *scal, vector_t *color);
 void deleteObjectBase(object_t *this);
+void delete_object_list(t_list *list);
 #endif

@@ -58,8 +58,8 @@ void calulcat_cylider_intersection(double *t, vector_t p, vector_t n, vector_t *
 	{
 		t[0] = (-b + numsqrt) / (2 * a);
 		t[1] = (-b - numsqrt) / (2 * a);
-		intersections[0] = pluse(&p, num_muliplication(&n, t[0]));
-		intersections[1] = pluse(&p, num_muliplication(&n, t[1]));
+		intersections[0] = addition(&p, num_muliplication(&n, t[0]));
+		intersections[1] = addition(&p, num_muliplication(&n, t[1]));
 		if (t[0] > 0 && fabs(intersections[0]->z) < 1.0)
 			valide_intersections[0] = TRUE;
 		else
@@ -76,8 +76,8 @@ void calulcat_cap_intersection(double *t, vector_t p, vector_t n, vector_t **int
 	t[2] = (p.z - 1) / -n.z;
 	t[3] = (p.z + 1) / -n.z;
 
-	intersections[2] = pluse(&p, num_muliplication(&n, t[2]));
-	intersections[3] = pluse(&p, num_muliplication(&n, t[3]));
+	intersections[2] = addition(&p, num_muliplication(&n, t[2]));
+	intersections[3] = addition(&p, num_muliplication(&n, t[3]));
 
 	if (t[2] > 0.0 &&
 		(sqrt(pow(intersections[2]->x, 2) + pow(intersections[2]->y, 2))) < 1.0)

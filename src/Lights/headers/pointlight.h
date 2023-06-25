@@ -8,4 +8,7 @@ light_t *new_light(vector_t *position, vector_t *color, double intensity);
 int	calculatIlumination(light_t *this, vector_t *localNormal,
 		vector_t *initPoint, double *intensity, vector_t *Color, scene_t *scene, object_t* cur_Object);
 
+void delete_light(light_t *this);
+void delete_light_list(t_list *list);
+
 #endif

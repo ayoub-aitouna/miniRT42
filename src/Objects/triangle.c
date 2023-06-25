@@ -58,7 +58,7 @@ vector_t *t_calculat_int_point(ray_t *ray, vector_t k, int *status)
     if (u < .0 || v < .0 || (u + v) > 1)
         return (false(status));
     else
-        return (pluse(ray->point1, num_muliplication(&k, t)));
+        return (addition(ray->point1, num_muliplication(&k, t)));
 }
 
 int t_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,

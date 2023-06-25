@@ -56,7 +56,7 @@ vector_t *p_calculat_int_point(ray_t *ray, vector_t k, int *status)
     if (fabs(u) >= 1.0 || fabs(v) >= 1.0)
         return (false(status));
     else
-        return (pluse(ray->point1, num_muliplication(&k, t)));
+        return (addition(ray->point1, num_muliplication(&k, t)));
 }
 
 int p_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,

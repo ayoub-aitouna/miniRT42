@@ -68,7 +68,7 @@ vector_t	*minus(vector_t *target, vector_t *v)
 	return (new);
 }
 
-vector_t	*pluse(vector_t *target, vector_t *v)
+vector_t	*addition(vector_t *target, vector_t *v)
 {
 	vector_t	*new;
 
@@ -156,3 +156,65 @@ vector_t *normalized_sub(vector_t *u, vector_t* v)
 }
 
 
+/*************************************************/
+/***********   Memory Safe Funtions     **********/
+/*************************************************/
+
+void free_at_index(void *ptr1, void *ptr2, int index)
+{
+	if (index == 0 || index == 2)
+		free(ptr1);
+	if (index == 1 || index == 2)
+		free(ptr2);
+}
+
+vector_t *ms_minus(vector_t *target, vector_t *v, int free_at)
+{
+	vector_t *result;
+	result = minus(target, v);
+	free_at_index(target, v, free_at);
+	return (result);
+}
+
+vector_t *ms_addition(vector_t *target, vector_t *v, int free_at)
+{
+	vector_t *result;
+	result = addition(target, v);
+	free_at_index(target, v, free_at);
+	return (result);
+}
+
+vector_t *ms_division(vector_t *target, vector_t *v, int free_at)
+{
+	vector_t *result;
+	result = division(target, v);
+	free_at_index(target, v, free_at);
+	return (result);
+}
+
+vector_t *ms_muliplication(vector_t *target, vector_t *v, int free_at)
+{
+	vector_t *result;
+	result = muliplication(target, v);
+	free_at_index(target, v, free_at);
+	return (result);
+}
+
+vector_t *ms_num_muliplication(vector_t *target, float num)
+{
+	vector_t *result;
+	result = num_muliplication(target, num);
+	free(target);
+	return (result);
+}
+
+double vector_distance(vector_t *u, vector_t *v)
+{
+	vector_t *result;
+	double distance = 0.0f;
+
+	result = minus(u, v);
+	distance = vector_lenght(*result);
+	free(result);
+	return (distance);
+}

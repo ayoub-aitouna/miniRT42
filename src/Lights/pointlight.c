@@ -56,3 +56,27 @@ int calculatIlumination(light_t *this, vector_t *localNormal,
 	free(lightDir);
 	return (TRUE);
 }
+
+
+void delete_light(light_t *this)
+{
+	if (this)
+	{
+		printf("deleting light %p \n", this);
+		if (this->base_color)
+			free(this->base_color);
+		if (this->position)
+			free(this->position);
+		free(this);
+	}
+}
+
+void delete_light_list(t_list *list)
+{
+	while (list)
+	{
+		delete_light(list->content);
+		free(list);
+		list = list->next;
+	}
+}
