@@ -5,9 +5,9 @@ t_list *Objects()
 	object_t *sphere, *m_cylinder, *m_triangle, *plan;
 
 	t_list *data = NULL;
-	sphere = create_sphere(vector(-1.5, -1.0, -0.8), vector(0, 0, 0), vector(1, 1, 1), vector(139.0f/255.0f, .0, .0));
+	sphere = create_sphere(vector(-1.0, 0.0, -2.0), vector(0, 0, 0), vector(1, 1, 1), vector(139.0f / 255.0f, .0, .0));
 	m_cylinder = cylinder(vector(0.0, 0.0, 0.0), vector(0.0, 0, 0), vector(1, 1, 1), vector(0.04, 0.78, 0.94));
-	m_triangle = triangle(vector(1.5, 0.0, -0.8), vector(-1.5708, .0f, -0.5708), vector(.8, .5, .5), vector(255/255.0f, 215/255.0f, 0));
+	m_triangle = triangle(vector(1.5, 0.0, -0.8), vector(-1.5708, .0f, -0.5708), vector(.8, .5, .5), vector(255 / 255.0f, 215 / 255.0f, 0));
 	plan = plane(vector(0, 0, 1), vector(0.0, 0, 0), vector(4.5, 4.0, 1.0), vector(1.0, 1.0, 1.0));
 
 	push_back(&data, ft_lstnew(plan));
@@ -60,6 +60,11 @@ void printProgress(int y)
 		printf("\033[A\33[2K\r DONE.\n");
 }
 
+vector_t ambient_lighing(double ration, vector_t ambient_color)
+{
+	return ((vector_t){.x = (ambient_color.x * ration), .y = (ambient_color.y * ration), .z = (ambient_color.z * ration)});
+}
+
 vector_t *CalculatDiffuseColor(scene_t *scene, vector_t *localNormal,
 							   vector_t *initPoint, vector_t *base_color, object_t *cur_object)
 {
@@ -82,9 +87,10 @@ vector_t *CalculatDiffuseColor(scene_t *scene, vector_t *localNormal,
 										&intensity, &Color, scene, cur_object);
 		if (validIlum)
 		{
-			r += Color.x * intensity;
-			g += Color.y * intensity;
-			b += Color.z * intensity;
+			vector_t ambient_color = ambient_lighing(0.2, (vector_t){.x = 1.0f, .y = 1.0f, .z = 1.0f});
+			r += (Color.x * intensity) + ambient_color.x;
+			g += (Color.y * intensity) + ambient_color.x;
+			b += (Color.z * intensity) + ambient_color.x;
 		}
 		tmp = tmp->next;
 	}
