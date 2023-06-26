@@ -3,7 +3,7 @@
 #include "headers/scene.h"
 #include "headers/types.h"
 
-#define ESC 720
+#define ESC 53
 
 typedef struct mt
 {
@@ -24,7 +24,6 @@ int	m_exit(mt_t *m_mt)
 
 int	key_hook(int keycode, mt_t *mt)
 {
-	printf("keycode = %d \n", keycode);
 	if (keycode == ESC)
 		m_exit(mt);
 	return (0);
