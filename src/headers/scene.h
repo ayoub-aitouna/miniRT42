@@ -16,4 +16,5 @@
 
 int cast_ray(ray_t *ray, scene_t *scene, vector_t *c_intersection_point,
 			 object_t **c_object, vector_t *c_norm, vector_t *c_color);
+void deleteScene(scene_t *this);
 #endif

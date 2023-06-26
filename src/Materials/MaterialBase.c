@@ -10,3 +10,9 @@ material_t *new_material_base(double shininess_coefficient, double reflection_co
 
     return (material_base);
 }
+
+void delete_material(material_t *this)
+{
+    if (this)
+        free(this);
+}

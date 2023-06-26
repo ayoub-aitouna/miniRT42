@@ -1,5 +1,6 @@
 #include "headers/base.h"
 material_t *new_simple_material(double shininess_coefficient, double reflection_coefficient);
+
 object_t *object_base(vector_t *translation, vector_t *rotation,
                       vector_t *scal, vector_t *color)
 {
@@ -8,10 +9,9 @@ object_t *object_base(vector_t *translation, vector_t *rotation,
     object = (object_t *)malloc(sizeof(object_t));
     object->fwd_tfm = Set_transform(translation, rotation, scal);
     object->bck_tfm = inverse(object->fwd_tfm);
-    object->base_color = color;
+    object->base_color = copy_vector(*color);
     object->material = new_simple_material(0.6, 2);
-    free(rotation);
-    free(translation);
+    free_list((void *[]){translation, rotation, scal, color}, 4);
     return (object);
 }
 
@@ -24,9 +24,11 @@ void deleteObjectBase(object_t *this)
         if (this->base_color)
             free(this->base_color);
         if (this->bck_tfm)
-            free(this->bck_tfm);
+            delete_matrix(this->bck_tfm);
         if (this->fwd_tfm)
-            free(this->fwd_tfm);
+            delete_matrix(this->fwd_tfm);
+        if (this->material)
+            delete_material(this->material);
         free(this);
     }
 }
@@ -46,11 +48,13 @@ vector_t * false(int *status)
 /// @param object_t *
 void delete_object_list(t_list *list)
 {
+    t_list *tmp;
+
     while (list)
     {
-        printf("deleting object %p \n", list);
         deleteObjectBase(list->content);
-        free(list);
+        tmp = list;
         list = list->next;
+        free(tmp);
     }
 }

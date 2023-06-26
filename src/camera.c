@@ -45,12 +45,11 @@ void calculat_geometry(camera_t *this)
 	normalize(this->screen_u);
 	this->screen_v = cross(*this->screen_u, *aligment);
 	normalize(this->screen_v);
-	this->screen_center = addition(this->position, num_muliplication(aligment,
-																  this->lenght));
-	this->screen_u = num_muliplication(this->screen_u,
-									   this->horizontal_size);
-	this->screen_v = num_muliplication(this->screen_v,
-									   this->horizontal_size / this->aspect_ration);
+	this->screen_center = ms_addition(this->position, ms_num_muliplication(aligment, this->lenght), 1);
+	this->screen_u = ms_num_muliplication(this->screen_u,
+										  this->horizontal_size);
+	this->screen_v = ms_num_muliplication(this->screen_v,
+										  this->horizontal_size / this->aspect_ration);
 }
 
 void PrintRay(ray_t *ray)
@@ -85,4 +84,24 @@ ray_t *generate_ray(camera_t *this, double screenX, double screenY)
 	free(scalled_v);
 	free(scalled_u);
 	return (ray(copy_vector(*this->position), dst_cords));
+}
+
+void deleteCamera(camera_t *this)
+{
+	if (this)
+	{
+		if (this->position)
+			free(this->position);
+		if (this->loockat)
+			free(this->loockat);
+		if (this->up)
+			free(this->up);
+		if (this->screen_u)
+			free(this->screen_u);
+		if (this->screen_v)
+			free(this->screen_v);
+		if (this->screen_center)
+			free(this->screen_center);
+		free(this);
+	}
 }

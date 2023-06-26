@@ -8,8 +8,8 @@ matrix_t *safe_matrix_multy(matrix_t *mt1, matrix_t *mt2)
     if (!mt1 || !mt2)
         return (NULL);
     matrix_t *result = mt_multiplication(mt1, mt2);
-    free(mt1);
-    free(mt2);
+    delete_matrix(mt1);
+    delete_matrix(mt2);
     if (!result)
         printf("error in safe mt \n");
     return (result);
@@ -102,18 +102,25 @@ ray_t *Apply_transform(ray_t *input_ray, object_t *this, int dirFlag)
 
 vector_t *Apply_transform_vector(vector_t *inputVector, int dirFlag, object_t *this)
 {
-    matrix_t *tmp = create_matrix(4, 1);
+    matrix_t *tmp;
+    double *values;
     matrix_t *resultmt = NULL;
-    double values[] = {inputVector->x, inputVector->y, inputVector->z, 1.0f};
+    vector_t *result;
+
+    values = (double[]){inputVector->x, inputVector->y, inputVector->z, 1.0f};
+    tmp = create_matrix(4, 1);
     fill_mt(tmp, values);
     if (dirFlag)
         resultmt = mt_multiplication(this->fwd_tfm, tmp);
     else
         resultmt = mt_multiplication(this->bck_tfm, tmp);
-    if(!resultmt)
-        return (vector(0,0,0));
-    vector_t *result = vector(resultmt->matrix[0][0], resultmt->matrix[1][0], resultmt->matrix[2][0]);
-    free(resultmt);
-    free(tmp);
+    if (!resultmt)
+    {
+        delete_matrix(tmp);
+        return (vector(0, 0, 0));
+    }
+    result = vector(resultmt->matrix[0][0], resultmt->matrix[1][0], resultmt->matrix[2][0]);
+    delete_matrix(resultmt);
+    delete_matrix(tmp);
     return (result);
 }

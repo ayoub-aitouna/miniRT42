@@ -11,5 +11,5 @@ void SetUp(camera_t *this, vector_t *Up);
 void SetPosition(camera_t *this, vector_t *position);
 void calculat_geometry(camera_t *this);
 ray_t *generate_ray(camera_t *this, double screenX, double screenY);
-
+void deleteCamera(camera_t *this);
 #endif

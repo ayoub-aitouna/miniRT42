@@ -12,7 +12,7 @@ t_list *Objects()
 	m_plan = plane(vector(.0, 1.5, 1), vector(-1 * HALFPI, 0, 0), vector(4.5, 4.0, 1.0), vector(.04, .78, .94));
 
 	push_back(&data, ft_lstnew(plan));
-	//	push_back(&data, ft_lstnew(m_plan));
+		// push_back(&data, ft_lstnew(m_plan));
 	push_back(&data, ft_lstnew(sphere));
 	// push_back(&data, ft_lstnew(m_cylinder));
 	// push_back(&data, ft_lstnew(m_triangle));
@@ -104,12 +104,15 @@ t_image *Render(scene_t *scene)
 				color = c_object->material->calculat_color(scene, &c_norm,
 														   &c_intersection_point, &c_color, c_object, ray);
 				set_pixel(image, x, y, color->x, color->y, color->z);
+				free(color);
 			}
 			else
 				set_pixel(image, x, y, 0, 0, 0);
 
+			delete_ray(ray);
 			x++;
 		}
+		// exit(0);
 		y++;
 	}
 	return (image);
@@ -161,4 +164,15 @@ int cast_ray(ray_t *ray, scene_t *scene, vector_t *c_int_point, object_t **c_obj
 		tmp = tmp->next;
 	}
 	return (found_int);
+}
+
+void deleteScene(scene_t *this)
+{
+	if (this)
+	{
+		delete_object_list(this->m_object_list);
+		delete_light_list(this->m_light_list);
+		deleteCamera(this->m_camera);
+		free(this);
+	}
 }

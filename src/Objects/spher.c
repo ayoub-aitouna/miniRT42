@@ -21,10 +21,13 @@ int sh_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,
 	vhat = *bck_ray->m_lab;
 	normalize(&vhat);
 	poi = calculat_int_point(bck_ray, vhat, &status);
+	delete_ray(bck_ray);
 	if (!status)
+	{
+		free(poi);
 		return (FALSE);
+	}
 	int_point_propreties(poi, this, int_point, local_normal, local_color);
-	free(bck_ray);
 	free(poi);
 	return (TRUE);
 }

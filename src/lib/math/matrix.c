@@ -183,7 +183,11 @@ matrix_t *submatrix(matrix_t *mt, int row, int column)
 
 double minor(matrix_t *mt, int row, int column)
 {
-	return (determinant(submatrix(mt, row, column)));
+	matrix_t *sub;
+	sub = submatrix(mt, row, column);
+	double m_determinant = determinant(sub);
+	delete_matrix(sub);
+	return (m_determinant);
 }
 
 double cofactor(matrix_t *mt, int row, int column)
@@ -236,5 +240,26 @@ void set_to_indentity(matrix_t *mt)
 			j++;
 		}
 		i++;
+	}
+}
+
+void delete_matrix(matrix_t *this)
+{
+	int row_index;
+
+	row_index = 0;
+	if (this)
+	{
+		if (this->matrix)
+		{
+			while (row_index < this->rows)
+			{
+				if (this->matrix[row_index])
+					free(this->matrix[row_index]);
+				row_index++;
+			}
+			free(this->matrix);
+		}
+		free(this);
 	}
 }

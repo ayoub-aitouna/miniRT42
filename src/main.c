@@ -2,35 +2,43 @@
 #include "headers/main.h"
 #include "headers/types.h"
 #define ESC 720
-
-int m_exit(void)
+typedef struct mt
 {
+	t_image *image;
+	scene_t *scene;
+	void *mlx;
+	void *mlx_win;
+} mt_t;
+
+int m_exit(mt_t *m_mt)
+{
+	deleteScene(m_mt->scene);
+	free(m_mt->mlx);
+	free(m_mt->mlx_win);
 	printf("Stoped Runnig \n");
 	exit(0);
 }
 
-int key_hook(int keycode, void *vars)
+int key_hook(int keycode, mt_t *mt)
 {
-	(void) vars;
+	printf("keycode = %d \n", keycode);
 	if (keycode == ESC)
-		m_exit();
+		m_exit(mt);
 	return (0);
 }
 
 int main(void)
 {
-	void *mlx;
-	void *mlx_win;
-	t_image *image;
-	scene_t *scene;
+	mt_t m_mt;
 
-	image = NULL;
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "RayTracing");
-	scene = Scene();
-	image = Render(scene);
-	display(mlx, mlx_win, image);
-	mlx_key_hook(mlx_win, key_hook, mlx);
-	mlx_hook(mlx_win, 17, 0l, m_exit, NULL);
-	mlx_loop(mlx);
+	m_mt = (mt_t){.scene = NULL, .image = NULL};
+	m_mt.image = NULL;
+	m_mt.mlx = mlx_init();
+	m_mt.mlx_win = mlx_new_window(m_mt.mlx, WIDTH, HEIGHT, "miniRT");
+	m_mt.scene = Scene();
+	m_mt.image = Render(m_mt.scene);
+	display(m_mt.mlx, m_mt.mlx_win, m_mt.image);
+	mlx_key_hook(m_mt.mlx_win, key_hook, &m_mt);
+	mlx_hook(m_mt.mlx_win, 17, 0l, m_exit, &m_mt);
+	mlx_loop(m_mt.mlx);
 }
