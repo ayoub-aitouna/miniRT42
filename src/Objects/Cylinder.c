@@ -133,8 +133,9 @@ vector_t	*set_cap_properiesties(object_t *this, vector_t *poi,
 	origin = vector(0.0, 0.0, 0.0);
 	normal_fp = vector(0.0, 0.0, 0 + poi->z);
 	global_origin = Apply_transform_vector(origin, FRWRD, this);
-	m_normal = normalized_sub(Apply_transform_vector(normal_fp, FRWRD, this),
-								global_origin);
+	m_normal = ms_normalized_sub(Apply_transform_vector(normal_fp, FRWRD, this),
+									global_origin,
+									0);
 	*local_normal = *m_normal;
 	*local_color = *this->base_color;
 	free_list((void *[]){(void *)origin, (void *)normal_fp,
