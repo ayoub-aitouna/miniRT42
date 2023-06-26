@@ -10,23 +10,21 @@ t_list	*Objects(void)
 	object_t	*m_plan;
 
 	data = NULL;
-	m_cylinder = cone(vector(0.0, 0.0, -1.5), vector(0, 0, 0), vector(1.f, 1.f,
-				1.f), vector(0.04, 0.78, 0.94));
-	/*	
 	m_triangle = triangle(vector(1.5, 0.0, -0.8), vector(0.0, .0f, -0.5708),
 			vector(.8, .5, .5), vector(255 / 255.0f, 215 / 255.0f, 0));
+	m_cylinder = cone(vector(0.0, 0.0, -1.5), vector(0, 0, 0), vector(1.f, 1.f,
+				1.f), vector(0.04, 0.78, 0.94));
 	plan = plane(vector(.0, 0.0, 1), vector(0.0, 0, 0), vector(4.5, 4.0, 1.0),
 			vector(.8, .3, 1.0));
 	m_plan = plane(vector(.0, 1.5, 1), vector(-1 * HALFPI, 0, 0), vector(4.5,
 				4.0, 1.0), vector(.04, .78, .94));
 	sphere = create_sphere(vector(-1.5, -2.0, 0.0), vector(0, 0, 0), vector(.5f,
 				.5f, .5f), vector(139.0f / 255.0f, .0, .0));
-*/
-	// push_back(&data, ft_lstnew(plan));
-	// push_back(&data, ft_lstnew(m_plan));
-	// push_back(&data, ft_lstnew(sphere));
+	push_back(&data, ft_lstnew(plan));
+	push_back(&data, ft_lstnew(m_plan));
+	push_back(&data, ft_lstnew(sphere));
 	push_back(&data, ft_lstnew(m_cylinder));
-	// push_back(&data, ft_lstnew(m_triangle));
+	push_back(&data, ft_lstnew(m_triangle));
 	return (data);
 }
 

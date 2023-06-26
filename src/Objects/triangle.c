@@ -16,12 +16,15 @@ void	t_int_point_propreties(vector_t *poi, object_t *this,
 	origin = vector(0.0, 0.0, 0.0);
 	normal_fp = vector(0.0, 0.0, -1.0);
 	global_origin = Apply_transform_vector(origin, FRWRD, this);
-	m_normal = minus(Apply_transform_vector(normal_fp, FRWRD, this),
-			global_origin);
+	m_normal = ms_minus(Apply_transform_vector(normal_fp, FRWRD, this),
+						global_origin,
+						0);
 	normalize(m_normal);
 	*int_point = *int_poi;
 	*local_normal = *m_normal;
 	*local_color = *this->base_color;
+	free_list((void *[]){origin, normal_fp, global_origin, m_normal, int_poi},
+				5);
 }
 
 /**
@@ -49,7 +52,7 @@ vector_t	*t_calculat_int_point(ray_t *ray, vector_t k, int *status)
 	if (u < .0 || v < .0 || (u + v) > 1)
 		return (false(status));
 	else
-		return (addition(ray->point1, num_muliplication(&k, t)));
+		return (ms_addition(ray->point1, num_muliplication(&k, t), 1));
 }
 
 int	t_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,
