@@ -1,4 +1,5 @@
 #include "headers/base.h"
+
 material_t *new_simple_material(double shininess_coefficient, double reflection_coefficient);
 
 object_t *object_base(vector_t *translation, vector_t *rotation,

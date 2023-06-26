@@ -65,8 +65,8 @@ void	calulcat_cylider_intersection(double *t, vector_t p, vector_t n,
 	{
 		t[0] = (-b + numsqrt) / (2 * a);
 		t[1] = (-b - numsqrt) / (2 * a);
-		intersections[0] = addition(&p, num_muliplication(&n, t[0]));
-		intersections[1] = addition(&p, num_muliplication(&n, t[1]));
+		intersections[0] = ms_addition(&p, num_muliplication(&n, t[0]), 1);
+		intersections[1] = ms_addition(&p, num_muliplication(&n, t[1]), 1);
 		if (t[0] > 0 && fabs(intersections[0]->z) < 1.0)
 			valide_intersections[0] = TRUE;
 		else
@@ -76,6 +76,11 @@ void	calulcat_cylider_intersection(double *t, vector_t p, vector_t n,
 		else
 			t[1] = MAX_V;
 	}
+	else
+	{
+		intersections[0] = NULL;
+		intersections[1] = NULL;
+	}
 }
 
 void	calulcat_cap_intersection(double *t, vector_t p, vector_t n,
@@ -83,8 +88,8 @@ void	calulcat_cap_intersection(double *t, vector_t p, vector_t n,
 {
 	t[2] = (p.z - 1) / -n.z;
 	t[3] = (p.z + 1) / -n.z;
-	intersections[2] = addition(&p, num_muliplication(&n, t[2]));
-	intersections[3] = addition(&p, num_muliplication(&n, t[3]));
+	intersections[2] = ms_addition(&p, num_muliplication(&n, t[2]), 1);
+	intersections[3] = ms_addition(&p, num_muliplication(&n, t[3]), 1);
 	if (t[2] > 0.0 &&
 		(sqrt(pow(intersections[2]->x, 2) + pow(intersections[2]->y, 2))) < 1.0)
 		valide_intersections[2] = TRUE;
@@ -165,9 +170,17 @@ int	cy_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,
 	calulcat_cylider_intersection(t, p, n, intersections, valide_intersections);
 	if (!close_enough(n.z, 0.0f))
 		calulcat_cap_intersection(t, p, n, intersections, valide_intersections);
+	else
+	{
+		intersections[2] = NULL;
+		intersections[3] = NULL;
+	}
 	delete_ray(bck_ray);
 	if (!includes(valide_intersections, 4, TRUE))
+	{
+		free_list((void **)intersections, 4);
 		return (FALSE);
+	}
 	index = min_index(t, 4);
 	poi = copy_vector(*intersections[index]);
 	free_list((void **)intersections, 4);
@@ -176,18 +189,20 @@ int	cy_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,
 		int_poi = set_cylider_properiesties(this, poi, local_normal,
 				local_color);
 		*int_point = *int_poi;
-		free(int_poi);
+		free_list((void *[]){int_poi, poi}, 2);
 		return (TRUE);
 	}
 	if (index >= 2)
 	{
-		if (close_enough(0.0, n.z))
+		if (sqrt(pow(poi->x, 2) + pow(poi->y, 2)) >= 1.0 || close_enough(0.0,
+				n.z))
+		{
+			free(poi);
 			return (FALSE);
-		if (sqrt(pow(poi->x, 2) + pow(poi->y, 2)) >= 1.0)
-			return (FALSE);
+		}
 		int_poi = set_cap_properiesties(this, poi, local_normal, local_color);
 		*int_point = *int_poi;
-		free(int_poi);
+		free_list((void *[]){int_poi, poi}, 2);
 		return (TRUE);
 	}
 	return (FALSE);

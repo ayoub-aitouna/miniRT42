@@ -4,12 +4,12 @@
 #include <stdlib.h>
 
 material_t	*new_simple_material(double shininess_coefficient,
-		double reflection_coefficient)
+								double reflection_coefficient)
 {
 	material_t	*simple_material;
 
 	simple_material = new_material_base(shininess_coefficient,
-			reflection_coefficient);
+										reflection_coefficient);
 	simple_material->calculat_color = calculat_color;
 	return (simple_material);
 }
@@ -27,7 +27,7 @@ vector_t	*calculat_color(scene_t *scene, vector_t *localNormal,
 	if (cur_object->material->shininess_coefficient > 0.f)
 	{
 		specularColor = Calculat_specularColor(scene, localNormal, initPoint,
-				base_color, cur_object, camera_ray);
+				cur_object, camera_ray);
 	}
 	if (specularColor)
 		color = ms_addition(color, specularColor, 2);
@@ -35,8 +35,7 @@ vector_t	*calculat_color(scene_t *scene, vector_t *localNormal,
 }
 
 vector_t	*Calculat_specularColor(scene_t *scene, vector_t *localNormal,
-		vector_t *initPoint, vector_t *base_color, object_t *cur_object,
-		ray_t *camera_ray)
+		vector_t *initPoint, object_t *cur_object, ray_t *camera_ray)
 {
 	t_list		*tmp;
 	object_t	*obj;
@@ -80,7 +79,7 @@ vector_t	*Calculat_specularColor(scene_t *scene, vector_t *localNormal,
 		if (!valide_itersection)
 		{
 			reflection_vector = Reflection_vector(lighit_ray->m_lab,
-					localNormal);
+													localNormal);
 			v = normalized(camera_ray->m_lab);
 			dotProduct = dot(*reflection_vector, *v);
 			free_list((void *[]){reflection_vector, v}, 2);

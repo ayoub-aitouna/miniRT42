@@ -1,16 +1,19 @@
 #include "headers/image.h"
 #include "headers/main.h"
+#include "headers/scene.h"
 #include "headers/types.h"
+
 #define ESC 720
+
 typedef struct mt
 {
-	t_image *image;
-	scene_t *scene;
-	void *mlx;
-	void *mlx_win;
-} mt_t;
+	t_image	*image;
+	scene_t	*scene;
+	void	*mlx;
+	void	*mlx_win;
+}			mt_t;
 
-int m_exit(mt_t *m_mt)
+int	m_exit(mt_t *m_mt)
 {
 	deleteScene(m_mt->scene);
 	free(m_mt->mlx);
@@ -19,7 +22,7 @@ int m_exit(mt_t *m_mt)
 	exit(0);
 }
 
-int key_hook(int keycode, mt_t *mt)
+int	key_hook(int keycode, mt_t *mt)
 {
 	printf("keycode = %d \n", keycode);
 	if (keycode == ESC)
@@ -27,9 +30,9 @@ int key_hook(int keycode, mt_t *mt)
 	return (0);
 }
 
-int main(void)
+int	main(void)
 {
-	mt_t m_mt;
+	mt_t	m_mt;
 
 	m_mt = (mt_t){.scene = NULL, .image = NULL};
 	m_mt.image = NULL;
