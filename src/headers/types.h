@@ -4,6 +4,7 @@
 #include "../lib/lib.h"
 
 typedef struct Object object_t;
+typedef struct material material_t;
 
 typedef struct s_data
 {
@@ -21,10 +22,7 @@ typedef struct ray
 	vector_t *m_lab;
 } ray_t;
 
-
 typedef int (*test_intersection)(object_t *this, struct ray *ray, vector_t *ip, vector_t *normal, vector_t *color);
-
-struct Object;
 
 typedef struct Object
 {
@@ -32,6 +30,8 @@ typedef struct Object
 	matrix_t *bck_tfm;
 	vector_t *base_color;
 	test_intersection test_inter;
+	material_t *material;
+
 } object_t;
 
 typedef struct Light
@@ -59,6 +59,32 @@ typedef struct Scene
 	t_list *m_object_list;
 	t_list *m_light_list;
 	camera_t *m_camera;
+	vector_t ambient_light_factor;
 } scene_t;
+
+typedef struct Propretries
+{
+	vector_t local_color;
+	vector_t local_normal;
+	vector_t int_point;
+} propretries_t;
+
+typedef struct cylinder_equations_Propretries
+{
+	vector_t **intersections;
+	int *valide_intersections;
+	double *t;
+} cep_t;
+
+typedef vector_t *(*compute_color)(scene_t *scene, vector_t *localNormal,
+								   vector_t *initPoint, vector_t *base_color, object_t *cur_object, ray_t *camera_ray);
+
+typedef struct material
+{
+	double shininess_coefficient;
+	double reflection_coefficient;
+	compute_color calculat_color;
+
+} material_t;
 
 #endif

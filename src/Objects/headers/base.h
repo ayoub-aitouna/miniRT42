@@ -5,6 +5,8 @@
 #include "../../headers/main.h"
 #include "../../lib/math/headers/vectormath.h"
 #include "../../lib/math/headers/matrix.h"
+
+
 vector_t * false(int *status);
 int close_enough(double v1, double v2);
 object_t *object_base(vector_t *translation, vector_t *rotation,

@@ -1,5 +1,6 @@
 #include "headers/triangle.h"
 void delete_ray(ray_t *);
+
 int min_index(double *list, int size)
 {
 	int i = 0;
@@ -42,7 +43,6 @@ int includes(int *list, int size, int value)
  * b = (2.px.nx + 2.py.ny)
  * c = (py^2 + px^2 - r^2)
  */
-
 void calulcat_cylider_intersection(double *t, vector_t p, vector_t n, vector_t **intersections, int *valide_intersections)
 {
 	double b;
