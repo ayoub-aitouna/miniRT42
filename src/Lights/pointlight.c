@@ -10,47 +10,29 @@ light_t *new_light(vector_t *position, vector_t *color, double intensity)
 	light->position = position;
 	return (light);
 }
-/**
- * @brief I = Li * (1 - (angle / (PI/2) ))
 
-	* @brief angle(angle btween localnormal & lightDir) = cos^-1(localNormal.lightDir)
- * @return light Intesity as double
- */
-int calculatIlumination(light_t *this, vector_t *localNormal,
-						vector_t *initPoint, double *intensity, vector_t *Color, scene_t *scene,
-						object_t *cur_Object)
+int check_ray_path(light_t *this, scene_t *scene, vector_t *initPoint, object_t *cur_Object, vector_t *lightDir)
 {
-	vector_t *lightDir;
-	double light_dist;
 	t_list *tmp;
-	object_t *object;
 	ray_t *m_ray;
-	vector_t l_ip;
-	vector_t l_normal;
-	vector_t l_color;
 	int valide_i;
-	double dist;
-	double angle;
+	double *distances;
+	propretries_t prop;
 
-	lightDir = minus(this->position, initPoint);
-	normalize(lightDir);
-	light_dist = vector_distance(this->position, initPoint);
-	tmp = scene->m_object_list;
-	object = NULL;
+	distances = (double []){0.f, 0.f};
 	m_ray = ray(copy_vector(*initPoint), copy_vector(*this->position));
+	distances[0] = vector_distance(this->position, initPoint);
 	valide_i = FALSE;
-	dist = 0;
+	tmp = scene->m_object_list;
 	while (tmp)
 	{
-		object = ((object_t *)tmp->content);
-		if (object != NULL)
+		if (((object_t *)tmp->content) != NULL)
 		{
-			if (object != cur_Object)
+			if (((object_t *)tmp->content) != cur_Object)
 			{
-				valide_i = object->test_inter(object, m_ray, &l_ip, &l_normal,
-											  &l_color);
-				dist = vector_distance(&l_ip, m_ray->point1);
-				if (dist > light_dist)
+				valide_i = ((object_t *)tmp->content)->test_inter(((object_t *)tmp->content), m_ray, &prop.int_point, &prop.local_normal, &prop.local_color);
+				distances[1] = vector_distance(&prop.int_point, m_ray->point1);
+				if (distances[1] > distances[0])
 					valide_i = FALSE;
 				if (valide_i)
 				{
@@ -63,6 +45,26 @@ int calculatIlumination(light_t *this, vector_t *localNormal,
 		tmp = tmp->next;
 	}
 	delete_ray(m_ray);
+	return (TRUE);
+}
+
+/**
+ * @brief I = Li * (1 - (angle / (PI/2) ))
+
+	* @brief angle(angle btween localnormal & lightDir) = cos^-1(localNormal.lightDir)
+ * @return light Intesity as double
+ */
+int calculatIlumination(light_t *this, vector_t *localNormal,
+						vector_t *initPoint, double *intensity, vector_t *Color, scene_t *scene,
+						object_t *cur_Object)
+{
+	vector_t *lightDir;
+	double angle;
+
+	lightDir = minus(this->position, initPoint);
+	normalize(lightDir);
+	if (!check_ray_path(this, scene, initPoint, cur_Object, lightDir))
+		return (FALSE);
 	angle = acos(dot(*localNormal, *lightDir));
 	free(lightDir);
 	if (angle > HALFPI)

@@ -11,6 +11,14 @@ material_t *new_material_base(double shininess_coefficient, double reflection_co
     return (material_base);
 }
 
+
+vector_t *reflect_color(scene_t *scene, vector_t *localNormal,
+		vector_t *initPoint, object_t *cur_object, ray_t *camera_ray)
+{
+    vector_t *reflection_v = Reflection_vector(camera_ray->m_lab, localNormal);
+    // ray_t m_ray = ray(initPoint);
+}
+
 void delete_material(material_t *this)
 {
     if (this)
