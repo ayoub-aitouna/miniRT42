@@ -90,6 +90,6 @@ object_t *plane(vector_t *translation, vector_t *rotation,
 {
     object_t *plane;
     plane = object_base(translation, rotation, scal, color);
-    plane->test_inter = p_int_test;
+    plane->test_inter = p_int_test; 
     return (plane);
 }

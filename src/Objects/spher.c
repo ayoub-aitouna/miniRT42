@@ -1,21 +1,24 @@
 #include "headers/spher.h"
 
-object_t *create_sphere(vector_t *translation, vector_t *rotation,
-						vector_t *scal, vector_t *color)
+object_t	*create_sphere(vector_t *translation, vector_t *rotation,
+		vector_t *scal, vector_t *color)
 {
-	object_t *shphere;
+	object_t	*shphere;
+
 	shphere = object_base(translation, rotation, scal, color);
+	shphere->material->shininess_coefficient = 10.f;
+	shphere->material->reflection_coefficient = .2;
 	shphere->test_inter = sh_int_test;
 	return (shphere);
 }
 
-int sh_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,
-				vector_t *local_normal, vector_t *local_color)
+int	sh_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,
+		vector_t *local_normal, vector_t *local_color)
 {
-	vector_t *poi;
-	ray_t *bck_ray;
-	vector_t vhat;
-	int status;
+	vector_t	*poi;
+	ray_t		*bck_ray;
+	vector_t	vhat;
+	int			status;
 
 	bck_ray = Apply_transform(camera_ray, this, BCKWRD);
 	vhat = *bck_ray->m_lab;
@@ -32,12 +35,12 @@ int sh_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,
 	return (TRUE);
 }
 
-vector_t *calculat_int_point(ray_t *bck_ray, vector_t vhat, int *status)
+vector_t	*calculat_int_point(ray_t *bck_ray, vector_t vhat, int *status)
 {
-	double b;
-	double c;
-	double thelta;
-	double t;
+	double	b;
+	double	c;
+	double	thelta;
+	double	t;
 
 	*status = TRUE;
 	b = 2 * dot(*bck_ray->point1, vhat);
@@ -51,13 +54,13 @@ vector_t *calculat_int_point(ray_t *bck_ray, vector_t vhat, int *status)
 	return (fs_addition(bck_ray->point1, num_muliplication(&vhat, t)));
 }
 
-void int_point_propreties(vector_t *poi, object_t *this,
-						  vector_t *int_point, vector_t *local_normal, vector_t *local_color)
+void	int_point_propreties(vector_t *poi, object_t *this, vector_t *int_point,
+		vector_t *local_normal, vector_t *local_color)
 {
-	vector_t *Origin;
-	vector_t *newOrigin;
-	vector_t *m_normal;
-	vector_t *int_poi;
+	vector_t	*Origin;
+	vector_t	*newOrigin;
+	vector_t	*m_normal;
+	vector_t	*int_poi;
 
 	int_poi = Apply_transform_vector(poi, FRWRD, this);
 	Origin = vector(0.0, 0.0, 0.0);
@@ -73,10 +76,10 @@ void int_point_propreties(vector_t *poi, object_t *this,
 	free(m_normal);
 }
 
-double min_t(double numsqrt, double b, int *status)
+double	min_t(double numsqrt, double b, int *status)
 {
-	double t1;
-	double t2;
+	double	t1;
+	double	t2;
 
 	t1 = (-b + numsqrt) / 2.0;
 	t2 = (-b - numsqrt) / 2.0;
@@ -90,9 +93,9 @@ double min_t(double numsqrt, double b, int *status)
 	return (t2);
 }
 
-vector_t *fs_addition(vector_t *u, vector_t *v)
+vector_t	*fs_addition(vector_t *u, vector_t *v)
 {
-	vector_t *re;
+	vector_t	*re;
 
 	re = addition(u, v);
 	free(v);

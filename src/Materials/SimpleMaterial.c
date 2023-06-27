@@ -16,22 +16,40 @@ material_t	*new_simple_material(double shininess_coefficient,
 
 vector_t	*calculat_color(scene_t *scene, vector_t *localNormal,
 		vector_t *initPoint, vector_t *base_color, object_t *cur_object,
-		ray_t *camera_ray)
+		ray_t *camera_ray, int rfc)
 {
 	vector_t	*color;
+	vector_t	*over_all_color;
 	vector_t	*specularColor;
+	vector_t	*reflectionColor;
+	double		reflectivity;
 
 	specularColor = NULL;
+	reflectionColor = NULL;
+	reflectivity = cur_object->material->reflection_coefficient;
 	color = CalculatDiffuseColor(scene, localNormal, initPoint, base_color,
 			cur_object);
+	if (cur_object->material->reflection_coefficient > 0.f)
+	{
+		reflectionColor = reflect_color(scene, localNormal, initPoint,
+				cur_object, camera_ray, rfc);
+	}
+	if (reflectionColor)
+		over_all_color = ms_addition(num_muliplication(reflectionColor,
+														reflectivity),
+										num_muliplication(color, (1
+													- reflectivity)),
+										2);
+	else
+		over_all_color = color;
 	if (cur_object->material->shininess_coefficient > 0.f)
 	{
 		specularColor = Calculat_specularColor(scene, localNormal, initPoint,
 				cur_object, camera_ray);
 	}
 	if (specularColor)
-		color = ms_addition(color, specularColor, 2);
-	return (color);
+		over_all_color = ms_addition(over_all_color, specularColor, 2);
+	return (over_all_color);
 }
 
 vector_t	*Calculat_specularColor(scene_t *scene, vector_t *localNormal,

@@ -112,7 +112,7 @@ t_image	*Render(scene_t *scene)
 					&c_color))
 			{
 				color = c_object->material->calculat_color(scene, &c_norm,
-						&c_intersection_point, &c_color, c_object, ray);
+						&c_intersection_point, &c_color, c_object, ray, 0);
 				set_pixel(image, x, y, color->x, color->y, color->z);
 				free(color);
 			}
