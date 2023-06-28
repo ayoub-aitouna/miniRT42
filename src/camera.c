@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   camera.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/27 23:23:39 by aaitouna          #+#    #+#             */
+/*   Updated: 2023/06/28 04:48:02 by aaitouna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "headers/camera.h"
 
-camera_t *Camera(double horizontal_size, double lenght, double aspect_ration)
+camera_t	*Camera(double horizontal_size, double lenght, double aspect_ration)
 {
-	camera_t *camera;
+	camera_t	*camera;
 
 	camera = malloc(sizeof(camera_t));
 	camera->position = NULL;
@@ -14,30 +26,24 @@ camera_t *Camera(double horizontal_size, double lenght, double aspect_ration)
 	return (camera);
 }
 
-void SetPosition(camera_t *this, vector_t *position)
+void	SetPosition(camera_t *this, vector_t *position)
 {
 	this->position = position;
 }
 
-void SetUp(camera_t *this, vector_t *Up)
+void	SetUp(camera_t *this, vector_t *Up)
 {
 	this->up = Up;
 }
 
-void Setloockat(camera_t *this, vector_t *loockat)
+void	Setloockat(camera_t *this, vector_t *loockat)
 {
 	this->loockat = loockat;
 }
 
-void printf_with_name(char *name, vector_t *v)
+void	calculat_geometry(camera_t *this)
 {
-	printf("%s\n\t", name);
-	print_vector(*v);
-}
-
-void calculat_geometry(camera_t *this)
-{
-	vector_t *aligment;
+	vector_t	*aligment;
 
 	aligment = minus(this->loockat, this->position);
 	normalize(aligment);
@@ -45,38 +51,26 @@ void calculat_geometry(camera_t *this)
 	normalize(this->screen_u);
 	this->screen_v = cross(*this->screen_u, *aligment);
 	normalize(this->screen_v);
-	this->screen_center = ms_addition(this->position, ms_num_muliplication(aligment, this->lenght), 1);
+	this->screen_center = ms_addition(this->position,
+										ms_num_muliplication(aligment,
+												this->lenght),
+										1);
 	this->screen_u = ms_num_muliplication(this->screen_u,
-										  this->horizontal_size);
+											this->horizontal_size);
 	this->screen_v = ms_num_muliplication(this->screen_v,
-										  this->horizontal_size / this->aspect_ration);
+											this->horizontal_size
+												/ this->aspect_ration);
 }
 
-void PrintRay(ray_t *ray)
+ray_t	*generate_ray(camera_t *this, double screenX, double screenY)
 {
-	for (int i = 0; i < 10; i++)
-		printf("-");
-	printf("\n");
-	printf("point1 : \n\t");
-	print_vector(*ray->point1);
-	printf("point2 : \n\t");
-	print_vector(*ray->point2);
-	printf("m_lab : \n\t");
-	print_vector(*ray->m_lab);
-	for (int i = 0; i < 10; i++)
-		printf("-");
-	printf("\n\n");
-}
-
-ray_t *generate_ray(camera_t *this, double screenX, double screenY)
-{
-	vector_t *w_part1;
-	vector_t *dst_cords;
-	vector_t *scalled_u;
-	vector_t *scalled_v;
+	vector_t	*w_part1;
+	vector_t	*dst_cords;
+	vector_t	*scalled_u;
+	vector_t	*scalled_v;
 
 	scalled_u = num_muliplication(this->screen_u,
-								  screenX);
+									screenX);
 	scalled_v = num_muliplication(this->screen_v, screenY);
 	w_part1 = addition(this->screen_center, scalled_u);
 	dst_cords = addition(w_part1, scalled_v);
@@ -86,7 +80,7 @@ ray_t *generate_ray(camera_t *this, double screenX, double screenY)
 	return (ray(copy_vector(*this->position), dst_cords));
 }
 
-void deleteCamera(camera_t *this)
+void	deleteCamera(camera_t *this)
 {
 	if (this)
 	{

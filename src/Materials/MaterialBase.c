@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   MaterialBase.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/27 23:22:51 by aaitouna          #+#    #+#             */
+/*   Updated: 2023/06/28 05:12:14 by aaitouna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "headers/MaterialBase.h"
 
 material_t	*new_material_base(double shininess_coefficient,
@@ -28,8 +40,8 @@ vector_t	*reflect_color(scene_t *scene, vector_t *localNormal,
 	found_int = mt_cast_ray(scene, m_ray, &prop, cur_object, &c_obj);
 	if (found_int && (rfc < MAX_REFLECTION_COUNT))
 	{
-		color = c_obj->material->calculat_color(scene, &prop.local_normal,
-				&prop.int_point, &prop.local_color, c_obj, m_ray, rfc + 1);
+		color = c_obj->material->calculat_color(scene, &prop, c_obj, m_ray, rfc
+				+ 1);
 	}
 	else
 		color = vector(0, 0, 0);
@@ -55,8 +67,7 @@ int	mt_cast_ray(scene_t *scene, ray_t *m_ray, propretries_t *prop,
 	{
 		obj = (object_t *)tmp->content;
 		if (obj != cur_object)
-			valide = obj->test_inter(obj, m_ray, &local_prop.int_point,
-					&local_prop.local_normal, &local_prop.local_color);
+			valide = obj->test_inter(obj, m_ray, &local_prop);
 		else
 			valide = FALSE;
 		if (valide)

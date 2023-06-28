@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   SimpleMaterial.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/27 23:22:56 by aaitouna          #+#    #+#             */
+/*   Updated: 2023/06/28 05:14:24 by aaitouna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "headers/MaterialBase.h"
 #include "headers/SimpleMaterial.h"
@@ -14,9 +25,8 @@ material_t	*new_simple_material(double shininess_coefficient,
 	return (simple_material);
 }
 
-vector_t	*calculat_color(scene_t *scene, vector_t *localNormal,
-		vector_t *initPoint, vector_t *base_color, object_t *cur_object,
-		ray_t *camera_ray, int rfc)
+vector_t	*calculat_color(scene_t *scene, propretries_t *prop,
+		object_t *cur_object, ray_t *camera_ray, int rfc)
 {
 	vector_t	*color;
 	vector_t	*over_all_color;
@@ -27,12 +37,12 @@ vector_t	*calculat_color(scene_t *scene, vector_t *localNormal,
 	specularColor = NULL;
 	reflectionColor = NULL;
 	reflectivity = cur_object->material->reflection_coefficient;
-	color = CalculatDiffuseColor(scene, localNormal, initPoint, base_color,
-			cur_object);
+	color = CalculatDiffuseColor(scene, &prop->local_normal, &prop->int_point,
+			&prop->local_color, cur_object);
 	if (cur_object->material->reflection_coefficient > 0.f)
 	{
-		reflectionColor = reflect_color(scene, localNormal, initPoint,
-				cur_object, camera_ray, rfc);
+		reflectionColor = reflect_color(scene, &prop->local_normal,
+				&prop->int_point, cur_object, camera_ray, rfc);
 	}
 	if (reflectionColor)
 		over_all_color = ms_addition(num_muliplication(reflectionColor,
@@ -44,8 +54,8 @@ vector_t	*calculat_color(scene_t *scene, vector_t *localNormal,
 		over_all_color = color;
 	if (cur_object->material->shininess_coefficient > 0.f)
 	{
-		specularColor = Calculat_specularColor(scene, localNormal, initPoint,
-				cur_object, camera_ray);
+		specularColor = Calculat_specularColor(scene, &prop->local_normal,
+				&prop->int_point, cur_object, camera_ray);
 	}
 	if (specularColor)
 		over_all_color = ms_addition(over_all_color, specularColor, 2);
@@ -55,22 +65,20 @@ vector_t	*calculat_color(scene_t *scene, vector_t *localNormal,
 vector_t	*Calculat_specularColor(scene_t *scene, vector_t *localNormal,
 		vector_t *initPoint, object_t *cur_object, ray_t *camera_ray)
 {
-	t_list		*tmp;
-	object_t	*obj;
-	light_t		*light;
-	vector_t	local_norm;
-	vector_t	local_int;
-	vector_t	local_color;
-	vector_t	*light_dir;
-	vector_t	*specularColor;
-	vector_t	*start_pos;
-	ray_t		*lighit_ray;
-	vector_t	*reflection_vector;
-	int			valide_itersection;
-	double		specular_intensity;
-	t_list		*object_tmp;
-	vector_t	*v;
-	double		dotProduct;
+	t_list			*tmp;
+	object_t		*obj;
+	light_t			*light;
+	propretries_t	local_prop;
+	vector_t		*light_dir;
+	vector_t		*specularColor;
+	vector_t		*start_pos;
+	ray_t			*lighit_ray;
+	vector_t		*reflection_vector;
+	int				valide_itersection;
+	double			specular_intensity;
+	t_list			*object_tmp;
+	vector_t		*v;
+	double			dotProduct;
 
 	tmp = scene->m_light_list;
 	specularColor = vector(0.f, 0.f, 0.f);
@@ -88,8 +96,7 @@ vector_t	*Calculat_specularColor(scene_t *scene, vector_t *localNormal,
 		while (object_tmp)
 		{
 			obj = (object_t *)object_tmp->content;
-			valide_itersection = obj->test_inter(obj, lighit_ray, &local_int,
-					&local_norm, &local_color);
+			valide_itersection = obj->test_inter(obj, lighit_ray, &local_prop);
 			if (valide_itersection)
 				break ;
 			object_tmp = object_tmp->next;

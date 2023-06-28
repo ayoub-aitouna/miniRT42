@@ -1,6 +1,16 @@
-#include "headers/triangle.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Cylinder.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/27 23:21:22 by aaitouna          #+#    #+#             */
+/*   Updated: 2023/06/27 23:21:23 by aaitouna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void		delete_ray(ray_t *);
+#include "headers/cylinder.h"
 
 int	min_index(double *list, int size)
 {
@@ -126,7 +136,7 @@ vector_t	*set_cylider_properiesties(object_t *this, vector_t *poi,
 }
 
 vector_t	*set_cap_properiesties(object_t *this, vector_t *poi,
-		vector_t *local_normal, vector_t *local_color)
+		propretries_t *prop)
 {
 	vector_t	*origin;
 	vector_t	*normal_fp;
@@ -141,15 +151,14 @@ vector_t	*set_cap_properiesties(object_t *this, vector_t *poi,
 	m_normal = ms_normalized_sub(Apply_transform_vector(normal_fp, FRWRD, this),
 									global_origin,
 									0);
-	*local_normal = *m_normal;
-	*local_color = *this->base_color;
+	prop->local_normal = *m_normal;
+	prop->local_color = *this->base_color;
 	free_list((void *[]){(void *)origin, (void *)normal_fp,
 			(void *)global_origin, (void *)m_normal}, 4);
 	return (int_poi);
 }
 
-int	cy_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,
-		vector_t *local_normal, vector_t *local_color)
+int	cy_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
 {
 	ray_t		*bck_ray;
 	vector_t	*intersections[4];
@@ -186,9 +195,9 @@ int	cy_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,
 	free_list((void **)intersections, 4);
 	if (index < 2)
 	{
-		int_poi = set_cylider_properiesties(this, poi, local_normal,
-				local_color);
-		*int_point = *int_poi;
+		int_poi = set_cylider_properiesties(this, poi, &prop->local_normal,
+				&prop->local_color);
+		prop->int_point = *int_poi;
 		free_list((void *[]){int_poi, poi}, 2);
 		return (TRUE);
 	}
@@ -200,8 +209,8 @@ int	cy_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,
 			free(poi);
 			return (FALSE);
 		}
-		int_poi = set_cap_properiesties(this, poi, local_normal, local_color);
-		*int_point = *int_poi;
+		int_poi = set_cap_properiesties(this, poi, prop);
+		prop->int_point = *int_poi;
 		free_list((void *[]){int_poi, poi}, 2);
 		return (TRUE);
 	}

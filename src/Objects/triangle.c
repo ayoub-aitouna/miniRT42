@@ -1,10 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   triangle.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/27 23:23:36 by aaitouna          #+#    #+#             */
+/*   Updated: 2023/06/27 23:23:36 by aaitouna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "headers/triangle.h"
 
-vector_t * false(int *status);
-int			close_enough(double v1, double v2);
-
 void	t_int_point_propreties(vector_t *poi, object_t *this,
-		vector_t *int_point, vector_t *local_normal, vector_t *local_color)
+		propretries_t *prop)
 {
 	vector_t	*origin;
 	vector_t	*normal_fp;
@@ -20,9 +29,9 @@ void	t_int_point_propreties(vector_t *poi, object_t *this,
 						global_origin,
 						0);
 	normalize(m_normal);
-	*int_point = *int_poi;
-	*local_normal = *m_normal;
-	*local_color = *this->base_color;
+	prop->int_point = *int_poi;
+	prop->local_normal = *m_normal;
+	prop->local_color = *this->base_color;
 	free_list((void *[]){origin, normal_fp, global_origin, m_normal, int_poi},
 				5);
 }
@@ -55,8 +64,7 @@ vector_t	*t_calculat_int_point(ray_t *ray, vector_t k, int *status)
 		return (ms_addition(ray->point1, num_muliplication(&k, t), 1));
 }
 
-int	t_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,
-		vector_t *local_normal, vector_t *local_color)
+int	t_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
 {
 	vector_t	*poi;
 	ray_t		*bck_ray;
@@ -73,7 +81,7 @@ int	t_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,
 		free(poi);
 		return (FALSE);
 	}
-	t_int_point_propreties(poi, this, int_point, local_normal, local_color);
+	t_int_point_propreties(poi, this, prop);
 	free(poi);
 	return (TRUE);
 }

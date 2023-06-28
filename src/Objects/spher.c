@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   spher.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/27 23:23:30 by aaitouna          #+#    #+#             */
+/*   Updated: 2023/06/27 23:23:30 by aaitouna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "headers/spher.h"
 
 object_t	*create_sphere(vector_t *translation, vector_t *rotation,
@@ -12,8 +24,7 @@ object_t	*create_sphere(vector_t *translation, vector_t *rotation,
 	return (shphere);
 }
 
-int	sh_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,
-		vector_t *local_normal, vector_t *local_color)
+int	sh_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
 {
 	vector_t	*poi;
 	ray_t		*bck_ray;
@@ -30,7 +41,7 @@ int	sh_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,
 		free(poi);
 		return (FALSE);
 	}
-	int_point_propreties(poi, this, int_point, local_normal, local_color);
+	int_point_propreties(poi, this, prop);
 	free(poi);
 	return (TRUE);
 }
@@ -54,8 +65,7 @@ vector_t	*calculat_int_point(ray_t *bck_ray, vector_t vhat, int *status)
 	return (fs_addition(bck_ray->point1, num_muliplication(&vhat, t)));
 }
 
-void	int_point_propreties(vector_t *poi, object_t *this, vector_t *int_point,
-		vector_t *local_normal, vector_t *local_color)
+void	int_point_propreties(vector_t *poi, object_t *this, propretries_t *prop)
 {
 	vector_t	*Origin;
 	vector_t	*newOrigin;
@@ -67,9 +77,9 @@ void	int_point_propreties(vector_t *poi, object_t *this, vector_t *int_point,
 	newOrigin = Apply_transform_vector(Origin, FRWRD, this);
 	m_normal = minus(int_poi, newOrigin);
 	normalize(m_normal);
-	*int_point = *int_poi;
-	*local_normal = *m_normal;
-	*local_color = *this->base_color;
+	prop->int_point = *int_poi;
+	prop->local_normal = *m_normal;
+	prop->local_color = *this->base_color;
 	free(int_poi);
 	free(Origin);
 	free(newOrigin);

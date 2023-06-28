@@ -1,15 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Cone.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/27 23:23:19 by aaitouna          #+#    #+#             */
+/*   Updated: 2023/06/27 23:28:41 by aaitouna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "headers/Cone.h"
-
-void		delete_ray(ray_t *);
-
-/**
- *
- * solve tot t;
- * t^2.a + t.b + p = 0;
- * a = (nx^2 + ny^2)
- * b = (2.px.nx + 2.py.ny)
- * c = (py^2 + px^2 - r^2)
- */
 
 int	in_range(double value, double min, double max)
 {
@@ -29,6 +30,14 @@ void	cone_cap_intersection(vector_t p, vector_t n, cep_t propretries)
 		propretries.t[2] = MAX_V;
 }
 
+/**
+ * solve tot t;
+ *	x^2 + y^2 = z^2
+ *	replace x,y and z by (p<x,y,z> + t.n<x,y,z>)
+ *	find t
+ *	if t hase solution then the a = p+tn is the point of intersection 
+ *	if t has no solution then ray does not intersect with the cone
+ */
 void	calulcat_cone_intersection(vector_t p, vector_t n, cep_t propretries)
 {
 	double	b;
@@ -66,8 +75,7 @@ void	calulcat_cone_intersection(vector_t p, vector_t n, cep_t propretries)
 	}
 }
 
-int	cone_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,
-		vector_t *local_normal, vector_t *local_color)
+int	cone_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
 {
 	ray_t		*bck_ray;
 	vector_t	*intersections[3];
@@ -105,9 +113,9 @@ int	cone_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,
 	free_list((void **)intersections, 3);
 	if (index < 2)
 	{
-		int_poi = set_cylider_properiesties(this, poi, local_normal,
-				local_color);
-		*int_point = *int_poi;
+		int_poi = set_cylider_properiesties(this, poi, &prop->local_normal,
+				&prop->local_color);
+		prop->int_point = *int_poi;
 		free(int_poi);
 		free(poi);
 		return (TRUE);
@@ -120,8 +128,8 @@ int	cone_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,
 			free(poi);
 			return (FALSE);
 		}
-		int_poi = set_cap_properiesties(this, poi, local_normal, local_color);
-		*int_point = *int_poi;
+		int_poi = set_cap_properiesties(this, poi, prop);
+		prop->int_point = *int_poi;
 		free(int_poi);
 		free(poi);
 		return (TRUE);
@@ -132,9 +140,11 @@ int	cone_int_test(object_t *this, ray_t *camera_ray, vector_t *int_point,
 object_t	*cone(vector_t *translation, vector_t *rotation, vector_t *scal,
 		vector_t *color)
 {
-	object_t	*cylinder;
+	object_t	*cone;
 
-	cylinder = object_base(translation, rotation, scal, color);
-	cylinder->test_inter = cone_int_test;
-	return (cylinder);
+	cone = object_base(translation, rotation, scal, color);
+	cone->test_inter = cone_int_test;
+	cone->material->reflection_coefficient = 0.5;
+	cone->material->shininess_coefficient = 3;
+	return (cone);
 }
