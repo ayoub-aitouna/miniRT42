@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:22:44 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/06/28 05:06:14 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/01 13:12:42 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ vector_t	*calculat_color(scene_t *scene, propretries_t *prop,
 				object_t *cur_object, ray_t *camera_ray, int rfc);
 vector_t	*Calculat_specularColor(scene_t *scene, vector_t *localNormal,
 				vector_t *initPoint, object_t *cur_object, ray_t *camera_ray);
-vector_t	*CalculatDiffuseColor(scene_t *scene, vector_t *localNormal,
-				vector_t *initPoint, vector_t *base_color,
+vector_t	*CalculatDiffuseColor(scene_t *scene, propretries_t *prop,
 				object_t *cur_object);
 #endif

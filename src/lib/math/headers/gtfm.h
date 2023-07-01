@@ -6,12 +6,13 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:56 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/06/28 13:57:30 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/01 12:05:46 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GTFM_H
 # define GTFM_H
+# include "../../../headers/types.h"
 # include "matrix.h"
 # include <stdio.h>
 matrix_t	*Set_transform(vector_t *translation, vector_t *rotation,

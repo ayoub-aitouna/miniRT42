@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:22:51 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/06/28 05:12:14 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/01 22:06:59 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,30 +23,29 @@ material_t	*new_material_base(double shininess_coefficient,
 	return (material_base);
 }
 
-vector_t	*reflect_color(scene_t *scene, vector_t *localNormal,
-		vector_t *initPoint, object_t *cur_object, ray_t *camera_ray, int rfc)
+vector_t	*reflect_color(scene_t *scene, propretries_t *prop,
+		object_t *cur_object, ray_t *camera_ray, int rfc)
 {
 	vector_t		*reflection_v;
 	ray_t			*m_ray;
-	propretries_t	prop;
+	propretries_t	local_prop;
 	object_t		*c_obj;
 	double			found_int;
 	vector_t		*color;
 
 	c_obj = NULL;
 	color = NULL;
-	reflection_v = Reflection_vector(camera_ray->m_lab, localNormal);
-	m_ray = ray(initPoint, addition(initPoint, reflection_v));
-	found_int = mt_cast_ray(scene, m_ray, &prop, cur_object, &c_obj);
+	reflection_v = Reflection_vector(camera_ray->m_lab, &prop->local_normal);
+	m_ray = ray(&prop->int_point, addition(&prop->int_point, reflection_v));
+	found_int = mt_cast_ray(scene, m_ray, &local_prop, cur_object, &c_obj);
 	if (found_int && (rfc < MAX_REFLECTION_COUNT))
-	{
-		color = c_obj->material->calculat_color(scene, &prop, c_obj, m_ray, rfc
-				+ 1);
-	}
+		color = c_obj->material->calculat_color(scene, &local_prop, c_obj,
+				m_ray, rfc + 1);
 	else
 		color = vector(0, 0, 0);
 	return (color);
 }
+
 
 int	mt_cast_ray(scene_t *scene, ray_t *m_ray, propretries_t *prop,
 		object_t *cur_object, object_t **c_obj)
@@ -60,7 +59,6 @@ int	mt_cast_ray(scene_t *scene, ray_t *m_ray, propretries_t *prop,
 	int				found_int;
 
 	found_int = FALSE;
-	valide = FALSE;
 	min_dst = MAX_V;
 	tmp = scene->m_object_list;
 	while (tmp)

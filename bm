@@ -1,0 +1,49 @@
+#Pseudocode for Bump Mapping in Ray Tracing
+
+#Given:
+#- Intersection point on the surface of an object(hit point)
+#- Normal vector at the hit point(surface normal)
+#- Bump map texture
+
+# 1. Compute the texture coordinates at the hit point based on the object's UV mapping.
+#This step depends on how you have set up UV coordinates for your objects.
+
+# 2. Use the texture coordinates to sample the bump map texture at the hit point.
+#This will give you the corresponding grayscale value(height or displacement) from the bump map.
+
+# 3. Calculate the tangent and bitangent vectors at the hit point.
+#These vectors are used to perturb the surface normal according to the bump map information.
+#The tangent and bitangent vectors are perpendicular to the surface normal and each other.
+
+# 4. Perturb the surface normal using the tangent and bitangent vectors and the bump map value.
+#The extent of the perturbation depends on the bumpiness you want to achieve.
+#You can scale the tangent and bitangent vectors by the bump map value to control the effect.
+#The modified normal is calculated as:
+#perturbed _normal = surface_normal + bumpiness * (tangent * dU + bitangent * dV)
+
+# 5. Use the perturbed normal for shading calculations,
+	such as lighting and reflections.
+
+#Example pseudocode implementation for a ray - triangle intersection:
+
+def	intersect_ray_triangle(ray, triangle)
+	:
+#... perform ray - triangle intersection calculation...
+
+# 1. Compute texture coordinates
+		tex_coords = compute_texture_coordinates(intersection_point, triangle)
+
+# 2. Sample bump map
+			bump_map_value = sample_bump_map(tex_coords)
+
+# 3. Calculate tangent and bitangent vectors
+				tangent,
+		bitangent = calculate_tangent_and_bitangent(triangle)
+
+# 4. Perturb the surface normal
+			perturbed_normal = triangle.surface_normal + bumpiness * (tangent
+					* bump_map_value.u + bitangent * bump_map_value.v)
+
+# 5. Use perturbed normal for shading calculations
+
+#... continue with shading calculations using the perturbed normal...

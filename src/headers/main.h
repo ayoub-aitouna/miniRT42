@@ -6,25 +6,23 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:33 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/06/28 20:57:38 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/01 11:56:22 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT
-#define RT
-#include <stdlib.h>
-#include <mlx.h>
-#include <limits.h>
-#include <unistd.h>
-#include <stdarg.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include "image.h"
-#include "../lib/math/headers/matrix.h"
-#include "../lib/math/headers/gtfm.h"
-#define WIDTH 1280
-#define HEIGHT 720
-scene_t *Scene();
-// t_image *Render(scene_t *scene);
+# define RT
+# include "../lib/math/headers/gtfm.h"
+# include "../lib/math/headers/matrix.h"
+# include "image.h"
+# include <fcntl.h>
+# include <limits.h>
+# include <mlx.h>
+# include <stdarg.h>
+# include <stdint.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# define WIDTH 1280
+# define HEIGHT 720
 #endif

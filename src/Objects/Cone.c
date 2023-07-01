@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:19 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/01 06:44:01 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/01 19:31:14 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,6 @@ void	calulcat_cone_intersection(vector_t p, vector_t n, cep_t propretries)
 		else
 			propretries.t[1] = MAX_V;
 	}
-	else
-	{
-		propretries.intersections[0] = NULL;
-		propretries.intersections[1] = NULL;
-	}
 }
 
 vector_t	*set_cone_properiesties(object_t *this, vector_t *poi,
@@ -96,39 +91,36 @@ vector_t	*set_cone_properiesties(object_t *this, vector_t *poi,
 int	cone_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
 {
 	ray_t		*bck_ray;
-	vector_t	*intersections[3];
-	vector_t	p;
+	cep_t		cone_prop;
 	vector_t	n;
 	vector_t	*poi;
 	vector_t	*int_poi;
 	int			index;
-	double		*t;
-	int			*valide_intersections;
 
-	t = (double[]){MAX_V, MAX_V, MAX_V};
-	valide_intersections = (int[]){FALSE, FALSE, FALSE};
+	cone_prop = (cep_t){.t = (double[]){MAX_V, MAX_V, MAX_V},
+						.valide_intersections = (int[]){FALSE, FALSE, FALSE},
+						.intersections = (vector_t *[]){NULL, NULL, NULL}};
 	bck_ray = Apply_transform(camera_ray, this, BCKWRD);
 	n = *bck_ray->m_lab;
 	normalize(&n);
-	p = *bck_ray->point1;
-	calulcat_cone_intersection(p, n, (cep_t){.t = t,
-			.intersections = intersections,
-			.valide_intersections = valide_intersections});
+	calulcat_cone_intersection(*bck_ray->point1, n, (cep_t){.t = cone_prop.t,
+			.intersections = cone_prop.intersections,
+			.valide_intersections = cone_prop.valide_intersections});
 	if (!close_enough(n.z, 0.0f))
-		cone_cap_intersection(p, n, (cep_t){.t = t,
-				.intersections = intersections,
-				.valide_intersections = valide_intersections});
+		cone_cap_intersection(*bck_ray->point1, n, (cep_t){.t = cone_prop.t,
+				.intersections = cone_prop.intersections,
+				.valide_intersections = cone_prop.valide_intersections});
 	else
-		intersections[2] = NULL;
+		cone_prop.intersections[2] = NULL;
 	delete_ray(bck_ray);
-	if (!includes(valide_intersections, 3, TRUE))
+	if (!includes(cone_prop.valide_intersections, 3, TRUE))
 	{
-		free_list((void **)intersections, 3);
+		free_list((void **)cone_prop.intersections, 3);
 		return (FALSE);
 	}
-	index = min_index(t, 3);
-	poi = copy_vector(*intersections[index]);
-	free_list((void **)intersections, 3);
+	index = min_index(cone_prop. t, 3);
+	poi = copy_vector(*cone_prop.intersections[index]);
+	free_list((void **)cone_prop.intersections, 3);
 	if (index < 2)
 	{
 		int_poi = set_cone_properiesties(this, poi, prop);
@@ -161,7 +153,7 @@ object_t	*cone(vector_t *translation, vector_t *rotation, vector_t *scal,
 
 	cone = object_base(translation, rotation, scal, color);
 	cone->test_inter = cone_int_test;
-	cone->material->reflection_coefficient = 0.5;
-	cone->material->shininess_coefficient = 3;
+	cone->material->reflection_coefficient = 0.6;
+	cone->material->shininess_coefficient = 6;
 	return (cone);
 }

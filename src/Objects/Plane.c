@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:27 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/01 08:50:29 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/01 19:12:11 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,17 @@
 void	p_int_point_propreties(vector_t *poi, object_t *this,
 		propretries_t *prop)
 {
+	vector_t	*normal_fp;
 	vector_t	*m_normal;
 	vector_t	*int_poi;
 
 	int_poi = Apply_transform_vector(poi, FRWRD, this);
-	m_normal = get_norm(this, poi);
-	normalize(m_normal);
+	normal_fp = vector(0.0, 0.0, -1.0);
+	m_normal = get_norm(this, normal_fp);
 	prop->int_point = *int_poi;
 	prop->local_normal = *m_normal;
 	prop->local_color = *this->base_color;
-	free_list((void *[]){int_poi, m_normal}, 2);
+	free_list((void *[]){int_poi, m_normal, normal_fp}, 3);
 }
 
 /**
@@ -90,6 +91,6 @@ object_t	*plane(vector_t *translation, vector_t *rotation, vector_t *scal,
 	plane = object_base(translation, rotation, scal, color);
 	plane->test_inter = p_int_test;
 	plane->material->shininess_coefficient = 10;
-	plane->material->reflection_coefficient = .6;
+	plane->material->reflection_coefficient = .8;
 	return (plane);
 }

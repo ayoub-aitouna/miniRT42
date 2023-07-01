@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:53 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/01 08:47:33 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/01 21:28:20 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,24 @@ t_list	*Objects(void *mlx)
 	t_checker_textures	*checker;
 	t_checker_textures	*ww;
 	object_t			*plan;
+	object_t			*m_sphere;
 
-	checker = new_texture((vector_t){.x = 0.3, .y = .3, .z = .3},
-							(vector_t){.x = 1, .y = 1, .z = 1});
+	(void)mlx;
+	checker = new_img_texture(mlx, "./assets/dragon.xpm");
 	ww = new_img_texture(mlx, "./assets/ww.xpm");
 	data = NULL;
 	plan = plane(vector(.0, 0.0, 2), vector(0.0, 0, 0), vector(4.5, 4.0, 1.0),
 			vector(1, 1, 1.0));
-	sphere = create_sphere(vector(-2, -2.0, 0.0), vector(0, 0, 0), vector(1.f,
+	m_sphere = create_sphere(vector(2.0, 0.0, .0), vector(0.0, 0, 0), vector(1,
+				1, 1), vector(.6, .1, .6));
+	sphere = create_sphere(vector(0.0, 2.0, 0.0), vector(0, 0, 0), vector(1.f,
 				1.f, 1.f), vector(139.0f / 255.0f, .0, .0));
 	sphere->textures = ww;
 	plan->textures = checker;
-	set_tfm(checker, &(vector2_t){.x = 0, .y = 0}, &(vector2_t){.x = 4, .y = 4},
-			0);
+	// set_tfm(checker, &(vector2_t){.x = 0, .y = 0}, &(vector2_t){.x = 4,
+	// .y = 4}, 0);
 	push_back(&data, ft_lstnew(plan));
+	push_back(&data, ft_lstnew(m_sphere));
 	push_back(&data, ft_lstnew(sphere));
 	return (data);
 }
@@ -46,9 +50,8 @@ t_list	*LightSorces(void)
 						1.0, 1.0), 1.0)));
 	push_back(&data, ft_lstnew(new_light(vector(.0, -8.0, -2.0), vector(1.0,
 						1.0, 1.0), 1.0)));
-	// push_back(&data, ft_lstnew(new_light(vector(3.f, -5.f, -5.f), vector(.0,
-	// .0,
-	// 					1.0), 1.0)));
+	push_back(&data, ft_lstnew(new_light(vector(3.f, -5.f, -5.f), vector(.0, .0,
+						1.0), 1.0)));
 	return (data);
 }
 
@@ -105,11 +108,11 @@ void	render_line(scene_t *scene, t_image *image, int y, vector_t fact)
 		{
 			color = c_object->material->calculat_color(scene, &prop, c_object,
 					ray, 0);
-			set_pixel(image, x, y, color->x, color->y, color->z);
+			set_pixel(image, x, y, color);
 			free(color);
 		}
 		else
-			set_pixel(image, x, y, 0, 0, 0);
+			set_pixel(image, x, y, &(vector_t){.x = 0, .y = 0, .z = 0});
 		delete_ray(ray);
 		x++;
 	}
