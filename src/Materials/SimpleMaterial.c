@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:22:56 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/06/28 05:14:24 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/01 05:48:09 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,12 @@ material_t	*new_simple_material(double shininess_coefficient,
 	simple_material->calculat_color = calculat_color;
 	return (simple_material);
 }
-
+vector_t	get_curect_color(object_t *this, propretries_t *prop)
+{
+	if (this->textures)
+		return (*this->textures->get_color(this->textures, prop->uv_cords));
+	return (prop->local_color);
+}
 vector_t	*calculat_color(scene_t *scene, propretries_t *prop,
 		object_t *cur_object, ray_t *camera_ray, int rfc)
 {
@@ -33,12 +38,14 @@ vector_t	*calculat_color(scene_t *scene, propretries_t *prop,
 	vector_t	*specularColor;
 	vector_t	*reflectionColor;
 	double		reflectivity;
+	vector_t	base_color;
 
 	specularColor = NULL;
 	reflectionColor = NULL;
 	reflectivity = cur_object->material->reflection_coefficient;
+	base_color = get_curect_color(cur_object, prop);
 	color = CalculatDiffuseColor(scene, &prop->local_normal, &prop->int_point,
-			&prop->local_color, cur_object);
+			&base_color, cur_object);
 	if (cur_object->material->reflection_coefficient > 0.f)
 	{
 		reflectionColor = reflect_color(scene, &prop->local_normal,

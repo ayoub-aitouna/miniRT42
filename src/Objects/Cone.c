@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:19 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/06/27 23:28:41 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/01 06:44:01 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,24 @@ void	calulcat_cone_intersection(vector_t p, vector_t n, cep_t propretries)
 	}
 }
 
+vector_t	*set_cone_properiesties(object_t *this, vector_t *poi,
+		propretries_t *prop)
+{
+	vector_t	*normal_fp;
+	vector_t	*m_normal;
+	vector_t	*int_poi;
+
+	int_poi = Apply_transform_vector(poi, FRWRD, this);
+	normal_fp = vector(poi->x, poi->y, 0);
+	m_normal = get_norm(this, normal_fp);
+	normalize(m_normal);
+	prop->local_normal = *m_normal;
+	prop->local_color = *this->base_color;
+	free_list((void *[]){normal_fp, m_normal},
+				2);
+	return (int_poi);
+}
+
 int	cone_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
 {
 	ray_t		*bck_ray;
@@ -113,8 +131,7 @@ int	cone_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
 	free_list((void **)intersections, 3);
 	if (index < 2)
 	{
-		int_poi = set_cylider_properiesties(this, poi, &prop->local_normal,
-				&prop->local_color);
+		int_poi = set_cone_properiesties(this, poi, prop);
 		prop->int_point = *int_poi;
 		free(int_poi);
 		free(poi);

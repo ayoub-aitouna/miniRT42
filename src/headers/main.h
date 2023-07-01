@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:33 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/06/27 23:21:33 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/06/28 20:57:38 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@
 #define WIDTH 1280
 #define HEIGHT 720
 scene_t *Scene();
-t_image *Render(scene_t *scene);
+// t_image *Render(scene_t *scene);
 #endif

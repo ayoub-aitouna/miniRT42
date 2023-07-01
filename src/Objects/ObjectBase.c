@@ -6,14 +6,11 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:24 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/06/27 23:23:24 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/01 08:50:43 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/base.h"
-
-material_t	*new_simple_material(double shininess_coefficient,
-								double reflection_coefficient);
 
 object_t	*object_base(vector_t *translation, vector_t *rotation,
 		vector_t *scal, vector_t *color)
@@ -25,6 +22,8 @@ object_t	*object_base(vector_t *translation, vector_t *rotation,
 	object->bck_tfm = inverse(object->fwd_tfm);
 	object->base_color = copy_vector(*color);
 	object->material = new_simple_material(0, 0);
+	object->textures = NULL;
+	set_lineartfm(object);
 	free_list((void *[]){translation, rotation, scal, color}, 4);
 	return (object);
 }

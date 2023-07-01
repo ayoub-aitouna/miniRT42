@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:27 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/06/27 23:23:27 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/01 08:50:29 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,16 @@
 void	p_int_point_propreties(vector_t *poi, object_t *this,
 		propretries_t *prop)
 {
-	vector_t	*origin;
-	vector_t	*normal_fp;
-	vector_t	*global_origin;
 	vector_t	*m_normal;
 	vector_t	*int_poi;
 
 	int_poi = Apply_transform_vector(poi, FRWRD, this);
-	origin = vector(0.0, 0.0, 0.0);
-	normal_fp = vector(0.0, 0.0, -1.0);
-	global_origin = Apply_transform_vector(origin, FRWRD, this);
-	m_normal = ms_minus(Apply_transform_vector(normal_fp, FRWRD, this),
-						global_origin,
-						0);
+	m_normal = get_norm(this, poi);
 	normalize(m_normal);
 	prop->int_point = *int_poi;
 	prop->local_normal = *m_normal;
 	prop->local_color = *this->base_color;
-	free_list((void *[]){int_poi, origin, global_origin, normal_fp, m_normal},
-				5);
+	free_list((void *[]){int_poi, m_normal}, 2);
 }
 
 /**
@@ -43,7 +34,8 @@ void	p_int_point_propreties(vector_t *poi, object_t *this,
  *  K = ray.m_lab normilazed
  *  u = Ax + tKz; & v = ay + tky; & t = kz/az;
  */
-vector_t	*p_calculat_int_point(ray_t *ray, vector_t k, int *status)
+vector_t	*p_calculat_int_point(ray_t *ray, vector_t k, propretries_t *prop,
+		int *status)
 {
 	vector_t	a;
 	double		t;
@@ -62,7 +54,10 @@ vector_t	*p_calculat_int_point(ray_t *ray, vector_t k, int *status)
 	if (fabs(u) >= 1.0 || fabs(v) >= 1.0)
 		return (false(status));
 	else
+	{
+		prop->uv_cords = (t_uv_cords){.u = u, .v = v};
 		return (ms_addition(ray->point1, num_muliplication(&k, t), 1));
+	}
 }
 
 int	p_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
@@ -75,7 +70,7 @@ int	p_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
 	bck_ray = Apply_transform(camera_ray, this, BCKWRD);
 	vhat = *bck_ray->m_lab;
 	normalize(&vhat);
-	poi = p_calculat_int_point(bck_ray, vhat, &status);
+	poi = p_calculat_int_point(bck_ray, vhat, prop, &status);
 	delete_ray(bck_ray);
 	if (status == 0)
 	{
@@ -94,5 +89,7 @@ object_t	*plane(vector_t *translation, vector_t *rotation, vector_t *scal,
 
 	plane = object_base(translation, rotation, scal, color);
 	plane->test_inter = p_int_test;
+	plane->material->shininess_coefficient = 10;
+	plane->material->reflection_coefficient = .6;
 	return (plane);
 }

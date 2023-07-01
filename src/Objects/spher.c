@@ -6,11 +6,12 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:30 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/06/27 23:23:30 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/01 08:50:25 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/spher.h"
+#include <math.h>
 
 object_t	*create_sphere(vector_t *translation, vector_t *rotation,
 		vector_t *scal, vector_t *color)
@@ -65,25 +66,34 @@ vector_t	*calculat_int_point(ray_t *bck_ray, vector_t vhat, int *status)
 	return (fs_addition(bck_ray->point1, num_muliplication(&vhat, t)));
 }
 
+void	calculat_uv(propretries_t *prop, vector_t *poi)
+{
+	double	u;
+	double	v;
+
+	u = atan2(sqrt(poi->x * poi->x + poi->y * poi->y), poi->z);
+	v = atan2(poi->y, poi->x);
+	if (v < 0)
+		v += PI;
+	u /= PI;
+	v /= PI;
+	prop->uv_cords.u = u;
+	prop->uv_cords.v = v;
+}
+
 void	int_point_propreties(vector_t *poi, object_t *this, propretries_t *prop)
 {
-	vector_t	*Origin;
-	vector_t	*newOrigin;
 	vector_t	*m_normal;
 	vector_t	*int_poi;
 
 	int_poi = Apply_transform_vector(poi, FRWRD, this);
-	Origin = vector(0.0, 0.0, 0.0);
-	newOrigin = Apply_transform_vector(Origin, FRWRD, this);
-	m_normal = minus(int_poi, newOrigin);
+	m_normal = get_norm(this, poi);
 	normalize(m_normal);
 	prop->int_point = *int_poi;
 	prop->local_normal = *m_normal;
 	prop->local_color = *this->base_color;
-	free(int_poi);
-	free(Origin);
-	free(newOrigin);
-	free(m_normal);
+	calculat_uv(prop, poi);
+	free_list((void *[]){int_poi, m_normal}, 2);
 }
 
 double	min_t(double numsqrt, double b, int *status)

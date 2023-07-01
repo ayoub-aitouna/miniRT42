@@ -6,13 +6,14 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:22:41 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/06/27 23:22:42 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/06/30 04:09:07 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MATERIALBASE_H
 # define MATERIALBASE_H
 # include "../../Lights/headers/pointlight.h"
+# include "../../Textures/headers/checker.h"
 # include "../../headers/main.h"
 # include "../../headers/ray.h"
 # include "../../headers/types.h"

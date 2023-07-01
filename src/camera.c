@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:39 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/06/28 04:48:02 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/01 08:48:17 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	calculat_geometry(camera_t *this)
 	normalize(this->screen_v);
 	this->screen_center = ms_addition(this->position,
 										ms_num_muliplication(aligment,
-												this->lenght),
+															this->lenght),
 										1);
 	this->screen_u = ms_num_muliplication(this->screen_u,
 											this->horizontal_size);

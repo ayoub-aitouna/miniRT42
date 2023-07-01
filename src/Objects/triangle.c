@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:36 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/06/27 23:23:36 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/01 08:49:39 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,17 @@
 void	t_int_point_propreties(vector_t *poi, object_t *this,
 		propretries_t *prop)
 {
-	vector_t	*origin;
-	vector_t	*normal_fp;
-	vector_t	*global_origin;
 	vector_t	*m_normal;
 	vector_t	*int_poi;
 
 	int_poi = Apply_transform_vector(poi, FRWRD, this);
-	origin = vector(0.0, 0.0, 0.0);
-	normal_fp = vector(0.0, 0.0, -1.0);
-	global_origin = Apply_transform_vector(origin, FRWRD, this);
-	m_normal = ms_minus(Apply_transform_vector(normal_fp, FRWRD, this),
-						global_origin,
-						0);
+	m_normal = get_norm(this, int_poi);
 	normalize(m_normal);
 	prop->int_point = *int_poi;
 	prop->local_normal = *m_normal;
 	prop->local_color = *this->base_color;
-	free_list((void *[]){origin, normal_fp, global_origin, m_normal, int_poi},
-				5);
+	free_list((void *[]){m_normal, int_poi},
+				2);
 }
 
 /**

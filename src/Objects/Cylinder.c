@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:22 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/06/27 23:21:23 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/06/30 00:46:03 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,23 +115,17 @@ void	calulcat_cap_intersection(double *t, vector_t p, vector_t n,
 vector_t	*set_cylider_properiesties(object_t *this, vector_t *poi,
 		vector_t *local_normal, vector_t *local_color)
 {
-	vector_t	*origin;
 	vector_t	*normal_fp;
-	vector_t	*global_origin;
 	vector_t	*m_normal;
 	vector_t	*int_poi;
-	vector_t	*gb_normal;
 
 	int_poi = Apply_transform_vector(poi, FRWRD, this);
-	origin = vector(0.0, 0.0, 0.0);
-	global_origin = Apply_transform_vector(origin, FRWRD, this);
 	normal_fp = vector(poi->x, poi->y, 0.0);
-	gb_normal = Apply_transform_vector(normal_fp, FRWRD, this);
-	m_normal = normalized_sub(gb_normal, global_origin);
+	m_normal = get_norm(this, normal_fp);
 	*local_normal = *m_normal;
 	*local_color = *this->base_color;
-	free_list((void *[]){origin, normal_fp, global_origin, m_normal, gb_normal},
-				5);
+	free_list((void *[]){normal_fp, m_normal},
+				2);
 	return (int_poi);
 }
 
