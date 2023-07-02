@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:40 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/01 05:29:09 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/02 08:19:59 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct Object				object_t;
 typedef struct material				material_t;
 typedef struct Propretries			propretries_t;
 typedef struct s_checker_textures	t_checker_textures;
+typedef struct color_params			t_color_params;
 
 typedef struct s_data
 {
@@ -89,9 +90,7 @@ typedef struct cylinder_equations_Propretries
 
 typedef vector_t	*(*compute_color)(scene_t *scene,
 									propretries_t *prop,
-									object_t *cur_object,
-									ray_t *camera_ray,
-									int rfc);
+									t_color_params params);
 
 typedef struct material
 {

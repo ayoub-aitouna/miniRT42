@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:30 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/01 08:50:25 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/02 13:37:57 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ object_t	*create_sphere(vector_t *translation, vector_t *rotation,
 	object_t	*shphere;
 
 	shphere = object_base(translation, rotation, scal, color);
-	shphere->material->shininess_coefficient = 10.f;
-	shphere->material->reflection_coefficient = .2;
+	shphere->material->shininess_coefficient = 13.f;
+	shphere->material->reflection_coefficient = .5;
 	shphere->test_inter = sh_int_test;
 	return (shphere);
 }

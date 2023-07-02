@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:37 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/01 11:56:06 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/02 08:06:04 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,7 @@ void	update_values(propretries_t *c_prop, object_t **c_object,
 scene_t	*Scene(void *mlx, void *mlx_win);
 t_image	*Render(scene_t *scene, void *mlx, void *mlx_win);
 void	deleteScene(scene_t *this);
+
+int		check_n_set_dist(propretries_t *prop, ray_t *ray, double *min_dist);
+
 #endif

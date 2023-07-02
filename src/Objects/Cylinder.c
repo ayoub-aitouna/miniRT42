@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:22 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/06/30 00:46:03 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/02 17:51:12 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,27 +129,26 @@ vector_t	*set_cylider_properiesties(object_t *this, vector_t *poi,
 	return (int_poi);
 }
 
-vector_t	*set_cap_properiesties(object_t *this, vector_t *poi,
+int	set_cap_properiesties(object_t *this, vector_t *poi, vector_t n,
 		propretries_t *prop)
 {
-	vector_t	*origin;
 	vector_t	*normal_fp;
 	vector_t	*m_normal;
-	vector_t	*global_origin;
 	vector_t	*int_poi;
 
+	if (sqrt(pow(poi->x, 2) + pow(poi->y, 2)) >= 1.0 || close_enough(0.0, n.z))
+	{
+		free(poi);
+		return (FALSE);
+	}
 	int_poi = Apply_transform_vector(poi, FRWRD, this);
-	origin = vector(0.0, 0.0, 0.0);
 	normal_fp = vector(0.0, 0.0, 0 + poi->z);
-	global_origin = Apply_transform_vector(origin, FRWRD, this);
-	m_normal = ms_normalized_sub(Apply_transform_vector(normal_fp, FRWRD, this),
-									global_origin,
-									0);
+	m_normal = get_norm(this, normal_fp);
 	prop->local_normal = *m_normal;
 	prop->local_color = *this->base_color;
-	free_list((void *[]){(void *)origin, (void *)normal_fp,
-			(void *)global_origin, (void *)m_normal}, 4);
-	return (int_poi);
+	prop->int_point = *int_poi;
+	free_list((void *[]){poi, normal_fp, int_poi, m_normal}, 4);
+	return (TRUE);
 }
 
 int	cy_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
@@ -180,10 +179,7 @@ int	cy_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
 	}
 	delete_ray(bck_ray);
 	if (!includes(valide_intersections, 4, TRUE))
-	{
-		free_list((void **)intersections, 4);
 		return (FALSE);
-	}
 	index = min_index(t, 4);
 	poi = copy_vector(*intersections[index]);
 	free_list((void **)intersections, 4);
@@ -195,20 +191,8 @@ int	cy_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
 		free_list((void *[]){int_poi, poi}, 2);
 		return (TRUE);
 	}
-	if (index >= 2)
-	{
-		if (sqrt(pow(poi->x, 2) + pow(poi->y, 2)) >= 1.0 || close_enough(0.0,
-				n.z))
-		{
-			free(poi);
-			return (FALSE);
-		}
-		int_poi = set_cap_properiesties(this, poi, prop);
-		prop->int_point = *int_poi;
-		free_list((void *[]){int_poi, poi}, 2);
-		return (TRUE);
-	}
-	return (FALSE);
+	else
+		return (set_cap_properiesties(this, poi, n, prop));
 }
 
 object_t	*cylinder(vector_t *translation, vector_t *rotation, vector_t *scal,

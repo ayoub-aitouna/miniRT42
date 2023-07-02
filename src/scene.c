@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:53 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/01 21:28:20 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/02 17:56:57 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,20 @@ t_list	*Objects(void *mlx)
 	object_t			*m_sphere;
 
 	(void)mlx;
-	checker = new_img_texture(mlx, "./assets/dragon.xpm");
+	checker = new_texture((vector_t){0, 0, 0}, (vector_t){1, 1, 1});
 	ww = new_img_texture(mlx, "./assets/ww.xpm");
 	data = NULL;
 	plan = plane(vector(.0, 0.0, 2), vector(0.0, 0, 0), vector(4.5, 4.0, 1.0),
 			vector(1, 1, 1.0));
 	m_sphere = create_sphere(vector(2.0, 0.0, .0), vector(0.0, 0, 0), vector(1,
-				1, 1), vector(.6, .1, .6));
-	sphere = create_sphere(vector(0.0, 2.0, 0.0), vector(0, 0, 0), vector(1.f,
-				1.f, 1.f), vector(139.0f / 255.0f, .0, .0));
-	sphere->textures = ww;
+				1, 1), vector(1, 1, 1));
+	sphere = cone(vector(0.0, 2.0, 0.0), vector((PI / 4), 0, 0), vector(1.f, 1.f, 1.f),
+			vector(139.0f / 255.0f, .0, .0));
+	m_sphere->textures = ww;
 	plan->textures = checker;
-	// set_tfm(checker, &(vector2_t){.x = 0, .y = 0}, &(vector2_t){.x = 4,
-	// .y = 4}, 0);
+	sphere->textures = checker;
+	set_tfm(checker, &(vector2_t){.x = 0, .y = 0}, &(vector2_t){.x = 4, .y = 4},
+			0);
 	push_back(&data, ft_lstnew(plan));
 	push_back(&data, ft_lstnew(m_sphere));
 	push_back(&data, ft_lstnew(sphere));
@@ -106,8 +107,8 @@ void	render_line(scene_t *scene, t_image *image, int y, vector_t fact)
 				(((double)y) * fact.y) - 1.0);
 		if (cast_ray(ray, scene, &prop, &c_object))
 		{
-			color = c_object->material->calculat_color(scene, &prop, c_object,
-					ray, 0);
+			color = c_object->material->calculat_color(scene, &prop,
+					(t_color_params){c_object, ray, 0});
 			set_pixel(image, x, y, color);
 			free(color);
 		}
