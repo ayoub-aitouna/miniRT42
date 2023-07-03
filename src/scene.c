@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:53 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/02 17:56:57 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/03 01:22:25 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ t_list	*Objects(void *mlx)
 	checker = new_texture((vector_t){0, 0, 0}, (vector_t){1, 1, 1});
 	ww = new_img_texture(mlx, "./assets/ww.xpm");
 	data = NULL;
-	plan = plane(vector(.0, 0.0, 2), vector(0.0, 0, 0), vector(4.5, 4.0, 1.0),
+	plan = plane(vector(.0, 0.0, 1.0), vector(0.0, 0, 0), vector(4.5, 4.0, 1.0),
 			vector(1, 1, 1.0));
 	m_sphere = create_sphere(vector(2.0, 0.0, .0), vector(0.0, 0, 0), vector(1,
 				1, 1), vector(1, 1, 1));
-	sphere = cone(vector(0.0, 2.0, 0.0), vector((PI / 4), 0, 0), vector(1.f, 1.f, 1.f),
-			vector(139.0f / 255.0f, .0, .0));
+	sphere = cone(vector(0.0, 0.0, 0.0), vector((PI / 4), 0, 0), vector(1.f,
+				1.f, 1.f), vector(139.0f / 255.0f, .0, .0));
 	m_sphere->textures = ww;
 	plan->textures = checker;
 	sphere->textures = checker;
@@ -47,19 +47,19 @@ t_list	*LightSorces(void)
 	t_list	*data;
 
 	data = NULL;
-	push_back(&data, ft_lstnew(new_light(vector(-3.f, -5.f, -5.f), vector(1.0,
+	push_back(&data, ft_lstnew(new_light(vector(-3.f, -5.f, -10.f), vector(1.0,
 						1.0, 1.0), 1.0)));
-	push_back(&data, ft_lstnew(new_light(vector(.0, -8.0, -2.0), vector(1.0,
+	push_back(&data, ft_lstnew(new_light(vector(.0, -8.0, -10.0), vector(1.0,
 						1.0, 1.0), 1.0)));
-	push_back(&data, ft_lstnew(new_light(vector(3.f, -5.f, -5.f), vector(.0, .0,
-						1.0), 1.0)));
+	push_back(&data, ft_lstnew(new_light(vector(3.f, -5.f, -10.f), vector(.0,
+						.0, 1.0), 1.0)));
 	return (data);
 }
 
 void	setupCamera(scene_t *this)
 {
 	this->m_camera = Camera(.75f, 1.0f, (double)WIDTH / (double)HEIGHT);
-	SetPosition(this->m_camera, vector(.0, -8.0, -2.0));
+	SetPosition(this->m_camera, vector(3, -8.0, -2.0));
 	SetUp(this->m_camera, vector(.0, .0, .1));
 	Setloockat(this->m_camera, vector(.0, .0, 1));
 	calculat_geometry(this->m_camera);
