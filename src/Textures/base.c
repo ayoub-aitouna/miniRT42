@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   base.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/04 01:32:01 by aaitouna          #+#    #+#             */
+/*   Updated: 2023/07/04 01:32:02 by aaitouna         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "headers/base.h"
 
-t_checker_textures	*new_base_texture(void)
+t_textures	*new_base_texture(void)
 {
-	t_checker_textures	*base;
+	t_textures	*base;
 
-	base = malloc(sizeof(t_checker_textures));
+	base = malloc(sizeof(t_textures));
 	base->tfm = NULL;
 	return (base);
 }
 
-void	set_tfm(t_checker_textures *this, vector2_t *translation,
+void	set_tfm(t_textures *this, vector2_t *translation,
 		vector2_t *scal, double rotation)
 {
 	matrix_t	*tmt;
@@ -25,7 +37,7 @@ void	set_tfm(t_checker_textures *this, vector2_t *translation,
 	this->tfm = safe_matrix_multy(safe_matrix_multy(tmt, rmt), smt);
 }
 
-t_uv_cords	*apply_transform(t_checker_textures *this, t_uv_cords *cords)
+t_uv_cords	*apply_transform(t_textures *this, t_uv_cords *cords)
 {
 	matrix_t	*result;
 	matrix_t	*uv;

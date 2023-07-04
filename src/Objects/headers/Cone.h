@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:06 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/02 17:56:10 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/03 14:33:12 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "cylinder.h"
 int			in_range(double value, double min, double max);
 void		cone_cap_intersection(vector_t p, vector_t *n, cep_t *propretries);
-void		check_nd_set(cep_t *propretries, int index);
 cep_t		*init_cap_prop(void);
 void		calulcat_cone_intersection(vector_t p, vector_t *n,
 				cep_t *propretries);

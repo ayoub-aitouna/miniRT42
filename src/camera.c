@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:39 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/01 08:48:17 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/03 03:17:58 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,11 @@ void	calculat_geometry(camera_t *this)
 	this->screen_v = cross(*this->screen_u, *aligment);
 	normalize(this->screen_v);
 	this->screen_center = ms_addition(this->position,
-										ms_num_muliplication(aligment,
-															this->lenght),
-										1);
+			ms_num_muliplication(aligment, this->lenght), 1);
 	this->screen_u = ms_num_muliplication(this->screen_u,
-											this->horizontal_size);
+			this->horizontal_size);
 	this->screen_v = ms_num_muliplication(this->screen_v,
-											this->horizontal_size
-												/ this->aspect_ration);
+			this->horizontal_size / this->aspect_ration);
 }
 
 ray_t	*generate_ray(camera_t *this, double screenX, double screenY)

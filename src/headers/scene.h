@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:37 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/02 08:06:04 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/04 01:35:46 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include "../Objects/headers/plane.h"
 # include "../Objects/headers/spher.h"
 # include "../Objects/headers/triangle.h"
+# include "../Textures/headers/Texturesimage.h"
 # include "../Textures/headers/checker.h"
-# include "../Textures/headers/image.h"
 # include "../lib/lib.h"
 # include "../lib/math/headers/matrix.h"
 # include "../lib/math/headers/vectormath.h"

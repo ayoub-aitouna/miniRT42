@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:19 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/02 17:56:13 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/03 14:20:32 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	cone_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
 	else
 		return (set_cap_properiesties(this, poi, *n, prop));
 }
+
 void	check_intersections(ray_t *bck_ray,
 							vector_t *n,
 							cep_t *cone_prop,
@@ -102,8 +103,10 @@ void	calulcat_cone_intersection(vector_t p, vector_t *n, cep_t *propretries)
 					propretries->t[0]), 1);
 		propretries->intersections[1] = ms_addition(&p, num_muliplication(n,
 					propretries->t[1]), 1);
-		check_nd_set(propretries, 0);
-		check_nd_set(propretries, 1);
+		check_nd_set(propretries, 0,
+				in_range(propretries->intersections[0]->z, .0, 1.));
+		check_nd_set(propretries, 1,
+				in_range(propretries->intersections[1]->z, .0, 1.));
 	}
 }
 
@@ -120,10 +123,9 @@ void	cone_cap_intersection(vector_t p, vector_t *n, cep_t *propretries)
 		propretries->t[2] = MAX_V;
 }
 
-void	check_nd_set(cep_t *propretries, int index)
+void	check_nd_set(cep_t *propretries, int index, int z_condition)
 {
-	if (propretries->t[index] > 0
-		&& in_range(propretries->intersections[index]->z, .0, 1.))
+	if (propretries->t[index] > 0 && z_condition)
 		propretries->valide_intersections[index] = TRUE;
 	else
 		propretries->t[index] = MAX_V;

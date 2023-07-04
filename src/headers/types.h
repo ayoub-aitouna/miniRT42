@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:40 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/02 08:19:59 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/03 14:44:27 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 typedef struct Object				object_t;
 typedef struct material				material_t;
 typedef struct Propretries			propretries_t;
-typedef struct s_checker_textures	t_checker_textures;
+typedef struct s_textures	t_textures;
 typedef struct color_params			t_color_params;
 
 typedef struct s_data
@@ -50,7 +50,7 @@ typedef struct Object
 	vector_t						*base_color;
 	test_intersection				test_inter;
 	material_t						*material;
-	t_checker_textures				*textures;
+	t_textures				*textures;
 }									object_t;
 
 typedef struct Light
@@ -113,9 +113,9 @@ typedef struct Propretries
 	vector_t						int_point;
 	t_uv_cords						uv_cords;
 }									propretries_t;
-typedef vector_t	*(*get_color_function)(t_checker_textures *this,
+typedef vector_t	*(*get_color_function)(t_textures *this,
 										t_uv_cords cords);
-typedef struct s_checker_textures
+typedef struct s_textures
 {
 	vector_t						color_1;
 	vector_t						color_2;
@@ -124,6 +124,6 @@ typedef struct s_checker_textures
 	int								img_width;
 	int								img_height;
 	get_color_function				get_color;
-}									t_checker_textures;
+}									t_textures;
 
 #endif

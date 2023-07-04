@@ -6,15 +6,15 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 10:17:58 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/01 08:49:13 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/04 01:35:04 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/image.h"
+#include "headers/Texturesimage.h"
 
-t_checker_textures	*new_img_texture(void *mlx_ptr, char *filename)
+t_textures	*new_img_texture(void *mlx_ptr, char *filename)
 {
-	t_checker_textures	*t;
+	t_textures	*t;
 
 	t = new_base_texture();
 	t->get_color = get_color;
@@ -22,23 +22,21 @@ t_checker_textures	*new_img_texture(void *mlx_ptr, char *filename)
 	return (t);
 }
 
-void	load_img(t_checker_textures *this, void *mlx_ptr, char *filename)
+void	load_img(t_textures *this, void *mlx_ptr, char *filename)
 {
 	this->img = NULL;
 	this->img = malloc(sizeof(t_data));
 	this->img->img = mlx_xpm_file_to_image(mlx_ptr, filename, &this->img_width,
 			&this->img_height);
 	if (!this->img->img)
-	{
 		printf("error img null name is : <%s>  \n", filename);
-	}
 	this->img->addr = mlx_get_data_addr(this->img->img,
 										&this->img->bits_per_pixel,
 										&this->img->line_length,
 										&this->img->endian);
 }
 
-vector_t	*get_color(t_checker_textures *this, t_uv_cords cords)
+vector_t	*get_color(t_textures *this, t_uv_cords cords)
 {
 	unsigned int	all;
 	char			*dst;

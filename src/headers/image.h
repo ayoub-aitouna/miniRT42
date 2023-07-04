@@ -6,12 +6,12 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:30 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/01 11:54:18 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/04 01:34:27 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RTCIMAGE_H
-# define RTCIMAGE_H
+#ifndef IMAGE_H
+# define IMAGE_H
 # include "types.h"
 
 typedef struct image

@@ -6,15 +6,15 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 00:51:46 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/01 06:44:23 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/03 18:51:44 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/checker.h"
 
-t_checker_textures	*new_texture(vector_t color_1, vector_t color_2)
+t_textures	*new_texture(vector_t color_1, vector_t color_2)
 {
-	t_checker_textures	*t;
+	t_textures	*t;
 
 	t = new_base_texture();
 	t->color_1 = color_1;
@@ -23,7 +23,7 @@ t_checker_textures	*new_texture(vector_t color_1, vector_t color_2)
 	t->tfm = NULL;
 	return (t);
 }
-vector_t	*get_ch_color(t_checker_textures *this, t_uv_cords cords)
+vector_t	*get_ch_color(t_textures *this, t_uv_cords cords)
 {
 	t_uv_cords	*new_cords;
 
