@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:30 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/03 14:43:13 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/05 12:39:49 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ object_t	*create_sphere(vector_t *translation, vector_t *rotation,
 	object_t	*shphere;
 
 	shphere = object_base(translation, rotation, scal, color);
-	shphere->material->shininess_coefficient = 13.f;
-	shphere->material->reflection_coefficient = .5;
 	shphere->test_inter = sh_int_test;
 	return (shphere);
 }
@@ -103,14 +101,35 @@ double	min_t(double numsqrt, double b, int *status)
 
 	t1 = (-b + numsqrt) / 2.0;
 	t2 = (-b - numsqrt) / 2.0;
-	if (t1 < 0.0 || t2 < 0.0)
+	if (t1 < 0.0 && t2 < 0.0)
 	{
 		*status = FALSE;
 		return (0);
 	}
 	if (t1 < t2)
-		return (t1);
-	return (t2);
+	{
+		if (t1 > .0)
+			return (t1);
+		else if (t2 > .0)
+			return (t2);
+		else
+		{
+			*status = FALSE;
+			return (0);
+		}
+	}
+	else
+	{
+		if (t2 > .0)
+			return (t2);
+		else if (t1 > .0)
+			return (t1);
+		else
+		{
+			*status = FALSE;
+			return (0);
+		}
+	}
 }
 
 vector_t	*fs_addition(vector_t *u, vector_t *v)

@@ -22,27 +22,27 @@
 #perturbed _normal = surface_normal + bumpiness * (tangent * dU + bitangent * dV)
 
 # 5. Use the perturbed normal for shading calculations,
-	such as lighting and reflections.
+# 	such as lighting and reflections.
 
 #Example pseudocode implementation for a ray - triangle intersection:
 
-def	intersect_ray_triangle(ray, triangle)
-	:
+# def	intersect_ray_triangle(ray, triangle)
+# 	:
 #... perform ray - triangle intersection calculation...
 
 # 1. Compute texture coordinates
-		tex_coords = compute_texture_coordinates(intersection_point, triangle)
+# 		tex_coords = compute_texture_coordinates(intersection_point, triangle)
 
 # 2. Sample bump map
-			bump_map_value = sample_bump_map(tex_coords)
+# 			bump_map_value = sample_bump_map(tex_coords)
 
 # 3. Calculate tangent and bitangent vectors
-				tangent,
-		bitangent = calculate_tangent_and_bitangent(triangle)
+# 				tangent,
+# 		bitangent = calculate_tangent_and_bitangent(triangle)
 
 # 4. Perturb the surface normal
-			perturbed_normal = triangle.surface_normal + bumpiness * (tangent
-					* bump_map_value.u + bitangent * bump_map_value.v)
+# 			perturbed_normal = triangle.surface_normal + bumpiness * (tangent
+# 					* bump_map_value.u + bitangent * bump_map_value.v)
 
 # 5. Use perturbed normal for shading calculations
 

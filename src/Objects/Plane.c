@@ -6,19 +6,19 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:27 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/03 14:42:56 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/05 12:04:59 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/types.h"
 #include "headers/spher.h"
 
-void	p_int_point_propreties(vector_t *poi, object_t *this,
-		propretries_t *prop)
+void p_int_point_propreties(vector_t *poi, object_t *this,
+							propretries_t *prop)
 {
-	vector_t	*normal_fp;
-	vector_t	*m_normal;
-	vector_t	*int_poi;
+	vector_t *normal_fp;
+	vector_t *m_normal;
+	vector_t *int_poi;
 
 	int_poi = Apply_transform_vector(poi, FRWRD, this);
 	normal_fp = vector(0.0, 0.0, -1.0);
@@ -35,13 +35,13 @@ void	p_int_point_propreties(vector_t *poi, object_t *this,
  *  K = ray.m_lab normilazed
  *  u = Ax + tKz; & v = ay + tky; & t = kz/az;
  */
-vector_t	*p_calculat_int_point(ray_t *ray, vector_t k, propretries_t *prop,
-		int *status)
+vector_t *p_calculat_int_point(ray_t *ray, vector_t k, propretries_t *prop,
+							   int *status)
 {
-	vector_t	a;
-	double		t;
-	double		u;
-	double		v;
+	vector_t a;
+	double t;
+	double u;
+	double v;
 
 	a = *ray->point1;
 	*status = 1;
@@ -61,12 +61,12 @@ vector_t	*p_calculat_int_point(ray_t *ray, vector_t k, propretries_t *prop,
 	}
 }
 
-int	p_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
+int p_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
 {
-	vector_t	*poi;
-	ray_t		*bck_ray;
-	vector_t	vhat;
-	int			status;
+	vector_t *poi;
+	ray_t *bck_ray;
+	vector_t vhat;
+	int status;
 
 	bck_ray = Apply_transform(camera_ray, this, BCKWRD);
 	vhat = *bck_ray->m_lab;
@@ -83,14 +83,12 @@ int	p_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
 	return (TRUE);
 }
 
-object_t	*plane(vector_t *translation, vector_t *rotation, vector_t *scal,
-		vector_t *color)
+object_t *plane(vector_t *translation, vector_t *rotation, vector_t *scal,
+				vector_t *color)
 {
-	object_t	*plane;
+	object_t *plane;
 
 	plane = object_base(translation, rotation, scal, color);
 	plane->test_inter = p_int_test;
-	plane->material->shininess_coefficient = 10;
-	plane->material->reflection_coefficient = .8;
 	return (plane);
 }
