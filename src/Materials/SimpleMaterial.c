@@ -77,8 +77,7 @@ vector_t *get_refractive_color(vector_t *color, scene_t *scene,
 	return (final_color);
 }
 
-vector_t *
-calculat_diffuse_color(scene_t *scene, propretries_t *prop,
+vector_t *calculat_diffuse_color(scene_t *scene, propretries_t *prop,
 					   object_t *cur_object)
 {
 	vector_t color;
@@ -107,6 +106,7 @@ calculat_diffuse_color(scene_t *scene, propretries_t *prop,
 
 vector_t get_curect_color(object_t *this, propretries_t *prop)
 {
+	(void) this;
 	if (this->textures)
 		return (*this->textures->get_color(this->textures, prop->uv_cords));
 	return (prop->local_color);

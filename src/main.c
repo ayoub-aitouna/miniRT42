@@ -41,13 +41,6 @@ int	key_hook(int keycode, mt_t *mt)
 	return (0);
 }
 
-/**
- * plan = plane(vector(.0, 0.0, 2), vector(0.0, 0, 0), vector(4.5, 4.0, 1.0),
-			vector(1, 1, 1.0));
-	plan->textures = checker;
-	push_back(&m_mt.scene->m_object_list, ft_lstnew(plan));
-	
-*/
 int	main(void)
 {
 	mt_t				m_mt;

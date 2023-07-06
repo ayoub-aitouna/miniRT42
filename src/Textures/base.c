@@ -54,3 +54,13 @@ t_uv_cords	*apply_transform(t_textures *this, t_uv_cords *cords)
 	delete_matrix(uv);
 	return (r);
 }
+
+vector_t *apply_bump_map_textures(t_textures *this, vector_t *org_normal, t_uv_cords cords)
+{
+	vector_t *color;
+	double displacement;
+
+	color = this->get_color(this, cords);
+	displacement = (color->x * 2) - 1;
+	return ms_num_muliplication(org_normal, displacement);
+}

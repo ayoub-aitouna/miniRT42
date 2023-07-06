@@ -33,12 +33,13 @@ t_list *Objects(void *mlx)
 	// **************************************************************************************
 	t_textures *checker;
 	t_textures *ww;
+	t_textures *brick;
 
 	checker = new_texture((vector_t){1.0, 1.0, 1.0}, (vector_t){0.2, 0.2, 0.2});
 	set_tfm(checker, &(vector2_t){.x = 0, .y = 0}, &(vector2_t){.x = 16, .y = 16},
 			0);
 	ww = new_img_texture(mlx, "./assets/ww.xpm");
-
+	brick = new_img_texture(mlx, "./assets/brick.xpm");
 	// **************************************************************************************
 	// Create and setup objects.
 	// **************************************************************************************
@@ -47,20 +48,20 @@ t_list *Objects(void *mlx)
 	sphere = create_sphere(vector(-2.0, -2.0, 0.25), vector(0.0, 0.0, 0.0), vector(0.75, 0.75, 0.75), vector(1.0, 0.2, 0.2));
 	sphere2 = create_sphere(vector(-2.0, -0.5, 0.25), vector(0.0, 0.0, 0.0), vector(0.75, 0.75, 0.75), vector(0.2, 1.0, 0.2));
 	sphere3 = create_sphere(vector(-2.0, -1.25, -1.0), vector(0.0, 0.0, 0.0), vector(0.75, 0.75, 0.75), vector(0.2, 0.2, 1.0));
-	sphere4 = create_sphere(vector(2.0, -1.25, 0.25), vector(0.0, 0.0, 0.0), vector(0.75, 0.75, 0.75), vector(0.2, 0.2, 1.0));
+	sphere4 = cone(vector(2.0, -1.25, 0.25), vector(0.0, 0.0, 0.0), vector(0.75, 0.75, 0.75), vector(0.2, 0.2, 1.0));
 
 	// **************************************************************************************
 	// Setup the materials.
 	// **************************************************************************************
-	floor->textures = checker;
 	floor->material->reflection_coefficient = .25;
 	floor->material->reflactive_index = 0;
 	floor->textures = checker;
 
 	image->textures = ww;
 
-	sphere->material->reflection_coefficient = 0.8;
+	sphere->material->reflection_coefficient = 0.2;
 	sphere->material->shininess_coefficient = 32.0;
+	sphere->textures = brick;
 
 	sphere2->material->reflection_coefficient = 0.8;
 	sphere2->material->shininess_coefficient = 32.0;
@@ -68,9 +69,9 @@ t_list *Objects(void *mlx)
 	sphere3->material->reflection_coefficient = 0.8;
 	sphere3->material->shininess_coefficient = 32.0;
 
-	sphere4->material->reflection_coefficient = 0.25;
+	sphere4->material->reflection_coefficient = .25;
 	sphere4->material->shininess_coefficient = 32.0;
-	sphere4->material->transparency_coefficient = 0.75;
+	sphere4->material->transparency_coefficient = .75;
 	sphere4->material->reflactive_index = 1.333;
 
 	// **************************************************************************************
@@ -78,10 +79,10 @@ t_list *Objects(void *mlx)
 	// **************************************************************************************
 	push_back(&data, ft_lstnew(floor));
 	push_back(&data, ft_lstnew(sphere));
-	push_back(&data, ft_lstnew(sphere2));
-	push_back(&data, ft_lstnew(sphere3));
-	push_back(&data, ft_lstnew(sphere4));
-	push_back(&data, ft_lstnew(image));
+	// push_back(&data, ft_lstnew(sphere2));
+	// push_back(&data, ft_lstnew(sphere3));
+	// push_back(&data, ft_lstnew(sphere4));
+	// push_back(&data, ft_lstnew(image));
 	return (data);
 }
 

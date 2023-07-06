@@ -3,7 +3,7 @@ OBJ_DIR	:= .compiled
 OBJ		:= $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC))
 NAME	:= miniRT
 cc		:= gcc  #-fsanitize=address -g3
-CFLAGS  := -Ofast -Werror -Wall -Wextra 
+CFLAGS  := -Ofast  -Werror -Wall -Wextra 
 MLXFLAG := -lmlx
 GREEN	:= \033[32m
 RESET	:= \033[0m
