@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:53 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/05 12:48:11 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/06 10:52:58 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ t_list *Objects(void *mlx)
 	// **************************************************************************************
 	floor = plane(vector(.0, 0.0, 1.0), vector(0.0, 0, 0), vector(16.0, 16.0, 1.0), vector(1, 1, 1.0));
 	image = plane(vector(0.0, 5.0, -0.75), vector(-PI / 2.0, 0.0, 0.0), vector(1.75, 1.75, 1.0), vector(1, 1, 1.0));
-	sphere = create_sphere(vector(-2.0, -2.0, 0.25), vector(0.0, 0.0, 0.0), vector(0.75, 0.75, 0.75), vector(0.1, 0.2, 2.0));
+	sphere = create_sphere(vector(-2.0, -2.0, 0.25), vector(0.0, 0.0, 0.0), vector(0.75, 0.75, 0.75), vector(1.0, 0.2, 0.2));
 	sphere2 = create_sphere(vector(-2.0, -0.5, 0.25), vector(0.0, 0.0, 0.0), vector(0.75, 0.75, 0.75), vector(0.2, 1.0, 0.2));
-	sphere3 = create_sphere(vector(-2.0, -1.25, -1.0), vector(0.0, 0.0, 0.0), vector(0.75, 0.75, 0.75), vector(0.2, 1.0, 0.2));
+	sphere3 = create_sphere(vector(-2.0, -1.25, -1.0), vector(0.0, 0.0, 0.0), vector(0.75, 0.75, 0.75), vector(0.2, 0.2, 1.0));
 	sphere4 = create_sphere(vector(2.0, -1.25, 0.25), vector(0.0, 0.0, 0.0), vector(0.75, 0.75, 0.75), vector(0.2, 0.2, 1.0));
 
 	// **************************************************************************************
@@ -86,7 +86,7 @@ t_list *Objects(void *mlx)
 }
 
 // **************************************************************************************
-// Construct and setup the lights.
+// setup the lights.
 // **************************************************************************************
 t_list *LightSorces(void)
 {
