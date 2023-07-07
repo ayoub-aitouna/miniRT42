@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:53 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/06 10:52:58 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/07 17:24:42 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ t_list *Objects(void *mlx)
 	// **************************************************************************************
 	floor = plane(vector(.0, 0.0, 1.0), vector(0.0, 0, 0), vector(16.0, 16.0, 1.0), vector(1, 1, 1.0));
 	image = plane(vector(0.0, 5.0, -0.75), vector(-PI / 2.0, 0.0, 0.0), vector(1.75, 1.75, 1.0), vector(1, 1, 1.0));
-	sphere = create_sphere(vector(-2.0, -2.0, 0.25), vector(0.0, 0.0, 0.0), vector(0.75, 0.75, 0.75), vector(1.0, 0.2, 0.2));
+	sphere = create_sphere(vector(-2.0, -2.0, 0.25), vector(HALFPI, HALFPI, HALFPI), vector(0.75, 0.75, 0.75), vector(1.0, 0.2, 0.2));
 	sphere2 = create_sphere(vector(-2.0, -0.5, 0.25), vector(0.0, 0.0, 0.0), vector(0.75, 0.75, 0.75), vector(0.2, 1.0, 0.2));
 	sphere3 = create_sphere(vector(-2.0, -1.25, -1.0), vector(0.0, 0.0, 0.0), vector(0.75, 0.75, 0.75), vector(0.2, 0.2, 1.0));
-	sphere4 = cone(vector(2.0, -1.25, 0.25), vector(0.0, 0.0, 0.0), vector(0.75, 0.75, 0.75), vector(0.2, 0.2, 1.0));
+	sphere4 = rm_object(vector(2.0, -1.25, 0.25), vector(0.0, 0.0, 0.0), vector(0.75, 0.75, 0.75), vector(0.2, 0.2, 1.0));
 
 	// **************************************************************************************
 	// Setup the materials.
@@ -56,11 +56,12 @@ t_list *Objects(void *mlx)
 	floor->material->reflection_coefficient = .25;
 	floor->material->reflactive_index = 0;
 	floor->textures = checker;
-
+	(void)ww;
+	(void)brick;
 	image->textures = ww;
 
-	sphere->material->reflection_coefficient = 0.2;
-	sphere->material->shininess_coefficient = 32.0;
+	sphere->material->reflection_coefficient = 0.0;
+	sphere->material->shininess_coefficient = 00.0;
 	sphere->textures = brick;
 
 	sphere2->material->reflection_coefficient = 0.8;
@@ -71,7 +72,7 @@ t_list *Objects(void *mlx)
 
 	sphere4->material->reflection_coefficient = .25;
 	sphere4->material->shininess_coefficient = 32.0;
-	sphere4->material->transparency_coefficient = .75;
+	sphere4->material->transparency_coefficient = 0.0;
 	sphere4->material->reflactive_index = 1.333;
 
 	// **************************************************************************************
@@ -79,10 +80,10 @@ t_list *Objects(void *mlx)
 	// **************************************************************************************
 	push_back(&data, ft_lstnew(floor));
 	push_back(&data, ft_lstnew(sphere));
-	// push_back(&data, ft_lstnew(sphere2));
-	// push_back(&data, ft_lstnew(sphere3));
-	// push_back(&data, ft_lstnew(sphere4));
-	// push_back(&data, ft_lstnew(image));
+	push_back(&data, ft_lstnew(sphere2));
+	push_back(&data, ft_lstnew(sphere3));
+	push_back(&data, ft_lstnew(sphere4));
+	push_back(&data, ft_lstnew(image));
 	return (data);
 }
 
@@ -99,10 +100,13 @@ t_list *LightSorces(void)
 	return (data);
 }
 
+// **************************************************************************************
+// setup the Camera Configurations.
+// **************************************************************************************
 void setupCamera(scene_t *this)
 {
 	this->m_camera = Camera(1, 1, (double)WIDTH / (double)HEIGHT);
-	SetPosition(this->m_camera, vector(2.0, -5.0, 0.25));
+	SetPosition(this->m_camera, vector(2.0, 10.0, -9.25));
 	SetUp(this->m_camera, vector(0.0, 0.0, 1.0));
 	Setloockat(this->m_camera, vector(0.0, 0.0, 0.0));
 	calculat_geometry(this->m_camera);

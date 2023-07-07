@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:22:04 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/06/27 23:22:04 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/07 08:51:06 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 #ifndef MAX_V
 #define MAX_V 100e6
 #endif
+
 
 typedef struct matrix{
 	int rows;

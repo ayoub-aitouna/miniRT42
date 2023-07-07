@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:30 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/06 08:02:59 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/07 08:45:03 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ void int_point_propreties(vector_t *poi, object_t *this, propretries_t *prop)
 	int_poi = Apply_transform_vector(poi, FRWRD, this);
 	calculat_uv(prop, poi);
 	m_normal = get_norm(this, poi);
-	if (this->textures)
-		m_normal = apply_bump_map_textures(this->textures, m_normal, prop->uv_cords);
+	// if (this->textures)
+	// m_normal = apply_bump_map_textures(this->textures, m_normal, prop->uv_cords);
 	normalize(m_normal);
 	prop->int_point = *int_poi;
 	prop->local_normal = *m_normal;

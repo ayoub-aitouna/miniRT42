@@ -1,0 +1,348 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Apply_transform	src/lib/math/gtfm.c	/^ray_t	*Apply_transform(ray_t *input_ray, object_t *this, int dirFlag)$/;"	f
+Apply_transform_vector	src/lib/math/gtfm.c	/^vector_t	*Apply_transform_vector(vector_t *inputVector, int dirFlag,$/;"	f
+BASE_H	src/Textures/headers/base.h	14;"	d
+BCKWRD	src/lib/math/headers/types.h	42;"	d
+BOX_H	src/Objects/headers/Box.h	14;"	d
+CFLAGS	Makefile	/^CFLAGS  := -Ofast  -Werror -Wall -Wextra $/;"	m
+CONE_H	src/Objects/headers/Cone.h	14;"	d
+CYLINDER_H	src/Objects/headers/cylinder.h	14;"	d
+Camera	src/camera.c	/^camera_t	*Camera(double horizontal_size, double lenght, double aspect_ration)$/;"	f
+EPSILON	src/lib/math/headers/types.h	25;"	d
+ESC	src/main.c	18;"	d	file:
+FALSE	src/lib/math/headers/types.h	29;"	d
+FRWRD	src/lib/math/headers/types.h	38;"	d
+GREEN	Makefile	/^GREEN	:= \\033[32m$/;"	m
+GTFM_H	src/lib/math/headers/gtfm.h	14;"	d
+HALFPI	src/lib/math/headers/types.h	21;"	d
+HEIGHT	src/headers/main.h	27;"	d
+IMAGE_H	src/headers/image.h	14;"	d
+LIB_H	src/lib/lib.h	14;"	d
+Light	src/headers/types.h	/^typedef struct Light$/;"	s
+LightSorces	src/scene.c	/^t_list *LightSorces(void)$/;"	f
+MATERIALBASE_H	src/Materials/headers/MaterialBase.h	14;"	d
+MATH_H	src/lib/math/headers/vectormath.h	14;"	d
+MAX_REFLECTION_COUNT	src/Materials/headers/MaterialBase.h	25;"	d
+MAX_V	src/lib/math/headers/types.h	46;"	d
+MLXFLAG	Makefile	/^MLXFLAG := -lmlx$/;"	m
+M_TYPES_H	src/headers/types.h	14;"	d
+NAME	Makefile	/^NAME	:= miniRT$/;"	m
+OBJ	Makefile	/^OBJ		:= $(patsubst %.c, $(OBJ_DIR)\/%.o, $(SRC))$/;"	m
+OBJECT_BASE_HPP	src/Objects/headers/base.h	14;"	d
+OBJ_DIR	Makefile	/^OBJ_DIR	:= .compiled$/;"	m
+OS	Makefile	/^OS 	:= $(shell uname)$/;"	m
+Object	src/headers/types.h	/^typedef struct Object$/;"	s
+Objects	src/scene.c	/^t_list *Objects(void *mlx)$/;"	f
+PI	src/lib/math/headers/types.h	17;"	d
+PLANE_H	src/Objects/headers/plane.h	14;"	d
+POINTLIGHT_H	src/Lights/headers/pointlight.h	14;"	d
+Propretries	src/headers/types.h	/^typedef struct Propretries$/;"	s
+RAYMARCHING_H	src/Objects/headers/raymarching.h	2;"	d
+RAY_H	src/headers/ray.h	14;"	d
+REFRACTIVE_H	src/Materials/headers/Refractive.h	14;"	d
+RESET	Makefile	/^RESET	:= \\033[0m$/;"	m
+RT	src/headers/main.h	14;"	d
+RT_CAMERA	src/headers/camera.h	14;"	d
+Reflection_vector	src/lib/math/vectormath.c	/^vector_t	*Reflection_vector(vector_t *l, vector_t *n)$/;"	f
+Render	src/scene.c	/^t_image *Render(scene_t *scene, void *mlx, void *mlx_win)$/;"	f
+SCENE_H	src/headers/scene.h	14;"	d
+SIMPLEMATERIAL_H	src/Materials/headers/SimpleMaterial.h	14;"	d
+SPHER_H	src/Objects/headers/spher.h	14;"	d
+SRC	Makefile	/^SRC		:= $(wildcard src\/*.c) $(wildcard src\/**\/*.c) $(wildcard src\/**\/**\/*.c)$/;"	m
+Scene	src/headers/types.h	/^typedef struct Scene$/;"	s
+Scene	src/scene.c	/^scene_t *Scene(void *mlx, void *mlx_win)$/;"	f
+SetPosition	src/camera.c	/^void	SetPosition(camera_t *this, vector_t *position)$/;"	f
+SetUp	src/camera.c	/^void	SetUp(camera_t *this, vector_t *Up)$/;"	f
+Set_transform	src/lib/math/gtfm.c	/^matrix_t	*Set_transform(vector_t *translation, vector_t *rotation,$/;"	f
+Setloockat	src/camera.c	/^void	Setloockat(camera_t *this, vector_t *loockat)$/;"	f
+TEXTURECHECKER_H	src/Textures/headers/checker.h	14;"	d
+TEXTURESIMAGE_H	src/Textures/headers/Texturesimage.h	14;"	d
+TRIANGLE_H	src/Objects/headers/triangle.h	14;"	d
+TRUE	src/lib/math/headers/types.h	33;"	d
+TYPES_H	src/lib/math/headers/types.h	14;"	d
+WIDTH	src/headers/main.h	26;"	d
+addition	src/lib/math/vectormath.c	/^vector_t	*addition(vector_t *target, vector_t *v)$/;"	f
+addr	src/headers/types.h	/^	char					*addr;$/;"	m	struct:s_data
+ambient_light_factor	src/headers/types.h	/^	vector_t				ambient_light_factor;$/;"	m	struct:Scene
+apply_bump_map_textures	src/Textures/base.c	/^vector_t *apply_bump_map_textures(t_textures *this, vector_t *org_normal, t_uv_cords cords)$/;"	f
+apply_transform	src/Textures/base.c	/^t_uv_cords *apply_transform(t_textures *this, t_uv_cords *cords)$/;"	f
+aspect_ration	src/headers/types.h	/^	double					aspect_ration;$/;"	m	struct:camera
+base_color	src/headers/types.h	/^	vector_t				*base_color;$/;"	m	struct:Light
+base_color	src/headers/types.h	/^	vector_t				*base_color;$/;"	m	struct:Object
+bck_tfm	src/headers/types.h	/^	matrix_t				*bck_tfm;$/;"	m	struct:Object
+bits_per_pixel	src/headers/types.h	/^	int						bits_per_pixel;$/;"	m	struct:s_data
+blue	src/headers/image.h	/^	double	**blue;$/;"	m	struct:image
+box	src/Objects/Box.c	/^object_t	*box(vector_t *translation, vector_t *rotation, vector_t *scal,$/;"	f
+box_int_test	src/Objects/Box.c	/^int	box_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)$/;"	f
+c_obj	src/Materials/headers/MaterialBase.h	/^	object_t	**c_obj;$/;"	m	struct:ref_cast_prop
+calculat_color	src/Materials/SimpleMaterial.c	/^vector_t *calculat_color(scene_t *scene, propretries_t *prop,$/;"	f
+calculat_color	src/headers/types.h	/^	compute_color			calculat_color;$/;"	m	struct:material
+calculat_diffuse_color	src/Materials/SimpleMaterial.c	/^vector_t *calculat_diffuse_color(scene_t *scene, propretries_t *prop,$/;"	f
+calculat_geometry	src/camera.c	/^void	calculat_geometry(camera_t *this)$/;"	f
+calculat_ilumination	src/Lights/illumination.c	/^int	calculat_ilumination(light_t *this, propretries_t *prop,$/;"	f
+calculat_int_point	src/Objects/spher.c	/^vector_t *calculat_int_point(ray_t *bck_ray, vector_t vhat, int *status)$/;"	f
+calculat_spec_intensity	src/Materials/simpleSpecular.c	/^double	calculat_spec_intensity(ray_t *light_ray,$/;"	f
+calculat_specular_color	src/Materials/simpleSpecular.c	/^vector_t	*calculat_specular_color(scene_t *scene, propretries_t *prop,$/;"	f
+calculat_uv	src/Objects/spher.c	/^void calculat_uv(propretries_t *prop, vector_t *poi)$/;"	f
+calulcat_cap_intersection	src/Objects/Cylinder.c	/^void	calulcat_cap_intersection(vector_t p, vector_t n, cep_t *cylinder_prop)$/;"	f
+calulcat_cone_intersection	src/Objects/Cone.c	/^void	calulcat_cone_intersection(vector_t p, vector_t *n, cep_t *propretries)$/;"	f
+calulcat_cylider_intersection	src/Objects/Cylinder.c	/^void	calulcat_cylider_intersection(vector_t p, vector_t n,$/;"	f
+camera	src/headers/types.h	/^typedef struct camera$/;"	s
+camera_ray	src/Materials/headers/MaterialBase.h	/^	ray_t		*camera_ray;$/;"	m	struct:color_params
+camera_t	src/headers/types.h	/^}							camera_t;$/;"	t	typeref:struct:camera
+cast_ray	src/scene.c	/^int cast_ray(ray_t *ray, scene_t *scene, propretries_t *c_prop,$/;"	f
+cc	Makefile	/^cc		:= gcc  #-fsanitize=address -g3$/;"	m
+cep_t	src/headers/types.h	/^}							cep_t;$/;"	t	typeref:struct:cylinder_equations_Propretries
+check_intersections	src/Objects/Cone.c	/^void	check_intersections(ray_t *bck_ray,$/;"	f
+check_n_set_dist	src/scene.c	/^int check_n_set_dist(propretries_t *prop, ray_t *ray, double *min_dist)$/;"	f
+check_nd_set	src/Objects/Cone.c	/^void	check_nd_set(cep_t *propretries, int index, int z_condition)$/;"	f
+check_ray_path	src/Lights/illumination.c	/^int	check_ray_path(light_t *this, t_light_params params, vector_t *initPoint)$/;"	f
+check_ray_path_returns	src/Lights/illumination.c	/^int	check_ray_path_returns(int value, ray_t *m_ray)$/;"	f
+close_enough	src/Objects/ObjectBase.c	/^int	close_enough(double v1, double v2)$/;"	f
+cofactor	src/lib/math/matrix.c	/^double	cofactor(matrix_t *mt, int row, int column)$/;"	f
+color	src/Lights/headers/pointlight.h	/^	vector_t	*color;$/;"	m	struct:light_params
+color_1	src/headers/types.h	/^	vector_t				color_1;$/;"	m	struct:s_textures
+color_2	src/headers/types.h	/^	vector_t				color_2;$/;"	m	struct:s_textures
+color_params	src/Materials/headers/MaterialBase.h	/^typedef struct color_params$/;"	s
+cols	src/lib/math/headers/types.h	/^	int cols;$/;"	m	struct:matrix
+compute_color	src/headers/types.h	/^typedef vector_t	*(*compute_color)(scene_t *scene,$/;"	t
+cone	src/Objects/Cone.c	/^object_t	*cone(vector_t *translation, vector_t *rotation, vector_t *scal,$/;"	f
+cone_cap_intersection	src/Objects/Cone.c	/^void	cone_cap_intersection(vector_t p, vector_t *n, cep_t *propretries)$/;"	f
+cone_int_test	src/Objects/Cone.c	/^int	cone_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)$/;"	f
+content	src/lib/lib.h	/^    void *content;$/;"	m	struct:list
+convert	src/Image.c	/^int	convert(double red, double green, double blue, double max)$/;"	f
+copy_vector	src/lib/math/vectormath.c	/^vector_t	*copy_vector(vector_t v)$/;"	f
+create_cols	src/lib/math/matrix.c	/^double	*create_cols(int c)$/;"	f
+create_matrix	src/lib/math/matrix.c	/^matrix_t	*create_matrix(int rows, int cols)$/;"	f
+create_sphere	src/Objects/spher.c	/^object_t *create_sphere(vector_t *translation, vector_t *rotation,$/;"	f
+cross	src/lib/math/vectormath.c	/^vector_t	*cross(vector_t v, vector_t u)$/;"	f
+cur_object	src/Lights/headers/pointlight.h	/^	object_t	*cur_object;$/;"	m	struct:light_params
+cur_object	src/Materials/headers/MaterialBase.h	/^	object_t	*cur_object;$/;"	m	struct:color_params
+cur_object	src/Materials/headers/MaterialBase.h	/^	object_t	*cur_object;$/;"	m	struct:ref_cast_prop
+cy_int_test	src/Objects/Cylinder.c	/^int	cy_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)$/;"	f
+cylinder	src/Objects/Cylinder.c	/^object_t	*cylinder(vector_t *translation, vector_t *rotation, vector_t *scal,$/;"	f
+cylinder_equations_Propretries	src/headers/types.h	/^typedef struct cylinder_equations_Propretries$/;"	s
+cylinder_intersection_points	src/Objects/Cylinder.c	/^int	cylinder_intersection_points(ray_t *bck_ray,$/;"	f
+deleteCamera	src/camera.c	/^void	deleteCamera(camera_t *this)$/;"	f
+deleteObjectBase	src/Objects/ObjectBase.c	/^void	deleteObjectBase(object_t *this)$/;"	f
+deleteScene	src/scene.c	/^void deleteScene(scene_t *this)$/;"	f
+delete_light	src/Lights/pointlight.c	/^void	delete_light(light_t *this)$/;"	f
+delete_light_list	src/Lights/pointlight.c	/^void	delete_light_list(t_list *list)$/;"	f
+delete_material	src/Materials/MaterialBase.c	/^void	delete_material(material_t *this)$/;"	f
+delete_matrix	src/lib/math/matrix.c	/^void	delete_matrix(matrix_t *this)$/;"	f
+delete_object_list	src/Objects/ObjectBase.c	/^void	delete_object_list(t_list *list)$/;"	f
+delete_ray	src/ray.c	/^void	delete_ray(ray_t *this)$/;"	f
+determinant	src/lib/math/matrix.c	/^double	determinant(matrix_t *mt)$/;"	f
+display	src/Image.c	/^void	display(void *mlx, void *win, t_image *image)$/;"	f
+division	src/lib/math/vectormath.c	/^vector_t	*division(vector_t *target, vector_t *v)$/;"	f
+dot	src/lib/math/vectormath.c	/^double	dot(vector_t v, vector_t u)$/;"	f
+endian	src/headers/types.h	/^	int						endian;$/;"	m	struct:s_data
+equal	src/lib/math/vectormath.c	/^vector_t	*equal(vector_t *target, vector_t *v)$/;"	f
+false	src/Objects/ObjectBase.c	/^vector_t * false(int *status)$/;"	f
+fill_mt	src/lib/math/matrix.c	/^void	fill_mt(matrix_t *mt, double *values)$/;"	f
+free_at_index	src/lib/math/vectormath.c	/^void	free_at_index(void *ptr1, void *ptr2, int index)$/;"	f
+free_list	src/lib/ms.c	/^void free_list(void **ptrs, int size)$/;"	f
+from_mt_to_vt	src/lib/math/vectormath.c	/^vector_t	*from_mt_to_vt(matrix_t mt)$/;"	f
+from_vector_to_matrix	src/lib/math/matrix.c	/^matrix_t	*from_vector_to_matrix(vector_t vt)$/;"	f
+front_back_faces	src/Objects/Box.c	/^void	front_back_faces(vector_t *k, vector_t *a,$/;"	f
+fs_addition	src/Objects/spher.c	/^vector_t *fs_addition(vector_t *u, vector_t *v)$/;"	f
+ft_lstiter	src/lib/list/ft_lstiter.c	/^void ft_lstiter(t_list *lst, void (*f)(void *))$/;"	f
+ft_lstnew	src/lib/list/ft_lstnew.c	/^t_list *ft_lstnew(void *content)$/;"	f
+ft_lstsize	src/lib/list/ft_lstsize.c	/^int ft_lstsize(t_list *lst)$/;"	f
+fwd_tfm	src/headers/types.h	/^	matrix_t				*fwd_tfm;$/;"	m	struct:Object
+generate_light_ray	src/Materials/simpleSpecular.c	/^ray_t	*generate_light_ray(light_t *light, vector_t *initPoint)$/;"	f
+generate_ray	src/camera.c	/^ray_t	*generate_ray(camera_t *this, double screenX, double screenY)$/;"	f
+get_ch_color	src/Textures/checker.c	/^vector_t	*get_ch_color(t_textures *this, t_uv_cords cords)$/;"	f
+get_color	src/Textures/image.c	/^vector_t *get_color(t_textures *this, t_uv_cords cords)$/;"	f
+get_color	src/headers/types.h	/^	get_color_function		get_color;$/;"	m	struct:s_textures
+get_color_function	src/headers/types.h	/^typedef vector_t	*(*get_color_function)(t_textures *this,$/;"	t
+get_curect_color	src/Materials/SimpleMaterial.c	/^vector_t get_curect_color(object_t *this, propretries_t *prop)$/;"	f
+get_face_normal	src/Objects/Box.c	/^vector_t	*get_face_normal(int index)$/;"	f
+get_gb_normal	src/Objects/Box.c	/^vector_t	*get_gb_normal(object_t *this, int index)$/;"	f
+get_nearest_intersection	src/Objects/Box.c	/^int	get_nearest_intersection(t_box_solutions *box_solutions,$/;"	f
+get_norm	src/lib/math/gtfm.c	/^vector_t	*get_norm(object_t *this, vector_t *input_vector)$/;"	f
+get_refractive_color	src/Materials/SimpleMaterial.c	/^vector_t *get_refractive_color(vector_t *color, scene_t *scene,$/;"	f
+green	src/headers/image.h	/^	double	**green;$/;"	m	struct:image
+horizontal_size	src/headers/types.h	/^	double					horizontal_size;$/;"	m	struct:camera
+image	src/headers/image.h	/^typedef struct image$/;"	s
+image	src/main.c	/^	t_image	*image;$/;"	m	struct:mt	file:
+img	src/headers/types.h	/^	t_data					*img;$/;"	m	struct:s_textures
+img	src/headers/types.h	/^	void					*img;$/;"	m	struct:s_data
+img_height	src/headers/types.h	/^	int						img_height;$/;"	m	struct:s_textures
+img_width	src/headers/types.h	/^	int						img_width;$/;"	m	struct:s_textures
+in_range	src/Objects/Cone.c	/^int	in_range(double value, double min, double max)$/;"	f
+includes	src/Objects/Cylinder.c	/^int	includes(int *list, int size, int value)$/;"	f
+init_channel	src/Image.c	/^double	**init_channel(void)$/;"	f
+initialize	src/Image.c	/^t_image	*initialize(void)$/;"	f
+int_point	src/headers/types.h	/^	vector_t				int_point;$/;"	m	struct:Propretries
+int_point_propreties	src/Objects/spher.c	/^void int_point_propreties(vector_t *poi, object_t *this, propretries_t *prop)$/;"	f
+intensity	src/Lights/headers/pointlight.h	/^	double		*intensity;$/;"	m	struct:light_params
+intersections	src/headers/types.h	/^	vector_t				**intersections;$/;"	m	struct:cylinder_equations_Propretries
+inverse	src/lib/math/matrix.c	/^matrix_t	*inverse(matrix_t *mt)$/;"	f
+key_hook	src/main.c	/^int	key_hook(int keycode, mt_t *mt)$/;"	f
+left_right_faces	src/Objects/Box.c	/^void	left_right_faces(vector_t *k, vector_t *a,$/;"	f
+lenght	src/headers/types.h	/^	double					lenght;$/;"	m	struct:camera
+light_params	src/Lights/headers/pointlight.h	/^typedef struct light_params$/;"	s
+light_t	src/headers/types.h	/^}							light_t;$/;"	t	typeref:struct:Light
+line_length	src/headers/types.h	/^	int						line_length;$/;"	m	struct:s_data
+lineartfm	src/headers/types.h	/^	matrix_t				*lineartfm;$/;"	m	struct:Object
+list	src/lib/lib.h	/^typedef struct list$/;"	s
+load_img	src/Textures/image.c	/^void load_img(t_textures *this, void *mlx_ptr, char *filename)$/;"	f
+local_color	src/headers/types.h	/^	vector_t				local_color;$/;"	m	struct:Propretries
+local_normal	src/headers/types.h	/^	vector_t				local_normal;$/;"	m	struct:Propretries
+loockat	src/headers/types.h	/^	vector_t				*loockat;$/;"	m	struct:camera
+mAX_STEPS	src/Objects/headers/raymarching.h	3;"	d
+m_camera	src/headers/types.h	/^	camera_t				*m_camera;$/;"	m	struct:Scene
+m_exit	src/main.c	/^int	m_exit(mt_t *m_mt)$/;"	f
+m_intensity	src/headers/types.h	/^	double					m_intensity;$/;"	m	struct:Light
+m_lab	src/headers/types.h	/^	vector_t				*m_lab;$/;"	m	struct:ray
+m_light_list	src/headers/types.h	/^	t_list					*m_light_list;$/;"	m	struct:Scene
+m_object_list	src/headers/types.h	/^	t_list					*m_object_list;$/;"	m	struct:Scene
+main	src/main.c	/^int	main(void)$/;"	f
+material	src/headers/types.h	/^	material_t				*material;$/;"	m	struct:Object
+material	src/headers/types.h	/^typedef struct material$/;"	s
+material_t	src/headers/types.h	/^typedef struct material		material_t;$/;"	t	typeref:struct:material
+material_t	src/headers/types.h	/^}							material_t;$/;"	t	typeref:struct:material
+matrix	src/lib/math/headers/types.h	/^	double **matrix;$/;"	m	struct:matrix
+matrix	src/lib/math/headers/types.h	/^typedef struct matrix{$/;"	s
+matrix	src/lib/math/matrix.c	/^matrix_t	*matrix(int rows, int cols, double *values)$/;"	f
+matrix_H	src/lib/math/headers/matrix.h	14;"	d
+matrix_t	src/lib/math/headers/types.h	/^} matrix_t;$/;"	t	typeref:struct:matrix
+max_color_value	src/Image.c	/^double	max_color_value(t_image *image)$/;"	f
+max_in_channel	src/Image.c	/^double	max_in_channel(double **channel)$/;"	f
+min_index	src/Objects/Cylinder.c	/^int	min_index(double *list, int size)$/;"	f
+min_t	src/Objects/spher.c	/^double min_t(double numsqrt, double b, int *status)$/;"	f
+minor	src/lib/math/matrix.c	/^double	minor(matrix_t *mt, int row, int column)$/;"	f
+minus	src/lib/math/vectormath.c	/^vector_t	*minus(vector_t *target, vector_t *v)$/;"	f
+mlx	src/main.c	/^	void	*mlx;$/;"	m	struct:mt	file:
+mlx_win	src/main.c	/^	void	*mlx_win;$/;"	m	struct:mt	file:
+ms_addition	src/lib/math/vectormath.c	/^vector_t	*ms_addition(vector_t *target, vector_t *v, int free_at)$/;"	f
+ms_division	src/lib/math/vectormath.c	/^vector_t	*ms_division(vector_t *target, vector_t *v, int free_at)$/;"	f
+ms_minus	src/lib/math/vectormath.c	/^vector_t	*ms_minus(vector_t *target, vector_t *v, int free_at)$/;"	f
+ms_muliplication	src/lib/math/vectormath.c	/^vector_t	*ms_muliplication(vector_t *target, vector_t *v, int free_at)$/;"	f
+ms_normalized_sub	src/lib/math/vectormath.c	/^vector_t	*ms_normalized_sub(vector_t *u, vector_t *v, int free_at)$/;"	f
+ms_num_muliplication	src/lib/math/vectormath.c	/^vector_t	*ms_num_muliplication(vector_t *target, double num)$/;"	f
+mt	src/main.c	/^typedef struct mt$/;"	s	file:
+mt_cast_ray	src/Materials/MaterialBase.c	/^int	mt_cast_ray(scene_t *scene, ray_t *m_ray, propretries_t *prop,$/;"	f
+mt_multiplication	src/lib/math/matrix.c	/^matrix_t	*mt_multiplication(matrix_t *mt1, matrix_t *mt2)$/;"	f
+mt_t	src/main.c	/^}			mt_t;$/;"	t	typeref:struct:mt	file:
+muliplication	src/lib/math/vectormath.c	/^vector_t	*muliplication(vector_t *target, vector_t *v)$/;"	f
+my_mlx_pixel_put	src/Image.c	/^void	my_mlx_pixel_put(t_data *data, int x, int y, int color)$/;"	f
+new_base_texture	src/Textures/base.c	/^t_textures *new_base_texture(void)$/;"	f
+new_img_texture	src/Textures/image.c	/^t_textures *new_img_texture(void *mlx_ptr, char *filename)$/;"	f
+new_light	src/Lights/pointlight.c	/^light_t	*new_light(vector_t *position, vector_t *color, double intensity)$/;"	f
+new_material_base	src/Materials/MaterialBase.c	/^material_t	*new_material_base(double shininess_coefficient,$/;"	f
+new_simple_material	src/Materials/SimpleMaterial.c	/^material_t *new_simple_material(double shininess_coefficient,$/;"	f
+new_texture	src/Textures/checker.c	/^t_textures	*new_texture(vector_t color_1, vector_t color_2)$/;"	f
+next	src/lib/lib.h	/^    struct list *next;$/;"	m	struct:list	typeref:struct:list::list
+normalize	src/lib/math/vectormath.c	/^double	normalize(vector_t *v)$/;"	f
+normalized	src/lib/math/vectormath.c	/^vector_t	*normalized(vector_t *v)$/;"	f
+normalized_sub	src/lib/math/vectormath.c	/^vector_t	*normalized_sub(vector_t *u, vector_t *v)$/;"	f
+normilized_copy	src/Objects/Cone.c	/^vector_t	*normilized_copy(vector_t *v)$/;"	f
+num_division	src/lib/math/vectormath.c	/^vector_t	*num_division(vector_t *target, double num)$/;"	f
+num_muliplication	src/lib/math/vectormath.c	/^vector_t	*num_muliplication(vector_t *target, double num)$/;"	f
+object_base	src/Objects/ObjectBase.c	/^object_t	*object_base(vector_t *translation, vector_t *rotation,$/;"	f
+object_t	src/headers/types.h	/^typedef struct Object		object_t;$/;"	t	typeref:struct:Object
+object_t	src/headers/types.h	/^}							object_t;$/;"	t	typeref:struct:Object
+p_calculat_int_point	src/Objects/Plane.c	/^vector_t *p_calculat_int_point(ray_t *ray, vector_t k, propretries_t *prop,$/;"	f
+p_int_point_propreties	src/Objects/Plane.c	/^void p_int_point_propreties(vector_t *poi, object_t *this,$/;"	f
+p_int_test	src/Objects/Plane.c	/^int p_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)$/;"	f
+plane	src/Objects/Plane.c	/^object_t *plane(vector_t *translation, vector_t *rotation, vector_t *scal,$/;"	f
+point1	src/headers/types.h	/^	vector_t				*point1;$/;"	m	struct:ray
+point2	src/headers/types.h	/^	vector_t				*point2;$/;"	m	struct:ray
+point_t	src/lib/math/headers/types.h	/^typedef		vector_t point_t;$/;"	t
+position	src/headers/types.h	/^	vector_t				*position;$/;"	m	struct:Light
+position	src/headers/types.h	/^	vector_t				*position;$/;"	m	struct:camera
+printProgress	src/scene.c	/^void printProgress(int y)$/;"	f
+print_matrix	src/lib/math/matrix.c	/^void	print_matrix(matrix_t *matrix)$/;"	f
+print_vector	src/lib/math/vectormath.c	/^void	print_vector(vector_t v)$/;"	f
+propretries_t	src/headers/types.h	/^typedef struct Propretries	propretries_t;$/;"	t	typeref:struct:Propretries
+propretries_t	src/headers/types.h	/^}							propretries_t;$/;"	t	typeref:struct:Propretries
+push_back	src/lib/list/push_back.c	/^void push_back(t_list **lst, t_list *new)$/;"	f
+ray	src/headers/types.h	/^typedef struct ray$/;"	s
+ray	src/ray.c	/^ray_t	*ray(vector_t *m_point1, vector_t *m_point2)$/;"	f
+ray_t	src/headers/types.h	/^}							ray_t;$/;"	t	typeref:struct:ray
+red	src/headers/image.h	/^	double	**red;$/;"	m	struct:image
+ref_cast_prop	src/Materials/headers/MaterialBase.h	/^typedef struct ref_cast_prop$/;"	s
+reflacted_ray	src/Materials/Refractive.c	/^ray_t *reflacted_ray(ray_t *m_ray, double r, propretries_t *prop)$/;"	f
+reflactive_index	src/headers/types.h	/^	double					reflactive_index;$/;"	m	struct:material
+reflect_color	src/Materials/MaterialBase.c	/^vector_t	*reflect_color(scene_t *scene, propretries_t *prop,$/;"	f
+reflection_coefficient	src/headers/types.h	/^	double					reflection_coefficient;$/;"	m	struct:material
+refractive_color	src/Materials/Refractive.c	/^vector_t *refractive_color(scene_t *scene,$/;"	f
+render_line	src/scene.c	/^void render_line(scene_t *scene, t_image *image, int y, vector_t fact)$/;"	f
+rfc	src/Materials/headers/MaterialBase.h	/^	int			rfc;$/;"	m	struct:color_params
+rows	src/lib/math/headers/types.h	/^	int rows;$/;"	m	struct:matrix
+s_box_solutions	src/Objects/headers/Box.h	/^typedef struct s_box_solutions$/;"	s
+s_data	src/headers/types.h	/^typedef struct s_data$/;"	s
+s_textures	src/headers/types.h	/^typedef struct s_textures$/;"	s
+safe_matrix_multy	src/lib/math/matrix.c	/^matrix_t	*safe_matrix_multy(matrix_t *mt1, matrix_t *mt2)$/;"	f
+scene	src/Lights/headers/pointlight.h	/^	scene_t		*scene;$/;"	m	struct:light_params
+scene	src/main.c	/^	scene_t	*scene;$/;"	m	struct:mt	file:
+scene_t	src/headers/types.h	/^}							scene_t;$/;"	t	typeref:struct:Scene
+screen_center	src/headers/types.h	/^	vector_t				*screen_center;$/;"	m	struct:camera
+screen_u	src/headers/types.h	/^	vector_t				*screen_u;$/;"	m	struct:camera
+screen_v	src/headers/types.h	/^	vector_t				*screen_v;$/;"	m	struct:camera
+set_box_propreties	src/Objects/Box.c	/^propretries_t	*set_box_propreties(object_t *this, ray_t *bckray,$/;"	f
+set_cap_properiesties	src/Objects/Cylinder.c	/^int	set_cap_properiesties(object_t *this, vector_t *poi, vector_t n,$/;"	f
+set_cone_properiesties	src/Objects/Cone.c	/^int	set_cone_properiesties(object_t *this, vector_t *poi, propretries_t *prop)$/;"	f
+set_cylider_properiesties	src/Objects/Cylinder.c	/^int	set_cylider_properiesties(object_t *this, vector_t *poi,$/;"	f
+set_lineartfm	src/lib/math/gtfm.c	/^void	set_lineartfm(object_t *this)$/;"	f
+set_pixel	src/Image.c	/^void	set_pixel(t_image *image, int x, int y, vector_t *color)$/;"	f
+set_tfm	src/Textures/base.c	/^void set_tfm(t_textures *this, vector2_t *translation,$/;"	f
+set_to_indentity	src/lib/math/matrix.c	/^void	set_to_indentity(matrix_t *mt)$/;"	f
+setupCamera	src/scene.c	/^void setupCamera(scene_t *this)$/;"	f
+sh_int_test	src/Objects/spher.c	/^int sh_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)$/;"	f
+shininess_coefficient	src/headers/types.h	/^	double					shininess_coefficient;$/;"	m	struct:material
+solutions	src/Objects/headers/Box.h	/^	double		*solutions;$/;"	m	struct:s_box_solutions
+spec_int_test	src/Materials/simpleSpecular.c	/^int	spec_int_test(scene_t *scene, ray_t *lighit_ray)$/;"	f
+submatrix	src/lib/math/matrix.c	/^matrix_t	*submatrix(matrix_t *mt, int row, int column)$/;"	f
+t	src/headers/types.h	/^	double					*t;$/;"	m	struct:cylinder_equations_Propretries
+t_box_solutions	src/Objects/headers/Box.h	/^}				t_box_solutions;$/;"	t	typeref:struct:s_box_solutions
+t_calculat_int_point	src/Objects/triangle.c	/^vector_t	*t_calculat_int_point(ray_t *ray, vector_t k, int *status)$/;"	f
+t_color_params	src/Materials/headers/MaterialBase.h	/^}				t_color_params;$/;"	t	typeref:struct:color_params
+t_color_params	src/headers/types.h	/^typedef struct color_params	t_color_params;$/;"	t	typeref:struct:color_params
+t_data	src/headers/types.h	/^}							t_data;$/;"	t	typeref:struct:s_data
+t_image	src/headers/image.h	/^}			t_image;$/;"	t	typeref:struct:image
+t_int_point_propreties	src/Objects/triangle.c	/^void	t_int_point_propreties(vector_t *poi, object_t *this,$/;"	f
+t_int_test	src/Objects/triangle.c	/^int	t_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)$/;"	f
+t_light_params	src/Lights/headers/pointlight.h	/^}				t_light_params;$/;"	t	typeref:struct:light_params
+t_list	src/lib/lib.h	/^} t_list;$/;"	t	typeref:struct:list
+t_ref_cast_prop	src/Materials/headers/MaterialBase.h	/^}				t_ref_cast_prop;$/;"	t	typeref:struct:ref_cast_prop
+t_textures	src/headers/types.h	/^typedef struct s_textures	t_textures;$/;"	t	typeref:struct:s_textures
+t_textures	src/headers/types.h	/^}							t_textures;$/;"	t	typeref:struct:s_textures
+t_uv_cords	src/headers/types.h	/^}							t_uv_cords;$/;"	t	typeref:struct:uv_cords
+test_inter	src/headers/types.h	/^	test_intersection		test_inter;$/;"	m	struct:Object
+test_intersection	src/headers/types.h	/^typedef int (*test_intersection)(object_t *this,$/;"	t
+textures	src/headers/types.h	/^	t_textures				*textures;$/;"	m	struct:Object
+tfm	src/headers/types.h	/^	matrix_t				*tfm;$/;"	m	struct:s_textures
+transparency_coefficient	src/headers/types.h	/^	double					transparency_coefficient;$/;"	m	struct:material
+transpose	src/lib/math/matrix.c	/^matrix_t	*transpose(matrix_t *mt)$/;"	f
+triangle	src/Objects/triangle.c	/^object_t	*triangle(vector_t *translation, vector_t *rotation, vector_t *scal,$/;"	f
+u	src/headers/types.h	/^	double					u;$/;"	m	struct:uv_cords
+u_values	src/Objects/headers/Box.h	/^	double		*u_values;$/;"	m	struct:s_box_solutions
+up	src/headers/types.h	/^	vector_t				*up;$/;"	m	struct:camera
+up_down_faces	src/Objects/Box.c	/^void	up_down_faces(vector_t *k, vector_t *a, t_box_solutions *box_solutions)$/;"	f
+update_values	src/scene.c	/^void update_values(propretries_t *c_prop, object_t **c_object,$/;"	f
+uv_cords	src/headers/types.h	/^	t_uv_cords				uv_cords;$/;"	m	struct:Propretries
+uv_cords	src/headers/types.h	/^typedef struct uv_cords$/;"	s
+v	src/headers/types.h	/^	double					v;$/;"	m	struct:uv_cords
+v_values	src/Objects/headers/Box.h	/^	double		*v_values;$/;"	m	struct:s_box_solutions
+valide_intersections	src/headers/types.h	/^	int						*valide_intersections;$/;"	m	struct:cylinder_equations_Propretries
+vector	src/lib/math/headers/types.h	/^typedef struct vector$/;"	s
+vector	src/lib/math/vectormath.c	/^vector_t	*vector(double x, double y, double z)$/;"	f
+vector2	src/lib/math/headers/types.h	/^typedef struct vector2{$/;"	s
+vector2_t	src/lib/math/headers/types.h	/^} vector2_t;$/;"	t	typeref:struct:vector2
+vector_distance	src/lib/math/vectormath.c	/^double	vector_distance(vector_t *u, vector_t *v)$/;"	f
+vector_lenght	src/lib/math/vectormath.c	/^double	vector_lenght(vector_t v)$/;"	f
+vector_lenght2	src/lib/math/vectormath.c	/^double	vector_lenght2(vector_t v)$/;"	f
+vector_t	src/lib/math/headers/types.h	/^} vector_t;$/;"	t	typeref:struct:vector
+x	src/lib/math/headers/types.h	/^	float x, y, z;$/;"	m	struct:vector
+x	src/lib/math/headers/types.h	/^	float x,y;$/;"	m	struct:vector2
+y	src/lib/math/headers/types.h	/^	float x, y, z;$/;"	m	struct:vector
+y	src/lib/math/headers/types.h	/^	float x,y;$/;"	m	struct:vector2
+z	src/lib/math/headers/types.h	/^	float x, y, z;$/;"	m	struct:vector
