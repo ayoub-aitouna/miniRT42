@@ -106,7 +106,7 @@ t_list *LightSorces(void)
 void setupCamera(scene_t *this)
 {
 	this->m_camera = Camera(1, 1, (double)WIDTH / (double)HEIGHT);
-	SetPosition(this->m_camera, vector(2.0, 10.0, -9.25));
+	SetPosition(this->m_camera, vector(2.0, -10.0, 0.25));
 	SetUp(this->m_camera, vector(0.0, 0.0, 1.0));
 	Setloockat(this->m_camera, vector(0.0, 0.0, 0.0));
 	calculat_geometry(this->m_camera);
