@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:53 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/08 18:16:09 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/08 18:50:06 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,8 @@ t_list	*LightSorces(void)
 void	setupCamera(scene_t *this)
 {
 	this->m_camera = Camera(1, 1, (double)WIDTH / (double)HEIGHT);
-	SetPosition(this->m_camera, vector(2.0, -5.0, 0.25));
+
+	SetPosition(this->m_camera, vector(2.0, -10.0, 0.25));
 	SetUp(this->m_camera, vector(0.0, 0.0, 1.0));
 	Setloockat(this->m_camera, vector(0.0, 0.0, 0.0));
 	calculat_geometry(this->m_camera);
