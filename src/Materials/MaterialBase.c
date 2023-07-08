@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:22:51 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/05 12:04:51 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/08 18:08:39 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ vector_t	*reflect_color(scene_t *scene, propretries_t *prop,
 	c_obj = NULL;
 	reflection_v = Reflection_vector(params.camera_ray->m_lab,
 										&prop->local_normal);
-	m_ray = ray(&prop->int_point, addition(&prop->int_point, reflection_v));
+	m_ray = ray(&prop->int_point, ms_addition(&prop->int_point, reflection_v,
+				1));
 	found_int = mt_cast_ray(scene, m_ray, &local_prop,
 			(t_ref_cast_prop){params.cur_object, &c_obj});
 	if (found_int && (params.rfc < MAX_REFLECTION_COUNT))

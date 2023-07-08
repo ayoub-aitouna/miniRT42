@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:24 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/03 14:42:48 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/08 17:01:03 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,14 @@ void	deleteObjectBase(object_t *this)
 			free(this->base_color);
 		if (this->bck_tfm)
 			delete_matrix(this->bck_tfm);
+		if (this->lineartfm)
+			delete_matrix(this->lineartfm);
 		if (this->fwd_tfm)
 			delete_matrix(this->fwd_tfm);
 		if (this->material)
 			delete_material(this->material);
+		if (this->textures)
+			delete_textures(this->textures);
 		free(this);
 	}
 }

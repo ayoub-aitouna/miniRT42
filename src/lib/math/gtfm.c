@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:22:11 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/06/30 01:22:22 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/08 18:22:15 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "headers/gtfm.h"
 #include "headers/matrix.h"
 #include "headers/vectormath.h"
-
-
 
 matrix_t	*Set_transform(vector_t *translation, vector_t *rotation,
 		vector_t *scal)
@@ -160,9 +158,9 @@ void	set_lineartfm(object_t *this)
 
 vector_t	*get_norm(object_t *this, vector_t *input_vector)
 {
-	matrix_t *tmp;
-	matrix_t *resultmt;
-	vector_t *result;
+	matrix_t	*tmp;
+	matrix_t	*resultmt;
+	vector_t	*result;
 
 	resultmt = NULL;
 	tmp = matrix(3, 1, (double[]){input_vector->x, input_vector->y,

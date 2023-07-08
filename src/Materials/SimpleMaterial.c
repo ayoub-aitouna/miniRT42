@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:22:56 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/05 12:45:44 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/08 18:36:23 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include "headers/SimpleMaterial.h"
 #include <stdlib.h>
 
-material_t *new_simple_material(double shininess_coefficient,
+material_t	*new_simple_material(double shininess_coefficient,
 								double reflection_coefficient)
 {
-	material_t *simple_material;
+	material_t	*simple_material;
 
 	simple_material = new_material_base(shininess_coefficient,
 										reflection_coefficient);
@@ -25,14 +25,14 @@ material_t *new_simple_material(double shininess_coefficient,
 	return (simple_material);
 }
 
-vector_t *calculat_color(scene_t *scene, propretries_t *prop,
-						 t_color_params c_params)
+vector_t	*calculat_color(scene_t *scene, propretries_t *prop,
+		t_color_params c_params)
 {
-	vector_t *color;
-	vector_t *over_all_color;
-	vector_t *specular_color;
-	vector_t *reflection_color;
-	double reflectivity;
+	vector_t	*color;
+	vector_t	*over_all_color;
+	vector_t	*specular_color;
+	vector_t	*reflection_color;
+	double		reflectivity;
 
 	specular_color = NULL;
 	reflection_color = NULL;
@@ -42,28 +42,29 @@ vector_t *calculat_color(scene_t *scene, propretries_t *prop,
 	if (c_params.cur_object->material->reflection_coefficient > 0.f)
 		reflection_color = reflect_color(scene, prop, c_params);
 	if (reflection_color)
-		over_all_color = ms_addition(num_muliplication(reflection_color,
-													   reflectivity),
-									 num_muliplication(color, (1 - reflectivity)),
-									 2);
+		over_all_color = ms_addition(num_muliplication(reflection_color, reflectivity),
+										num_muliplication(color,
+														(1 - reflectivity)),
+										2);
 	else
-		over_all_color = color;
+		over_all_color = copy_vector(*color);
+	free(color);
 	over_all_color = get_refractive_color(over_all_color, scene, c_params,
-										  prop);
+			prop);
 	if (c_params.cur_object->material->shininess_coefficient > 0.f)
 		specular_color = calculat_specular_color(scene, prop,
-												 c_params.cur_object, c_params.camera_ray);
+				c_params.cur_object, c_params.camera_ray);
 	if (specular_color)
 		over_all_color = ms_addition(over_all_color, specular_color, 2);
 	return (over_all_color);
 }
 
-vector_t *get_refractive_color(vector_t *color, scene_t *scene,
-							   t_color_params params, propretries_t *prop)
+vector_t	*get_refractive_color(vector_t *color, scene_t *scene,
+		t_color_params params, propretries_t *prop)
 {
-	vector_t *r_color;
-	vector_t *final_color;
-	double transparency;
+	vector_t	*r_color;
+	vector_t	*final_color;
+	double		transparency;
 
 	transparency = params.cur_object->material->transparency_coefficient;
 	if (!transparency)
@@ -71,20 +72,20 @@ vector_t *get_refractive_color(vector_t *color, scene_t *scene,
 	r_color = refractive_color(scene, params, prop);
 	final_color = ms_addition(num_muliplication(r_color,
 												transparency),
-							  num_muliplication(color, (1 - transparency)),
-							  2);
+								num_muliplication(color, (1 - transparency)),
+								2);
 	free(color);
 	return (final_color);
 }
 
-vector_t *calculat_diffuse_color(scene_t *scene, propretries_t *prop,
-					   object_t *cur_object)
+vector_t	*calculat_diffuse_color(scene_t *scene, propretries_t *prop,
+		object_t *cur_object)
 {
-	vector_t color;
-	vector_t *final_color;
-	t_list *tmp;
-	double intensity;
-	int valid_ilum;
+	vector_t	color;
+	vector_t	*final_color;
+	t_list		*tmp;
+	double		intensity;
+	int			valid_ilum;
 
 	valid_ilum = 0;
 	final_color = copy_vector(scene->ambient_light_factor);
@@ -92,7 +93,8 @@ vector_t *calculat_diffuse_color(scene_t *scene, propretries_t *prop,
 	while (tmp)
 	{
 		valid_ilum = calculat_ilumination(tmp->content, prop,
-										  (t_light_params){.intensity = &intensity, .color = &color, .scene = scene, .cur_object = cur_object});
+				(t_light_params){.intensity = &intensity, .color = &color,
+				.scene = scene, .cur_object = cur_object});
 		if (valid_ilum)
 		{
 			final_color->x += (color.x * intensity);
@@ -104,10 +106,17 @@ vector_t *calculat_diffuse_color(scene_t *scene, propretries_t *prop,
 	return (ms_muliplication(final_color, &prop->local_color, 0));
 }
 
-vector_t get_curect_color(object_t *this, propretries_t *prop)
+vector_t	get_curect_color(object_t *this, propretries_t *prop)
 {
-	(void) this;
+	vector_t	*color;
+	vector_t	result;
+
 	if (this->textures)
-		return (*this->textures->get_color(this->textures, prop->uv_cords));
+	{
+		color = this->textures->get_color(this->textures, prop->uv_cords);
+		result = *color;
+		free(color);
+		return (result);
+	}
 	return (prop->local_color);
 }

@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:40 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/04 17:45:35 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/08 14:28:26 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct Object
 	test_intersection		test_inter;
 	material_t				*material;
 	t_textures				*textures;
+	void					*extra;
 }							object_t;
 
 typedef struct Light
@@ -113,6 +114,7 @@ typedef struct Propretries
 	vector_t				local_color;
 	vector_t				local_normal;
 	vector_t				int_point;
+	vector_t				poi;
 	t_uv_cords				uv_cords;
 }							propretries_t;
 typedef vector_t	*(*get_color_function)(t_textures *this,
