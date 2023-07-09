@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:48 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/03 17:44:43 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/09 02:57:00 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	m_exit(mt_t *m_mt)
 	deleteScene(m_mt->scene);
 	free(m_mt->mlx);
 	free(m_mt->mlx_win);
-	printf("Stoped Runnig \n");
+	printf("ESC Clicked \n");
 	exit(0);
 }
 
@@ -54,5 +54,6 @@ int	main(void)
 	display(m_mt.mlx, m_mt.mlx_win, m_mt.image);
 	mlx_key_hook(m_mt.mlx_win, key_hook, &m_mt);
 	mlx_hook(m_mt.mlx_win, 17, 0l, m_exit, &m_mt);
+	system("leaks miniRT");
 	mlx_loop(m_mt.mlx);
 }
