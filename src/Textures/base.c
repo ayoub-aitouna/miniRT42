@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 01:32:01 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/09 00:45:51 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/09 22:40:07 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ vector_t *apply_bump_map_textures(t_textures *this, vector_t *org_normal,
 	color = this->get_color(this, cords);
 	avg = (color->x + color->y + color->z) / 3;
 	displacement = (avg * 2) - 1;
+	free(color);
 	return (ms_num_muliplication(org_normal, displacement));
 }
 

@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:45 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/03 17:39:21 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/10 07:29:09 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	display(void *mlx, void *win, t_image *image)
 		i++;
 	}
 	mlx_put_image_to_window(mlx, win, img.img, 0, 0);
-	free(img.img);
+	mlx_destroy_image(mlx, img.img);
 }
 
 int	convert(double red, double green, double blue, double max)

@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:53 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/09 15:37:56 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/09 23:15:57 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ t_list	*Objects(void *mlx)
 	object_t	*sphere;
 	object_t	*sphere2;
 	object_t	*sphere3;
-	object_t	*sphere4;
+	object_t	*m_torus;
 	object_t	*floor;
 	object_t	*image;
+	
 	t_textures	*checker;
 	t_textures	*ww;
 	t_textures	*brick;
@@ -51,17 +52,17 @@ t_list	*Objects(void *mlx)
 			vector(0.75, 0.75, 0.75), vector(0.2, 1.0, 0.2));
 	sphere3 = create_sphere(vector(-2.0, -1.25, -1.0), vector(0.0, 0.0, 0.0),
 			vector(0.75, 0.75, 0.75), vector(0.2, 0.2, 1.0));
-	sphere4 = torus(vector(2.0, -1.25, 0.25), vector(HALFPI, 0.0, 0.0),
+	m_torus = torus(vector(2.0, -1.25, 0.25), vector(HALFPI, 0.0, 0.0),
 			vector(0.75, 0.75, 0.75), vector(0.2, 0.2, 1.0));
 	// **************************************************************************************
 	// Setup material Configurations
 	// **************************************************************************************
-	setUpMaterialConfigurations(floor, 0.25, 32.0, 0.0, 0.0, NULL);
+	setUpMaterialConfigurations(floor, 0.25, 32.0, 0.0, 0.0, checker);
 	setUpMaterialConfigurations(image, 0.00, 0.00, 0.0, 0.0, ww);
-	setUpMaterialConfigurations(sphere, 0.25, 32.0, 0.0, 0.0, brick);
+	setUpMaterialConfigurations(sphere, 0.25, 32.0, 0.0, 0.0, checker);
 	setUpMaterialConfigurations(sphere2, 0.55, 32.0, 0.3, 1.33, NULL);
 	setUpMaterialConfigurations(sphere3, 0.35, 32.0, 0.0, 0.0, NULL);
-	setUpMaterialConfigurations(sphere4, 0.25, 32.0, 0.35, 1.333, NULL);
+	setUpMaterialConfigurations(m_torus, 0.25, 32.0, 0.35, 1.333, brick);
 	// **************************************************************************************
 	// Put the objects into the scene.
 	// **************************************************************************************
@@ -69,7 +70,7 @@ t_list	*Objects(void *mlx)
 	push_back(&data, ft_lstnew(sphere));
 	push_back(&data, ft_lstnew(sphere2));
 	push_back(&data, ft_lstnew(sphere3));
-	push_back(&data, ft_lstnew(sphere4));
+	push_back(&data, ft_lstnew(m_torus));
 	push_back(&data, ft_lstnew(image));
 	return (data);
 }
