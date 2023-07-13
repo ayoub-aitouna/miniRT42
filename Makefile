@@ -1,4 +1,4 @@
-SRC		:= $(wildcard src/*.c) $(wildcard src/**/*.c) $(wildcard src/**/**/*.c)
+SRC		:= $(wildcard src/*.c) $(wildcard src/**/*.c) $(wildcard src/**/**/*.c)  $(wildcard src/**/**/**/*.c)
 OBJ_DIR	:= .compiled
 OBJ		:= $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC))
 NAME	:= miniRT
