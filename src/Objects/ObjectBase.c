@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:24 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 06:57:06 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 08:50:56 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_object	*object_base(t_vector *translation, t_vector *rotation,
 
 /// @brief Delete Operator Overload
 /// @param t_object *
-void	deleteObjectBase(t_object *this)
+void	delete_object_base(t_object *this)
 {
 	if (this)
 	{
@@ -53,7 +53,7 @@ int	close_enough(double v1, double v2)
 	return (fabs(v1 - v2) < EPSILON);
 }
 
-t_vector * false(int *status)
+t_vector	*false(int *status)
 {
 	*status = FALSE;
 	return (NULL);
@@ -63,11 +63,11 @@ t_vector * false(int *status)
 /// @param t_object *
 void	delete_object_list(t_list *list)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	while (list)
 	{
-		deleteObjectBase(list->content);
+		delete_object_base(list->content);
 		tmp = list;
 		list = list->next;
 		free(tmp);

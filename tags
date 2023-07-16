@@ -135,7 +135,7 @@ cylinder	src/Objects/Cylinder.c	/^t_object	*cylinder(t_vector *translation, t_ve
 cylinder_equations_Propretries	src/headers/types.h	/^typedef struct cylinder_equations_Propretries$/;"	s
 cylinder_intersection_points	src/Objects/Cylinder.c	/^int	cylinder_intersection_points(t_ray *bck_ray,$/;"	f
 deleteCamera	src/camera.c	/^void	deleteCamera(t_camera *this)$/;"	f
-deleteObjectBase	src/Objects/ObjectBase.c	/^void	deleteObjectBase(t_object *this)$/;"	f
+delete_object_base	src/Objects/ObjectBase.c	/^void	delete_object_base(t_object *this)$/;"	f
 deleteScene	src/scene.c	/^void	deleteScene(t_scene *this)$/;"	f
 delete_light	src/Lights/pointlight.c	/^void	delete_light(t_light *this)$/;"	f
 delete_light_list	src/Lights/pointlight.c	/^void	delete_light_list(t_list *list)$/;"	f

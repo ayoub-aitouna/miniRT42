@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:30 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 06:58:16 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 09:03:50 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	int_point_propreties(t_vector *poi, t_object *this, t_propretries *prop)
 	m_normal = get_norm(this, poi);
 	if (this->textures)
 		m_normal = apply_bump_map_textures(this->textures, m_normal,
-			prop->uv_cords);
+				prop->uv_cords);
 	normalize(m_normal);
 	prop->int_point = *int_poi;
 	prop->local_normal = *m_normal;
@@ -105,10 +105,7 @@ double	min_t(double numsqrt, double b, int *status)
 	t1 = (-b + numsqrt) / 2.0;
 	t2 = (-b - numsqrt) / 2.0;
 	if (t1 < 0.0 && t2 < 0.0)
-	{
-		*status = FALSE;
-		return (0);
-	}
+		return (*(status) = 0, 0);
 	if (t1 < t2)
 	{
 		if (t1 > .0)
@@ -116,10 +113,7 @@ double	min_t(double numsqrt, double b, int *status)
 		else if (t2 > .0)
 			return (t2);
 		else
-		{
-			*status = FALSE;
-			return (0);
-		}
+			return (*(status) = 0, 0);
 	}
 	else
 	{
@@ -128,10 +122,7 @@ double	min_t(double numsqrt, double b, int *status)
 		else if (t1 > .0)
 			return (t1);
 		else
-		{
-			*status = FALSE;
-			return (0);
-		}
+			return (*(status) = 0, 0);
 	}
 }
 

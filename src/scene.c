@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:53 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 06:59:30 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 20:35:14 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ t_list	*objects(void *mlx)
 	set_up_material_configurations(sphere, 0.25, 32.0, 0.0, 0.0, checker);
 	set_up_material_configurations(sphere2, 0.55, 32.0, 0.3, 1.33, NULL);
 	set_up_material_configurations(sphere3, 0.35, 32.0, 0.0, 0.0, NULL);
-	set_up_material_configurations(m_torus, 0.25, 32.0, 0.35, 1.333, brick);
+	set_up_material_configurations(m_torus, 0.25, 32.0, 0.45, 1.333, brick);
 	push_back(&data, ft_lstnew(floor));
 	push_back(&data, ft_lstnew(sphere));
 
-	// push_back(&data, ft_lstnew(sphere2));
-	// push_back(&data, ft_lstnew(sphere3));
-	// push_back(&data, ft_lstnew(m_torus));
-	// push_back(&data, ft_lstnew(image));
+	push_back(&data, ft_lstnew(sphere2));
+	push_back(&data, ft_lstnew(sphere3));
+	push_back(&data, ft_lstnew(m_torus));
+	push_back(&data, ft_lstnew(image));
 	return (data);
 }
 

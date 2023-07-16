@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:02 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 07:02:59 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 19:23:58 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ t_vector	*false(int *status);
 int			close_enough(double v1, double v2);
 t_object	*object_base(t_vector *translation, t_vector *rotation,
 				t_vector *scal, t_vector *color);
-void		deleteObjectBase(t_object *this);
+void		delete_object_base(t_object *this);
 void		delete_object_list(t_list *list);
 #endif

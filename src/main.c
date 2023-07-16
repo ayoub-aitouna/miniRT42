@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:48 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 07:01:18 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 19:30:17 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(void)
 	display(m_mt.mlx, m_mt.mlx_win, m_mt.image);
 	mlx_key_hook(m_mt.mlx_win, key_hook, &m_mt);
 	mlx_hook(m_mt.mlx_win, 17, 0l, m_exit, &m_mt);
-	sleep(1);
-	system("leaks miniRT");
+	//sleep(1);
+	//system("leaks miniRT");
 	mlx_loop(m_mt.mlx);
 }
