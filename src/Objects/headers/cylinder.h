@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:09 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 07:02:43 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,20 @@
 # define CYLINDER_H
 # include "Objectbase.h"
 
-object_t	*cylinder(t_vector *translation, t_vector *rotation, t_vector *scal,
+t_object	*cylinder(t_vector *translation, t_vector *rotation, t_vector *scal,
 				t_vector *color);
-int			cy_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop);
-int			set_cap_properiesties(object_t *this, t_vector *poi, t_vector n,
-				propretries_t *prop);
-int			set_cylider_properiesties(object_t *this, t_vector *poi,
-				propretries_t *prop);
-void	calulcat_cap_intersection(t_vector p,
-								t_vector n,
-								cep_t *cylinder_prop);
+int			cy_int_test(t_object *this, t_ray *camera_ray, t_propretries *prop);
+int			set_cap_properiesties(t_object *this, t_vector *poi, t_vector n,
+				t_propretries *prop);
+int			set_cylider_properiesties(t_object *this, t_vector *poi,
+				t_propretries *prop);
+void		calulcat_cap_intersection(t_vector p, t_vector n,
+				t_cep *cylinder_prop);
 void		calulcat_cylider_intersection(t_vector p, t_vector n,
-				cep_t *cylinder_prop);
+				t_cep *cylinder_prop);
 int			includes(int *list, int size, int value);
 int			min_index(double *list, int size);
-void		check_nd_set(cep_t *propretries, int index, int z_condition);
-int	cylinder_intersection_points(ray_t *bck_ray,
-									propretries_t *prop,
-									cep_t *cylinder_prop);
+void		check_nd_set(t_cep *propretries, int index, int z_condition);
+int			cylinder_intersection_points(t_ray *bck_ray, t_propretries *prop,
+				t_cep *cylinder_prop);
 #endif

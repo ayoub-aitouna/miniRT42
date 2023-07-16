@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:22:56 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 06:59:30 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include "headers/SimpleMaterial.h"
 #include <stdlib.h>
 
-material_t	*new_simple_material(double shininess_coefficient,
+t_material	*new_simple_material(double shininess_coefficient,
 		double reflection_coefficient)
 {
-	material_t	*simple_material;
+	t_material	*simple_material;
 
 	simple_material = new_material_base(shininess_coefficient,
 		reflection_coefficient);
@@ -39,7 +39,7 @@ t_vector	*ms_percentage_addition(t_vector *v1, t_vector *v2,
 	return (ms_addition(new_v1, new_v2, 2));
 }
 
-t_vector	*calculat_color(scene_t *scene, propretries_t *prop,
+t_vector	*calculat_color(t_scene *scene, t_propretries *prop,
 		t_color_params c_params)
 {
 	t_vector	*color;
@@ -64,8 +64,8 @@ t_vector	*calculat_color(scene_t *scene, propretries_t *prop,
 	return (color);
 }
 
-t_vector	*get_refractive_color(t_vector *color, scene_t *scene,
-		t_color_params params, propretries_t *prop)
+t_vector	*get_refractive_color(t_vector *color, t_scene *scene,
+		t_color_params params, t_propretries *prop)
 {
 	t_vector	*r_color;
 	double		transparency;
@@ -77,8 +77,8 @@ t_vector	*get_refractive_color(t_vector *color, scene_t *scene,
 	return (ms_percentage_addition(r_color, color, transparency, 2));
 }
 
-t_vector	*calculat_diffuse_color(scene_t *scene, propretries_t *prop,
-		object_t *cur_object)
+t_vector	*calculat_diffuse_color(t_scene *scene, t_propretries *prop,
+		t_object *cur_object)
 {
 	t_vector	color;
 	t_vector	*final_color;
@@ -105,7 +105,7 @@ t_vector	*calculat_diffuse_color(scene_t *scene, propretries_t *prop,
 	return (ms_muliplication(final_color, &prop->local_color, 0));
 }
 
-t_vector	get_curect_color(object_t *this, propretries_t *prop)
+t_vector	get_curect_color(t_object *this, t_propretries *prop)
 {
 	t_vector	*color;
 	t_vector	result;

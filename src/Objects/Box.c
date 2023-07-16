@@ -6,16 +6,16 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 01:32:28 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 07:04:42 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/Box.h"
 
-object_t	*box(t_vector *translation, t_vector *rotation, t_vector *scal,
+t_object	*box(t_vector *translation, t_vector *rotation, t_vector *scal,
 		t_vector *color)
 {
-	object_t	*box;
+	t_object	*box;
 
 	box = object_base(translation, rotation, scal, color);
 	box->test_inter = box_int_test;
@@ -24,17 +24,17 @@ object_t	*box(t_vector *translation, t_vector *rotation, t_vector *scal,
 	return (box);
 }
 
-int	box_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
+int	box_int_test(t_object *this, t_ray *camera_ray, t_propretries *prop)
 {
-	ray_t			*bckray;
+	t_ray			*bckray;
 	t_vector		k;
 	int				index;
-	propretries_t	*local_prop;
+	t_propretries	*local_prop;
 	t_box_solutions	box_solutions;
 
-	box_solutions = (t_box_solutions){(double[]){MAX_V, MAX_V, MAX_V, MAX_V,
-		MAX_V, MAX_V}, (double[]){0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, (double[]){0.0,
-		0.0, 0.0, 0.0, 0.0, 0.0}};
+	box_solutions = (t_box_solutions){(double []){MAX_V, MAX_V, MAX_V, MAX_V,
+		MAX_V, MAX_V}, (double []){0.0, 0.0, 0.0, 0.0, 0.0, 0.0},
+		(double []){0.0, 0.0, 0.0, 0.0, 0.0, 0.0}};
 	bckray = apply_transform(camera_ray, this, BCKWRD);
 	k = *bckray->m_lab;
 	normalize(&k);
@@ -49,20 +49,20 @@ int	box_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
 	return (TRUE);
 }
 
-propretries_t	*set_box_propreties(object_t *this, ray_t *bckray,
+t_propretries	*set_box_propreties(t_object *this, t_ray *bckray,
 		t_box_solutions *box_solutions, int index)
 {
 	t_vector		*poi;
 	t_vector		*m_normal;
 	t_vector		*int_poi;
-	propretries_t	*prop;
+	t_propretries	*prop;
 	t_vector		k;
 
 	k = *bckray->m_lab;
 	normalize(&k);
-	prop = malloc(sizeof(propretries_t));
+	prop = malloc(sizeof(t_propretries));
 	poi = ms_addition(bckray->point1, num_muliplication(&k,
-			box_solutions->solutions[index]), 1);
+				box_solutions->solutions[index]), 1);
 	int_poi = apply_transform_vector(poi, FRWRD, this);
 	m_normal = get_gb_normal(this, index);
 	prop->int_point = *int_poi;
@@ -73,7 +73,7 @@ propretries_t	*set_box_propreties(object_t *this, ray_t *bckray,
 	return (prop);
 }
 
-t_vector	*get_gb_normal(object_t *this, int index)
+t_vector	*get_gb_normal(t_object *this, int index)
 {
 	t_vector	*normal;
 	t_vector	*m_normal;
@@ -109,6 +109,7 @@ int	get_nearest_intersection(t_box_solutions *box_solutions, int *index)
 	}
 	return (valide_int);
 }
+
 void	up_down_faces(t_vector *k, t_vector *a, t_box_solutions *box_solutions)
 {
 	if (!close_enough(k->z, 0.f))
@@ -121,6 +122,7 @@ void	up_down_faces(t_vector *k, t_vector *a, t_box_solutions *box_solutions)
 		box_solutions->v_values[1] = a->y + k->y * box_solutions->solutions[1];
 	}
 }
+
 void	left_right_faces(t_vector *k, t_vector *a,
 		t_box_solutions *box_solutions)
 {
@@ -134,6 +136,7 @@ void	left_right_faces(t_vector *k, t_vector *a,
 		box_solutions->v_values[5] = a->z + k->z * box_solutions->solutions[5];
 	}
 }
+
 void	front_back_faces(t_vector *k, t_vector *a,
 		t_box_solutions *box_solutions)
 {

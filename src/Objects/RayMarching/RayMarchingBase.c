@@ -6,25 +6,25 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 19:55:51 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 06:58:16 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/RayMarchingBase.h"
 
-object_t	*rm_object(t_vector *translation, t_vector *rotation,
+t_object	*rm_object(t_vector *translation, t_vector *rotation,
 		t_vector *scal, t_vector *color)
 {
-	object_t	*rm_base_object;
+	t_object	*rm_base_object;
 
 	rm_base_object = object_base(translation, rotation, scal, color);
 	rm_base_object->test_inter = rm_int_test;
 	return (rm_base_object);
 }
 
-int	rm_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
+int	rm_int_test(t_object *this, t_ray *camera_ray, t_propretries *prop)
 {
-	ray_t		*bckray;
+	t_ray		*bckray;
 	t_vector	*dir_v;
 	t_vector	*int_poi;
 	t_vector	*cur_location;
@@ -49,7 +49,7 @@ int	rm_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
 	return (TRUE);
 }
 
-t_vector	get_local_normal(object_t *this, t_vector *cur_location,
+t_vector	get_local_normal(t_object *this, t_vector *cur_location,
 		t_vector *dir_v, t_vector *params)
 {
 	t_vector	*normalLoc;
@@ -69,7 +69,7 @@ t_vector	get_local_normal(object_t *this, t_vector *cur_location,
 	return (result);
 }
 
-t_vector	*get_locatione_at_intersection(object_t *this, ray_t *bckray,
+t_vector	*get_locatione_at_intersection(t_object *this, t_ray *bckray,
 		t_vector *params, t_vector *dir_v)
 {
 	double		dist;
@@ -96,7 +96,7 @@ t_vector	*get_locatione_at_intersection(object_t *this, ray_t *bckray,
 	return (cur_location);
 }
 
-double	calculat_sdf_diff(object_t *this, t_vector *normal,
+double	calculat_sdf_diff(t_object *this, t_vector *normal,
 		t_vector displacemnt, t_vector parms)
 {
 	t_vector	*val1;
@@ -110,7 +110,7 @@ double	calculat_sdf_diff(object_t *this, t_vector *normal,
 	return (result);
 }
 
-double	SDF(object_t *this, t_vector p, t_vector params)
+double	SDF(t_object *this, t_vector p, t_vector params)
 {
 	return (((t_rm_object_params *)this->extra)->torus_sdf(p, params));
 }

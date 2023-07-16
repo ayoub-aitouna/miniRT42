@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:48 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/15 22:33:23 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 07:01:18 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@
 typedef struct mt
 {
 	t_image	*image;
-	scene_t	*scene;
+	t_scene	*scene;
 	void	*mlx;
 	void	*mlx_win;
-}			mt_t;
+}			t_mt;
 
-int	m_exit(mt_t *m_mt)
+int	m_exit(t_mt *m_mt)
 {
 	deletescene(m_mt->scene);
 	free(m_mt->mlx);
@@ -34,7 +34,7 @@ int	m_exit(mt_t *m_mt)
 	exit(0);
 }
 
-int	key_hook(int keycode, mt_t *mt)
+int	key_hook(int keycode, t_mt *mt)
 {
 	if (keycode == ESC)
 		m_exit(mt);
@@ -43,9 +43,9 @@ int	key_hook(int keycode, mt_t *mt)
 
 int	main(void)
 {
-	mt_t	m_mt;
+	t_mt	m_mt;
 
-	m_mt = (mt_t){.scene = NULL, .image = NULL};
+	m_mt = (t_mt){.scene = NULL, .image = NULL};
 	m_mt.image = NULL;
 	m_mt.mlx = mlx_init();
 	m_mt.mlx_win = mlx_new_window(m_mt.mlx, WIDTH, HEIGHT, "miniRT");

@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 00:51:46 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 04:16:52 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 06:48:55 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_textures	*new_texture(t_vector color_1, t_vector color_2)
 	t->tfm = NULL;
 	return (t);
 }
+
 t_vector	*get_ch_color(t_textures *this, t_uv_cords cords)
 {
 	t_uv_cords	*new_cords;

@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:22:11 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 06:58:16 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ t_matrix	*set_transform(t_vector *translation, t_vector *rotation,
 	return (result);
 }
 
-ray_t	*apply_transform(ray_t *input_ray, object_t *this, int dirFlag)
+t_ray	*apply_transform(t_ray *input_ray, t_object *this, int dirFlag)
 {
-	ray_t	*output;
+	t_ray	*output;
 
-	output = malloc(sizeof(ray_t));
+	output = malloc(sizeof(t_ray));
 	output->point1 = apply_transform_vector(input_ray->point1, dirFlag, this);
 	output->point2 = apply_transform_vector(input_ray->point2, dirFlag, this);
 	output->m_lab = minus(output->point2, output->point1);
@@ -46,7 +46,7 @@ ray_t	*apply_transform(ray_t *input_ray, object_t *this, int dirFlag)
 }
 
 t_vector	*apply_transform_vector(t_vector *inputVector, int dirFlag,
-		object_t *this)
+		t_object *this)
 {
 	t_matrix	*tmp;
 	double		*values;
@@ -73,7 +73,7 @@ t_vector	*apply_transform_vector(t_vector *inputVector, int dirFlag,
 	return (result);
 }
 
-void	set_lineartfm(object_t *this)
+void	set_lineartfm(t_object *this)
 {
 	t_matrix	*tmp;
 	t_matrix	*inverse_tmp;
@@ -99,7 +99,7 @@ void	set_lineartfm(object_t *this)
 	delete_matrix(inverse_tmp);
 }
 
-t_vector	*get_norm(object_t *this, t_vector *input_vector)
+t_vector	*get_norm(t_object *this, t_vector *input_vector)
 {
 	t_matrix	*tmp;
 	t_matrix	*resultmt;

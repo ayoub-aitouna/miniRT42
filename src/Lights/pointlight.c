@@ -6,24 +6,24 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:22:37 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 06:59:07 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/pointlight.h"
 
-light_t	*new_light(t_vector *position, t_vector *color, double intensity)
+t_light	*new_light(t_vector *position, t_vector *color, double intensity)
 {
-	light_t	*light;
+	t_light	*light;
 
-	light = malloc(sizeof(light_t));
+	light = malloc(sizeof(t_light));
 	light->base_color = color;
 	light->m_intensity = intensity;
 	light->position = position;
 	return (light);
 }
 
-void	delete_light(light_t *this)
+void	delete_light(t_light *this)
 {
 	if (this)
 	{

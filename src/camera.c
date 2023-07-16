@@ -6,17 +6,17 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:39 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 06:59:20 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/camera.h"
 
-camera_t	*camera(double horizontal_size, double lenght, double aspect_ration)
+t_camera	*camera(double horizontal_size, double lenght, double aspect_ration)
 {
-	camera_t	*camera;
+	t_camera	*camera;
 
-	camera = malloc(sizeof(camera_t));
+	camera = malloc(sizeof(t_camera));
 	camera->position = NULL;
 	camera->loockat = NULL;
 	camera->up = NULL;
@@ -26,22 +26,22 @@ camera_t	*camera(double horizontal_size, double lenght, double aspect_ration)
 	return (camera);
 }
 
-void	set_position(camera_t *this, t_vector *position)
+void	set_position(t_camera *this, t_vector *position)
 {
 	this->position = position;
 }
 
-void	set_up(camera_t *this, t_vector *Up)
+void	set_up(t_camera *this, t_vector *Up)
 {
 	this->up = Up;
 }
 
-void	set_loock_at(camera_t *this, t_vector *loockat)
+void	set_loock_at(t_camera *this, t_vector *loockat)
 {
 	this->loockat = loockat;
 }
 
-void	calculat_geometry(camera_t *this)
+void	calculat_geometry(t_camera *this)
 {
 	t_vector	*aligment;
 
@@ -59,7 +59,7 @@ void	calculat_geometry(camera_t *this)
 			/ this->aspect_ration);
 }
 
-ray_t	*generate_ray(camera_t *this, double screenX, double screenY)
+t_ray	*generate_ray(t_camera *this, double screenX, double screenY)
 {
 	t_vector	*w_part1;
 	t_vector	*dst_cords;
@@ -76,7 +76,7 @@ ray_t	*generate_ray(camera_t *this, double screenX, double screenY)
 	return (ray(copy_vector(*this->position), dst_cords));
 }
 
-void	deletecamera(camera_t *this)
+void	deletecamera(t_camera *this)
 {
 	if (this)
 	{

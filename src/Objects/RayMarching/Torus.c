@@ -6,16 +6,16 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 19:55:42 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 06:58:16 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/Torus.h"
 
-object_t	*torus(t_vector *translation, t_vector *rotation, t_vector *scal,
+t_object	*torus(t_vector *translation, t_vector *rotation, t_vector *scal,
 		t_vector *color)
 {
-	object_t			*m_torus;
+	t_object			*m_torus;
 	t_rm_object_params	*torus_info;
 
 	torus_info = malloc(sizeof(t_rm_object_params));
@@ -44,7 +44,7 @@ double	torus_sdf(t_vector p, t_vector params)
 	return (distance);
 }
 
-int	torus_test_int(object_t *this, ray_t *camera_ray, propretries_t *prop)
+int	torus_test_int(t_object *this, t_ray *camera_ray, t_propretries *prop)
 {
 	int valide;
 	double u;

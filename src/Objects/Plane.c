@@ -6,15 +6,15 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:27 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 06:58:16 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/types.h"
 #include "headers/spher.h"
 
-void	p_int_point_propreties(t_vector *poi, object_t *this,
-		propretries_t *prop)
+void	p_int_point_propreties(t_vector *poi, t_object *this,
+		t_propretries *prop)
 {
 	t_vector	*normal_fp;
 	t_vector	*m_normal;
@@ -35,7 +35,7 @@ void	p_int_point_propreties(t_vector *poi, object_t *this,
  *  K = ray.m_lab normilazed
  *  u = Ax + tKz; & v = ay + tky; & t = kz/az;
  */
-t_vector	*p_calculat_int_point(ray_t *ray, t_vector k, propretries_t *prop,
+t_vector	*p_calculat_int_point(t_ray *ray, t_vector k, t_propretries *prop,
 		int *status)
 {
 	t_vector	a;
@@ -61,10 +61,10 @@ t_vector	*p_calculat_int_point(ray_t *ray, t_vector k, propretries_t *prop,
 	}
 }
 
-int	p_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
+int	p_int_test(t_object *this, t_ray *camera_ray, t_propretries *prop)
 {
 	t_vector	*poi;
-	ray_t		*bck_ray;
+	t_ray		*bck_ray;
 	t_vector	vhat;
 	int			status;
 
@@ -83,10 +83,10 @@ int	p_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
 	return (TRUE);
 }
 
-object_t	*plane(t_vector *translation, t_vector *rotation, t_vector *scal,
+t_object	*plane(t_vector *translation, t_vector *rotation, t_vector *scal,
 		t_vector *color)
 {
-	object_t	*plane;
+	t_object	*plane;
 
 	plane = object_base(translation, rotation, scal, color);
 	plane->test_inter = p_int_test;

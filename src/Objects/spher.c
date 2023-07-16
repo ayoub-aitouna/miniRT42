@@ -6,27 +6,27 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:30 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 06:58:16 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/spher.h"
 #include <math.h>
 
-object_t	*create_sphere(t_vector *translation, t_vector *rotation,
+t_object	*create_sphere(t_vector *translation, t_vector *rotation,
 		t_vector *scal, t_vector *color)
 {
-	object_t	*shphere;
+	t_object	*shphere;
 
 	shphere = object_base(translation, rotation, scal, color);
 	shphere->test_inter = sh_int_test;
 	return (shphere);
 }
 
-int	sh_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
+int	sh_int_test(t_object *this, t_ray *camera_ray, t_propretries *prop)
 {
 	t_vector	*poi;
-	ray_t		*bck_ray;
+	t_ray		*bck_ray;
 	t_vector	vhat;
 	int			status;
 
@@ -45,7 +45,7 @@ int	sh_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
 	return (TRUE);
 }
 
-t_vector	*calculat_int_point(ray_t *bck_ray, t_vector vhat, int *status)
+t_vector	*calculat_int_point(t_ray *bck_ray, t_vector vhat, int *status)
 {
 	double	b;
 	double	c;
@@ -64,7 +64,7 @@ t_vector	*calculat_int_point(ray_t *bck_ray, t_vector vhat, int *status)
 	return (fs_addition(bck_ray->point1, num_muliplication(&vhat, t)));
 }
 
-void	calculat_uv(propretries_t *prop, t_vector *poi)
+void	calculat_uv(t_propretries *prop, t_vector *poi)
 {
 	double	u;
 	double	v;
@@ -79,7 +79,7 @@ void	calculat_uv(propretries_t *prop, t_vector *poi)
 	prop->uv_cords.v = v;
 }
 
-void	int_point_propreties(t_vector *poi, object_t *this, propretries_t *prop)
+void	int_point_propreties(t_vector *poi, t_object *this, t_propretries *prop)
 {
 	t_vector	*m_normal;
 	t_vector	*int_poi;

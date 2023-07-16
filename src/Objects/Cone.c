@@ -6,16 +6,16 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:19 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 07:06:30 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/Cone.h"
 
-object_t	*cone(t_vector *translation, t_vector *rotation, t_vector *scal,
+t_object	*cone(t_vector *translation, t_vector *rotation, t_vector *scal,
 		t_vector *color)
 {
-	object_t	*cone;
+	t_object	*cone;
 
 	cone = object_base(translation, rotation, scal, color);
 	cone->test_inter = cone_int_test;
@@ -24,17 +24,17 @@ object_t	*cone(t_vector *translation, t_vector *rotation, t_vector *scal,
 	return (cone);
 }
 
-int	cone_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
+int	cone_int_test(t_object *this, t_ray *camera_ray, t_propretries *prop)
 {
-	cep_t		cone_prop;
+	t_cep		cone_prop;
 	t_vector	*n;
 	t_vector	*poi;
 	int			index;
-	ray_t		*bck_ray;
+	t_ray		*bck_ray;
 
-	cone_prop = ((cep_t){.t = (double[]){MAX_V, MAX_V, MAX_V},
-		.valide_intersections = (int[]){FALSE, FALSE, FALSE},
-		.intersections = (t_vector *[]){NULL, NULL, NULL}});
+	cone_prop = (t_cep){.t = (double []){MAX_V, MAX_V, MAX_V},
+		.valide_intersections = (int []){FALSE, FALSE, FALSE},
+		.intersections = (t_vector * []){NULL, NULL, NULL}};
 	bck_ray = apply_transform(camera_ray, this, BCKWRD);
 	n = normilized_copy(bck_ray->m_lab);
 	check_intersections(bck_ray, n, &cone_prop, prop);
@@ -49,15 +49,15 @@ int	cone_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
 		return (set_cap_properiesties(this, poi, *n, prop));
 }
 
-void	check_intersections(ray_t *bck_ray, t_vector *n, cep_t *cone_prop,
-		propretries_t *prop)
+void	check_intersections(t_ray *bck_ray, t_vector *n, t_cep *cone_prop,
+		t_propretries *prop)
 {
 	calulcat_cone_intersection(*bck_ray->point1, n, cone_prop);
 	if (!close_enough(n->z, 0.0f))
 	{
 		cone_cap_intersection(*bck_ray->point1, n, cone_prop);
 		prop->uv_cords = (t_uv_cords){bck_ray->point1->x + (cone_prop->t[2]
-			* n->x), bck_ray->point1->y + (cone_prop->t[2] * n->y)};
+				* n->x), bck_ray->point1->y + (cone_prop->t[2] * n->y)};
 	}
 	delete_ray(bck_ray);
 }
@@ -79,7 +79,7 @@ t_vector	*normilized_copy(t_vector *v)
  *	if t hase solution then the a = p+tn is the point of intersection
  *	if t has no solution then ray does not intersect with the cone
  */
-void	calulcat_cone_intersection(t_vector p, t_vector *n, cep_t *propretries)
+void	calulcat_cone_intersection(t_vector p, t_vector *n, t_cep *propretries)
 {
 	double	b;
 	double	a;
@@ -95,9 +95,9 @@ void	calulcat_cone_intersection(t_vector p, t_vector *n, cep_t *propretries)
 		propretries->t[0] = (-b + numsqrt) / (2 * a);
 		propretries->t[1] = (-b - numsqrt) / (2 * a);
 		propretries->intersections[0] = ms_addition(&p, num_muliplication(n,
-				propretries->t[0]), 1);
+					propretries->t[0]), 1);
 		propretries->intersections[1] = ms_addition(&p, num_muliplication(n,
-				propretries->t[1]), 1);
+					propretries->t[1]), 1);
 		check_nd_set(propretries, 0, in_range(propretries->intersections[0]->z,
 				.0, 1.));
 		check_nd_set(propretries, 1, in_range(propretries->intersections[1]->z,
@@ -105,11 +105,11 @@ void	calulcat_cone_intersection(t_vector p, t_vector *n, cep_t *propretries)
 	}
 }
 
-void	cone_cap_intersection(t_vector p, t_vector *n, cep_t *propretries)
+void	cone_cap_intersection(t_vector p, t_vector *n, t_cep *propretries)
 {
 	propretries->t[2] = (p.z - 1) / -n->z;
 	propretries->intersections[2] = ms_addition(&p, num_muliplication(n,
-			propretries->t[2]), 1);
+				propretries->t[2]), 1);
 	if (propretries->t[2] > 0.0 && (sqrt(pow(propretries->intersections[2]->x,
 					2) + pow(propretries->intersections[2]->y, 2))) < 1.0)
 		propretries->valide_intersections[2] = TRUE;
@@ -117,7 +117,7 @@ void	cone_cap_intersection(t_vector p, t_vector *n, cep_t *propretries)
 		propretries->t[2] = MAX_V;
 }
 
-void	check_nd_set(cep_t *propretries, int index, int z_condition)
+void	check_nd_set(t_cep *propretries, int index, int z_condition)
 {
 	if (propretries->t[index] > 0 && z_condition)
 		propretries->valide_intersections[index] = TRUE;
@@ -125,7 +125,7 @@ void	check_nd_set(cep_t *propretries, int index, int z_condition)
 		propretries->t[index] = MAX_V;
 }
 
-int	set_cone_properiesties(object_t *this, t_vector *poi, propretries_t *prop)
+int	set_cone_properiesties(t_object *this, t_vector *poi, t_propretries *prop)
 {
 	t_vector	*normal_fp;
 	t_vector	*m_normal;

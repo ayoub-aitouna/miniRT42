@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:35 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 06:58:16 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@
 # include "image.h"
 # include "types.h"
 
-ray_t	*ray(t_vector *point1, t_vector *point2);
-void	delete_ray(ray_t *this);
+t_ray	*ray(t_vector *point1, t_vector *point2);
+void	delete_ray(t_ray *this);
 #endif

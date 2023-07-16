@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 01:32:01 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 04:50:23 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 06:48:42 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	set_tfm(t_textures *this, t_vector2 *translation, t_vector2 *scal,
 	t_matrix	*rmt;
 	t_matrix	*smt;
 
-	tmt = matrix(3, 3, (double[]){1.0, 0.0, translation->x, 0.0, 1.0,
-		translation->y, 0.0, 0.0, 1.0});
-	rmt = matrix(3, 3, (double[]){cos(rotation), -sin(rotation), 0.0,
-		sin(rotation), cos(rotation), 0.0, 0.0, 0.0, 1.0});
-	smt = matrix(3, 3, (double[]){scal->x, 0.0, 0.0, 0.0, scal->y, 0.0, 0.0,
-		0.0, 1.0});
+	tmt = matrix(3, 3, (double []){1.0, 0.0, translation->x, 0.0, 1.0,
+			translation->y, 0.0, 0.0, 1.0});
+	rmt = matrix(3, 3, (double []){cos(rotation), -sin(rotation), 0.0,
+			sin(rotation), cos(rotation), 0.0, 0.0, 0.0, 1.0});
+	smt = matrix(3, 3, (double []){scal->x, 0.0, 0.0, 0.0, scal->y, 0.0, 0.0,
+			0.0, 1.0});
 	this->tfm = safe_matrix_multy(safe_matrix_multy(tmt, rmt), smt);
 }
 
@@ -45,7 +45,7 @@ t_uv_cords	*apply_transform_textures(t_textures *this, t_uv_cords *cords)
 
 	if (!this->tfm)
 		return (cords);
-	uv = matrix(3, 1, (double[]){cords->u, cords->v, 0.0});
+	uv = matrix(3, 1, (double []){cords->u, cords->v, 0.0});
 	result = mt_multiplication(this->tfm, uv);
 	r = malloc(sizeof(t_uv_cords));
 	r->u = result->matrix[0][0];

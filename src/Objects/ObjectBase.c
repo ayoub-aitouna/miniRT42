@@ -6,18 +6,18 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:24 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 06:57:06 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/Objectbase.h"
 
-object_t	*object_base(t_vector *translation, t_vector *rotation,
+t_object	*object_base(t_vector *translation, t_vector *rotation,
 		t_vector *scal, t_vector *color)
 {
-	object_t	*object;
+	t_object	*object;
 
-	object = (object_t *)malloc(sizeof(object_t));
+	object = (t_object *)malloc(sizeof(t_object));
 	object->fwd_tfm = set_transform(translation, rotation, scal);
 	object->bck_tfm = inverse(object->fwd_tfm);
 	object->base_color = copy_vector(*color);
@@ -29,8 +29,8 @@ object_t	*object_base(t_vector *translation, t_vector *rotation,
 }
 
 /// @brief Delete Operator Overload
-/// @param object_t *
-void	deleteObjectBase(object_t *this)
+/// @param t_object *
+void	deleteObjectBase(t_object *this)
 {
 	if (this)
 	{
@@ -60,7 +60,7 @@ t_vector * false(int *status)
 }
 
 /// @brief Delete[] Operator Overload
-/// @param object_t *
+/// @param t_object *
 void	delete_object_list(t_list *list)
 {
 	t_list *tmp;

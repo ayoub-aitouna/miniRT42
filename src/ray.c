@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:50 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 06:58:16 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 #include "lib/math/headers/libtypes.h"
 #include "lib/math/headers/vectormath.h"
 
-ray_t	*ray(t_vector *m_point1, t_vector *m_point2)
+t_ray	*ray(t_vector *m_point1, t_vector *m_point2)
 {
-	ray_t	*ray;
+	t_ray	*ray;
 
-	ray = malloc(sizeof(ray_t));
+	ray = malloc(sizeof(t_ray));
 	ray->point1 = m_point1;
 	ray->point2 = m_point2;
 	ray->m_lab = minus(ray->point2, ray->point1);
@@ -27,8 +27,8 @@ ray_t	*ray(t_vector *m_point1, t_vector *m_point2)
 }
 
 /// @brief frees All memory Allocated By the Ray
-/// @param  ray_t*
-void	delete_ray(ray_t *this)
+/// @param  t_ray*
+void	delete_ray(t_ray *this)
 {
 	if (this)
 	{

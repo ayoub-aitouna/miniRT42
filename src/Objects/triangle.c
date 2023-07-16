@@ -6,14 +6,14 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:36 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 06:58:16 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/triangle.h"
 
-void	t_int_point_propreties(t_vector *poi, object_t *this,
-		propretries_t *prop)
+void	t_int_point_propreties(t_vector *poi, t_object *this,
+		t_propretries *prop)
 {
 	t_vector	*m_normal;
 	t_vector	*int_poi;
@@ -33,7 +33,7 @@ void	t_int_point_propreties(t_vector *poi, object_t *this,
  *  K = ray.m_lab normilazed
  *  u = Ax + tKz; & v = ay + tky; & t = kz/az;
  */
-t_vector	*t_calculat_int_point(ray_t *ray, t_vector k, int *status)
+t_vector	*t_calculat_int_point(t_ray *ray, t_vector k, int *status)
 {
 	t_vector	a;
 	double		t;
@@ -55,10 +55,10 @@ t_vector	*t_calculat_int_point(ray_t *ray, t_vector k, int *status)
 		return (ms_addition(ray->point1, num_muliplication(&k, t), 1));
 }
 
-int	t_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
+int	t_int_test(t_object *this, t_ray *camera_ray, t_propretries *prop)
 {
 	t_vector	*poi;
-	ray_t		*bck_ray;
+	t_ray		*bck_ray;
 	t_vector	vhat;
 	int			status;
 
@@ -77,10 +77,10 @@ int	t_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
 	return (TRUE);
 }
 
-object_t	*triangle(t_vector *translation, t_vector *rotation, t_vector *scal,
+t_object	*triangle(t_vector *translation, t_vector *rotation, t_vector *scal,
 		t_vector *color)
 {
-	object_t	*triangle;
+	t_object	*triangle;
 
 	triangle = object_base(translation, rotation, scal, color);
 	triangle->test_inter = t_int_test;
