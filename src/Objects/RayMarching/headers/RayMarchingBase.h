@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 19:55:56 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 06:58:16 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 19:32:39 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,19 @@
 # ifndef D_S
 #  define D_S 0.001
 # endif
-typedef double	(*sdf)(t_vector p, t_vector params);
+
+typedef double	(*t_sdf)(t_vector p, t_vector params);
 typedef struct s_rm_object_params
 {
-	sdf			torus_sdf;
+	t_sdf		torus_sdf;
 	t_vector	params;
 }				t_rm_object_params;
+
 t_object		*rm_object(t_vector *translation, t_vector *rotation,
 					t_vector *scal, t_vector *color);
 int				rm_int_test(t_object *this, t_ray *camera_ray,
 					t_propretries *prop);
-double			SDF(t_object *this, t_vector p, t_vector params);
+double			sdf(t_object *this, t_vector p, t_vector params);
 double			calculat_sdf_diff(t_object *this, t_vector *normal,
 					t_vector displacemnt, t_vector parms);
 t_vector		get_local_normal(t_object *this, t_vector *cur_location,

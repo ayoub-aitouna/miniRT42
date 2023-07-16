@@ -2,7 +2,7 @@ SRC		:= $(wildcard src/*.c) $(wildcard src/**/*.c) $(wildcard src/**/**/*.c)  $(
 OBJ_DIR	:= .compiled
 OBJ		:= $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC))
 NAME	:= miniRT
-cc		:= gcc -O2 -g -fsanitize=address
+cc		:= gcc #-O2 -g -fsanitize=address
 CFLAGS  := -Werror -Wall -Wextra
 MLXFLAG := -lmlx
 GREEN	:= \033[32m
