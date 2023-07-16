@@ -6,17 +6,17 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:44 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/06/27 23:21:44 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 03:28:40 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib.h"
 
-void ft_lstiter(t_list *lst, void (*f)(void *))
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-    while (lst)
-    {
-        (*f)(lst->content);
-        lst = lst->next;
-    }
+	while (lst)
+	{
+		(*f)(lst->content);
+		lst = lst->next;
+	}
 }

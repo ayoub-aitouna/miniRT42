@@ -6,15 +6,15 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:30 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/09 00:54:30 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/spher.h"
 #include <math.h>
 
-object_t	*create_sphere(vector_t *translation, vector_t *rotation,
-		vector_t *scal, vector_t *color)
+object_t	*create_sphere(t_vector *translation, t_vector *rotation,
+		t_vector *scal, t_vector *color)
 {
 	object_t	*shphere;
 
@@ -25,12 +25,12 @@ object_t	*create_sphere(vector_t *translation, vector_t *rotation,
 
 int	sh_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
 {
-	vector_t	*poi;
+	t_vector	*poi;
 	ray_t		*bck_ray;
-	vector_t	vhat;
+	t_vector	vhat;
 	int			status;
 
-	bck_ray = Apply_transform(camera_ray, this, BCKWRD);
+	bck_ray = apply_transform(camera_ray, this, BCKWRD);
 	vhat = *bck_ray->m_lab;
 	normalize(&vhat);
 	poi = calculat_int_point(bck_ray, vhat, &status);
@@ -45,7 +45,7 @@ int	sh_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
 	return (TRUE);
 }
 
-vector_t	*calculat_int_point(ray_t *bck_ray, vector_t vhat, int *status)
+t_vector	*calculat_int_point(ray_t *bck_ray, t_vector vhat, int *status)
 {
 	double	b;
 	double	c;
@@ -64,7 +64,7 @@ vector_t	*calculat_int_point(ray_t *bck_ray, vector_t vhat, int *status)
 	return (fs_addition(bck_ray->point1, num_muliplication(&vhat, t)));
 }
 
-void	calculat_uv(propretries_t *prop, vector_t *poi)
+void	calculat_uv(propretries_t *prop, t_vector *poi)
 {
 	double	u;
 	double	v;
@@ -79,16 +79,17 @@ void	calculat_uv(propretries_t *prop, vector_t *poi)
 	prop->uv_cords.v = v;
 }
 
-void	int_point_propreties(vector_t *poi, object_t *this, propretries_t *prop)
+void	int_point_propreties(t_vector *poi, object_t *this, propretries_t *prop)
 {
-	vector_t	*m_normal;
-	vector_t	*int_poi;
+	t_vector	*m_normal;
+	t_vector	*int_poi;
 
-	int_poi = Apply_transform_vector(poi, FRWRD, this);
+	int_poi = apply_transform_vector(poi, FRWRD, this);
 	calculat_uv(prop, poi);
 	m_normal = get_norm(this, poi);
 	if (this->textures)
-	m_normal = apply_bump_map_textures(this->textures, m_normal, prop->uv_cords);
+		m_normal = apply_bump_map_textures(this->textures, m_normal,
+			prop->uv_cords);
 	normalize(m_normal);
 	prop->int_point = *int_poi;
 	prop->local_normal = *m_normal;
@@ -134,9 +135,9 @@ double	min_t(double numsqrt, double b, int *status)
 	}
 }
 
-vector_t	*fs_addition(vector_t *u, vector_t *v)
+t_vector	*fs_addition(t_vector *u, t_vector *v)
 {
-	vector_t	*re;
+	t_vector	*re;
 
 	re = addition(u, v);
 	free(v);

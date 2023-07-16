@@ -6,21 +6,23 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:22:31 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/02 15:53:05 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 03:30:14 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib.h"
 
-void free_list(void **ptrs, int size)
+void	free_list(void **ptrs, int size)
 {
-    int i = 0;
-    if (!ptrs)
-        return;
-    while (i < size)
-    {
-        if (ptrs[i])
-            free(ptrs[i]);
-        i++;
-    }
+	int	i;
+
+	i = 0;
+	if (!ptrs)
+		return ;
+	while (i < size)
+	{
+		if (ptrs[i])
+			free(ptrs[i]);
+		i++;
+	}
 }

@@ -6,15 +6,15 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 01:09:45 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/13 01:11:48 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 04:47:28 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/vectormath.h"
 
-vector_t	*addition(vector_t *target, vector_t *v)
+t_vector	*addition(t_vector *target, t_vector *v)
 {
-	vector_t	*new;
+	t_vector	*new;
 
 	new = copy_vector(*target);
 	new->x += v->x;
@@ -23,10 +23,9 @@ vector_t	*addition(vector_t *target, vector_t *v)
 	return (new);
 }
 
-
-vector_t	*ms_addition(vector_t *target, vector_t *v, int free_at)
+t_vector	*ms_addition(t_vector *target, t_vector *v, int free_at)
 {
-	vector_t	*result;
+	t_vector	*result;
 
 	result = addition(target, v);
 	free_at_index(target, v, free_at);

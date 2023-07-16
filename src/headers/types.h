@@ -6,12 +6,12 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:40 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/08 14:28:26 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef M_TYPES_H
-# define M_TYPES_H
+#ifndef TYPES_H
+# define TYPES_H
 # include "../lib/lib.h"
 # include <math.h>
 # include <stdlib.h>
@@ -33,21 +33,20 @@ typedef struct s_data
 
 typedef struct ray
 {
-	vector_t				*point1;
-	vector_t				*point2;
-	vector_t				*m_lab;
+	t_vector				*point1;
+	t_vector				*point2;
+	t_vector				*m_lab;
 }							ray_t;
 
-typedef int (*test_intersection)(object_t *this,
-									struct ray *ray,
-									propretries_t *prop);
+typedef int					(*test_intersection)(object_t *this,
+						struct ray *ray, propretries_t *prop);
 
 typedef struct Object
 {
-	matrix_t				*fwd_tfm;
-	matrix_t				*bck_tfm;
-	matrix_t				*lineartfm;
-	vector_t				*base_color;
+	t_matrix				*fwd_tfm;
+	t_matrix				*bck_tfm;
+	t_matrix				*lineartfm;
+	t_vector				*base_color;
 	test_intersection		test_inter;
 	material_t				*material;
 	t_textures				*textures;
@@ -56,19 +55,19 @@ typedef struct Object
 
 typedef struct Light
 {
-	vector_t				*base_color;
-	vector_t				*position;
+	t_vector				*base_color;
+	t_vector				*position;
 	double					m_intensity;
 }							light_t;
 
 typedef struct camera
 {
-	vector_t				*position;
-	vector_t				*loockat;
-	vector_t				*up;
-	vector_t				*screen_u;
-	vector_t				*screen_v;
-	vector_t				*screen_center;
+	t_vector				*position;
+	t_vector				*loockat;
+	t_vector				*up;
+	t_vector				*screen_u;
+	t_vector				*screen_v;
+	t_vector				*screen_center;
 	double					lenght;
 	double					horizontal_size;
 	double					aspect_ration;
@@ -79,19 +78,18 @@ typedef struct Scene
 	t_list					*m_object_list;
 	t_list					*m_light_list;
 	camera_t				*m_camera;
-	vector_t				ambient_light_factor;
+	t_vector				ambient_light_factor;
 }							scene_t;
 
 typedef struct cylinder_equations_Propretries
 {
-	vector_t				**intersections;
+	t_vector				**intersections;
 	int						*valide_intersections;
 	double					*t;
 }							cep_t;
 
-typedef vector_t	*(*compute_color)(scene_t *scene,
-									propretries_t *prop,
-									t_color_params params);
+typedef t_vector			*(*compute_color)(scene_t *scene,
+								propretries_t *prop, t_color_params params);
 
 typedef struct material
 {
@@ -111,19 +109,19 @@ typedef struct uv_cords
 
 typedef struct Propretries
 {
-	vector_t				local_color;
-	vector_t				local_normal;
-	vector_t				int_point;
-	vector_t				poi;
+	t_vector				local_color;
+	t_vector				local_normal;
+	t_vector				int_point;
+	t_vector				poi;
 	t_uv_cords				uv_cords;
 }							propretries_t;
-typedef vector_t	*(*get_color_function)(t_textures *this,
-										t_uv_cords cords);
+typedef t_vector			*(*get_color_function)(t_textures *this,
+								t_uv_cords cords);
 typedef struct s_textures
 {
-	vector_t				color_1;
-	vector_t				color_2;
-	matrix_t				*tfm;
+	t_vector				color_1;
+	t_vector				color_2;
+	t_matrix				*tfm;
 	t_data					*img;
 	int						img_width;
 	int						img_height;

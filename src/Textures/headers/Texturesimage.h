@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   image.h                                            :+:      :+:    :+:   */
+/*   Texturesimage.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 11:27:31 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/03 14:44:05 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ t_textures	*new_img_texture(void *mlx_ptr, char *filename);
 void				load_img(t_textures *this, void *mlx_ptr,
 						char *filename);
 
-vector_t			*get_color(t_textures *this, t_uv_cords cords);
+t_vector			*get_color(t_textures *this, t_uv_cords cords);
 #endif

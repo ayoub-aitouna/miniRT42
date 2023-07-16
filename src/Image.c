@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:45 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/10 07:29:09 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_image	*initialize(void)
 	return (image);
 }
 
-void	set_pixel(t_image *image, int x, int y, vector_t *color)
+void	set_pixel(t_image *image, int x, int y, t_vector *color)
 {
 	image->red[y][x] = color->x;
 	image->green[y][x] = color->y;
@@ -52,7 +52,6 @@ void	display(void *mlx, void *win, t_image *image)
 	int		j;
 
 	i = 0;
-	j = 0;
 	if (!image)
 		return ;
 	max = max_color_value(image);
@@ -65,7 +64,7 @@ void	display(void *mlx, void *win, t_image *image)
 		while (j < WIDTH)
 		{
 			my_mlx_pixel_put(&img, j, i, convert(image->red[i][j],
-						image->green[i][j], image->blue[i][j], max));
+					image->green[i][j], image->blue[i][j], max));
 			j++;
 		}
 		i++;

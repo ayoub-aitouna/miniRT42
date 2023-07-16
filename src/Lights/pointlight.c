@@ -6,13 +6,13 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:22:37 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/01 14:20:42 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/pointlight.h"
 
-light_t	*new_light(vector_t *position, vector_t *color, double intensity)
+light_t	*new_light(t_vector *position, t_vector *color, double intensity)
 {
 	light_t	*light;
 

@@ -6,13 +6,13 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:39 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/03 03:17:58 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/camera.h"
 
-camera_t	*Camera(double horizontal_size, double lenght, double aspect_ration)
+camera_t	*camera(double horizontal_size, double lenght, double aspect_ration)
 {
 	camera_t	*camera;
 
@@ -26,48 +26,47 @@ camera_t	*Camera(double horizontal_size, double lenght, double aspect_ration)
 	return (camera);
 }
 
-void	SetPosition(camera_t *this, vector_t *position)
+void	set_position(camera_t *this, t_vector *position)
 {
 	this->position = position;
 }
 
-void	SetUp(camera_t *this, vector_t *Up)
+void	set_up(camera_t *this, t_vector *Up)
 {
 	this->up = Up;
 }
 
-void	Setloockat(camera_t *this, vector_t *loockat)
+void	set_loock_at(camera_t *this, t_vector *loockat)
 {
 	this->loockat = loockat;
 }
 
 void	calculat_geometry(camera_t *this)
 {
-	vector_t	*aligment;
+	t_vector	*aligment;
 
 	aligment = minus(this->loockat, this->position);
 	normalize(aligment);
-	this->screen_u = cross(*aligment, *this->up);
+		this->screen_u = cross(*aligment, *this->up);
 	normalize(this->screen_u);
-	this->screen_v = cross(*this->screen_u, *aligment);
+		this->screen_v = cross(*this->screen_u, *aligment);
 	normalize(this->screen_v);
 	this->screen_center = ms_addition(this->position,
 			ms_num_muliplication(aligment, this->lenght), 1);
 	this->screen_u = ms_num_muliplication(this->screen_u,
 			this->horizontal_size);
-	this->screen_v = ms_num_muliplication(this->screen_v,
-			this->horizontal_size / this->aspect_ration);
+	this->screen_v = ms_num_muliplication(this->screen_v, this->horizontal_size
+			/ this->aspect_ration);
 }
 
 ray_t	*generate_ray(camera_t *this, double screenX, double screenY)
 {
-	vector_t	*w_part1;
-	vector_t	*dst_cords;
-	vector_t	*scalled_u;
-	vector_t	*scalled_v;
+	t_vector	*w_part1;
+	t_vector	*dst_cords;
+	t_vector	*scalled_u;
+	t_vector	*scalled_v;
 
-	scalled_u = num_muliplication(this->screen_u,
-									screenX);
+	scalled_u = num_muliplication(this->screen_u, screenX);
 	scalled_v = num_muliplication(this->screen_v, screenY);
 	w_part1 = addition(this->screen_center, scalled_u);
 	dst_cords = addition(w_part1, scalled_v);
@@ -77,7 +76,7 @@ ray_t	*generate_ray(camera_t *this, double screenX, double screenY)
 	return (ray(copy_vector(*this->position), dst_cords));
 }
 
-void	deleteCamera(camera_t *this)
+void	deletecamera(camera_t *this)
 {
 	if (this)
 	{

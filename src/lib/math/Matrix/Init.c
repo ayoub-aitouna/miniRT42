@@ -6,62 +6,70 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 22:21:31 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/12 22:21:42 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 04:20:02 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../headers/libtypes.h"
 #include "../headers/matrix.h"
-#include "../headers/types.h"
 #include <stdio.h>
 
-matrix_t *matrix(int rows, int cols, double *values)
+t_matrix	*matrix(int rows, int cols, double *values)
 {
-    matrix_t *mt;
+	t_matrix	*mt;
 
-    mt = create_matrix(rows, cols);
-    fill_mt(mt, values);
-    return (mt);
+	mt = create_matrix(rows, cols);
+	fill_mt(mt, values);
+	return (mt);
 }
 
-void fill_mt(matrix_t *mt, double *values)
+void	fill_mt(t_matrix *mt, double *values)
 {
-    int k;
+	int	k;
+	int	i;
+	int	j;
 
-    k = 0;
-    for (int i = 0; i < mt->rows; i++)
-    {
-        for (int j = 0; j < mt->cols; j++)
-            mt->matrix[i][j] = values[k++];
-    }
+	k = 0;
+	i = 0;
+	while (i < mt->rows)
+	{
+		j = 0;
+		while (j < mt->cols)
+		{
+			mt->matrix[i][j] = values[k++];
+			j++;
+		}
+		i++;
+	}
 }
 
-double *create_cols(int c)
+double	*create_cols(int c)
 {
-    int i;
-    double *new_col;
+	int		i;
+	double	*new_col;
 
-    i = 0;
-    new_col = malloc(c * sizeof(double));
-    while (i < c)
-        new_col[i++] = .0;
-    return (new_col);
+	i = 0;
+	new_col = malloc(c * sizeof(double));
+	while (i < c)
+		new_col[i++] = .0;
+	return (new_col);
 }
 
-matrix_t *create_matrix(int rows, int cols)
+t_matrix	*create_matrix(int rows, int cols)
 {
-    matrix_t *new_mt;
-    int i;
-    double **mt;
+	t_matrix	*new_mt;
+	int			i;
+	double		**mt;
 
-    if (rows <= 0 || cols <= 0)
-        return (NULL);
-    new_mt = malloc(sizeof(matrix_t));
-    i = 0;
-    new_mt->rows = rows;
-    new_mt->cols = cols;
-    mt = malloc(sizeof(double *) * rows);
-    while (i < rows)
-        mt[i++] = create_cols(cols);
-    new_mt->matrix = mt;
-    return (new_mt);
+	if (rows <= 0 || cols <= 0)
+		return (NULL);
+	new_mt = malloc(sizeof(t_matrix));
+	i = 0;
+	new_mt->rows = rows;
+	new_mt->cols = cols;
+	mt = malloc(sizeof(double *) * rows);
+	while (i < rows)
+		mt[i++] = create_cols(cols);
+	new_mt->matrix = mt;
+	return (new_mt);
 }

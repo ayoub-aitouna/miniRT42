@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 14:18:02 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/01 14:21:13 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	check_ray_path_returns(int value, ray_t *m_ray)
 	return (value);
 }
 
-int	check_ray_path(light_t *this, t_light_params params, vector_t *initPoint)
+int	check_ray_path(light_t *this, t_light_params params, t_vector *initPoint)
 {
 	t_list			*tmp;
 	ray_t			*m_ray;
@@ -33,8 +33,8 @@ int	check_ray_path(light_t *this, t_light_params params, vector_t *initPoint)
 	{
 		if (((object_t *)tmp->content) != params.cur_object)
 		{
-			valide_i = ((object_t *)tmp->content)
-				->test_inter(((object_t *)tmp->content), m_ray, &prop);
+			valide_i = ((object_t *)tmp->content)->test_inter(((object_t *)tmp
+						->content), m_ray, &prop);
 			distances[1] = vector_distance(&prop.int_point, m_ray->point1);
 			if (distances[1] > distances[0])
 				valide_i = FALSE;
@@ -48,14 +48,14 @@ int	check_ray_path(light_t *this, t_light_params params, vector_t *initPoint)
 
 /**
  * @brief I = Li * (1 - (angle / (PI/2) ))
- * @brief angle(angle btween localnormal & lightDir) 
+ * @brief angle(angle btween localnormal & lightDir)
  *	= cos^-1(localNormal.lightDir)
  * @return light Intesity as double
  */
 int	calculat_ilumination(light_t *this, propretries_t *prop,
 		t_light_params params)
 {
-	vector_t	*light_dir;
+	t_vector	*light_dir;
 	double		angle;
 
 	if (!check_ray_path(this, params, &prop->int_point))

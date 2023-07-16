@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:22:35 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/01 14:20:53 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 typedef struct light_params
 {
 	double		*intensity;
-	vector_t	*color;
+	t_vector	*color;
 	scene_t		*scene;
 	object_t	*cur_object;
 }				t_light_params;
 
-light_t			*new_light(vector_t *position, vector_t *color,
+light_t			*new_light(t_vector *position, t_vector *color,
 					double intensity);
 int				calculat_ilumination(light_t *this, propretries_t *prop,
 					t_light_params params);

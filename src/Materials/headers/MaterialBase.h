@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:22:41 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/04 16:19:05 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct color_params
 
 material_t		*new_material_base(double shininess_coefficient,
 					double reflection_coefficient);
-vector_t		*reflect_color(scene_t *scene, propretries_t *prop,
+t_vector		*reflect_color(scene_t *scene, propretries_t *prop,
 					t_color_params params);
 int				mt_cast_ray(scene_t *scene, ray_t *m_ray, propretries_t *prop,
 					t_ref_cast_prop cast_prop);

@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:48 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/10 07:29:16 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/15 22:33:23 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct mt
 
 int	m_exit(mt_t *m_mt)
 {
-	deleteScene(m_mt->scene);
+	deletescene(m_mt->scene);
 	free(m_mt->mlx);
 	free(m_mt->mlx_win);
 	printf("ESC Clicked \n");
@@ -43,14 +43,14 @@ int	key_hook(int keycode, mt_t *mt)
 
 int	main(void)
 {
-	mt_t				m_mt;
+	mt_t	m_mt;
 
 	m_mt = (mt_t){.scene = NULL, .image = NULL};
 	m_mt.image = NULL;
 	m_mt.mlx = mlx_init();
 	m_mt.mlx_win = mlx_new_window(m_mt.mlx, WIDTH, HEIGHT, "miniRT");
-	m_mt.scene = Scene(m_mt.mlx, m_mt.mlx_win);
-	m_mt.image = Render(m_mt.scene, m_mt.mlx, m_mt.mlx_win);
+	m_mt.scene = scene(m_mt.mlx, m_mt.mlx_win);
+	m_mt.image = render(m_mt.scene, m_mt.mlx, m_mt.mlx_win);
 	display(m_mt.mlx, m_mt.mlx_win, m_mt.image);
 	mlx_key_hook(m_mt.mlx_win, key_hook, &m_mt);
 	mlx_hook(m_mt.mlx_win, 17, 0l, m_exit, &m_mt);

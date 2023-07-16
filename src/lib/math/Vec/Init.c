@@ -6,38 +6,38 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:22:21 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/13 01:14:12 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/vectormath.h"
 
-vector_t	*vector(double x, double y, double z)
+t_vector	*vector(double x, double y, double z)
 {
-	vector_t	*vector;
+	t_vector	*vector;
 
-	vector = malloc(sizeof(vector_t));
+	vector = malloc(sizeof(t_vector));
 	vector->x = x;
 	vector->y = y;
 	vector->z = z;
 	return (vector);
 }
 
-vector_t	*copy_vector(vector_t v)
+t_vector	*copy_vector(t_vector v)
 {
 	return (vector(v.x, v.y, v.z));
 }
 
-vector_t	*normalized(vector_t *v)
+t_vector	*normalized(t_vector *v)
 {
-	vector_t	*n_v;
+	t_vector	*n_v;
 
 	n_v = copy_vector(*v);
 	normalize(n_v);
 	return (n_v);
 }
 
-double	normalize(vector_t *v)
+double	normalize(t_vector *v)
 {
 	double	l;
 

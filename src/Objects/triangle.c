@@ -6,26 +6,25 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:36 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/03 14:43:29 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/triangle.h"
 
-void	t_int_point_propreties(vector_t *poi, object_t *this,
+void	t_int_point_propreties(t_vector *poi, object_t *this,
 		propretries_t *prop)
 {
-	vector_t	*m_normal;
-	vector_t	*int_poi;
+	t_vector	*m_normal;
+	t_vector	*int_poi;
 
-	int_poi = Apply_transform_vector(poi, FRWRD, this);
+	int_poi = apply_transform_vector(poi, FRWRD, this);
 	m_normal = get_norm(this, int_poi);
 	normalize(m_normal);
 	prop->int_point = *int_poi;
 	prop->local_normal = *m_normal;
 	prop->local_color = *this->base_color;
-	free_list((void *[]){m_normal, int_poi},
-				2);
+	free_list((void *[]){m_normal, int_poi}, 2);
 }
 
 /**
@@ -34,9 +33,9 @@ void	t_int_point_propreties(vector_t *poi, object_t *this,
  *  K = ray.m_lab normilazed
  *  u = Ax + tKz; & v = ay + tky; & t = kz/az;
  */
-vector_t	*t_calculat_int_point(ray_t *ray, vector_t k, int *status)
+t_vector	*t_calculat_int_point(ray_t *ray, t_vector k, int *status)
 {
-	vector_t	a;
+	t_vector	a;
 	double		t;
 	double		u;
 	double		v;
@@ -58,12 +57,12 @@ vector_t	*t_calculat_int_point(ray_t *ray, vector_t k, int *status)
 
 int	t_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
 {
-	vector_t	*poi;
+	t_vector	*poi;
 	ray_t		*bck_ray;
-	vector_t	vhat;
+	t_vector	vhat;
 	int			status;
 
-	bck_ray = Apply_transform(camera_ray, this, BCKWRD);
+	bck_ray = apply_transform(camera_ray, this, BCKWRD);
 	vhat = *bck_ray->m_lab;
 	normalize(&vhat);
 	poi = t_calculat_int_point(bck_ray, vhat, &status);
@@ -78,8 +77,8 @@ int	t_int_test(object_t *this, ray_t *camera_ray, propretries_t *prop)
 	return (TRUE);
 }
 
-object_t	*triangle(vector_t *translation, vector_t *rotation, vector_t *scal,
-		vector_t *color)
+object_t	*triangle(t_vector *translation, t_vector *rotation, t_vector *scal,
+		t_vector *color)
 {
 	object_t	*triangle;
 

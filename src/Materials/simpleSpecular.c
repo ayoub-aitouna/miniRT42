@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 09:52:29 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/08 18:30:04 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 04:49:16 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #include "headers/SimpleMaterial.h"
 #include <stdlib.h>
 
-vector_t	*calculat_specular_color(scene_t *scene, propretries_t *prop,
+t_vector	*calculat_specular_color(scene_t *scene, propretries_t *prop,
 		object_t *cur_object, ray_t *camera_ray)
 {
 	t_list		*tmp;
-	vector_t	*specular_color;
+	t_vector	*specular_color;
 	ray_t		*lighit_ray;
 	double		specular_intensity;
 
@@ -27,14 +27,14 @@ vector_t	*calculat_specular_color(scene_t *scene, propretries_t *prop,
 	while (tmp)
 	{
 		lighit_ray = generate_light_ray(((light_t *)tmp->content),
-										&prop->int_point);
+			&prop->int_point);
 		if (spec_int_test(scene, lighit_ray))
 		{
 			delete_ray(lighit_ray);
 			return (specular_color);
 		}
 		specular_intensity = calculat_spec_intensity(lighit_ray, camera_ray,
-				&prop->local_normal, cur_object);
+			&prop->local_normal, cur_object);
 		specular_color->x += ((light_t *)tmp->content)->base_color->x
 			* specular_intensity;
 		specular_color->y += ((light_t *)tmp->content)->base_color->y
@@ -67,10 +67,10 @@ int	spec_int_test(scene_t *scene, ray_t *lighit_ray)
 	return (valide_itersection);
 }
 
-ray_t	*generate_light_ray(light_t *light, vector_t *initPoint)
+ray_t	*generate_light_ray(light_t *light, t_vector *initPoint)
 {
-	vector_t	*light_dir;
-	vector_t	*start_pos;
+	t_vector	*light_dir;
+	t_vector	*start_pos;
 	ray_t		*light_ray;
 
 	light_dir = normalized_sub(light->position, initPoint);
@@ -80,21 +80,19 @@ ray_t	*generate_light_ray(light_t *light, vector_t *initPoint)
 	return (light_ray);
 }
 
-double	calculat_spec_intensity(ray_t *light_ray,
-								ray_t *camera_ray,
-								vector_t *localNormal,
-								object_t *cur_object)
+double	calculat_spec_intensity(ray_t *light_ray, ray_t *camera_ray,
+		t_vector *localNormal, object_t *cur_object)
 {
-	vector_t	*reflection_vector;
-	vector_t	*v;
+	t_vector	*m_reflection_vector;
+	t_vector	*v;
 	double		dot_product;
 	double		specular_intensity;
 
 	specular_intensity = 0;
-	reflection_vector = Reflection_vector(light_ray->m_lab, localNormal);
+	m_reflection_vector = reflection_vector(light_ray->m_lab, localNormal);
 	v = normalized(camera_ray->m_lab);
-	dot_product = dot(*reflection_vector, *v);
-	free_list((void *[]){reflection_vector, v}, 2);
+	dot_product = dot(*m_reflection_vector, *v);
+	free_list((void *[]){m_reflection_vector, v}, 2);
 	if (dot_product > 0.0)
 		specular_intensity = cur_object->material->reflection_coefficient
 			* pow(dot_product, cur_object->material->shininess_coefficient);

@@ -6,15 +6,15 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 01:09:49 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/13 01:27:37 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 04:47:47 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/vectormath.h"
 
-vector_t	*minus(vector_t *target, vector_t *v)
+t_vector	*minus(t_vector *target, t_vector *v)
 {
-	vector_t	*new;
+	t_vector	*new;
 
 	new = copy_vector(*target);
 	new->x -= v->x;
@@ -23,27 +23,27 @@ vector_t	*minus(vector_t *target, vector_t *v)
 	return (new);
 }
 
-vector_t	*normalized_sub(vector_t *u, vector_t *v)
+t_vector	*normalized_sub(t_vector *u, t_vector *v)
 {
-	vector_t	*re;
+	t_vector	*re;
 
 	re = minus(u, v);
 	normalize(re);
 	return (re);
 }
 
-vector_t	*ms_minus(vector_t *target, vector_t *v, int free_at)
+t_vector	*ms_minus(t_vector *target, t_vector *v, int free_at)
 {
-	vector_t	*result;
+	t_vector	*result;
 
 	result = minus(target, v);
 	free_at_index(target, v, free_at);
 	return (result);
 }
 
-vector_t	*ms_normalized_sub(vector_t *u, vector_t *v, int free_at)
+t_vector	*ms_normalized_sub(t_vector *u, t_vector *v, int free_at)
 {
-	vector_t	*re;
+	t_vector	*re;
 
 	re = minus(u, v);
 	normalize(re);

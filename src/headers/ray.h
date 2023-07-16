@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:35 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/02 08:17:50 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "camera.h"
 # include "image.h"
 # include "types.h"
-ray_t	*ray(vector_t *point1, vector_t *point2);
+
+ray_t	*ray(t_vector *point1, t_vector *point2);
 void	delete_ray(ray_t *this);
 #endif

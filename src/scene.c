@@ -6,13 +6,13 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:53 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/09 23:15:57 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 04:50:23 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/scene.h"
 
-t_list	*Objects(void *mlx)
+t_list	*objects(void *mlx)
 {
 	t_list		*data;
 	object_t	*sphere;
@@ -21,27 +21,17 @@ t_list	*Objects(void *mlx)
 	object_t	*m_torus;
 	object_t	*floor;
 	object_t	*image;
-	
 	t_textures	*checker;
 	t_textures	*ww;
 	t_textures	*brick;
 
 	data = NULL;
 	(void)mlx;
-	// **************************************************************************************
-	// Create some spheres.
-	// **************************************************************************************
-	// **************************************************************************************
-	// Create some textures.
-	// **************************************************************************************
-	checker = new_texture((vector_t){1.0, 1.0, 1.0}, (vector_t){0.2, 0.2, 0.2});
-	set_tfm(checker, &(vector2_t){.x = 0, .y = 0}, &(vector2_t){.x = 16,
-			.y = 16}, 0);
+	checker = new_texture((t_vector){1.0, 1.0, 1.0}, (t_vector){0.2, 0.2, 0.2});
+	set_tfm(checker, &(t_vector2){.x = 0, .y = 0}, &(t_vector2){.x = 16,
+		.y = 16}, 0);
 	ww = new_img_texture(mlx, "./assets/ww.xpm");
 	brick = new_img_texture(mlx, "./assets/brick.xpm");
-	// **************************************************************************************
-	// Create and setup objects.
-	// **************************************************************************************
 	floor = plane(vector(.0, 0.0, 1.0), vector(0.0, 0, 0), vector(16.0, 16.0,
 				1.0), vector(1, 1, 1.0));
 	image = plane(vector(0.0, 5.0, -0.75), vector(-PI / 2.0, 0.0, 0.0),
@@ -54,28 +44,23 @@ t_list	*Objects(void *mlx)
 			vector(0.75, 0.75, 0.75), vector(0.2, 0.2, 1.0));
 	m_torus = torus(vector(2.0, -1.25, 0.25), vector(HALFPI, 0.0, 0.0),
 			vector(0.75, 0.75, 0.75), vector(0.2, 0.2, 1.0));
-	// **************************************************************************************
-	// Setup material Configurations
-	// **************************************************************************************
-	setUpMaterialConfigurations(floor, 0.25, 32.0, 0.0, 0.0, checker);
-	setUpMaterialConfigurations(image, 0.00, 0.00, 0.0, 0.0, ww);
-	setUpMaterialConfigurations(sphere, 0.25, 32.0, 0.0, 0.0, checker);
-	setUpMaterialConfigurations(sphere2, 0.55, 32.0, 0.3, 1.33, NULL);
-	setUpMaterialConfigurations(sphere3, 0.35, 32.0, 0.0, 0.0, NULL);
-	setUpMaterialConfigurations(m_torus, 0.25, 32.0, 0.35, 1.333, brick);
-	// **************************************************************************************
-	// Put the objects into the scene.
-	// **************************************************************************************
+	set_up_material_configurations(floor, 0.25, 32.0, 0.0, 0.0, checker);
+	set_up_material_configurations(image, 0.00, 0.00, 0.0, 0.0, ww);
+	set_up_material_configurations(sphere, 0.25, 32.0, 0.0, 0.0, checker);
+	set_up_material_configurations(sphere2, 0.55, 32.0, 0.3, 1.33, NULL);
+	set_up_material_configurations(sphere3, 0.35, 32.0, 0.0, 0.0, NULL);
+	set_up_material_configurations(m_torus, 0.25, 32.0, 0.35, 1.333, brick);
 	push_back(&data, ft_lstnew(floor));
 	push_back(&data, ft_lstnew(sphere));
-	push_back(&data, ft_lstnew(sphere2));
-	push_back(&data, ft_lstnew(sphere3));
-	push_back(&data, ft_lstnew(m_torus));
-	push_back(&data, ft_lstnew(image));
+
+	// push_back(&data, ft_lstnew(sphere2));
+	// push_back(&data, ft_lstnew(sphere3));
+	// push_back(&data, ft_lstnew(m_torus));
+	// push_back(&data, ft_lstnew(image));
 	return (data);
 }
 
-void	setUpMaterialConfigurations(object_t *this, double reflection,
+void	set_up_material_configurations(object_t *this, double reflection,
 		double shininess, double translution, double bending_index,
 		t_textures *texture)
 {
@@ -86,49 +71,42 @@ void	setUpMaterialConfigurations(object_t *this, double reflection,
 	this->textures = texture;
 }
 
-// **************************************************************************************
-// setup the lights.
-// **************************************************************************************
-t_list	*LightSorces(void)
+t_list	*light_source(void)
 {
 	t_list	*data;
 
 	data = NULL;
 	push_back(&data, ft_lstnew(new_light(vector(3.0, -10.0, -5.0), vector(1.0,
-						1.0, 1.0), 4.0)));
+					1.0, 1.0), 4.0)));
 	push_back(&data, ft_lstnew(new_light(vector(0.0, -10.0, -5.0), vector(1.0,
-						1.0, 1.0), 2.0)));
+					1.0, 1.0), 2.0)));
 	return (data);
 }
 
-// **************************************************************************************
-// setup the Camera Configurations.
-// **************************************************************************************
-void	setupCamera(scene_t *this)
+void	set_upcamera(scene_t *this)
 {
-	this->m_camera = Camera(1, 1, (double)WIDTH / (double)HEIGHT);
-	SetPosition(this->m_camera, vector(2.0, -5.0, 0.25));
-	SetUp(this->m_camera, vector(0.0, 0.0, 1.0));
-	Setloockat(this->m_camera, vector(0.0, 0.0, 0.0));
+	this->m_camera = camera(1, 1, (double)WIDTH / (double)HEIGHT);
+	set_position(this->m_camera, vector(2.0, -5.0, 0.25));
+	set_up(this->m_camera, vector(0.0, 0.0, 1.0));
+	set_loock_at(this->m_camera, vector(0.0, 0.0, 0.0));
 	calculat_geometry(this->m_camera);
 }
 
-scene_t	*Scene(void *mlx, void *mlx_win)
+scene_t	*scene(void *mlx, void *mlx_win)
 {
 	scene_t	*scene;
 
 	(void)mlx_win;
 	scene = malloc(sizeof(scene_t));
-	scene->m_object_list = Objects(mlx);
-	scene->m_light_list = LightSorces();
-	setupCamera(scene);
-	scene->ambient_light_factor = (vector_t){.x = (255.f / 255.f) * 0.2f,
-												.y = (255.f / 255.f) * 0.2f,
-												.z = (255.f / 255.f) * 0.2f};
+	scene->m_object_list = objects(mlx);
+	scene->m_light_list = light_source();
+	set_upcamera(scene);
+	scene->ambient_light_factor = (t_vector){.x = (255.f / 255.f) * 0.2f,
+		.y = (255.f / 255.f) * 0.2f, .z = (255.f / 255.f) * 0.2f};
 	return (scene);
 }
 
-void	printProgress(int y)
+void	print_progress(int y)
 {
 	int	progress;
 
@@ -139,13 +117,13 @@ void	printProgress(int y)
 		printf("\033[A\33[2K\r DONE.\n");
 }
 
-void	render_line(scene_t *scene, t_image *image, int y, vector_t fact)
+void	render_line(scene_t *scene, t_image *image, int y, t_vector fact)
 {
 	int				x;
 	ray_t			*ray;
 	propretries_t	prop;
 	object_t		*c_object;
-	vector_t		*color;
+	t_vector		*color;
 
 	c_object = NULL;
 	x = 0;
@@ -161,27 +139,27 @@ void	render_line(scene_t *scene, t_image *image, int y, vector_t fact)
 			free(color);
 		}
 		else
-			set_pixel(image, x, y, &(vector_t){.x = 0, .y = 0, .z = 0});
+			set_pixel(image, x, y, &(t_vector){.x = 0, .y = 0, .z = 0});
 		delete_ray(ray);
 		x++;
 	}
 }
 
-t_image	*Render(scene_t *scene, void *mlx, void *mlx_win)
+t_image	*render(scene_t *scene, void *mlx, void *mlx_win)
 {
 	t_image		*image;
 	int			y;
-	vector_t	fact;
+	t_vector	fact;
 
 	(void)mlx;
 	(void)mlx_win;
 	image = initialize();
-	fact = (vector_t){.x = 1.0 / (((double)WIDTH) / 2.0), .y = 1.0
+	fact = (t_vector){.x = 1.0 / (((double)WIDTH) / 2.0), .y = 1.0
 		/ (((double)HEIGHT) / 2.0)};
 	y = 0;
 	while (y < HEIGHT)
 	{
-		printProgress(y);
+		print_progress(y);
 		render_line(scene, image, y, fact);
 		y++;
 	}
@@ -222,7 +200,7 @@ int	cast_ray(ray_t *ray, scene_t *scene, propretries_t *c_prop,
 				found_int = 1;
 				if (check_n_set_dist(&prop, ray, &min_dist))
 					update_values(c_prop, c_object, &prop,
-							((object_t *)tmp->content));
+						((object_t *)tmp->content));
 			}
 		}
 		tmp = tmp->next;
@@ -237,13 +215,13 @@ void	update_values(propretries_t *c_prop, object_t **c_object,
 	*c_object = cur_object;
 }
 
-void	deleteScene(scene_t *this)
+void	deletescene(scene_t *this)
 {
 	if (this)
 	{
 		delete_object_list(this->m_object_list);
 		delete_light_list(this->m_light_list);
-		deleteCamera(this->m_camera);
+		deletecamera(this->m_camera);
 		free(this);
 	}
 }

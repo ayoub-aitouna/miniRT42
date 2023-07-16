@@ -6,18 +6,18 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:22:14 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/12 22:22:02 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 04:45:22 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../headers/libtypes.h"
 #include "../headers/matrix.h"
-#include "../headers/types.h"
 #include <stdio.h>
 
-void set_to_indentity(matrix_t *mt)
+void	set_to_indentity(t_matrix *mt)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -34,13 +34,13 @@ void set_to_indentity(matrix_t *mt)
 	}
 }
 
-void print_matrix(matrix_t *matrix)
+void	print_matrix(t_matrix *matrix)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	if (!matrix)
-		return;
+		return ;
 	i = 0;
 	printf("[ \n");
 	while (i < matrix->rows)
@@ -49,7 +49,7 @@ void print_matrix(matrix_t *matrix)
 		printf("\t[ ");
 		while (j < matrix->cols)
 		{
-			printf(" %f  %c", matrix->matrix[i][j], j < (matrix->cols - 1) ? ',' : ' ');
+			printf(" %f  %c", matrix->matrix[i][j], ' ');
 			j++;
 		}
 		printf("],\n");
@@ -58,9 +58,9 @@ void print_matrix(matrix_t *matrix)
 	printf("]\n");
 }
 
-matrix_t *from_vector_to_matrix(vector_t vt)
+t_matrix	*from_t_vectoro_matrix(t_vector vt)
 {
-	matrix_t *new_mt;
+	t_matrix	*new_mt;
 
 	new_mt = create_matrix(1, 3);
 	new_mt->matrix[0][0] = vt.x;
@@ -69,11 +69,11 @@ matrix_t *from_vector_to_matrix(vector_t vt)
 	return (new_mt);
 }
 
-matrix_t *transpose(matrix_t *mt)
+t_matrix	*transpose(t_matrix *mt)
 {
-	matrix_t *new_mt;
-	int r_i;
-	int c_i;
+	t_matrix	*new_mt;
+	int			r_i;
+	int			c_i;
 
 	if (!mt)
 		return (NULL);
@@ -92,9 +92,9 @@ matrix_t *transpose(matrix_t *mt)
 	return (new_mt);
 }
 
-void delete_matrix(matrix_t *this)
+void	delete_matrix(t_matrix *this)
 {
-	int row_index;
+	int	row_index;
 
 	row_index = 0;
 	if (this)

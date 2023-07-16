@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 01:13:03 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/13 01:17:49 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 04:49:16 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,32 @@
  * r = l - 2(l.n).n
  * r & l & n : are vectors
  */
-vector_t *Reflection_vector(vector_t *l, vector_t *n)
+t_vector	*reflection_vector(t_vector *l, t_vector *n)
 {
-    vector_t   *r;
-    double ln;
+	t_vector	*r;
+	double		ln;
 
-    ln = dot(*l, *n);
-    r = ms_minus(l, num_muliplication(n, 2 * ln), 1);
-    normalize(r);
-    return (r);
+	ln = dot(*l, *n);
+	r = ms_minus(l, num_muliplication(n, 2 * ln), 1);
+	normalize(r);
+	return (r);
 }
 
-double vector_distance(vector_t *u, vector_t *v)
+double	vector_distance(t_vector *u, t_vector *v)
 {
-    vector_t *result;
-    double distance = 0.0f;
+	t_vector	*result;
+	double		distance;
 
-    result = minus(u, v);
-    distance = vector_lenght(*result);
-    free(result);
-    return (distance);
+	distance = 0.0f;
+	result = minus(u, v);
+	distance = vector_lenght(*result);
+	free(result);
+	return (distance);
 }
 
-vector_t *from_mt_to_vt(matrix_t mt)
+t_vector	*from_mt_to_vt(t_matrix mt)
 {
-    if (mt.cols != 3 || mt.rows != 1)
-        return (NULL);
-    return (vector(mt.matrix[0][0], mt.matrix[0][1], mt.matrix[0][2]));
+	if (mt.cols != 3 || mt.rows != 1)
+		return (NULL);
+	return (vector(mt.matrix[0][0], mt.matrix[0][1], mt.matrix[0][2]));
 }

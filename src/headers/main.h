@@ -6,12 +6,12 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:33 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/01 11:56:22 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 01:49:50 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RT
-# define RT
+#ifndef MAIN_H
+# define MAIN_H
 # include "../lib/math/headers/gtfm.h"
 # include "../lib/math/headers/matrix.h"
 # include "image.h"

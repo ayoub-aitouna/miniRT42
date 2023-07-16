@@ -6,16 +6,16 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:50 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/01 08:47:50 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/ray.h"
 #include "headers/types.h"
-#include "lib/math/headers/types.h"
+#include "lib/math/headers/libtypes.h"
 #include "lib/math/headers/vectormath.h"
 
-ray_t	*ray(vector_t *m_point1, vector_t *m_point2)
+ray_t	*ray(t_vector *m_point1, t_vector *m_point2)
 {
 	ray_t	*ray;
 

@@ -6,15 +6,15 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:17 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/06/27 23:23:17 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TRIANGLE_H
 #define TRIANGLE_H
-#include "base.h"
+#include "Objectbase.h"
 
-object_t *triangle(vector_t *translation, vector_t *rotation, vector_t *scal,
-				   vector_t *color);
+object_t *triangle(t_vector *translation, t_vector *rotation, t_vector *scal,
+				   t_vector *color);
 
 #endif

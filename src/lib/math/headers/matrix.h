@@ -6,30 +6,30 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:58 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/06/30 01:22:42 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 04:14:40 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef matrix_H
-# define matrix_H
+#ifndef MATRIX_H
+# define MATRIX_H
 
-# include "types.h"
+# include "libtypes.h"
 # include <math.h>
 # include <stdlib.h>
 # include <unistd.h>
 
-matrix_t	*create_matrix(int r, int c);
-matrix_t	*mt_multiplication(matrix_t *mt1, matrix_t *mt2);
-void		fill_mt(matrix_t *mt, double *values);
-void		print_matrix(matrix_t *matrix);
-matrix_t	*matrix(int rows, int cols, double *values);
-double		determinant(matrix_t *mt);
-matrix_t	*submatrix(matrix_t *mt, int row, int column);
-double		minor(matrix_t *mt, int row, int column);
-double		cofactor(matrix_t *mt, int row, int column);
-matrix_t	*inverse(matrix_t *mt);
-matrix_t	*transpose(matrix_t *mt);
-void		set_to_indentity(matrix_t *mt);
-matrix_t	*safe_matrix_multy(matrix_t *mt1, matrix_t *mt2);
-void		delete_matrix(matrix_t *this);
+t_matrix	*create_matrix(int r, int c);
+t_matrix	*mt_multiplication(t_matrix *mt1, t_matrix *mt2);
+void		fill_mt(t_matrix *mt, double *values);
+void		print_matrix(t_matrix *matrix);
+t_matrix	*matrix(int rows, int cols, double *values);
+double		determinant(t_matrix *mt);
+t_matrix	*submatrix(t_matrix *mt, int row, int column);
+double		minor(t_matrix *mt, int row, int column);
+double		cofactor(t_matrix *mt, int row, int column);
+t_matrix	*inverse(t_matrix *mt);
+t_matrix	*transpose(t_matrix *mt);
+void		set_to_indentity(t_matrix *mt);
+t_matrix	*safe_matrix_multy(t_matrix *mt1, t_matrix *mt2);
+void		delete_matrix(t_matrix *this);
 #endif
