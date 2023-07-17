@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:40 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 07:00:17 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/16 22:48:46 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,15 +117,23 @@ typedef struct Propretries
 }							t_propretries;
 typedef t_vector			*(*t_get_color_function)(t_textures *this,
 								t_uv_cords cords);
+
+typedef struct s_txtr_img
+{
+	t_data					*img;
+	int						img_width;
+	int						img_height;
+}	t_txtr_img;
+
 typedef struct s_textures
 {
 	t_vector				color_1;
 	t_vector				color_2;
 	t_matrix				*tfm;
-	t_data					*img;
-	int						img_width;
-	int						img_height;
+	t_txtr_img			*txtr_img;
+	t_txtr_img			*surface_hieght_info;
 	t_get_color_function	get_color;
+	t_get_color_function	get_surface_hieght;
 }							t_textures;
 
 #endif
