@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 10:17:58 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/17 00:24:11 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/17 19:15:44 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_textures	*new_img_texture(void *mlx_ptr, char *filename)
 	t->get_color = get_rgb_color;
 	t->get_surface_hieght = get_shi_color;
 	t->txtr_img = load_img(mlx_ptr, filename);
-	t->surface_hieght_info = load_img(mlx_ptr, dsp_filename);
+	t->surface_hieght_info = load_img(mlx_ptr, filename);
 	free(dsp_filename);
 	return (t);
 }

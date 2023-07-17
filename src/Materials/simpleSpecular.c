@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 09:52:29 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 06:59:30 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/17 19:12:39 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,11 @@ t_vector	*calculat_specular_color(t_scene *scene, t_propretries *prop,
 	while (tmp)
 	{
 		lighit_ray = generate_light_ray(((t_light *)tmp->content),
-			&prop->int_point);
+				&prop->int_point);
 		if (spec_int_test(scene, lighit_ray))
-		{
-			delete_ray(lighit_ray);
-			return (specular_color);
-		}
+			return (delete_ray(lighit_ray), specular_color);
 		specular_intensity = calculat_spec_intensity(lighit_ray, camera_ray,
-			&prop->local_normal, cur_object);
+				&prop->local_normal, cur_object);
 		specular_color->x += ((t_light *)tmp->content)->base_color->x
 			* specular_intensity;
 		specular_color->y += ((t_light *)tmp->content)->base_color->y

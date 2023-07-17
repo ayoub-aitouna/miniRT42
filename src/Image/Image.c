@@ -6,13 +6,11 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:45 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/17 19:56:14 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/image.h"
-#include "headers/main.h"
-#include "headers/types.h"
+#include "../headers/image.h"
 
 double	**init_channel(void)
 {
@@ -73,65 +71,10 @@ void	display(void *mlx, void *win, t_image *image)
 	mlx_destroy_image(mlx, img.img);
 }
 
-int	convert(double red, double green, double blue, double max)
-{
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-	int				value;
-
-	r = (red / max) * 255;
-	g = (green / max) * 255;
-	b = (blue / max) * 255;
-	value = (r << 16) + (g << 8) + b;
-	return (value);
-}
-
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
-}
-
-double	max_in_channel(double **channel)
-{
-	int		x;
-	int		y;
-	double	max;
-	double	value;
-
-	value = 0;
-	max = 0;
-	x = 0;
-	y = 0;
-	while (x < WIDTH)
-	{
-		y = 0;
-		while (y < HEIGHT)
-		{
-			value = channel[y][x];
-			if (value > max)
-				max = value;
-			y++;
-		}
-		x++;
-	}
-	return (max);
-}
-
-double	max_color_value(t_image *image)
-{
-	double	m_overall_max;
-	double	value;
-
-	m_overall_max = max_in_channel(image->red);
-	value = max_in_channel(image->green);
-	if (value > m_overall_max)
-		m_overall_max = value;
-	value = max_in_channel(image->blue);
-	if (value > m_overall_max)
-		m_overall_max = value;
-	return (m_overall_max);
 }

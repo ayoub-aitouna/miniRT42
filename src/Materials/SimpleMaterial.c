@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:22:56 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 06:59:30 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/17 19:14:04 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_material	*new_simple_material(double shininess_coefficient,
 	t_material	*simple_material;
 
 	simple_material = new_material_base(shininess_coefficient,
-		reflection_coefficient);
+			reflection_coefficient);
 	simple_material->calculat_color = calculat_color;
 	return (simple_material);
 }
@@ -58,7 +58,7 @@ t_vector	*calculat_color(t_scene *scene, t_propretries *prop,
 	color = get_refractive_color(color, scene, c_params, prop);
 	if (c_params.cur_object->material->shininess_coefficient > 0.f)
 		specular_color = calculat_specular_color(scene, prop,
-			c_params.cur_object, c_params.camera_ray);
+				c_params.cur_object, c_params.camera_ray);
 	if (specular_color)
 		color = ms_addition(color, specular_color, 2);
 	return (color);
@@ -92,8 +92,8 @@ t_vector	*calculat_diffuse_color(t_scene *scene, t_propretries *prop,
 	while (tmp)
 	{
 		valid_ilum = calculat_ilumination(tmp->content, prop,
-			(t_light_params){.intensity = &intensity, .color = &color,
-			.scene = scene, .cur_object = cur_object});
+				(t_light_params){.intensity = &intensity, .color = &color,
+				.scene = scene, .cur_object = cur_object});
 		if (valid_ilum)
 		{
 			final_color->x += (color.x * intensity);
@@ -103,19 +103,4 @@ t_vector	*calculat_diffuse_color(t_scene *scene, t_propretries *prop,
 		tmp = tmp->next;
 	}
 	return (ms_muliplication(final_color, &prop->local_color, 0));
-}
-
-t_vector	get_curect_color(t_object *this, t_propretries *prop)
-{
-	t_vector	*color;
-	t_vector	result;
-
-	if (this->textures)
-	{
-		color = this->textures->get_color(this->textures, prop->uv_cords);
-		result = *color;
-		free(color);
-		return (result);
-	}
-	return (prop->local_color);
 }

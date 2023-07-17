@@ -6,12 +6,14 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:30 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/17 19:57:46 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef IMAGE_H
 # define IMAGE_H
+# include "types.h"
+# include "main.h"
 # include "types.h"
 
 typedef struct image

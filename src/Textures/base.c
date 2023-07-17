@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 01:32:01 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/17 00:21:58 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/17 19:32:21 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ t_textures	*new_base_texture(void)
 
 	base = malloc(sizeof(t_textures));
 	base->tfm = NULL;
+	base->get_surface_hieght = NULL;
+	base->get_color = NULL;
 	return (base);
 }
 
@@ -61,10 +63,13 @@ t_vector	*apply_bump_map_textures(t_textures *this, t_vector *org_normal,
 	t_vector	*color;
 	double		displacement;
 
+	if (!this->get_surface_hieght)
+		return (org_normal);
 	color = this->get_surface_hieght(this, cords);
 	displacement = (color->x + color->y + color->z) / 3;
+	displacement = (displacement * 2) - 1;
 	free(color);
-	return (ms_addition(org_normal, ms_num_muliplication(org_normal, displacement), 1));
+	return (ms_num_muliplication(org_normal, displacement));
 }
 
 void	delete_textures(t_textures *this)

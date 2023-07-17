@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:22:51 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 06:59:30 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/17 19:14:21 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,21 @@ int	mt_cast_ray(t_scene *scene, t_ray *m_ray, t_propretries *prop,
 		tmp = tmp->next;
 	}
 	return (found_int);
+}
+
+t_vector	get_curect_color(t_object *this, t_propretries *prop)
+{
+	t_vector	*color;
+	t_vector	result;
+
+	if (this->textures)
+	{
+		color = this->textures->get_color(this->textures, prop->uv_cords);
+		result = *color;
+		free(color);
+		return (result);
+	}
+	return (prop->local_color);
 }
 
 void	delete_material(t_material *this)

@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:40 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 22:48:46 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/17 19:57:15 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,8 +130,8 @@ typedef struct s_textures
 	t_vector				color_1;
 	t_vector				color_2;
 	t_matrix				*tfm;
-	t_txtr_img			*txtr_img;
-	t_txtr_img			*surface_hieght_info;
+	t_txtr_img				*txtr_img;
+	t_txtr_img				*surface_hieght_info;
 	t_get_color_function	get_color;
 	t_get_color_function	get_surface_hieght;
 }							t_textures;
