@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:22:08 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/17 20:58:13 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/17 22:18:45 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ t_ray	*reflacted_ray(t_ray *m_ray, double r, t_propretries *prop)
 	t_vector	*refractive_vector;
 	double		c;
 	double		f;
-	t_vector	*p1;
-	t_vector	*p2;
 
 	ray_norm = normilized_copy(m_ray->m_lab);
 	tmp_normal = copy_vector(prop->local_normal);
@@ -59,10 +57,9 @@ t_ray	*reflacted_ray(t_ray *m_ray, double r, t_propretries *prop)
 	refractive_vector = ms_addition(num_muliplication(ray_norm, r),
 			num_muliplication(tmp_normal, f), 2);
 	free_list((void *[]){ray_norm, tmp_normal}, 2);
-	p1 = ms_addition(copy_vector(prop->int_point),
-			num_muliplication(refractive_vector, 0.01), 2);
-	p2 = ms_addition(copy_vector(prop->int_point), refractive_vector, 2);
-	return (ray(p1, p2));
+	return (ray(ms_addition(copy_vector(prop->int_point),
+				num_muliplication(refractive_vector, 0.01), 2),
+			ms_addition(copy_vector(prop->int_point), refractive_vector, 2)));
 }
 
 t_ray	*replace_reflacted_ray(t_ray *m_ray, double r, t_propretries *prop)

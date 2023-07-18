@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 01:32:01 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/17 19:32:21 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/18 02:31:29 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,10 @@ t_vector	*apply_bump_map_textures(t_textures *this, t_vector *org_normal,
 		return (org_normal);
 	color = this->get_surface_hieght(this, cords);
 	displacement = (color->x + color->y + color->z) / 3;
-	displacement = (displacement * 2) - 1;
+	displacement = ((displacement * 2) - 1) * 2;
 	free(color);
-	return (ms_num_muliplication(org_normal, displacement));
+	return (ms_addition(org_normal,
+			ms_num_muliplication(org_normal, displacement), 1));
 }
 
 void	delete_textures(t_textures *this)

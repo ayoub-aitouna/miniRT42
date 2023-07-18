@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:37 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 06:59:30 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/18 00:31:12 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ void	update_values(t_propretries *c_prop, t_object **c_object,
 t_scene	*scene(void *mlx, void *mlx_win);
 t_image	*render(t_scene *scene, void *mlx, void *mlx_win);
 void	deletescene(t_scene *this);
-
+t_list	*objects(void *mlx);
+void	set_up_material_configurations(t_object *this, double reflection,
+			double shininess, double translution, double bending_index,
+			t_textures *texture);
 int		check_n_set_dist(t_propretries *prop, t_ray *ray, double *min_dist);
 void	set_up_material_configurations(t_object *this, double reflection,
 			double shininess, double translution, double bending_index,
