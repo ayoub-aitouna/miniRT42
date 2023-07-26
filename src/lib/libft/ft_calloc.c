@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lib.h                                              :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 23:22:29 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/26 10:01:02 by aaitouna         ###   ########.fr       */
+/*   Created: 2022/10/16 17:56:04 by clyamani          #+#    #+#             */
+/*   Updated: 2023/07/26 10:07:13 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIB_H
-# define LIB_H
-# include "math/headers/libtypes.h"
-# include <stdlib.h>
-#include "libft/libft.h"
+#include "libft.h"
 
-typedef struct list
+void *ft_calloc(size_t nmemb, size_t size)
 {
-	void		*content;
-	struct list	*next;
-}				t_list;
+	void *ptr;
 
-void			push_back(t_list **lst, t_list *node);
-void			ft_lstiter(t_list *lst, void (*f)(void *));
-t_list			*ft_lstnew(void *content);
-int				ft_lstsize(t_list *lst);
-void			free_list(void **ptrs, int size);
-#endif
+	if (nmemb == SIZE_MAX || size == SIZE_MAX)
+		return (NULL);
+	ptr = malloc(size * nmemb);
+	if (!ptr)
+		return (NULL);
+	ft_bzero(ptr, size * nmemb);
+	return (ptr);
+}

@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 01:09:41 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/26 10:34:48 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,5 @@ t_vector	*cross(t_vector v, t_vector u)
 
 void	print_vector(t_vector v)
 {
-	printf("| %f, %f, %f |\n", v.x, v.y, v.z);
+	printf("(%.3f, %.3f, %.3f)\n", v.x, v.y, v.z);
 }
