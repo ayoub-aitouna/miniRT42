@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 21:59:43 by clyamani          #+#    #+#             */
-/*   Updated: 2023/07/26 10:53:09 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/29 20:18:36 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ t_scene_object	*handle_ambient(char **elements)
 
 	obj = malloc(sizeof(t_scene_object));
 	if (double_ptr_size(elements) != 3)
-		err("error in args\n");
+	{
+		printf("%d\n", double_ptr_size(elements));
+		err("1error in args\n");
+	}
 	obj->type = elements[0];
 	obj->intensity = atof(elements[1]);
 	if (!f_in_range(obj->intensity, 1, 0))
@@ -107,24 +110,57 @@ t_scene_object	*handle_plane(char **elements)
 	return (obj);
 }
 
-t_scene_object	*handle_line(char *line)
+t_scene_object	*handle_cy_cone(char **elements)
 {
-	char **splited;
-	t_scene_object *object = NULL;
-	splited = ft_split(line, ' ');
-	if (ft_strncmp(splited[0], "A", ft_strlen(splited[0])) == 0)
-		object = handle_ambient(splited);
-	if (ft_strncmp(splited[0], "C", ft_strlen(splited[0])) == 0)
-		object = handle_camera(splited);
-	if (ft_strncmp(splited[0], "L", ft_strlen(splited[0])) == 0)
-		object = handle_light(splited);
-	// if (ft_strncmp(splited[0], "cy", ft_strlen(splited[0])) == 0)
-	// 	object = handle_cylinder(splited);
-	// if (ft_strncmp(splited[0], "sp", ft_strlen(splited[0])) == 0)
-	// 	object = handle_sphere(splited);
-	if (ft_strncmp(splited[0], "pl", ft_strlen(splited[0])) == 0)
-		object = handle_plane(splited);
-	// if (ft_strncmp(splited[0], "co", ft_strlen(splited[0])) == 0)
-	// 	object = handle_cone(splited);
-	return (object);
+	t_scene_object	*obj;
+	char			**vec_elements;
+
+	obj = malloc(sizeof(t_scene_object));
+	if (!obj)
+		err("Error\n");
+	if (double_ptr_size(elements) != 6)
+	{
+		write(2, "2error in args\n", 14);
+		exit(1);
+	}
+	obj->type = elements[0];
+	vec_elements = ft_split(elements[1], ',');
+	if (double_ptr_size(vec_elements) != 3)
+		err("error in args\n");
+	obj->position = vector(atof(vec_elements[0]), atof(vec_elements[1]),
+			atof(vec_elements[2]));
+	obj->normal = vec_range_check(ft_split(elements[2], ','), 1, -1);
+	if (!obj->normal)
+		err("out of range\n");
+	obj->color = vec_range_check(ft_split(elements[5], ','), 255, 0);
+	if (!obj->color)
+		err("out of range\n");
+	return (obj);
+}
+
+t_scene_object	*handle_sphere(char **elements)
+{
+	t_scene_object	*obj;
+	char			**vec_elements;
+	double			diameter;
+	double			radius;
+
+	obj = malloc(sizeof(t_scene_object));
+	if (!obj)
+		err("Error\n");
+	if (double_ptr_size(elements) != 4)
+		err("2 error in args\n");
+	obj->type = elements[0];
+	vec_elements = ft_split(elements[1], ',');
+	if (double_ptr_size(vec_elements) != 3)
+		err("error in args\n");
+	obj->position = vector(atof(vec_elements[0]), atof(vec_elements[1]),
+			atof(vec_elements[2]));
+	diameter = atof(elements[2]);
+	radius = diameter / 2;
+	obj->scal = vector(radius, radius, radius);
+	obj->color = vec_range_check(ft_split(elements[3], ','), 255, 0);
+	if (!obj->color)
+		err("out of range\n");
+	return (obj);
 }

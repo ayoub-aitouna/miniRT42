@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:48 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/26 10:05:55 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/29 20:24:07 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,21 @@ int	key_hook(int keycode, t_mt *mt)
 	return (0);
 }
 
-// int	main(void)
-// {
-// 	t_mt	m_mt;
+int	main(void)
+{
+	t_mt	m_mt;
 
-// 	m_mt = (t_mt){.scene = NULL, .image = NULL};
-// 	m_mt.image = NULL;
-// 	m_mt.mlx = mlx_init();
-// 	m_mt.mlx_win = mlx_new_window(m_mt.mlx, WIDTH, HEIGHT, "miniRT");
-// 	m_mt.scene = scene(m_mt.mlx, m_mt.mlx_win);
-// 	m_mt.image = render(m_mt.scene, m_mt.mlx, m_mt.mlx_win);
-// 	display(m_mt.mlx, m_mt.mlx_win, m_mt.image);
-// 	deletescene(m_mt.scene);
-// 	mlx_key_hook(m_mt.mlx_win, key_hook, &m_mt);
-// 	mlx_hook(m_mt.mlx_win, 17, 0l, m_exit, &m_mt);
-// 	sleep(1);
-// 	system("leaks miniRT");
-// 	mlx_loop(m_mt.mlx);
-// }
+	m_mt = (t_mt){.scene = NULL, .image = NULL};
+	m_mt.image = NULL;
+	m_mt.mlx = mlx_init();
+	m_mt.mlx_win = mlx_new_window(m_mt.mlx, WIDTH, HEIGHT, "miniRT");
+	m_mt.scene = scene(m_mt.mlx, m_mt.mlx_win);
+	m_mt.image = render(m_mt.scene, m_mt.mlx, m_mt.mlx_win);
+	display(m_mt.mlx, m_mt.mlx_win, m_mt.image);
+	deletescene(m_mt.scene);
+	mlx_key_hook(m_mt.mlx_win, key_hook, &m_mt);
+	mlx_hook(m_mt.mlx_win, 17, 0l, m_exit, &m_mt);
+	sleep(1);
+	system("leaks miniRT");
+	mlx_loop(m_mt.mlx);
+}

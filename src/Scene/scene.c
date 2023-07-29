@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:53 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/18 00:29:08 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/29 20:34:14 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ t_list	*light_source(void)
 
 void	set_upcamera(t_scene *this)
 {
-	this->m_camera = camera(1, 1, (double)WIDTH / (double)HEIGHT);
-	set_position(this->m_camera, vector(2.0, -5.0, 0.25));
+	this->m_camera = camera(1.8, 1, (double)WIDTH / (double)HEIGHT);
+	set_position(this->m_camera, vector(-50.0, 0, 20.0));
 	set_up(this->m_camera, vector(0.0, 0.0, 1.0));
-	set_loock_at(this->m_camera, vector(0.0, 0.0, 0.0));
+	set_loock_at(this->m_camera, vector(0.0, 0.0, 1.0));
 	calculat_geometry(this->m_camera);
 }
 
