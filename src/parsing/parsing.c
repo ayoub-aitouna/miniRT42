@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 21:57:57 by clyamani          #+#    #+#             */
-/*   Updated: 2023/07/26 10:48:03 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:52:26 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	f_in_range(double value, double max, double min)
 	return (TRUE);
 }
 
-t_list	*ReadFile(char *fileName)
+t_list	*readfile(char *filename)
 {
 	t_scene_object	*node_content;
 	char			*line;
@@ -65,7 +65,7 @@ t_list	*ReadFile(char *fileName)
 	int				fd;
 
 	list = NULL;
-	fd = open(fileName, O_RDONLY);
+	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 	{
 		write(2, "failed to open file\n", 21);
@@ -82,57 +82,4 @@ t_list	*ReadFile(char *fileName)
 		push_back(&list, ft_lstnew(node_content));
 	}
 	return (list);
-}
-
-void	print_scene_object(t_scene_object *obj)
-{
-	printf("\t----------------------------\n"
-			"type %s :\n",
-			obj->type);
-	if (!strcmp(obj->type, "C"))
-	{
-		printf("\tPosition : ");
-		print_vector(*obj->position);
-		printf("\tNormal   : ");
-		print_vector(*obj->normal);
-		printf("\tFOV      : %.3f\n", obj->field_of_view);
-	}
-	if (!strcmp(obj->type, "A"))
-	{
-		printf("\tIntensity: %.3f\n", obj->intensity);
-		printf("\tColor    : ");
-		print_vector(*obj->color);
-	}
-	if (!strcmp(obj->type, "L"))
-	{
-		printf("\tPosition : ");
-		print_vector(*obj->position);
-		printf("\tIntensity: %.3f\n", obj->intensity);
-		printf("\tColor    : ");
-		print_vector(*obj->color);
-	}
-	if (!strcmp(obj->type, "pl"))
-	{
-		printf("\tPosition : ");
-		print_vector(*obj->position);
-		printf("\tNormal   : ");
-		print_vector(*obj->normal);
-		printf("\tColor    : ");
-		print_vector(*obj->color);
-	}
-	printf("\t----------------------------\n\n");
-}
-
-int	main(int ac, char **av)
-{
-	t_list	*scene;
-
-	(void)ac;
-	(void)av;
-	scene = ReadFile("scenes/s1.rt");
-	while (scene)
-	{
-		print_scene_object(scene->content);
-		scene = scene->next;
-	}
 }
