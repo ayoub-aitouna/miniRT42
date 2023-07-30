@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:42:52 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/30 14:25:43 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/30 22:22:10 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	print_scene_object(t_scene_object *obj)
 	{
 		printf("\tIntensity: %.3f\n", obj->intensity);
 		printf("\tColor    : ");
-		print_vector(*obj->color);
+		print_vector(*convert_vec_color(obj->color));
 	}
 	if (!strcmp(obj->type, "L"))
 	{
@@ -49,7 +49,8 @@ void	print_scene_object(t_scene_object *obj)
 		print_vector(*obj->position);
 		printf("\tIntensity: %.3f\n", obj->intensity);
 		printf("\tColor    : ");
-		print_vector(*obj->color);
+
+		print_vector(*convert_vec_color(obj->color));
 	}
 	if (!strcmp(obj->type, "pl"))
 	{
@@ -58,7 +59,7 @@ void	print_scene_object(t_scene_object *obj)
 		printf("\tNormal   : ");
 		print_vector(*obj->normal);
 		printf("\tColor    : ");
-		print_vector(*obj->color);
+		print_vector(*convert_vec_color(obj->color));
 		printf("\treflection_pr    : ");
 		print_vector(*obj->reflection_pr);
 		printf("\tTexture Type    : %d\n", obj->texture_type);
@@ -72,7 +73,7 @@ void	print_scene_object(t_scene_object *obj)
 		printf("\tScal   : ");
 		print_vector(*obj->scal);
 		printf("\tColor    : ");
-		print_vector(*obj->color);
+		print_vector(*convert_vec_color(obj->color));
 		printf("\treflection_pr    : ");
 		print_vector(*obj->reflection_pr);
 		printf("\tTexture Type    : %d\n", obj->texture_type);
@@ -84,7 +85,7 @@ void	print_scene_object(t_scene_object *obj)
 		printf("\tScal   : ");
 		print_vector(*obj->scal);
 		printf("\tColor    : ");
-		print_vector(*obj->color);
+		print_vector(*convert_vec_color(obj->color));
 		printf("\treflection_pr    : ");
 		print_vector(*obj->reflection_pr);
 		printf("\tTexture Type    : %d\n", obj->texture_type);
@@ -92,13 +93,35 @@ void	print_scene_object(t_scene_object *obj)
 	printf("\t----------------------------\n\n");
 }
 
-t_scene_object	*handle_line(char *line)
+int	str_equal(char *s1, char *s2)
+{
+	return (ft_strncmp(s1, s2, ft_strlen(s1)) == 0);
+}
+
+int	equal_atleast_once(char *s1, char **list)
+{
+	int	i;
+
+	i = 0;
+	while (list[i])
+	{
+		if (str_equal(s1, list[i]))
+			return (TRUE);
+		i++;
+	}
+	return (FALSE);
+}
+
+t_scene_object	*handle_line(char *line, t_list *list)
 {
 	char			**splited;
 	t_scene_object	*object;
 
 	object = NULL;
 	splited = ft_split(line, ' ');
+	if (equal_atleast_once(splited[0], (char *[]){"A", "C", NULL})
+		&& (first_of(list, splited[0]) != NULL))
+		err("Element Duplicated \n");
 	if (ft_strncmp(splited[0], "A", ft_strlen(splited[0])) == 0)
 		object = handle_ambient(splited);
 	if (ft_strncmp(splited[0], "C", ft_strlen(splited[0])) == 0)
@@ -135,7 +158,7 @@ void	delete_object_scene(t_scene_object *obj)
 		free(obj->Texture_path);
 }
 
-int	main(int ac, char **av)
+int	_diabled_main(int ac, char **av)
 {
 	t_list	*scene;
 
@@ -150,4 +173,5 @@ int	main(int ac, char **av)
 		delete_object_scene(scene->content);
 		scene = scene->next;
 	}
+	return (0);
 }

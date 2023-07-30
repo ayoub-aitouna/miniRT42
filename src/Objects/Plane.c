@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:27 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 06:58:16 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/30 22:29:21 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ t_vector	*p_calculat_int_point(t_ray *ray, t_vector k, t_propretries *prop,
 		return (false(status));
 	u = a.x + (t * k.x);
 	v = a.y + (t * k.y);
-	if (fabs(u) >= 1.0 || fabs(v) >= 1.0)
-		return (false(status));
-	else
-	{
-		prop->uv_cords = (t_uv_cords){.u = u, .v = v};
-		return (ms_addition(ray->point1, num_muliplication(&k, t), 1));
-	}
+	// if (fabs(u) >= 1.0 || fabs(v) >= 1.0)
+	// 	return (false(status));
+	// else
+	// {
+	prop->uv_cords = (t_uv_cords){.u = u, .v = v};
+	return (ms_addition(ray->point1, num_muliplication(&k, t), 1));
+	// }
 }
 
 int	p_int_test(t_object *this, t_ray *camera_ray, t_propretries *prop)

@@ -6,11 +6,31 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 21:59:43 by clyamani          #+#    #+#             */
-/*   Updated: 2023/07/30 14:25:06 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/30 22:10:35 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/parsing.h"
+
+t_scene_object	*first_of(t_list *l_scene, char *type)
+{
+	while (l_scene)
+	{
+		if (!strncmp(((t_scene_object *)l_scene->content)->type, type,
+				ft_strlen(type)))
+			return (l_scene->content);
+		l_scene = l_scene->next;
+	}
+	return (NULL);
+}
+
+t_vector	*convert_vec_color(t_vector *color)
+{
+	color->x /= 255;
+	color->y /= 255;
+	color->z /= 255;
+	return (color);
+}
 
 t_scene_object	*init_t_scene_object(void)
 {
@@ -62,7 +82,7 @@ t_scene_object	*handle_camera(char **elements)
 	if (double_ptr_size(vec_elmnts) != 3)
 		err("error in args\n");
 	obj->position = vector(atof(vec_elmnts[0]), atof(vec_elmnts[1]),
-			atof(vec_elmnts[2]));
+		atof(vec_elmnts[2]));
 	free_list_str(vec_elmnts);
 	obj->normal = vec_range_check(ft_split(elements[2], ','), 1, -1);
 	if (!obj->normal)
@@ -88,7 +108,7 @@ t_scene_object	*handle_light(char **elements)
 	if (double_ptr_size(vec_elemts) != 3)
 		err("error in args\n");
 	obj->position = vector(atof(vec_elemts[0]), atof(vec_elemts[1]),
-			atof(vec_elemts[2]));
+		atof(vec_elemts[2]));
 	obj->intensity = atof(elements[2]);
 	free_list_str(vec_elemts);
 	if (!f_in_range(obj->intensity, 1, 0))
@@ -119,8 +139,7 @@ void	set_up_material_proprieties(char **mt_coefficient, char *texture,
 	if (double_ptr_size(mt_coefficient) != 3)
 		err("error in args\n");
 	obj->reflection_pr = vector(atof(mt_coefficient[0]),
-								atof(mt_coefficient[1]),
-								atof(mt_coefficient[2]));
+		atof(mt_coefficient[1]), atof(mt_coefficient[2]));
 	if (!f_in_range(obj->reflection_pr->x, 1, 0))
 		exit(1);
 	if (!f_in_range(obj->reflection_pr->y, 1, 0))
@@ -134,6 +153,8 @@ void	set_up_material_proprieties(char **mt_coefficient, char *texture,
 	else
 	{
 		obj->texture_type = BUMPMAPTEXTURE;
+		if (!check_extention(texture, ".xpm"))
+			err("texture extention invalide \n");
 		obj->Texture_path = ft_strdup(texture);
 	}
 	free_list_str(mt_coefficient);
@@ -154,7 +175,7 @@ t_scene_object	*handle_plane(char **elements)
 	if (double_ptr_size(vec_elemts) != 3)
 		err("error in args\n");
 	obj->position = vector(atof(vec_elemts[0]), atof(vec_elemts[1]),
-			atof(vec_elemts[2]));
+		atof(vec_elemts[2]));
 	free_list_str(vec_elemts);
 	obj->normal = vec_range_check(ft_split(elements[2], ','), 1, -1);
 	if (!obj->normal)
@@ -181,7 +202,7 @@ t_scene_object	*handle_cy_cone(char **elements)
 	if (double_ptr_size(vec_elements) != 3)
 		err("error in args\n");
 	obj->position = vector(atof(vec_elements[0]), atof(vec_elements[1]),
-			atof(vec_elements[2]));
+		atof(vec_elements[2]));
 	free_list_str(vec_elements);
 	obj->normal = vec_range_check(ft_split(elements[2], ','), 1, -1);
 	if (!obj->normal)
@@ -216,7 +237,7 @@ t_scene_object	*handle_sphere(char **elements)
 	if (double_ptr_size(vec_elements) != 3)
 		err("error in args\n");
 	obj->position = vector(atof(vec_elements[0]), atof(vec_elements[1]),
-			atof(vec_elements[2]));
+		atof(vec_elements[2]));
 	free_list_str(vec_elements);
 	diameter = atof(elements[2]);
 	radius = diameter / 2;

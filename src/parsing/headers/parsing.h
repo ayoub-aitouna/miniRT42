@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:44:48 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/30 14:13:04 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/30 22:39:01 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@
 # include <unistd.h>
 
 void			err(char *msg);
+t_list			*readfile(char *filename);
 void			check_for_parametres(char **list, t_parsing *pars);
 t_list			*readfile(char *filename);
-t_scene_object	*handle_line(char *line);
+t_scene_object	*handle_line(char *line, t_list *parsed_list);
 int				double_ptr_size(char **str);
 t_vector		*vec_range_check(char **list, double max, double min);
 int				f_in_range(double value, double max, double min);
@@ -37,4 +38,9 @@ t_scene_object	*handle_plane(char **elements);
 t_scene_object	*handle_cy_cone(char **elements);
 t_scene_object	*handle_sphere(char **elements);
 void			free_list_str(char **list);
+int				check_extention(char *file_name, char *extention);
+t_scene_object	*first_of(t_list *l_scene, char *type);
+int				str_equal(char *s1, char *s2);
+t_vector*		convert_vec_color(t_vector* color);
+void			print_scene_object(t_scene_object *obj);
 #endif

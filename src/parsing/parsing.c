@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 21:57:57 by clyamani          #+#    #+#             */
-/*   Updated: 2023/07/30 14:13:27 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/30 21:49:57 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ t_list	*readfile(char *filename)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		node_content = handle_line(line);
+		node_content = handle_line(line, list);
 		if (!node_content)
 			err("Elemet no recognized \n");
 		push_back(&list, ft_lstnew(node_content));
