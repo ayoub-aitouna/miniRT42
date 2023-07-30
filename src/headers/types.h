@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:40 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/26 10:01:44 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/30 02:48:15 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ typedef struct s_txtr_img
 	t_data					*img;
 	int						img_width;
 	int						img_height;
-}	t_txtr_img;
+}							t_txtr_img;
 
 typedef struct s_textures
 {
@@ -136,20 +136,27 @@ typedef struct s_textures
 	t_get_color_function	get_surface_hieght;
 }							t_textures;
 
+typedef enum TextureType
+{
+	NON = -1,
+	CHECKBOARD = 0,
+	BUMPMAPTEXTURE = 1
+}							T_TextureType;
+
 typedef struct s_scene_object
 {
-	char *type;				   // type can be A, C, L, pl, sp, cy, co
-	t_vector *position;		   // position for all object that has position / and for object that dosn't have this prop leave it empty
-	t_vector *color;		   //  color for all object that has color / and for object that dosn't have this prop leave it empty
-	t_vector *normal;		   //  normal for all object that has normal / and for object that dosn't have this prop leave it empty
-	t_vector *reflection_prop; //  reflection_prop for all object that has reflection_prop / and for object that dosn't have this prop leave it empty
-	t_vector *scal;			   // this for sphere it will be vector(diameter, diameter, diameter); example : diameter = 12.6
-							   // for cylinder it will be vector(diameter, diameter, height); example : diameter = 14.2 & height = 21.42
-	double intensity;		   // in range [0, 1] for A & L for other's leave it without initializing
-	double field_of_view;	   // for camera in range [0-180]
-	char *Texture_path;		   // Checkboard for checker or ./assests/image_texture.xpm for bumpmap textures
+	char					*type;
+	t_vector				*position;
+	t_vector				*color;
+	t_vector				*normal;
+	t_vector				*reflection_pr;
+	t_vector				*scal;
+	double					intensity;
+	double					field_of_view;
+	T_TextureType			texture_type;
+	char					*Texture_path;
 
-} t_scene_object;
+}							t_scene_object;
 
 typedef struct k
 {
@@ -160,6 +167,6 @@ typedef struct k
 	char **sp;
 	char **cy;
 
-} t_parsing;
+}							t_parsing;
 
 #endif

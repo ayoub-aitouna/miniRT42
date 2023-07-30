@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:48 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/29 20:24:07 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/30 02:05:13 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	key_hook(int keycode, t_mt *mt)
 	return (0);
 }
 
-int	main(void)
+int	_disabled_main(void)
 {
 	t_mt	m_mt;
 
@@ -56,4 +56,5 @@ int	main(void)
 	sleep(1);
 	system("leaks miniRT");
 	mlx_loop(m_mt.mlx);
+	return (0);
 }

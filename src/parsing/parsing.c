@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 21:57:57 by clyamani          #+#    #+#             */
-/*   Updated: 2023/07/29 18:52:26 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/07/30 02:32:10 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,39 @@ int	f_in_range(double value, double max, double min)
 	return (TRUE);
 }
 
+/**
+ * file ex	:	"sence/scne.rt"	=>	13
+ * exten ex :	".rt"		=>	3
+ * 13 - 3 => 10
+ */
+int	check_extention(char *file_name, char *extention)
+{
+	size_t	pos;
+	size_t	npos;
+	size_t	i;
+
+	if (ft_strlen(file_name) <= ft_strlen(extention) || !file_name || !extention
+		|| !ft_strlen(file_name) || !ft_strlen(extention))
+		return (FALSE);
+	pos = ft_strlen(file_name) - ft_strlen(extention);
+	npos = (pos - 1);
+	while (npos > 0 && file_name[npos] != '/')
+		npos--;
+	if (npos == (pos - 1))
+		return (FALSE);
+	i = 0;
+	while (file_name[pos])
+	{
+		if (file_name[pos] != extention[i])
+			return (FALSE);
+		i++;
+		pos++;
+	}
+	if (i < (ft_strlen(extention) - 1))
+		return (FALSE);
+	return (TRUE);
+}
+
 t_list	*readfile(char *filename)
 {
 	t_scene_object	*node_content;
@@ -65,6 +98,8 @@ t_list	*readfile(char *filename)
 	int				fd;
 
 	list = NULL;
+	if (!check_extention(filename, ".rt"))
+		err("invalide Extention !!");
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 	{

@@ -6,10 +6,9 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 21:59:43 by clyamani          #+#    #+#             */
-/*   Updated: 2023/07/29 20:42:29 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/30 02:44:05 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "headers/parsing.h"
 
@@ -48,7 +47,7 @@ t_scene_object	*handle_camera(char **elements)
 	if (double_ptr_size(vec_elmnts) != 3)
 		err("error in args\n");
 	obj->position = vector(atof(vec_elmnts[0]), atof(vec_elmnts[1]),
-			atof(vec_elmnts[2]));
+		atof(vec_elmnts[2]));
 	obj->normal = vec_range_check(ft_split(elements[2], ','), 1, -1);
 	if (!obj->normal)
 		err("out of range\n");
@@ -73,7 +72,7 @@ t_scene_object	*handle_light(char **elements)
 	if (double_ptr_size(vec_elemts) != 3)
 		err("error in args\n");
 	obj->position = vector(atof(vec_elemts[0]), atof(vec_elemts[1]),
-			atof(vec_elemts[2]));
+		atof(vec_elemts[2]));
 	obj->intensity = atof(elements[2]);
 	if (!f_in_range(obj->intensity, 1, 0))
 		exit(1);
@@ -101,7 +100,7 @@ t_scene_object	*handle_plane(char **elements)
 	if (double_ptr_size(vec_elemts) != 3)
 		err("error in args\n");
 	obj->position = vector(atof(vec_elemts[0]), atof(vec_elemts[1]),
-			atof(vec_elemts[2]));
+		atof(vec_elemts[2]));
 	obj->normal = vec_range_check(ft_split(elements[2], ','), 1, -1);
 	if (!obj->normal)
 		err("out of range\n");
@@ -115,24 +114,27 @@ t_scene_object	*handle_cy_cone(char **elements)
 {
 	t_scene_object	*obj;
 	char			**vec_elements;
+	double			height;
+	double			diameter;
 
 	obj = malloc(sizeof(t_scene_object));
-	if (!obj)
-		err("Error\n");
-	if (double_ptr_size(elements) != 6)
-	{
-		write(2, "2error in args\n", 14);
-		exit(1);
-	}
+	if (!obj || double_ptr_size(elements) != 6)
+		err("Error \n");
 	obj->type = elements[0];
 	vec_elements = ft_split(elements[1], ',');
 	if (double_ptr_size(vec_elements) != 3)
 		err("error in args\n");
 	obj->position = vector(atof(vec_elements[0]), atof(vec_elements[1]),
-			atof(vec_elements[2]));
+		atof(vec_elements[2]));
 	obj->normal = vec_range_check(ft_split(elements[2], ','), 1, -1);
 	if (!obj->normal)
 		err("out of range\n");
+	diameter = atof(elements[3]);
+	height = atof(elements[4]);
+	if (ft_strncmp(elements[0], "cy", ft_strlen(elements[0])) == 0)
+		obj->scal = vector(diameter / 2, diameter / 2, height / 2);
+	else
+		obj->scal = vector(diameter / 2, diameter / 2, height);
 	obj->color = vec_range_check(ft_split(elements[5], ','), 255, 0);
 	if (!obj->color)
 		err("out of range\n");
@@ -156,7 +158,7 @@ t_scene_object	*handle_sphere(char **elements)
 	if (double_ptr_size(vec_elements) != 3)
 		err("error in args\n");
 	obj->position = vector(atof(vec_elements[0]), atof(vec_elements[1]),
-			atof(vec_elements[2]));
+		atof(vec_elements[2]));
 	diameter = atof(elements[2]);
 	radius = diameter / 2;
 	obj->scal = vector(radius, radius, radius);

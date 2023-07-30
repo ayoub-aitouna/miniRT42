@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:42:52 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/29 20:44:20 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/30 02:43:00 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	print_scene_object(t_scene_object *obj)
 		print_vector(*obj->position);
 		printf("\tNormal   : ");
 		print_vector(*obj->normal);
+		printf("\tScal   : ");
+		print_vector(*obj->scal);
 		printf("\tColor    : ");
 		print_vector(*obj->color);
 	}
@@ -63,6 +65,8 @@ void	print_scene_object(t_scene_object *obj)
 		print_vector(*obj->position);
 		printf("\tNormal   : ");
 		print_vector(*obj->normal);
+		printf("\tScal   : ");
+		print_vector(*obj->scal);
 		printf("\tColor    : ");
 		print_vector(*obj->color);
 	}
@@ -101,16 +105,18 @@ t_scene_object	*handle_line(char *line)
 	return (object);
 }
 
-// int	main(int ac, char **av)
-// {
-// 	t_list	*scene;
+int	main(int ac, char **av)
+{
+	t_list	*scene;
 
-// 	(void)ac;
-// 	(void)av;
-// 	scene = readfile("scenes/s1.rt");
-// 	while (scene)
-// 	{
-// 		print_scene_object(scene->content);
-// 		scene = scene->next;
-// 	}
-// }
+	(void)ac;
+	(void)av;
+	if (ac != 2)
+		err("invalide args !!\n");
+	scene = readfile(av[1]);
+	while (scene)
+	{
+		print_scene_object(scene->content);
+		scene = scene->next;
+	}
+}
