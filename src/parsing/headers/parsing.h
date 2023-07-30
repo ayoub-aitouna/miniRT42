@@ -6,10 +6,9 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:44:48 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/29 20:44:54 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/30 14:13:04 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef PARSING_H
 # define PARSING_H
@@ -37,5 +36,5 @@ t_scene_object	*handle_light(char **elements);
 t_scene_object	*handle_plane(char **elements);
 t_scene_object	*handle_cy_cone(char **elements);
 t_scene_object	*handle_sphere(char **elements);
-
+void			free_list_str(char **list);
 #endif

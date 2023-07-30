@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 21:57:57 by clyamani          #+#    #+#             */
-/*   Updated: 2023/07/30 02:32:10 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/30 14:13:27 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_vector	*vec_range_check(char **list, double max, double min)
 			return (NULL);
 		i++;
 	}
-	free(list);
+	free_list_str(list);
 	return (vector(nums[0], nums[1], nums[2]));
 }
 
@@ -102,10 +102,7 @@ t_list	*readfile(char *filename)
 		err("invalide Extention !!");
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-	{
-		write(2, "failed to open file\n", 21);
-		exit(1);
-	}
+		err("failed to open file\n");
 	while (TRUE)
 	{
 		line = get_next_line(fd);
@@ -115,6 +112,7 @@ t_list	*readfile(char *filename)
 		if (!node_content)
 			err("Elemet no recognized \n");
 		push_back(&list, ft_lstnew(node_content));
+		free(line);
 	}
 	return (list);
 }

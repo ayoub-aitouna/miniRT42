@@ -6,11 +6,23 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:42:52 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/30 02:43:00 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/30 14:25:43 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/parsing.h"
+
+void	free_list_str(char **list)
+{
+	int	i;
+
+	i = 0;
+	while (list[i])
+	{
+		free(list[i++]);
+	}
+	free(list);
+}
 
 void	print_scene_object(t_scene_object *obj)
 {
@@ -47,8 +59,11 @@ void	print_scene_object(t_scene_object *obj)
 		print_vector(*obj->normal);
 		printf("\tColor    : ");
 		print_vector(*obj->color);
+		printf("\treflection_pr    : ");
+		print_vector(*obj->reflection_pr);
+		printf("\tTexture Type    : %d\n", obj->texture_type);
 	}
-	if (!strcmp(obj->type, "cy"))
+	if (!strcmp(obj->type, "co") || !strcmp(obj->type, "cy"))
 	{
 		printf("\tPosition : ");
 		print_vector(*obj->position);
@@ -58,17 +73,9 @@ void	print_scene_object(t_scene_object *obj)
 		print_vector(*obj->scal);
 		printf("\tColor    : ");
 		print_vector(*obj->color);
-	}
-	if (!strcmp(obj->type, "co"))
-	{
-		printf("\tPosition : ");
-		print_vector(*obj->position);
-		printf("\tNormal   : ");
-		print_vector(*obj->normal);
-		printf("\tScal   : ");
-		print_vector(*obj->scal);
-		printf("\tColor    : ");
-		print_vector(*obj->color);
+		printf("\treflection_pr    : ");
+		print_vector(*obj->reflection_pr);
+		printf("\tTexture Type    : %d\n", obj->texture_type);
 	}
 	if (!strcmp(obj->type, "sp"))
 	{
@@ -78,6 +85,9 @@ void	print_scene_object(t_scene_object *obj)
 		print_vector(*obj->scal);
 		printf("\tColor    : ");
 		print_vector(*obj->color);
+		printf("\treflection_pr    : ");
+		print_vector(*obj->reflection_pr);
+		printf("\tTexture Type    : %d\n", obj->texture_type);
 	}
 	printf("\t----------------------------\n\n");
 }
@@ -102,7 +112,27 @@ t_scene_object	*handle_line(char *line)
 		object = handle_sphere(splited);
 	if (ft_strncmp(splited[0], "pl", ft_strlen(splited[0])) == 0)
 		object = handle_plane(splited);
+	free_list_str(splited);
 	return (object);
+}
+void	delete_object_scene(t_scene_object *obj)
+{
+	if (obj == NULL)
+		return ;
+	if (obj->type != NULL)
+		free(obj->type);
+	if (obj->position != NULL)
+		free(obj->position);
+	if (obj->color != NULL)
+		free(obj->color);
+	if (obj->normal != NULL)
+		free(obj->normal);
+	if (obj->reflection_pr != NULL)
+		free(obj->reflection_pr);
+	if (obj->scal != NULL)
+		free(obj->scal);
+	if (obj->Texture_path != NULL)
+		free(obj->Texture_path);
 }
 
 int	main(int ac, char **av)
@@ -117,6 +147,7 @@ int	main(int ac, char **av)
 	while (scene)
 	{
 		print_scene_object(scene->content);
+		delete_object_scene(scene->content);
 		scene = scene->next;
 	}
 }
