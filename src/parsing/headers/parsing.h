@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:44:48 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/30 22:39:01 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/31 19:36:07 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ void			free_list_str(char **list);
 int				check_extention(char *file_name, char *extention);
 t_scene_object	*first_of(t_list *l_scene, char *type);
 int				str_equal(char *s1, char *s2);
-t_vector*		convert_vec_color(t_vector* color);
+t_vector		*convert_vec_color(t_vector *color);
 void			print_scene_object(t_scene_object *obj);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:42:52 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/31 02:09:49 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/31 19:33:01 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	free_list_str(char **list)
 void	print_scene_object(t_scene_object *obj)
 {
 	printf("\t----------------------------\n"
-			"type %s :\n",
-			obj->type);
+		"type %s :\n",
+		obj->type);
 	if (!strcmp(obj->type, "C"))
 	{
 		printf("\tPosition : ");
@@ -49,7 +49,6 @@ void	print_scene_object(t_scene_object *obj)
 		print_vector(*obj->position);
 		printf("\tIntensity: %.3f\n", obj->intensity);
 		printf("\tColor    : ");
-
 		print_vector(*obj->color);
 	}
 	if (!strcmp(obj->type, "pl"))
@@ -137,41 +136,4 @@ t_scene_object	*handle_line(char *line, t_list *list)
 		object = handle_plane(splited);
 	free_list_str(splited);
 	return (object);
-}
-void	delete_object_scene(t_scene_object *obj)
-{
-	if (obj == NULL)
-		return ;
-	if (obj->type != NULL)
-		free(obj->type);
-	if (obj->position != NULL)
-		free(obj->position);
-	if (obj->color != NULL)
-		free(obj->color);
-	if (obj->normal != NULL)
-		free(obj->normal);
-	if (obj->reflection_pr != NULL)
-		free(obj->reflection_pr);
-	if (obj->scal != NULL)
-		free(obj->scal);
-	if (obj->Texture_path != NULL)
-		free(obj->Texture_path);
-}
-
-int	_diabled_main(int ac, char **av)
-{
-	t_list	*scene;
-
-	(void)ac;
-	(void)av;
-	if (ac != 2)
-		err("invalide args !!\n");
-	scene = readfile(av[1]);
-	while (scene)
-	{
-		print_scene_object(scene->content);
-		delete_object_scene(scene->content);
-		scene = scene->next;
-	}
-	return (0);
 }

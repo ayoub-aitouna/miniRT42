@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 21:57:57 by clyamani          #+#    #+#             */
-/*   Updated: 2023/07/31 14:32:23 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/31 19:31:41 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,33 +88,4 @@ int	check_extention(char *file_name, char *extention)
 	if (i < (ft_strlen(extention) - 1))
 		return (FALSE);
 	return (TRUE);
-}
-
-t_list	*readfile(char *filename)
-{
-	t_scene_object	*node_content;
-	char			*line;
-	t_list			*list;
-	int				fd;
-
-	list = NULL;
-	if (!check_extention(filename, ".rt"))
-		err("invalide Extention !!");
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		err("failed to open file\n");
-	while (TRUE)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		node_content = handle_line(line, list);
-		if (!node_content)
-			err("Elemet no recognized \n");
-		push_back(&list, ft_lstnew(node_content));
-		free(line);
-	}
-	if (!first_of(list, "C") || !first_of(list, "A") || !first_of(list, "L"))
-		err("must be at least on Light Source & Camera & Ambient Light \n");
-	return (list);
 }
