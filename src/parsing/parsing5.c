@@ -6,7 +6,7 @@
 /*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 19:30:30 by clyamani          #+#    #+#             */
-/*   Updated: 2023/07/31 19:35:44 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/07/31 21:33:28 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_scene_object	*handle_plane(char **elements)
 
 	obj = init_t_scene_object();
 	if (!obj)
-		err("Error\n");
+		err("Error \n");
 	if (double_ptr_size(elements) != 6)
 		err("error in args\n");
 	obj->type = ft_strdup(elements[0]);
