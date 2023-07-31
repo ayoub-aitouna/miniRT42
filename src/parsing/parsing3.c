@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:42:52 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/30 22:22:10 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/31 02:09:49 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	print_scene_object(t_scene_object *obj)
 	{
 		printf("\tIntensity: %.3f\n", obj->intensity);
 		printf("\tColor    : ");
-		print_vector(*convert_vec_color(obj->color));
+		print_vector(*obj->color);
 	}
 	if (!strcmp(obj->type, "L"))
 	{
@@ -50,7 +50,7 @@ void	print_scene_object(t_scene_object *obj)
 		printf("\tIntensity: %.3f\n", obj->intensity);
 		printf("\tColor    : ");
 
-		print_vector(*convert_vec_color(obj->color));
+		print_vector(*obj->color);
 	}
 	if (!strcmp(obj->type, "pl"))
 	{
@@ -59,7 +59,7 @@ void	print_scene_object(t_scene_object *obj)
 		printf("\tNormal   : ");
 		print_vector(*obj->normal);
 		printf("\tColor    : ");
-		print_vector(*convert_vec_color(obj->color));
+		print_vector(*obj->color);
 		printf("\treflection_pr    : ");
 		print_vector(*obj->reflection_pr);
 		printf("\tTexture Type    : %d\n", obj->texture_type);
@@ -73,7 +73,7 @@ void	print_scene_object(t_scene_object *obj)
 		printf("\tScal   : ");
 		print_vector(*obj->scal);
 		printf("\tColor    : ");
-		print_vector(*convert_vec_color(obj->color));
+		print_vector(*obj->color);
 		printf("\treflection_pr    : ");
 		print_vector(*obj->reflection_pr);
 		printf("\tTexture Type    : %d\n", obj->texture_type);
@@ -85,7 +85,7 @@ void	print_scene_object(t_scene_object *obj)
 		printf("\tScal   : ");
 		print_vector(*obj->scal);
 		printf("\tColor    : ");
-		print_vector(*convert_vec_color(obj->color));
+		print_vector(*obj->color);
 		printf("\treflection_pr    : ");
 		print_vector(*obj->reflection_pr);
 		printf("\tTexture Type    : %d\n", obj->texture_type);

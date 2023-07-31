@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:27 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/30 22:29:21 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/31 15:03:50 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	p_int_point_propreties(t_vector *poi, t_object *this,
 	t_vector	*int_poi;
 
 	int_poi = apply_transform_vector(poi, FRWRD, this);
-	normal_fp = vector(0.0, 0.0, -1.0);
+	normal_fp = copy_vector(*this->normal);
 	m_normal = get_norm(this, normal_fp);
 	prop->int_point = *int_poi;
 	prop->local_normal = *m_normal;
@@ -52,13 +52,13 @@ t_vector	*p_calculat_int_point(t_ray *ray, t_vector k, t_propretries *prop,
 		return (false(status));
 	u = a.x + (t * k.x);
 	v = a.y + (t * k.y);
-	// if (fabs(u) >= 1.0 || fabs(v) >= 1.0)
-	// 	return (false(status));
-	// else
-	// {
-	prop->uv_cords = (t_uv_cords){.u = u, .v = v};
-	return (ms_addition(ray->point1, num_muliplication(&k, t), 1));
-	// }
+	if (fabs(u) >= 1.0 || fabs(v) >= 1.0)
+		return (false(status));
+	else
+	{
+		prop->uv_cords = (t_uv_cords){.u = u, .v = v};
+		return (ms_addition(ray->point1, num_muliplication(&k, t), 1));
+	}
 }
 
 int	p_int_test(t_object *this, t_ray *camera_ray, t_propretries *prop)

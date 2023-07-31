@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:40 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/30 02:48:15 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/31 02:40:35 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct Object
 	t_matrix				*bck_tfm;
 	t_matrix				*lineartfm;
 	t_vector				*base_color;
+	t_vector				*normal;
 	t_test_intersection		test_inter;
 	t_material				*material;
 	t_textures				*textures;

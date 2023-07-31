@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 21:57:57 by clyamani          #+#    #+#             */
-/*   Updated: 2023/07/30 21:49:57 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:32:23 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,7 @@ t_list	*readfile(char *filename)
 		push_back(&list, ft_lstnew(node_content));
 		free(line);
 	}
+	if (!first_of(list, "C") || !first_of(list, "A") || !first_of(list, "L"))
+		err("must be at least on Light Source & Camera & Ambient Light \n");
 	return (list);
 }
