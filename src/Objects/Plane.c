@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:27 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/31 15:03:50 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/01 01:58:35 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	p_int_point_propreties(t_vector *poi, t_object *this,
 	t_vector	*int_poi;
 
 	int_poi = apply_transform_vector(poi, FRWRD, this);
-	normal_fp = copy_vector(*this->normal);
+	normal_fp = vector(0.0, 0.0, -1.0);
 	m_normal = get_norm(this, normal_fp);
 	prop->int_point = *int_poi;
 	prop->local_normal = *m_normal;

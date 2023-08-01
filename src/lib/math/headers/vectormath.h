@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:22:06 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 04:49:16 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/31 21:58:42 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ double		vector_lenght2(t_vector v);
 t_vector	*normalized(t_vector *v);
 double		normalize(t_vector *v);
 t_vector	*vector(double x, double y, double z);
+t_vector2	*vec2(double x, double y);
 t_vector	*copy_vector(t_vector v);
 t_vector	*equal(t_vector *target, t_vector *v);
 t_vector	*minus(t_vector *target, t_vector *v);

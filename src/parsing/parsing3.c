@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:42:52 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/31 19:33:01 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/07/31 22:27:36 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void	print_scene_object(t_scene_object *obj)
 		print_vector(*obj->normal);
 		printf("\tColor    : ");
 		print_vector(*obj->color);
-		printf("\treflection_pr    : ");
-		print_vector(*obj->reflection_pr);
+		printf("\treflection    : %f, %f, refraction %f, %f \n", obj->reflection->x,
+			obj->reflection->y, obj->refraction->x, obj->refraction->y);
 		printf("\tTexture Type    : %d\n", obj->texture_type);
 	}
 	if (!strcmp(obj->type, "co") || !strcmp(obj->type, "cy"))
@@ -73,8 +73,8 @@ void	print_scene_object(t_scene_object *obj)
 		print_vector(*obj->scal);
 		printf("\tColor    : ");
 		print_vector(*obj->color);
-		printf("\treflection_pr    : ");
-		print_vector(*obj->reflection_pr);
+		printf("\treflection    : %f, %f, refraction %f, %f \n", obj->reflection->x,
+			obj->reflection->y, obj->refraction->x, obj->refraction->y);
 		printf("\tTexture Type    : %d\n", obj->texture_type);
 	}
 	if (!strcmp(obj->type, "sp"))
@@ -85,8 +85,8 @@ void	print_scene_object(t_scene_object *obj)
 		print_vector(*obj->scal);
 		printf("\tColor    : ");
 		print_vector(*obj->color);
-		printf("\treflection_pr    : ");
-		print_vector(*obj->reflection_pr);
+		printf("\treflection    : %f, %f, refraction %f, %f \n", obj->reflection->x,
+			obj->reflection->y, obj->refraction->x, obj->refraction->y);
 		printf("\tTexture Type    : %d\n", obj->texture_type);
 	}
 	printf("\t----------------------------\n\n");

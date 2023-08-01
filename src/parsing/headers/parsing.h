@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:44:48 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/31 19:36:07 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/07/31 22:07:26 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,7 @@ t_scene_object	*first_of(t_list *l_scene, char *type);
 int				str_equal(char *s1, char *s2);
 t_vector		*convert_vec_color(t_vector *color);
 void			print_scene_object(t_scene_object *obj);
+t_scene_object	*init_t_scene_object(void);
+void            set_up_material_proprieties(char *mt_coefficient, char *texture,
+		            t_scene_object *obj);
 #endif

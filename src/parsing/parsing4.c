@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing4.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 19:27:52 by clyamani          #+#    #+#             */
-/*   Updated: 2023/07/31 19:34:06 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/07/31 22:22:57 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,17 @@ void	delete_object_scene(t_scene_object *obj)
 		free(obj->color);
 	if (obj->normal != NULL)
 		free(obj->normal);
-	if (obj->reflection_pr != NULL)
-		free(obj->reflection_pr);
+	if (obj->reflection != NULL)
+		free(obj->reflection);
+	if (obj->refraction != NULL)
+		free(obj->refraction);
 	if (obj->scal != NULL)
 		free(obj->scal);
 	if (obj->Texture_path != NULL)
 		free(obj->Texture_path);
 }
 
-int	_diabled_main(int ac, char **av)
+int	__dsbld__main(int ac, char **av)
 {
 	t_list	*scene;
 
@@ -89,20 +91,31 @@ void	strip_nl(char *src)
 	}
 }
 
-void	set_up_material_proprieties(char **mt_coefficient, char *texture,
+void exit_f_out_of_range(t_vector2 *vec, double max1, double max2)
+{
+	f_in_range(vec->x, max1, 0);
+	f_in_range(vec->y, max2, 0);
+}
+
+void	set_up_material_proprieties(char *mt_coefficient, char *texture,
 		t_scene_object *obj)
 {
-	strip_nl(texture);
-	if (double_ptr_size(mt_coefficient) != 3)
+	char	**elemts;
+	char	**r_c;
+	char	**t_c;
+
+	elemts = ft_split(mt_coefficient, ':');
+	if (double_ptr_size(elemts) != 2)
 		err("error in args\n");
-	obj->reflection_pr = vector(atof(mt_coefficient[0]),
-			atof(mt_coefficient[1]), atof(mt_coefficient[2]));
-	if (!f_in_range(obj->reflection_pr->x, 1, 0))
-		exit(1);
-	if (!f_in_range(obj->reflection_pr->y, 1, 0))
-		exit(1);
-	if (!f_in_range(obj->reflection_pr->z, 100, 0))
-		exit(1);
+	r_c = ft_split(elemts[0], ',');
+	t_c = ft_split(elemts[1], ',');
+	if (double_ptr_size(r_c) != 2 || double_ptr_size(t_c) != 2)
+		err("error in args\n");
+	obj->reflection = vec2(atof(r_c[0]), atof(r_c[1]));
+	exit_f_out_of_range(obj->reflection, 1, 100);
+	obj->refraction = vec2(atof(t_c[0]), atof(t_c[1]));
+	exit_f_out_of_range(obj->refraction, 1, 4);
+
 	if (!ft_strncmp(texture, "NON", ft_strlen(texture)))
 		obj->texture_type = NON;
 	else if (ft_strncmp(texture, "CHECKBOARD", ft_strlen(texture)) == 0)
@@ -110,9 +123,10 @@ void	set_up_material_proprieties(char **mt_coefficient, char *texture,
 	else
 	{
 		obj->texture_type = BUMPMAPTEXTURE;
-		if (!check_extention(texture, ".xpm"))
-			err("texture extention invalide \n");
+
 		obj->Texture_path = ft_strdup(texture);
 	}
-	free_list_str(mt_coefficient);
+	free_list_str(elemts);
+	free_list_str(r_c);
+	free_list_str(t_c);
 }

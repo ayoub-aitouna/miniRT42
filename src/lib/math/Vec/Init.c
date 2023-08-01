@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:22:21 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 04:14:49 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/31 21:59:20 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@ t_vector	*vector(double x, double y, double z)
 	vector->y = y;
 	vector->z = z;
 	return (vector);
+}
+
+t_vector2	*vec2(double x, double y)
+{
+	t_vector2	*vec;
+
+	vec = malloc(sizeof(t_vector2));
+	vec->x = x;
+	vec->y = y;
+	return (vec);
 }
 
 t_vector	*copy_vector(t_vector v)

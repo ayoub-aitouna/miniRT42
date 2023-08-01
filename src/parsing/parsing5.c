@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing5.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 19:30:30 by clyamani          #+#    #+#             */
-/*   Updated: 2023/07/31 21:33:28 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/07/31 22:28:01 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_scene_object	*handle_plane(char **elements)
 	obj->color = vec_range_check(ft_split(elements[3], ','), 255, 0);
 	if (!obj->color)
 		err("out of range\n");
-	set_up_material_proprieties(ft_split(elements[4], ','), elements[5], obj);
+	set_up_material_proprieties(elements[4], elements[5], obj);
 	return (obj);
 }
 
@@ -68,7 +68,7 @@ t_scene_object	*handle_cy_cone(char **elements)
 	obj->color = vec_range_check(ft_split(elements[5], ','), 255, 0);
 	if (!obj->color)
 		err("out of range\n");
-	set_up_material_proprieties(ft_split(elements[6], ','), elements[7], obj);
+	set_up_material_proprieties(elements[6], elements[7], obj);
 	return (obj);
 }
 
@@ -97,7 +97,7 @@ t_scene_object	*handle_sphere(char **elements)
 	obj->color = vec_range_check(ft_split(elements[3], ','), 255, 0);
 	if (!obj->color)
 		err("out of range\n");
-	set_up_material_proprieties(ft_split(elements[4], ','), elements[5], obj);
+	set_up_material_proprieties(elements[4], elements[5], obj);
 	return (obj);
 }
 
@@ -119,6 +119,7 @@ t_list	*readfile(char *filename)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
+		line = ft_strtrim(line, " \n");
 		node_content = handle_line(line, list);
 		if (!node_content)
 			err("Elemet no recognized \n");

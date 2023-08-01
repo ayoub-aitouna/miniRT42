@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:40 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/31 02:40:35 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/07/31 21:59:59 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,8 @@ typedef struct s_scene_object
 	t_vector				*position;
 	t_vector				*color;
 	t_vector				*normal;
-	t_vector				*reflection_pr;
+	t_vector2				*reflection;
+	t_vector2				*refraction;
 	t_vector				*scal;
 	double					intensity;
 	double					field_of_view;
