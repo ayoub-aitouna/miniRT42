@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:22 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 22:11:13 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/01 05:58:35 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	set_cap_properiesties(t_object *this, t_vector *poi, t_vector n,
 		return (FALSE);
 	}
 	int_poi = apply_transform_vector(poi, FRWRD, this);
-	normal_fp = vector(0.0, 0.0, 0 + poi->z);
+	normal_fp = vector(0.0, 0.0, 1.0);
 	m_normal = get_norm(this, normal_fp);
 	prop->local_normal = *m_normal;
 	prop->local_color = *this->base_color;

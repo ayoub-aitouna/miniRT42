@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 00:29:11 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/01 03:00:43 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/01 05:50:20 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_object *get_object_by_type(t_scene_object *s_obj)
 		return (create_sphere(s_obj->position, vector(0, 0, 0), s_obj->scal,
 							  convert_vec_color(s_obj->color)));
 	if (str_equal(s_obj->type, "cy"))
-		return (cylinder(s_obj->position, vector(0, 0, 0), s_obj->scal,
+		return (cylinder(s_obj->position, vector(-1.57, 0.0, 0.0), s_obj->scal,
 						 convert_vec_color(s_obj->color)));
 	if (str_equal(s_obj->type, "co"))
 		return (cone(s_obj->position, vector(0, 0, 0), s_obj->scal,
