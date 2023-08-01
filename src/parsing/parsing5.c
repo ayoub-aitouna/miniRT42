@@ -6,7 +6,7 @@
 /*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 19:30:30 by clyamani          #+#    #+#             */
-/*   Updated: 2023/08/01 18:47:23 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/01 18:59:35 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,8 @@ t_list	*readfile(char *filename, t_utils *utils)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		if(line[0] == '\n')
-			continue;
+		if (line[0] == '\n')
+			continue ;
 		ptr = ft_strtrim(line, " \n");
 		node_content = handle_line(ptr, list, utils);
 		if (!node_content)

@@ -6,7 +6,7 @@
 /*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 21:57:57 by clyamani          #+#    #+#             */
-/*   Updated: 2023/08/01 17:45:49 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/01 19:00:22 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ int	check_extention(char *file_name, char *extention)
 	i = 0;
 	while (file_name[pos])
 	{
-		printf("file = %c-----\n",file_name[pos]);
-		printf(" exten = %c-----\n",extention[i]);
 		if (file_name[pos] != extention[i])
 			return (FALSE);
 		i++;
