@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 22:09:32 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/01 05:43:44 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/01 06:01:10 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,16 @@ int	set_cone_properiesties(t_object *this, t_vector *poi, t_propretries *prop)
 {
 	t_vector	*m_normal;
 	t_vector	*int_poi;
+	t_vector *normal_fp;
 
 	int_poi = apply_transform_vector(poi, FRWRD, this);
-	m_normal = get_norm(this, this->normal);
+	normal_fp = vector(0.0, 0.0, 1.0);
+	m_normal = get_norm(this, normal_fp);
 	prop->local_normal = *m_normal;
 	prop->local_color = *this->base_color;
 	prop->int_point = *int_poi;
 	prop->uv_cords = (t_uv_cords){atan2(poi->x, poi->y), poi->z};
-	free_list((void *[]){m_normal, int_poi, poi}, 3);
+	free_list((void *[]){m_normal, int_poi, poi, normal_fp}, 4);
 	return (TRUE);
 }
 
