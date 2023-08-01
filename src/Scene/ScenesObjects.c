@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 00:29:11 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/01 05:50:20 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/01 06:04:12 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ t_textures *get_texture(void *mlx_ptr, t_scene_object *s_obj)
 	else if (s_obj->texture_type == BUMPMAPTEXTURE)
 	{
 		file_names = ft_split(s_obj->Texture_path, ',');
+		if (!check_extention(file_names[0], ".xpm")
+				&& !check_extention(file_names[1], ".xpm"))
+			err("texture file has invalide extention \n");
 		texture = new_img_texture(mlx_ptr, file_names[0], file_names[1]);
 		free_list_str(file_names);
 	}
