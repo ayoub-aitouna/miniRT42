@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing4.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 19:27:52 by clyamani          #+#    #+#             */
-/*   Updated: 2023/07/31 22:22:57 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/01 18:53:17 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,6 @@ void	delete_object_scene(t_scene_object *obj)
 		free(obj->scal);
 	if (obj->Texture_path != NULL)
 		free(obj->Texture_path);
-}
-
-int	__dsbld__main(int ac, char **av)
-{
-	t_list	*scene;
-
-	(void)ac;
-	(void)av;
-	if (ac != 2)
-		err("invalide args !!\n");
-	scene = readfile(av[1]);
-	while (scene)
-	{
-		print_scene_object(scene->content);
-		delete_object_scene(scene->content);
-		scene = scene->next;
-	}
-	return (0);
 }
 
 t_scene_object	*handle_light(char **elements)
@@ -91,42 +73,30 @@ void	strip_nl(char *src)
 	}
 }
 
-void exit_f_out_of_range(t_vector2 *vec, double max1, double max2)
+void	exit_f_out_of_range(t_vector2 *vec, double max1, double max2)
 {
 	f_in_range(vec->x, max1, 0);
 	f_in_range(vec->y, max2, 0);
 }
 
-void	set_up_material_proprieties(char *mt_coefficient, char *texture,
-		t_scene_object *obj)
+int	main(int ac, char **av)
 {
-	char	**elemts;
-	char	**r_c;
-	char	**t_c;
+	t_list	*scene;
+	t_utils	*utils;
 
-	elemts = ft_split(mt_coefficient, ':');
-	if (double_ptr_size(elemts) != 2)
-		err("error in args\n");
-	r_c = ft_split(elemts[0], ',');
-	t_c = ft_split(elemts[1], ',');
-	if (double_ptr_size(r_c) != 2 || double_ptr_size(t_c) != 2)
-		err("error in args\n");
-	obj->reflection = vec2(atof(r_c[0]), atof(r_c[1]));
-	exit_f_out_of_range(obj->reflection, 1, 100);
-	obj->refraction = vec2(atof(t_c[0]), atof(t_c[1]));
-	exit_f_out_of_range(obj->refraction, 1, 4);
-
-	if (!ft_strncmp(texture, "NON", ft_strlen(texture)))
-		obj->texture_type = NON;
-	else if (ft_strncmp(texture, "CHECKBOARD", ft_strlen(texture)) == 0)
-		obj->texture_type = CHECKBOARD;
-	else
+	utils = NULL;
+	(void)ac;
+	(void)av;
+	if (ac != 2)
+		err("invalide args !!\n");
+	scene = readfile(av[1], utils);
+	while (scene)
 	{
-		obj->texture_type = BUMPMAPTEXTURE;
-
-		obj->Texture_path = ft_strdup(texture);
+		print_scene_object(scene->content);
+		delete_object_scene(scene->content);
+		scene = scene->next;
 	}
-	free_list_str(elemts);
-	free_list_str(r_c);
-	free_list_str(t_c);
+	free_linkedlst(scene);
+	free(utils);
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:42:52 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/31 22:27:36 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/01 18:46:03 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	equal_atleast_once(char *s1, char **list)
 	return (FALSE);
 }
 
-t_scene_object	*handle_line(char *line, t_list *list)
+t_scene_object	*handle_line(char *line, t_list *list, t_utils *utils)
 {
 	char			**splited;
 	t_scene_object	*object;
@@ -129,7 +129,7 @@ t_scene_object	*handle_line(char *line, t_list *list)
 		object = handle_light(splited);
 	if (ft_strncmp(splited[0], "cy", ft_strlen(splited[0])) == 0
 		|| ft_strncmp(splited[0], "co", ft_strlen(splited[0])) == 0)
-		object = handle_cy_cone(splited);
+		object = handle_cy_cone(splited, utils);
 	if (ft_strncmp(splited[0], "sp", ft_strlen(splited[0])) == 0)
 		object = handle_sphere(splited);
 	if (ft_strncmp(splited[0], "pl", ft_strlen(splited[0])) == 0)

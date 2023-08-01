@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:48 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/31 22:23:04 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/01 18:53:19 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ void print_scene(t_list *scene)
 	}
 }
 
-int	main(int ac, char **av)
+int		__dsbld__main(int ac, char **av)
 {
 	t_mt m_mt;
 	t_list *l_scene;
-
+	t_utils *utils = NULL;
 	if (ac != 2)
 		err("invalide args !!\n");
-	l_scene = readfile(av[1]);
+	l_scene = readfile(av[1], utils);
 	// print_scene(l_scene);
 	m_mt = (t_mt){.scene = NULL, .image = NULL};
 	m_mt.image = NULL;

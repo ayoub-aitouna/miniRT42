@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:44:48 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/31 22:07:26 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/01 17:07:16 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,26 @@
 # include <string.h>
 # include <unistd.h>
 
+typedef struct utils
+{
+	double			diameter;
+	t_scene_object	*obj;
+	char			**vec_elements;
+	double			height;
+
+}t_utils;
 void			err(char *msg);
-t_list			*readfile(char *filename);
+t_scene_object	*handle_plane(char **elements);
 void			check_for_parametres(char **list, t_parsing *pars);
-t_list			*readfile(char *filename);
-t_scene_object	*handle_line(char *line, t_list *parsed_list);
+t_list			*readfile(char *filename, t_utils *utils);
+t_scene_object	*handle_line(char *line, t_list *list, t_utils *utils);
 int				double_ptr_size(char **str);
 t_vector		*vec_range_check(char **list, double max, double min);
 int				f_in_range(double value, double max, double min);
-t_scene_object	*handle_cy_cone(char **elements);
 t_scene_object	*handle_ambient(char **elements);
 t_scene_object	*handle_camera(char **elements);
 t_scene_object	*handle_light(char **elements);
-t_scene_object	*handle_plane(char **elements);
-t_scene_object	*handle_cy_cone(char **elements);
+t_scene_object	*handle_cy_cone(char **elements, t_utils *utils);
 t_scene_object	*handle_sphere(char **elements);
 void			free_list_str(char **list);
 int				check_extention(char *file_name, char *extention);
@@ -44,6 +50,9 @@ int				str_equal(char *s1, char *s2);
 t_vector		*convert_vec_color(t_vector *color);
 void			print_scene_object(t_scene_object *obj);
 t_scene_object	*init_t_scene_object(void);
-void            set_up_material_proprieties(char *mt_coefficient, char *texture,
-		            t_scene_object *obj);
+void			set_up_material_proprieties(char *mt_coefficient, char *texture,
+					t_scene_object *obj);
+void			exit_f_out_of_range(t_vector2 *vec, double max1, double max2);
+void			hepler_handle_cycone(char **elements, t_utils *utils);
+void			free_linkedlst(t_list *head);
 #endif

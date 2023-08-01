@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing5.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 19:30:30 by clyamani          #+#    #+#             */
-/*   Updated: 2023/07/31 22:28:01 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/01 18:47:23 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,37 +39,39 @@ t_scene_object	*handle_plane(char **elements)
 	return (obj);
 }
 
-t_scene_object	*handle_cy_cone(char **elements)
+void	hepler_handle_cycone(char **elements, t_utils *utils)
 {
-	t_scene_object	*obj;
-	char			**vec_elements;
-	double			height;
-	double			diameter;
-
-	obj = init_t_scene_object();
-	if (!obj || double_ptr_size(elements) != 8)
+	utils->obj = init_t_scene_object();
+	if (!utils->obj || double_ptr_size(elements) != 8)
 		err("Error \n");
-	obj->type = ft_strdup(elements[0]);
-	vec_elements = ft_split(elements[1], ',');
-	if (double_ptr_size(vec_elements) != 3)
+	utils->obj->type = ft_strdup(elements[0]);
+	utils->vec_elements = ft_split(elements[1], ',');
+	if (double_ptr_size(utils->vec_elements) != 3)
 		err("error in args\n");
-	obj->position = vector(atof(vec_elements[0]), atof(vec_elements[1]),
-			atof(vec_elements[2]));
-	free_list_str(vec_elements);
-	obj->normal = vec_range_check(ft_split(elements[2], ','), 1, -1);
-	if (!obj->normal)
+	utils->obj->position = vector(atof(utils->vec_elements[0]),
+			atof(utils->vec_elements[1]), atof(utils->vec_elements[2]));
+	free_list_str(utils->vec_elements);
+	utils->obj->normal = vec_range_check(ft_split(elements[2], ','), 1, -1);
+}
+
+t_scene_object	*handle_cy_cone(char **elements, t_utils *utils)
+{
+	hepler_handle_cycone(elements, utils);
+	if (!utils->obj->normal)
 		err("out of range\n");
-	diameter = atof(elements[3]);
-	height = atof(elements[4]);
+	utils->diameter = atof(elements[3]);
+	utils->height = atof(elements[4]);
 	if (ft_strncmp(elements[0], "cy", ft_strlen(elements[0])) == 0)
-		obj->scal = vector(diameter / 2, diameter / 2, height / 2);
+		utils->obj->scal = vector(utils->diameter / 2, utils->diameter / 2,
+				utils->height / 2);
 	else
-		obj->scal = vector(diameter / 2, diameter / 2, height);
-	obj->color = vec_range_check(ft_split(elements[5], ','), 255, 0);
-	if (!obj->color)
+		utils->obj->scal = vector(utils->diameter / 2, utils->diameter / 2,
+				utils->height);
+	utils->obj->color = vec_range_check(ft_split(elements[5], ','), 255, 0);
+	if (!utils->obj->color)
 		err("out of range\n");
-	set_up_material_proprieties(elements[6], elements[7], obj);
-	return (obj);
+	set_up_material_proprieties(elements[6], elements[7], utils->obj);
+	return (utils->obj);
 }
 
 t_scene_object	*handle_sphere(char **elements)
@@ -101,12 +103,13 @@ t_scene_object	*handle_sphere(char **elements)
 	return (obj);
 }
 
-t_list	*readfile(char *filename)
+t_list	*readfile(char *filename, t_utils *utils)
 {
 	t_scene_object	*node_content;
 	char			*line;
 	t_list			*list;
 	int				fd;
+	char			*ptr;
 
 	list = NULL;
 	if (!check_extention(filename, ".rt"))
@@ -119,12 +122,13 @@ t_list	*readfile(char *filename)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		line = ft_strtrim(line, " \n");
-		node_content = handle_line(line, list);
+		if(line[0] == '\n')
+			continue;
+		ptr = ft_strtrim(line, " \n");
+		node_content = handle_line(ptr, list, utils);
 		if (!node_content)
 			err("Elemet no recognized \n");
-		push_back(&list, ft_lstnew(node_content));
-		free(line);
+		(push_back(&list, ft_lstnew(node_content)), free(line), free(ptr));
 	}
 	if (!first_of(list, "C") || !first_of(list, "A") || !first_of(list, "L"))
 		err("must be at least on Light Source & Camera & Ambient Light \n");
