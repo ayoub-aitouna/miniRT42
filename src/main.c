@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:48 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/01 21:40:13 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/02 11:53:52 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,30 @@
 
 typedef struct mt
 {
-	t_image *image;
-	t_scene *scene;
-	void *mlx;
-	void *mlx_win;
-} t_mt;
+	t_image	*image;
+	t_scene	*scene;
+	void	*mlx;
+	void	*mlx_win;
+}			t_mt;
 
-int m_exit(t_mt *m_mt)
+int	m_exit(t_mt *m_mt)
 {
 	mlx_destroy_window(m_mt->mlx, m_mt->mlx_win);
 	printf("ESC Clicked \n");
 	exit(0);
 }
 
-int key_hook(int keycode, t_mt *mt)
+int	key_hook(int keycode, t_mt *mt)
 {
 	if (keycode == ESC)
 		m_exit(mt);
 	return (0);
 }
 
-void print_scene(t_list *scene)
+void	print_scene(t_list *scene)
 {
-	t_list *tmp;
+	t_list	*tmp;
+
 	tmp = scene;
 	while (tmp)
 	{
@@ -50,10 +51,11 @@ void print_scene(t_list *scene)
 	}
 }
 
-int		main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_mt m_mt;
-	t_list *l_scene;
+	t_mt	m_mt;
+	t_list	*l_scene;
+
 	if (ac != 2)
 		err("invalide args !!\n");
 	l_scene = readfile(av[1]);

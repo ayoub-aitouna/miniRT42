@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:22:29 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/26 10:01:02 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/02 11:54:39 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LIB_H
 # include "math/headers/libtypes.h"
 # include <stdlib.h>
-#include "libft/libft.h"
+# include "libft/libft.h"
 
 typedef struct list
 {

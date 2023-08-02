@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:44:48 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/01 20:26:33 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/02 11:23:43 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct utils
 
 void			err(char *msg);
 t_scene_object	*handle_plane(char **elements);
-void			check_for_parametres(char **list, t_parsing *pars);
 t_list			*readfile(char *filename);
 t_scene_object	*handle_line(char *line, t_list *list);
 int				double_ptr_size(char **str);
@@ -56,4 +55,5 @@ void			set_up_material_proprieties(char *mt_coefficient, char *texture,
 void			exit_f_out_of_range(t_vector2 *vec, double max1, double max2);
 void			hepler_handle_cycone(char **elements, t_utils *utils);
 void			free_linkedlst(t_list *head);
+void			check_for_file(char *filename);
 #endif

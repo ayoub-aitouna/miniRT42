@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   triangle.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:36 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/02 04:18:58 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/02 11:09:01 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	t_int_point_propreties(t_vector *poi, t_object *this,
 	m_normal = get_norm(this, int_poi);
 	if (this->textures)
 		m_normal = apply_bump_map_textures(this->textures, m_normal,
-										   prop->uv_cords);
+				prop->uv_cords);
 	normalize(m_normal);
 	prop->int_point = *int_poi;
 	prop->local_normal = *m_normal;

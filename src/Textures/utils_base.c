@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   utils_base.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/08 20:51:55 by clyamani          #+#    #+#             */
-/*   Updated: 2023/07/23 15:52:51 by clyamani         ###   ########.fr       */
+/*   Created: 2023/08/02 11:42:00 by clyamani          #+#    #+#             */
+/*   Updated: 2023/08/02 11:42:20 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "headers/base.h"
 
-char	*ft_strchr(const char *s, int c)
+void	delete_txture_img(t_txtr_img *img)
 {
-	int	i;
-
-	i = 0;
-	if (!s)
-		return (NULL);
-	if (!(unsigned char)c)
-		return ((char *)(s + ft_strlen(s)));
-	while (s[i])
+	if (img)
 	{
-		if (s[i] == (unsigned char)c)
-			return ((char *)&s[i]);
-		i++;
+		if (img->img)
+			free(img->img);
+		free(img);
 	}
-	return (NULL);
+}
+
+void	delete_textures(t_textures *this)
+{
+	if (this)
+	{
+		if (this->tfm)
+			delete_matrix(this->tfm);
+		if (this->txtr_img)
+			delete_txture_img(this->txtr_img);
+		if (this->surface_hieght_info)
+			delete_txture_img(this->surface_hieght_info);
+		free(this);
+	}
 }

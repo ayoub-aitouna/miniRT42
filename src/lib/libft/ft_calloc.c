@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:56:04 by clyamani          #+#    #+#             */
-/*   Updated: 2023/07/26 10:07:13 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/02 10:49:18 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void *ft_calloc(size_t nmemb, size_t size)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void *ptr;
+	void	*ptr;
 
 	if (nmemb == SIZE_MAX || size == SIZE_MAX)
 		return (NULL);

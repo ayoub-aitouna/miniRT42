@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:22 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/02 04:20:27 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/02 11:04:56 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	set_cylider_properiesties(t_object *this, t_vector *poi,
 	m_normal = get_norm(this, normal_fp);
 	if (this->textures)
 		m_normal = apply_bump_map_textures(this->textures, m_normal,
-										   prop->uv_cords);
+				prop->uv_cords);
 	normalize(m_normal);
 	prop->local_normal = *m_normal;
 	prop->local_color = *this->base_color;
@@ -113,7 +113,7 @@ int	set_cap_properiesties(t_object *this, t_vector *poi, t_vector n,
 	m_normal = get_norm(this, normal_fp);
 	if (this->textures)
 		m_normal = apply_bump_map_textures(this->textures, m_normal,
-										   prop->uv_cords);
+				prop->uv_cords);
 	normalize(m_normal);
 	prop->local_normal = *m_normal;
 	prop->local_color = *this->base_color;

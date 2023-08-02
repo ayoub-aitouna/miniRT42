@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing4.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 19:27:52 by clyamani          #+#    #+#             */
-/*   Updated: 2023/08/01 21:35:06 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/02 10:48:09 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	delete_object_scene(t_scene_object *obj)
 		free(obj->refraction);
 	if (obj->scal != NULL)
 		free(obj->scal);
-	if (obj->Texture_path != NULL)
-		free(obj->Texture_path);
+	if (obj->texture_path != NULL)
+		free(obj->texture_path);
 	free(obj);
 }
 
@@ -78,7 +78,6 @@ void	exit_f_out_of_range(t_vector2 *vec, double max1, double max2)
 	f_in_range(vec->x, max1, 0);
 	f_in_range(vec->y, max2, 0);
 }
-
 
 int	__desabled_main(int ac, char **av)
 {

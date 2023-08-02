@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing5.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 19:30:30 by clyamani          #+#    #+#             */
-/*   Updated: 2023/08/01 23:12:37 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/02 11:24:43 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	hepler_handle_cycone(char **elements, t_utils *utils)
 t_scene_object	*handle_cy_cone(char **elements)
 {
 	t_utils		utils;
-	
+
 	hepler_handle_cycone(elements, &utils);
 	if (!utils.obj->normal)
 		err("Cone/Cylinder Normal out of range\n");
@@ -114,8 +114,6 @@ t_list	*readfile(char *filename)
 	char			*ptr;
 
 	list = NULL;
-	if (!check_extention(filename, ".rt"))
-		err("invalide Extention !!");
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		err("failed to open file\n");

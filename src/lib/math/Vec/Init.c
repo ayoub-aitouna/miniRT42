@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:22:21 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/31 21:59:20 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/02 10:59:47 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,4 @@ double	normalize(t_vector *v)
 	v->y /= l;
 	v->z /= l;
 	return (l);
-}
-
-void	free_at_index(void *ptr1, void *ptr2, int index)
-{
-	if (index == 0 || index == 2)
-		free(ptr1);
-	if (index == 1 || index == 2)
-		free(ptr2);
 }

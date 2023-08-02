@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   utils_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 23:58:17 by clyamani          #+#    #+#             */
-/*   Updated: 2022/11/02 18:48:04 by clyamani         ###   ########.fr       */
+/*   Created: 2023/08/02 10:58:58 by clyamani          #+#    #+#             */
+/*   Updated: 2023/08/02 10:59:55 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../headers/vectormath.h"
 
-int	ft_isascii(int c)
+void	free_at_index(void *ptr1, void *ptr2, int index)
 {
-	if (c >= 0 && c <= 127)
-	{
-		return (1);
-	}
-	return (0);
+	if (index == 0 || index == 2)
+		free(ptr1);
+	if (index == 1 || index == 2)
+		free(ptr2);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:40 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/31 21:59:59 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/02 10:48:09 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ typedef enum TextureType
 	NON = -1,
 	CHECKBOARD = 0,
 	BUMPMAPTEXTURE = 1
-}							T_TextureType;
+}							t_texturetype;
 
 typedef struct s_scene_object
 {
@@ -155,20 +155,9 @@ typedef struct s_scene_object
 	t_vector				*scal;
 	double					intensity;
 	double					field_of_view;
-	T_TextureType			texture_type;
-	char					*Texture_path;
+	t_texturetype			texture_type;
+	char					*texture_path;
 
 }							t_scene_object;
-
-typedef struct k
-{
-	char **A;
-	char **C;
-	char **L;
-	char **pl;
-	char **sp;
-	char **cy;
-
-}							t_parsing;
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 21:59:43 by clyamani          #+#    #+#             */
-/*   Updated: 2023/08/01 20:48:18 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/02 10:48:09 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_scene_object	*init_t_scene_object(void)
 	obj->reflection = NULL;
 	obj->refraction = NULL;
 	obj->scal = NULL;
-	obj->Texture_path = NULL;
+	obj->texture_path = NULL;
 	return (obj);
 }
 

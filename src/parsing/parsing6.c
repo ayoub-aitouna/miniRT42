@@ -6,7 +6,7 @@
 /*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:43:38 by clyamani          #+#    #+#             */
-/*   Updated: 2023/08/01 17:06:55 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/02 11:24:26 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,13 @@ void	set_up_material_proprieties(char *mt_coefficient, char *texture,
 	else
 	{
 		obj->texture_type = BUMPMAPTEXTURE;
-		obj->Texture_path = ft_strdup(texture);
+		obj->texture_path = ft_strdup(texture);
 	}
 	(free_list_str(elemts), free_list_str(r_c), free_list_str(t_c));
+}
+
+void	check_for_file(char *filename)
+{
+	if (!check_extention(filename, ".rt"))
+		err("invalide Extention !!");
 }
