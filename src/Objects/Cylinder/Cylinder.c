@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:22 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/02 02:16:58 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/02 04:20:27 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,10 @@ int	set_cylider_properiesties(t_object *this, t_vector *poi,
 	int_poi = apply_transform_vector(poi, FRWRD, this);
 	normal_fp = vector(poi->x, poi->y, 0.0);
 	m_normal = get_norm(this, normal_fp);
+	if (this->textures)
+		m_normal = apply_bump_map_textures(this->textures, m_normal,
+										   prop->uv_cords);
+	normalize(m_normal);
 	prop->local_normal = *m_normal;
 	prop->local_color = *this->base_color;
 	prop->int_point = *int_poi;
@@ -107,6 +111,10 @@ int	set_cap_properiesties(t_object *this, t_vector *poi, t_vector n,
 	int_poi = apply_transform_vector(poi, FRWRD, this);
 	normal_fp = vector(0.0, 0.0, 1.0);
 	m_normal = get_norm(this, normal_fp);
+	if (this->textures)
+		m_normal = apply_bump_map_textures(this->textures, m_normal,
+										   prop->uv_cords);
+	normalize(m_normal);
 	prop->local_normal = *m_normal;
 	prop->local_color = *this->base_color;
 	prop->int_point = *int_poi;

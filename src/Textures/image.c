@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 10:17:58 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/31 11:21:05 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/02 04:41:20 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ t_txtr_img *load_img(void *mlx_ptr, char *filename)
 											   &txtr_img->img_width, &txtr_img->img_height);
 	if (!txtr_img->img->img)
 	{
-		printf("error img null name is : <%s>  \n", filename);
+		
+		printf("Error\nimg null name is : <%s>  \n", filename);
 		exit(127);
 	}
 	txtr_img->img->addr = mlx_get_data_addr(txtr_img->img->img,
