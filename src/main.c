@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:48 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/01 18:53:19 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/01 21:40:13 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,13 @@ void print_scene(t_list *scene)
 	}
 }
 
-int		__dsbld__main(int ac, char **av)
+int		main(int ac, char **av)
 {
 	t_mt m_mt;
 	t_list *l_scene;
-	t_utils *utils = NULL;
 	if (ac != 2)
 		err("invalide args !!\n");
-	l_scene = readfile(av[1], utils);
-	// print_scene(l_scene);
+	l_scene = readfile(av[1]);
 	m_mt = (t_mt){.scene = NULL, .image = NULL};
 	m_mt.image = NULL;
 	m_mt.mlx = mlx_init();
@@ -67,6 +65,7 @@ int		__dsbld__main(int ac, char **av)
 	m_mt.image = render(m_mt.scene, m_mt.mlx, m_mt.mlx_win);
 	display(m_mt.mlx, m_mt.mlx_win, m_mt.image);
 	deletescene(m_mt.scene);
+	system("leaks miniRT");
 	mlx_key_hook(m_mt.mlx_win, key_hook, &m_mt);
 	mlx_hook(m_mt.mlx_win, 17, 0l, m_exit, &m_mt);
 	mlx_loop(m_mt.mlx);

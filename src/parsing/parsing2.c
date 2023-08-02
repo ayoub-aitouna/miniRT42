@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 21:59:43 by clyamani          #+#    #+#             */
-/*   Updated: 2023/07/31 22:03:20 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/01 20:48:18 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,10 @@ t_scene_object	*handle_ambient(char **elements)
 	}
 	obj->type = ft_strdup(elements[0]);
 	obj->intensity = atof(elements[1]);
-	if (!f_in_range(obj->intensity, 1, 0))
-		exit(1);
+	f_in_range(obj->intensity, 1, 0);
 	obj->color = vec_range_check(ft_split(elements[2], ','), 255, 0);
 	if (!obj->color)
-		exit(1);
+		err("A color out of range. \n");
 	return (obj);
 }
 
@@ -87,9 +86,8 @@ t_scene_object	*handle_camera(char **elements)
 	free_list_str(vec_elmnts);
 	obj->normal = vec_range_check(ft_split(elements[2], ','), 1, -1);
 	if (!obj->normal)
-		err("out of range\n");
+		err("Camer Normal out of range\n");
 	obj->field_of_view = atof(elements[3]);
-	if (!f_in_range(obj->field_of_view, 180, 0))
-		err("out of range\n");
+	f_in_range(obj->field_of_view, 180, 0);
 	return (obj);
 }

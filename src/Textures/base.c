@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 01:32:01 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/26 10:02:01 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/01 23:15:10 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ t_textures	*new_base_texture(void)
 	base = malloc(sizeof(t_textures));
 	base->tfm = NULL;
 	base->get_surface_hieght = NULL;
+	base->surface_hieght_info	 = NULL;
+	base->txtr_img = NULL;
 	base->get_color = NULL;
 	return (base);
 }
@@ -73,12 +75,26 @@ t_vector	*apply_bump_map_textures(t_textures *this, t_vector *org_normal,
 			ms_num_muliplication(org_normal, displacement), 1));
 }
 
+void	delete_txture_img(t_txtr_img* img)
+{
+	if(img)
+	{
+		if(img->img)
+			free(img->img);
+		free(img);
+	}
+}
+
 void	delete_textures(t_textures *this)
 {
 	if (this)
 	{
 		if (this->tfm)
 			delete_matrix(this->tfm);
+		if(this->txtr_img)
+			delete_txture_img(this->txtr_img);
+		if(this->surface_hieght_info)
+			delete_txture_img(this->surface_hieght_info);
 		free(this);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:22 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/01 05:58:35 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/02 02:16:58 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	cy_int_test(t_object *this, t_ray *camera_ray, t_propretries *prop)
 	index = cylinder_intersection_points(bck_ray, prop, &cylinder_prop);
 	delete_ray(bck_ray);
 	if (index == -1)
-		return (FALSE);
+		return (free_list((void **)cylinder_prop.intersections, 4), FALSE);
 	poi = copy_vector(*cylinder_prop.intersections[index]);
 	free_list((void **)cylinder_prop.intersections, 4);
 	if (index < 2)

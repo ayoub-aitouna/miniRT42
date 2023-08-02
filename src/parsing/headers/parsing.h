@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:44:48 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/01 17:07:16 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/01 20:26:33 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,19 @@ typedef struct utils
 	double			height;
 
 }t_utils;
+
 void			err(char *msg);
 t_scene_object	*handle_plane(char **elements);
 void			check_for_parametres(char **list, t_parsing *pars);
-t_list			*readfile(char *filename, t_utils *utils);
-t_scene_object	*handle_line(char *line, t_list *list, t_utils *utils);
+t_list			*readfile(char *filename);
+t_scene_object	*handle_line(char *line, t_list *list);
 int				double_ptr_size(char **str);
 t_vector		*vec_range_check(char **list, double max, double min);
 int				f_in_range(double value, double max, double min);
 t_scene_object	*handle_ambient(char **elements);
 t_scene_object	*handle_camera(char **elements);
 t_scene_object	*handle_light(char **elements);
-t_scene_object	*handle_cy_cone(char **elements, t_utils *utils);
+t_scene_object	*handle_cy_cone(char **elements);
 t_scene_object	*handle_sphere(char **elements);
 void			free_list_str(char **list);
 int				check_extention(char *file_name, char *extention);

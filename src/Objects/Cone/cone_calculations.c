@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 22:09:32 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/01 06:01:10 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/02 02:17:39 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	set_cone_properiesties(t_object *this, t_vector *poi, t_propretries *prop)
 	t_vector *normal_fp;
 
 	int_poi = apply_transform_vector(poi, FRWRD, this);
-	normal_fp = vector(0.0, 0.0, 1.0);
+	normal_fp = vector(poi->x, poi->y, -sqrt((poi->x * poi->x) + (poi->y * poi->y)));
 	m_normal = get_norm(this, normal_fp);
 	prop->local_normal = *m_normal;
 	prop->local_color = *this->base_color;

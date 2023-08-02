@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 21:57:57 by clyamani          #+#    #+#             */
-/*   Updated: 2023/08/01 19:00:22 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/01 20:45:36 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ int	double_ptr_size(char **str)
 
 void	err(char *msg)
 {
+	char	*err;
+
+	err = "Error\n";
+	write(2, err, ft_strlen(err));
 	write(2, msg, ft_strlen(msg));
 	exit(1);
 }
@@ -50,10 +54,7 @@ t_vector	*vec_range_check(char **list, double max, double min)
 int	f_in_range(double value, double max, double min)
 {
 	if (value < min || value > max)
-	{
-		printf("out of range %f\n", value);
-		exit(0);
-	}
+		err("out of range \n");
 	return (TRUE);
 }
 

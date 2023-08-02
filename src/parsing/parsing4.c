@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing4.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 19:27:52 by clyamani          #+#    #+#             */
-/*   Updated: 2023/08/01 18:53:17 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/01 21:35:06 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	delete_object_scene(t_scene_object *obj)
 		free(obj->scal);
 	if (obj->Texture_path != NULL)
 		free(obj->Texture_path);
+	free(obj);
 }
 
 t_scene_object	*handle_light(char **elements)
@@ -52,11 +53,10 @@ t_scene_object	*handle_light(char **elements)
 			atof(vec_elemts[2]));
 	obj->intensity = atof(elements[2]);
 	free_list_str(vec_elemts);
-	if (!f_in_range(obj->intensity, 1, 0))
-		exit(1);
+	f_in_range(obj->intensity, 1, 0);
 	obj->color = vec_range_check(ft_split(elements[3], ','), 255, 0);
 	if (!obj->color)
-		exit(1);
+		err("Light color out of range. \n");
 	return (obj);
 }
 
@@ -79,24 +79,22 @@ void	exit_f_out_of_range(t_vector2 *vec, double max1, double max2)
 	f_in_range(vec->y, max2, 0);
 }
 
-int	main(int ac, char **av)
+
+int	__desabled_main(int ac, char **av)
 {
 	t_list	*scene;
-	t_utils	*utils;
+	t_list	*tmp;
 
-	utils = NULL;
-	(void)ac;
-	(void)av;
 	if (ac != 2)
 		err("invalide args !!\n");
-	scene = readfile(av[1], utils);
+	scene = readfile(av[1]);
 	while (scene)
 	{
 		print_scene_object(scene->content);
 		delete_object_scene(scene->content);
-		scene = scene->next;
+		tmp = scene->next;
+		free(scene);
+		scene = tmp;
 	}
-	free_linkedlst(scene);
-	free(utils);
 	return (0);
 }

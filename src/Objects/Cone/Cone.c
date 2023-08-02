@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:19 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 22:16:12 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/02 02:15:54 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ int	cone_int_test(t_object *this, t_ray *camera_ray, t_propretries *prop)
 	bck_ray = apply_transform(camera_ray, this, BCKWRD);
 	n = normilized_copy(bck_ray->m_lab);
 	check_intersections(bck_ray, n, &cone_prop, prop);
+	free(n);
 	if (!includes(cone_prop.valide_intersections, 3, TRUE))
-		return (FALSE);
+		return (free_list((void **)cone_prop.intersections, 3), FALSE);
 	index = min_index(cone_prop.t, 3);
 	poi = copy_vector(*cone_prop.intersections[index]);
 	free_list((void **)cone_prop.intersections, 3);

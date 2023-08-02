@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:24 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 22:26:21 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/01 21:50:34 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	delete_object_base(t_object *this)
 			delete_matrix(this->fwd_tfm);
 		if (this->material)
 			delete_material(this->material);
+		if(this->textures)
+			delete_textures(this->textures);
 		free(this);
 	}
 }

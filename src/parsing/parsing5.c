@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing5.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 19:30:30 by clyamani          #+#    #+#             */
-/*   Updated: 2023/08/01 18:59:35 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/01 23:12:37 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ t_scene_object	*handle_plane(char **elements)
 	free_list_str(vec_elemts);
 	obj->normal = vec_range_check(ft_split(elements[2], ','), 1, -1);
 	if (!obj->normal)
-		err("out of range\n");
+		err("Plan Normal out of range\n");
 	obj->color = vec_range_check(ft_split(elements[3], ','), 255, 0);
 	if (!obj->color)
-		err("out of range\n");
+		err("Plane Color out of range\n");
 	set_up_material_proprieties(elements[4], elements[5], obj);
 	return (obj);
 }
@@ -54,24 +54,26 @@ void	hepler_handle_cycone(char **elements, t_utils *utils)
 	utils->obj->normal = vec_range_check(ft_split(elements[2], ','), 1, -1);
 }
 
-t_scene_object	*handle_cy_cone(char **elements, t_utils *utils)
+t_scene_object	*handle_cy_cone(char **elements)
 {
-	hepler_handle_cycone(elements, utils);
-	if (!utils->obj->normal)
-		err("out of range\n");
-	utils->diameter = atof(elements[3]);
-	utils->height = atof(elements[4]);
+	t_utils		utils;
+	
+	hepler_handle_cycone(elements, &utils);
+	if (!utils.obj->normal)
+		err("Cone/Cylinder Normal out of range\n");
+	utils.diameter = atof(elements[3]);
+	utils.height = atof(elements[4]);
 	if (ft_strncmp(elements[0], "cy", ft_strlen(elements[0])) == 0)
-		utils->obj->scal = vector(utils->diameter / 2, utils->diameter / 2,
-				utils->height / 2);
+		utils.obj->scal = vector(utils.diameter / 2, utils.diameter / 2,
+				utils.height / 2);
 	else
-		utils->obj->scal = vector(utils->diameter / 2, utils->diameter / 2,
-				utils->height);
-	utils->obj->color = vec_range_check(ft_split(elements[5], ','), 255, 0);
-	if (!utils->obj->color)
-		err("out of range\n");
-	set_up_material_proprieties(elements[6], elements[7], utils->obj);
-	return (utils->obj);
+		utils.obj->scal = vector(utils.diameter / 2, utils.diameter / 2,
+				utils.height);
+	utils.obj->color = vec_range_check(ft_split(elements[5], ','), 255, 0);
+	if (!utils.obj->color)
+		err("Cone/Cylinder Color out of range\n");
+	set_up_material_proprieties(elements[6], elements[7], utils.obj);
+	return (utils.obj);
 }
 
 t_scene_object	*handle_sphere(char **elements)
@@ -85,11 +87,11 @@ t_scene_object	*handle_sphere(char **elements)
 	if (!obj)
 		err("Error\n");
 	if (double_ptr_size(elements) != 6)
-		err("2 error in args\n");
+		err("Shpere has more then allowed elements. \n");
 	obj->type = ft_strdup(elements[0]);
 	vec_elements = ft_split(elements[1], ',');
 	if (double_ptr_size(vec_elements) != 3)
-		err("error in args\n");
+		err("position vector invalide. \n");
 	obj->position = vector(atof(vec_elements[0]), atof(vec_elements[1]),
 			atof(vec_elements[2]));
 	free_list_str(vec_elements);
@@ -98,12 +100,12 @@ t_scene_object	*handle_sphere(char **elements)
 	obj->scal = vector(radius, radius, radius);
 	obj->color = vec_range_check(ft_split(elements[3], ','), 255, 0);
 	if (!obj->color)
-		err("out of range\n");
+		err("Cone/Cylinder Color out of range\n");
 	set_up_material_proprieties(elements[4], elements[5], obj);
 	return (obj);
 }
 
-t_list	*readfile(char *filename, t_utils *utils)
+t_list	*readfile(char *filename)
 {
 	t_scene_object	*node_content;
 	char			*line;
@@ -123,11 +125,14 @@ t_list	*readfile(char *filename, t_utils *utils)
 		if (!line)
 			break ;
 		if (line[0] == '\n')
+		{
+			free(line);
 			continue ;
+		}
 		ptr = ft_strtrim(line, " \n");
-		node_content = handle_line(ptr, list, utils);
+		node_content = handle_line(ptr, list);
 		if (!node_content)
-			err("Elemet no recognized \n");
+			err("Elemet no Recognized \n");
 		(push_back(&list, ft_lstnew(node_content)), free(line), free(ptr));
 	}
 	if (!first_of(list, "C") || !first_of(list, "A") || !first_of(list, "L"))
