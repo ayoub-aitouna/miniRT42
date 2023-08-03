@@ -6,7 +6,7 @@
 /*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 21:59:43 by clyamani          #+#    #+#             */
-/*   Updated: 2023/08/02 10:48:09 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/03 21:17:40 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ t_vector	*convert_vec_color(t_vector *color)
 	return (color);
 }
 
+/**
+ * Allocate t_scene_object ptr and initial all it propreties to NULL
+*/
 t_scene_object	*init_t_scene_object(void)
 {
 	t_scene_object	*obj;
@@ -48,6 +51,9 @@ t_scene_object	*init_t_scene_object(void)
 	return (obj);
 }
 
+/**
+ * A           0.2                  255,255,255
+*/
 t_scene_object	*handle_ambient(char **elements)
 {
 	t_scene_object	*obj;
@@ -67,6 +73,9 @@ t_scene_object	*handle_ambient(char **elements)
 	return (obj);
 }
 
+/**
+* [<C>,<[2.0 , -10.0 , -2.5]>,<0,0,0>,<100>]
+*/
 t_scene_object	*handle_camera(char **elements)
 {
 	t_scene_object	*obj;

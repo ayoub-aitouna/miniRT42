@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 21:57:57 by clyamani          #+#    #+#             */
-/*   Updated: 2023/08/01 20:45:36 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/03 21:16:53 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ int	f_in_range(double value, double max, double min)
 }
 
 /**
- * file ex	:	"sence/scne.rt"	=>	13
- * exten ex :	".rt"		=>	3
- * 13 - 3 => 10
+ * checks it files ends with
+ * example : <.rt>
+ * example : ./scenes/example.rt
  */
 int	check_extention(char *file_name, char *extention)
 {

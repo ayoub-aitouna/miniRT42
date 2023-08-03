@@ -37,8 +37,6 @@ $(NAME) : $(OBJ) $(MNDATORY_OBJ)
 	@echo "to run the Program Type : ${GREEN}./$(NAME) <scene '.rt' file path >  ${RESET}"
 	@ $(cc) $(CFLAGS) $(OBJ) $(MNDATORY_OBJ) $(MLXFLAG) -lm -o $(NAME)
 
-
-
 $(NAMEBONUS) : $(OBJ) $(BONUS_OBJ)
 	@echo "to run the Program Type : ${GREEN}./$(NAMEBONUS) <scene '.rt' file path >  ${RESET}"
 	@ $(cc) $(CFLAGS) $(OBJ) $(BONUS_OBJ) $(MLXFLAG) -DBONUS -lm -o $(NAMEBONUS)

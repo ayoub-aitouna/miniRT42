@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ScenesObjects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 00:29:11 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/03 03:34:43 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/03 22:15:07 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/scene.h"
 
-void	_set_up_material_configurations(t_object *this, double reflection,
-			double shininess, double translution, double bending_index,
+void	_set_up_material_configurations(t_object *this, float *coefficient,
 			t_textures *texture);
 
 t_object	*get_object_by_type(t_scene_object *s_obj)
@@ -77,37 +76,31 @@ t_list	*objects(void *mlx, t_list *parsed)
 			if (s_obj->normal)
 				obj->normal = s_obj->normal;
 			if (s_obj->reflection && s_obj->refraction)
-				_set_up_material_configurations(obj, s_obj->reflection->x,
-												s_obj->reflection->y,
-												s_obj->refraction->x,
-												s_obj->refraction->y, get_texture(mlx, s_obj));
+				_set_up_material_configurations(obj, (float [])
+				{s_obj->reflection->x,
+					s_obj->reflection->y, s_obj->refraction->x,
+					s_obj->refraction->y}, get_texture(mlx, s_obj));
 			else
-				_set_up_material_configurations(obj, 0, 0, 0, 0, NULL);
+				_set_up_material_configurations(obj, NULL, NULL);
 			push_back(&data, ft_lstnew(obj));
 		}
-		obj = NULL;
 		parsed = parsed->next;
 	}
 	return (data);
 }
 
-void	_set_up_material_configurations(t_object *this, double reflection,
-		double shininess, double translution, double bending_index,
+void	_set_up_material_configurations(t_object *this, float *coefficient,
 		t_textures *texture)
 {
-	this->material->reflection_coefficient = reflection;
-	this->material->shininess_coefficient = shininess;
-	this->material->transparency_coefficient = translution;
-	this->material->reflactive_index = bending_index;
-	this->textures = texture;
-}
+	float	*local_coefficient;
 
-void	set_up_material_configurations(t_object *this, t_vector2 *rc,
-		t_vector2 *tc, t_textures *texture)
-{
-	this->material->reflection_coefficient = rc->x;
-	this->material->shininess_coefficient = rc->y;
-	this->material->transparency_coefficient = tc->x;
-	this->material->reflactive_index = tc->y;
+	if (coefficient)
+		local_coefficient = coefficient;
+	else
+		local_coefficient = (float []){0, 0, 0, 0};
+	this->material->reflection_coefficient = local_coefficient[0];
+	this->material->shininess_coefficient = local_coefficient[1];
+	this->material->transparency_coefficient = local_coefficient[2];
+	this->material->reflactive_index = local_coefficient[3];
 	this->textures = texture;
 }

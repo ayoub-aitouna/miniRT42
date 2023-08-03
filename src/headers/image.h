@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:30 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/03 04:11:25 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/03 08:54:57 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 # include "types.h"
 # include "main.h"
 # include "types.h"
-
-
 
 t_image		*initialize(void);
 void		set_pixel(t_image *image, int x, int y, t_vector *color);

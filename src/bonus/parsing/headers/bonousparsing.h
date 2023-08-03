@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonousparsing.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:44:48 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/03 04:34:03 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/03 22:17:48 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ t_scene_object	*bns_handle_plane(char **elements);
 void			hepler_bns_handle_cycone(char **elements, t_utils *utils);
 t_scene_object	*bns_handle_cy_cone(char **elements);
 t_scene_object	*bns_handle_sphere(char **elements);
-
+t_list			*get_bns_file_content(int fd);
 #endif

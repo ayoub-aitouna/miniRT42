@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:40 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/03 04:11:29 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/03 08:55:24 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ typedef struct color_params	t_color_params;
 
 typedef struct image
 {
-	double **red;
-	double **green;
-	double **blue;
-} t_image;
+	double	**red;
+	double	**green;
+	double	**blue;
+}	t_image;
 
 typedef struct s_data
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:33 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/03 04:29:22 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/03 22:04:17 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@
 # include <unistd.h>
 # define WIDTH 1280
 # define HEIGHT 720
+# define ESC 53
+# ifndef BONUS_ENABLES
+#  define BONUS_ENABLES 0
+# endif
 
 typedef struct mt
 {
@@ -39,5 +43,5 @@ typedef struct mt
 
 int			m_exit(t_mt *m_mt);
 int			key_hook(int keycode, t_mt *mt);
-void		print_scene(t_list *scene);
+t_list		*parse_scene(char *file_name);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_elements.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 19:30:30 by clyamani          #+#    #+#             */
-/*   Updated: 2023/08/03 04:29:42 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/03 22:03:54 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	hepler_bns_handle_cycone(char **elements, t_utils *utils)
 	if (double_ptr_size(utils->vec_elements) != 3)
 		err("cy/co : error in args\n");
 	utils->obj->position = vector(atof(utils->vec_elements[0]),
-									atof(utils->vec_elements[1]),
-									atof(utils->vec_elements[2]));
+			atof(utils->vec_elements[1]),
+			atof(utils->vec_elements[2]));
 	free_list_str(utils->vec_elements);
 	utils->obj->normal = vec_range_check(ft_split(elements[2], ','), 1, -1);
 }
@@ -106,18 +106,14 @@ t_scene_object	*bns_handle_sphere(char **elements)
 	return (obj);
 }
 
-t_list	*bns_readfile(char *filename)
+t_list	*get_bns_file_content(int fd)
 {
 	t_scene_object	*node_content;
 	char			*line;
 	t_list			*list;
-	int				fd;
 	char			*ptr;
 
 	list = NULL;
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		err("failed to open file\n");
 	while (TRUE)
 	{
 		line = get_next_line(fd);

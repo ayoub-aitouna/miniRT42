@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:43:38 by clyamani          #+#    #+#             */
-/*   Updated: 2023/08/03 04:20:33 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/03 22:09:05 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@ void	free_linkedlst(t_list *head)
 	}
 }
 
+/**
+ * ### in bonus
+ * >> only for cy co sp pl
+ * ...elemts_prop   0.1,10.0:0.0,0.0     				 NON
+ * ...elemts_prop   0.1,10.0:0.0,0.0      				 CHECKBOARD
+ * ...elemts_prop   0.1,10.0:0.0,0.0      				 file_path
+ * ...elemts_prop   0.1,10.0:0.0,0.0      				 file_path,file_path
+*/
 void	set_up_material_proprieties(char *mt_coefficient, char *texture,
 		t_scene_object *obj)
 {
@@ -60,4 +68,14 @@ void	check_for_file(char *filename)
 {
 	if (!check_extention(filename, ".rt"))
 		err("invalide Extention !!");
+}
+
+t_list	*readfile(char *filename)
+{
+	int				fd;
+
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		err("failed to open file\n");
+	return (get_file_content(fd));
 }

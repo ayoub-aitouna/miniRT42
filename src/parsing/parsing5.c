@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing5.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 19:30:30 by clyamani          #+#    #+#             */
-/*   Updated: 2023/08/03 03:29:10 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/03 22:08:18 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,21 +99,17 @@ t_scene_object	*handle_sphere(char **elements)
 	obj->color = vec_range_check(ft_split(elements[3], ','), 255, 0);
 	if (!obj->color)
 		err("Cone/Cylinder Color out of range\n");
- 	return (obj);
+	return (obj);
 }
 
-t_list	*readfile(char *filename)
+t_list	*get_file_content(int fd)
 {
 	t_scene_object	*node_content;
 	char			*line;
 	t_list			*list;
-	int				fd;
 	char			*ptr;
 
 	list = NULL;
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		err("failed to open file\n");
 	while (TRUE)
 	{
 		line = get_next_line(fd);
@@ -131,6 +127,6 @@ t_list	*readfile(char *filename)
 		(push_back(&list, ft_lstnew(node_content)), free(line), free(ptr));
 	}
 	if (!first_of(list, "C") || !first_of(list, "A") || !first_of(list, "L"))
-		err("must be at least on Light Source & Camera & Ambient Light \n");
+		err("Must be at least on Light Source & Camera & Ambient Light \n");
 	return (list);
 }

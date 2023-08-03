@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing4.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 19:27:52 by clyamani          #+#    #+#             */
-/*   Updated: 2023/08/03 04:32:40 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/03 22:07:19 by clyamani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,6 @@ t_scene_object	*handle_light(char **elements)
 	if (!obj->color)
 		err("Light color out of range. \n");
 	return (obj);
-}
-
-void	strip_nl(char *src)
-{
-	int	i;
-
-	i = 0;
-	while (src[i])
-	{
-		if (src[i] == '\n')
-			src[i] = 0;
-		i++;
-	}
 }
 
 void	exit_f_out_of_range(t_vector2 *vec, double max1, double max2)
