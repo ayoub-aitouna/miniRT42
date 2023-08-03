@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:40 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/02 10:48:09 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/03 04:11:29 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ typedef struct material		t_material;
 typedef struct Propretries	t_propretries;
 typedef struct s_textures	t_textures;
 typedef struct color_params	t_color_params;
+
+typedef struct image
+{
+	double **red;
+	double **green;
+	double **blue;
+} t_image;
 
 typedef struct s_data
 {

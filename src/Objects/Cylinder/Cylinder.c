@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:22 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/02 11:04:56 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/03 01:13:47 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	cylinder_intersection_points(t_ray *bck_ray, t_propretries *prop,
 	if (index < 2)
 		prop->uv_cords = (t_uv_cords){atan2(cylinder_prop
 				->intersections[index]->x,
-				cylinder_prop->intersections[index]->y),
+				cylinder_prop->intersections[index]->y) / PI,
 			cylinder_prop->intersections[index]->z};
 	else
 		prop->uv_cords = (t_uv_cords){p.x + (cylinder_prop->t[index] * n.x), p.y

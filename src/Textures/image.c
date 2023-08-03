@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 10:17:58 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/02 11:52:57 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/03 00:52:41 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ t_textures	*new_img_texture(void *mlx_ptr, char *filename, char *dsp_filename)
 	t->get_color = get_rgb_color;
 	if (dsp_filename)
 	{
-		t->get_surface_hieght = get_shi_color;
 		t->surface_hieght_info = load_img(mlx_ptr, dsp_filename);
+		t->get_surface_hieght = get_shi_color;
 	}
 	t->txtr_img = load_img(mlx_ptr, filename);
 	return (t);
@@ -42,8 +42,9 @@ t_txtr_img	*load_img(void *mlx_ptr, char *filename)
 		exit(127);
 	}
 	txtr_img->img->addr = mlx_get_data_addr(txtr_img->img->img,
-			&txtr_img->img->bits_per_pixel,
-			&txtr_img->img->line_length, &txtr_img->img->endian);
+											&txtr_img->img->bits_per_pixel,
+											&txtr_img->img->line_length,
+											&txtr_img->img->endian);
 	return (txtr_img);
 }
 
@@ -65,14 +66,20 @@ t_vector	*get_color(t_txtr_img *txtr_img, t_uv_cords cords)
 	double			u;
 	double			v;
 
-	u = (txtr_img->img_width - 1) - (floor
-			((cords.u + 1) * ((txtr_img->img_width - 1) / 2.f)));
-	v = (txtr_img->img_height - 1) - (floor
-			((double)(cords.v + 1) *((txtr_img->img_height - 1) / 2.f)));
-	mapping_cords = (t_uv_cords){.u = u, .v = v};
-	dst = txtr_img->img->addr + ((int)
-			mapping_cords.v * txtr_img->img->line_length + (int)
-			mapping_cords.u * (txtr_img->img->bits_per_pixel / 8));
+	u = (txtr_img->img_width - 1) - (floor((cords.u + 1) * ((txtr_img->img_width
+						- 1) / 2.f)));
+	v = (txtr_img->img_height - 1) - (floor((double)(cords.v + 1)
+				* ((txtr_img->img_height - 1) / 2.f)));
+	// Ensure mapping_cords stay within valid bounds
+	mapping_cords.u = fmax(0, fmin(txtr_img->img_width - 1, u));
+	mapping_cords.v = fmax(0, fmin(txtr_img->img_height - 1, v));
+	dst = txtr_img->img->addr + ((int)mapping_cords.v
+			* txtr_img->img->line_length + (int)mapping_cords.u
+			* (txtr_img->img->bits_per_pixel / 8));
+	// Make sure we are within the bounds of the image
+	if (dst < txtr_img->img->addr || dst >= txtr_img->img->addr
+		+ txtr_img->img->line_length * txtr_img->img_height)
+		return (vector(0,0,0));
 	all = *(unsigned int *)dst;
 	return (vector((all >> 16 & 255) / 255.f, ((all >> 8) & 255) / 255.f,
 			(all & 255) / 255.f));

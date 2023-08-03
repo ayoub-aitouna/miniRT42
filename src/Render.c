@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 00:23:04 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/18 00:25:43 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/02 23:16:35 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ t_image	*render(t_scene *scene, void *mlx, void *mlx_win)
 	fact = (t_vector){.x = 1.0 / (((double)WIDTH) / 2.0), .y = 1.0
 		/ (((double)HEIGHT) / 2.0)};
 	y = 0;
+	printf("\n\n");
 	while (y < HEIGHT)
 	{
 		print_progress(y);

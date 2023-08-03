@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   base.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 01:32:01 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/02 11:42:22 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/03 00:30:22 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_vector	*apply_bump_map_textures(t_textures *this, t_vector *org_normal,
 	t_vector	*scaled_vec;
 	double		displacement;
 
-	if (!this->get_surface_hieght)
+	if (!this->surface_hieght_info)
 		return (org_normal);
 	color = this->get_surface_hieght(this, cords);
 	displacement = (color->x + color->y + color->z) / 3;

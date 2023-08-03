@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cone_calculations.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 22:09:32 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/02 11:04:18 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/03 02:55:26 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	set_cone_properiesties(t_object *this, t_vector *poi, t_propretries *prop)
 	prop->local_normal = *m_normal;
 	prop->local_color = *this->base_color;
 	prop->int_point = *int_poi;
-	prop->uv_cords = (t_uv_cords){atan2(poi->x, poi->y), poi->z};
+	prop->uv_cords = (t_uv_cords){atan2(poi->y, poi->x) / PI, (poi->z * 2.0) - 1.0};
 	free_list((void *[]){m_normal, int_poi, poi, normal_fp}, 4);
 	return (TRUE);
 }

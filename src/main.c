@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:48 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/02 11:53:52 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/03 04:05:07 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,10 @@
 #include "headers/scene.h"
 #include "headers/types.h"
 #include "parsing/headers/parsing.h"
+#include "bonus/parsing/headers/bonousparsing.h"
 #define ESC 53
 
-typedef struct mt
-{
-	t_image	*image;
-	t_scene	*scene;
-	void	*mlx;
-	void	*mlx_win;
-}			t_mt;
+
 
 int	m_exit(t_mt *m_mt)
 {
@@ -49,27 +44,4 @@ void	print_scene(t_list *scene)
 		print_scene_object(tmp->content);
 		tmp = tmp->next;
 	}
-}
-
-int	main(int ac, char **av)
-{
-	t_mt	m_mt;
-	t_list	*l_scene;
-
-	if (ac != 2)
-		err("invalide args !!\n");
-	l_scene = readfile(av[1]);
-	m_mt = (t_mt){.scene = NULL, .image = NULL};
-	m_mt.image = NULL;
-	m_mt.mlx = mlx_init();
-	m_mt.mlx_win = mlx_new_window(m_mt.mlx, WIDTH, HEIGHT, "miniRT");
-	m_mt.scene = scene(m_mt.mlx, m_mt.mlx_win, l_scene);
-	m_mt.image = render(m_mt.scene, m_mt.mlx, m_mt.mlx_win);
-	display(m_mt.mlx, m_mt.mlx_win, m_mt.image);
-	deletescene(m_mt.scene);
-	system("leaks miniRT");
-	mlx_key_hook(m_mt.mlx_win, key_hook, &m_mt);
-	mlx_hook(m_mt.mlx_win, 17, 0l, m_exit, &m_mt);
-	mlx_loop(m_mt.mlx);
-	return (0);
 }

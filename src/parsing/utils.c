@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing6.c                                         :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:43:38 by clyamani          #+#    #+#             */
-/*   Updated: 2023/08/02 11:24:26 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/03 04:20:33 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void	set_up_material_proprieties(char *mt_coefficient, char *texture,
 
 	elemts = ft_split(mt_coefficient, ':');
 	if (double_ptr_size(elemts) != 2)
-		err("error in args\n");
+		err("mt : error in args\n");
 	r_c = ft_split(elemts[0], ',');
 	t_c = ft_split(elemts[1], ',');
 	if (double_ptr_size(r_c) != 2 || double_ptr_size(t_c) != 2)
-		err("error in args\n");
+		err("mt rc||tc:  error in args\n");
 	obj->reflection = vec2(atof(r_c[0]), atof(r_c[1]));
 	exit_f_out_of_range(obj->reflection, 1, 100);
 	obj->refraction = vec2(atof(t_c[0]), atof(t_c[1]));

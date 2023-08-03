@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScenesObjects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 00:29:11 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/02 11:33:01 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/03 03:34:43 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,13 @@ t_list	*objects(void *mlx, t_list *parsed)
 		{
 			if (s_obj->normal)
 				obj->normal = s_obj->normal;
-			_set_up_material_configurations(obj, s_obj->reflection->x,
-				s_obj->reflection->y,
-				s_obj->refraction->x,
-				s_obj->refraction->y, get_texture(mlx, s_obj));
+			if (s_obj->reflection && s_obj->refraction)
+				_set_up_material_configurations(obj, s_obj->reflection->x,
+												s_obj->reflection->y,
+												s_obj->refraction->x,
+												s_obj->refraction->y, get_texture(mlx, s_obj));
+			else
+				_set_up_material_configurations(obj, 0, 0, 0, 0, NULL);
 			push_back(&data, ft_lstnew(obj));
 		}
 		obj = NULL;

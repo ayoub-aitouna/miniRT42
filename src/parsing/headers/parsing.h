@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:44:48 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/02 11:23:43 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/03 03:22:02 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,5 @@ void			exit_f_out_of_range(t_vector2 *vec, double max1, double max2);
 void			hepler_handle_cycone(char **elements, t_utils *utils);
 void			free_linkedlst(t_list *head);
 void			check_for_file(char *filename);
+int				equal_atleast_once(char *s1, char **list);
 #endif

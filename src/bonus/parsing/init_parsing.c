@@ -1,34 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing3.c                                         :+:      :+:    :+:   */
+/*   init_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/29 20:42:52 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/03 03:28:40 by aaitouna         ###   ########.fr       */
+/*   Created: 2023/07/31 19:27:52 by clyamani          #+#    #+#             */
+/*   Updated: 2023/08/03 04:22:03 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/parsing.h"
+#include "headers/bonousparsing.h"
 
-void	free_list_str(char **list)
+t_scene_object	*bsn_handle_light(char **elements)
 {
-	int	i;
+	t_scene_object	*obj;
+	char			**vec_elemts;
 
-	i = 0;
-	while (list[i])
-	{
-		free(list[i++]);
-	}
-	free(list);
+	obj = init_t_scene_object();
+	if (!obj)
+		return (NULL);
+	if (double_ptr_size(elements) != 4)
+		err("error in args\n");
+	obj->type = ft_strdup(elements[0]);
+	vec_elemts = ft_split(elements[1], ',');
+	if (double_ptr_size(vec_elemts) != 3)
+		err("error in args\n");
+	obj->position = vector(atof(vec_elemts[0]), atof(vec_elemts[1]),
+			atof(vec_elemts[2]));
+	obj->intensity = atof(elements[2]);
+	free_list_str(vec_elemts);
+	f_in_range(obj->intensity, 1, 0);
+	obj->color = vec_range_check(ft_split(elements[3], ','), 255, 0);
+	if (!obj->color)
+		err("Light color out of range. \n");
+	return (obj);
 }
 
-void	print_scene_object(t_scene_object *obj)
+void print_scene_object_bns(t_scene_object *obj)
 {
 	printf("\t----------------------------\n"
-		"type %s :\n",
-		obj->type);
+		   "type %s :\n",
+		   obj->type);
 	if (!strcmp(obj->type, "C"))
 	{
 		printf("\tPosition : ");
@@ -60,7 +73,7 @@ void	print_scene_object(t_scene_object *obj)
 		printf("\tColor    : ");
 		print_vector(*obj->color);
 		printf("\treflection    : %f, %f, refraction %f, %f \n", obj->reflection->x,
-			obj->reflection->y, obj->refraction->x, obj->refraction->y);
+			   obj->reflection->y, obj->refraction->x, obj->refraction->y);
 		printf("\tTexture Type    : %d\n", obj->texture_type);
 	}
 	if (!strcmp(obj->type, "co") || !strcmp(obj->type, "cy"))
@@ -74,7 +87,7 @@ void	print_scene_object(t_scene_object *obj)
 		printf("\tColor    : ");
 		print_vector(*obj->color);
 		printf("\treflection    : %f, %f, refraction %f, %f \n", obj->reflection->x,
-			obj->reflection->y, obj->refraction->x, obj->refraction->y);
+			   obj->reflection->y, obj->refraction->x, obj->refraction->y);
 		printf("\tTexture Type    : %d\n", obj->texture_type);
 	}
 	if (!strcmp(obj->type, "sp"))
@@ -86,40 +99,20 @@ void	print_scene_object(t_scene_object *obj)
 		printf("\tColor    : ");
 		print_vector(*obj->color);
 		printf("\treflection    : %f, %f, refraction %f, %f \n", obj->reflection->x,
-			obj->reflection->y, obj->refraction->x, obj->refraction->y);
+			   obj->reflection->y, obj->refraction->x, obj->refraction->y);
 		printf("\tTexture Type    : %d\n", obj->texture_type);
 	}
 	printf("\t----------------------------\n\n");
 }
 
-int	str_equal(char *s1, char *s2)
+t_scene_object *handle_line_bonus(char *line, t_list *list)
 {
-	return (ft_strncmp(s1, s2, ft_strlen(s1)) == 0);
-}
-
-int	equal_atleast_once(char *s1, char **list)
-{
-	int	i;
-
-	i = 0;
-	while (list[i])
-	{
-		if (str_equal(s1, list[i]))
-			return (TRUE);
-		i++;
-	}
-	return (FALSE);
-}
-
-t_scene_object	*handle_line(char *line, t_list *list)
-{
-	char			**splited;
-	t_scene_object	*object;
+	char **splited;
+	t_scene_object *object;
 
 	object = NULL;
 	splited = ft_split(line, ' ');
-	if (equal_atleast_once(splited[0], (char *[]){"A", "C", "L", NULL})
-		&& (first_of(list, splited[0]) != NULL))
+	if (equal_atleast_once(splited[0], (char *[]){"A", "C", NULL}) && (first_of(list, splited[0]) != NULL))
 		err("Element Duplicated \n");
 	if (ft_strncmp(splited[0], "A", ft_strlen(splited[0])) == 0)
 		object = handle_ambient(splited);
@@ -127,12 +120,12 @@ t_scene_object	*handle_line(char *line, t_list *list)
 		object = handle_camera(splited);
 	if (ft_strncmp(splited[0], "L", ft_strlen(splited[0])) == 0)
 		object = handle_light(splited);
-	if (ft_strncmp(splited[0], "cy", ft_strlen(splited[0])) == 0)
-		object = handle_cy_cone(splited);
+	if (ft_strncmp(splited[0], "cy", ft_strlen(splited[0])) == 0 || ft_strncmp(splited[0], "co", ft_strlen(splited[0])) == 0)
+		object = bns_handle_cy_cone(splited);
 	if (ft_strncmp(splited[0], "sp", ft_strlen(splited[0])) == 0)
-		object = handle_sphere(splited);
+		object = bns_handle_sphere(splited);
 	if (ft_strncmp(splited[0], "pl", ft_strlen(splited[0])) == 0)
-		object = handle_plane(splited);
+		object = bns_handle_plane(splited);
 	free_list_str(splited);
 	return (object);
 }

@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:21:30 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/17 19:57:46 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/03 04:11:25 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,7 @@
 # include "main.h"
 # include "types.h"
 
-typedef struct image
-{
-	double	**red;
-	double	**green;
-	double	**blue;
-}			t_image;
+
 
 t_image		*initialize(void);
 void		set_pixel(t_image *image, int x, int y, t_vector *color);
