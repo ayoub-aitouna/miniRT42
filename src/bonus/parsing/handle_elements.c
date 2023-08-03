@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 19:30:30 by clyamani          #+#    #+#             */
-/*   Updated: 2023/08/03 04:22:58 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/03 04:29:42 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,15 @@ void	hepler_bns_handle_cycone(char **elements, t_utils *utils)
 	if (double_ptr_size(utils->vec_elements) != 3)
 		err("cy/co : error in args\n");
 	utils->obj->position = vector(atof(utils->vec_elements[0]),
-			atof(utils->vec_elements[1]), atof(utils->vec_elements[2]));
+									atof(utils->vec_elements[1]),
+									atof(utils->vec_elements[2]));
 	free_list_str(utils->vec_elements);
 	utils->obj->normal = vec_range_check(ft_split(elements[2], ','), 1, -1);
 }
 
 t_scene_object	*bns_handle_cy_cone(char **elements)
 {
-	t_utils		utils;
+	t_utils	utils;
 
 	hepler_bns_handle_cycone(elements, &utils);
 	if (!utils.obj->normal)
@@ -137,5 +138,3 @@ t_list	*bns_readfile(char *filename)
 		err("must be at least on Light Source & Camera & Ambient Light \n");
 	return (list);
 }
-
-

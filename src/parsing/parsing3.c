@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:42:52 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/03 03:28:40 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/03 04:31:11 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,74 +22,6 @@ void	free_list_str(char **list)
 		free(list[i++]);
 	}
 	free(list);
-}
-
-void	print_scene_object(t_scene_object *obj)
-{
-	printf("\t----------------------------\n"
-		"type %s :\n",
-		obj->type);
-	if (!strcmp(obj->type, "C"))
-	{
-		printf("\tPosition : ");
-		print_vector(*obj->position);
-		printf("\tNormal   : ");
-		print_vector(*obj->normal);
-		printf("\tFOV      : %.3f\n", obj->field_of_view);
-	}
-	if (!strcmp(obj->type, "A"))
-	{
-		printf("\tIntensity: %.3f\n", obj->intensity);
-		printf("\tColor    : ");
-		print_vector(*obj->color);
-	}
-	if (!strcmp(obj->type, "L"))
-	{
-		printf("\tPosition : ");
-		print_vector(*obj->position);
-		printf("\tIntensity: %.3f\n", obj->intensity);
-		printf("\tColor    : ");
-		print_vector(*obj->color);
-	}
-	if (!strcmp(obj->type, "pl"))
-	{
-		printf("\tPosition : ");
-		print_vector(*obj->position);
-		printf("\tNormal   : ");
-		print_vector(*obj->normal);
-		printf("\tColor    : ");
-		print_vector(*obj->color);
-		printf("\treflection    : %f, %f, refraction %f, %f \n", obj->reflection->x,
-			obj->reflection->y, obj->refraction->x, obj->refraction->y);
-		printf("\tTexture Type    : %d\n", obj->texture_type);
-	}
-	if (!strcmp(obj->type, "co") || !strcmp(obj->type, "cy"))
-	{
-		printf("\tPosition : ");
-		print_vector(*obj->position);
-		printf("\tNormal   : ");
-		print_vector(*obj->normal);
-		printf("\tScal   : ");
-		print_vector(*obj->scal);
-		printf("\tColor    : ");
-		print_vector(*obj->color);
-		printf("\treflection    : %f, %f, refraction %f, %f \n", obj->reflection->x,
-			obj->reflection->y, obj->refraction->x, obj->refraction->y);
-		printf("\tTexture Type    : %d\n", obj->texture_type);
-	}
-	if (!strcmp(obj->type, "sp"))
-	{
-		printf("\tPosition : ");
-		print_vector(*obj->position);
-		printf("\tScal   : ");
-		print_vector(*obj->scal);
-		printf("\tColor    : ");
-		print_vector(*obj->color);
-		printf("\treflection    : %f, %f, refraction %f, %f \n", obj->reflection->x,
-			obj->reflection->y, obj->refraction->x, obj->refraction->y);
-		printf("\tTexture Type    : %d\n", obj->texture_type);
-	}
-	printf("\t----------------------------\n\n");
 }
 
 int	str_equal(char *s1, char *s2)

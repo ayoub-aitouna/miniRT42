@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing4.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 19:27:52 by clyamani          #+#    #+#             */
-/*   Updated: 2023/08/02 10:48:09 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/03 04:32:40 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,23 +77,4 @@ void	exit_f_out_of_range(t_vector2 *vec, double max1, double max2)
 {
 	f_in_range(vec->x, max1, 0);
 	f_in_range(vec->y, max2, 0);
-}
-
-int	__desabled_main(int ac, char **av)
-{
-	t_list	*scene;
-	t_list	*tmp;
-
-	if (ac != 2)
-		err("invalide args !!\n");
-	scene = readfile(av[1]);
-	while (scene)
-	{
-		print_scene_object(scene->content);
-		delete_object_scene(scene->content);
-		tmp = scene->next;
-		free(scene);
-		scene = tmp;
-	}
-	return (0);
 }

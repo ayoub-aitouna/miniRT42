@@ -6,16 +6,16 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 20:44:48 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/03 04:23:18 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/03 04:34:03 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BONUSPARSING_H
-# define BONUSPARSING_H
-#include "../../../parsing/headers/parsing.h"
-#include "../../../get_next_line/get_next_line.h"
-#include "../../../headers/main.h"
-#include "../../../lib/math/headers/vectormath.h"
+#ifndef BONOUSPARSING_H
+# define BONOUSPARSING_H
+# include "../../../get_next_line/get_next_line.h"
+# include "../../../headers/main.h"
+# include "../../../lib/math/headers/vectormath.h"
+# include "../../../parsing/headers/parsing.h"
 # include <ctype.h>
 # include <fcntl.h>
 # include <stdio.h>
