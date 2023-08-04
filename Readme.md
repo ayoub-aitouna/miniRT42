@@ -39,18 +39,11 @@ ray tracing is computationally demanding, necessitating powerful hardware and of
 Light transport is a fundamental principle in ray tracing, enabling the simulation of realistic lighting interactions within a virtual environment. Ray tracing starts by casting rays from a virtual camera through each pixel on the image plane, simulating the paths that light rays would take. These rays are traced as they travel through the scene, checking for intersections with objects. When an intersection is found, the properties of the surface are assessed, taking into account its interaction with various light sources and environmental conditions. To capture intricate lighting effects, secondary rays are often cast, representing reflections, refractions, shadows, and global illumination. These secondary rays can themselves generate more rays in a recursive process, simulating complex light behaviors. As rays traverse the scene, they accumulate color and intensity information, which is then blended to compute the final colors for each pixel. This comprehensive process ultimately yields a rendered image that portrays how light interacts with virtual objects and surfaces, delivering a high degree of visual realism. However, due to its computational complexity, achieving accurate light transport often requires advanced optimization techniques and robust hardware resources.
 
 # Diffuse lighting & Shadows
-<div style="display: flex; flex-wrap: wrap;">
-  <div style="flex: 50%">
-    <figure style="height: 500px">
-      <img src="https://www.scratchapixel.com/images/introduction-to-ray-tracing/lightingnoshadow.gif" alt="Image 1" style="width: 100%; object-fit: fill;">
-    </figure>
-  </div>
-  <div style="flex: 50%;">
-    <figure style="height: 500px">
-      <img src="https://www.scratchapixel.com/images/introduction-to-ray-tracing/lightingshadow.gif" alt="Image 2" style="width: 100%; object-fit: fill;">
-    </figure>
-  </div>
-</div>
+
+|         |         |
+|---------|---------|
+| ![Image 1](https://www.scratchapixel.com/images/introduction-to-ray-tracing/lightingnoshadow.gif) | ![Image 2](https://www.scratchapixel.com/images/introduction-to-ray-tracing/lightingshadow.gif) |
+
 
 # Reflection & Refraction
 
