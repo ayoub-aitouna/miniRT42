@@ -25,32 +25,32 @@ degree of visual realism.
 <div style="display: flex; flex-wrap: wrap;">
   <div style="flex: 20%">
     <figure>
-      <img src="https://i.imgur.com/sDwp7Fy.jpg" alt="Image 1" style="width: 100%;">
+      <img src="https://github.com/jrayoub/miniRT42/blob/main/rendred_scenes/mt_light.png?raw=true" alt="Image 1" style="width: 100%;">
     </figure>
   </div>
   <div style="flex: 20%;">
     <figure style="">
-      <img src="https://i.imgur.com/sDwp7Fy.jpg" alt="Image 2" style=" object-fit: fill;">
+      <img src="https://github.com/jrayoub/miniRT42/blob/main/rendred_scenes/bm.png?raw=true" alt="Image 2" style=" object-fit: fill;">
     </figure>
   </div>
     <div style="flex:100%;">
     <figure>
-      <img src="https://i.imgur.com/sDwp7Fy.jpg" alt="Image 3" style="width: 100%;">
+      <img src="https://github.com/jrayoub/miniRT42/blob/main/rendred_scenes/bmpmap.png?raw=true" alt="Image 3" style="width: 100%;">
     </figure>
   </div>
    <div style="flex: 20%">
     <figure>
-      <img src="https://i.imgur.com/sDwp7Fy.jpg" alt="Image 1" style="width: 100%;">
+      <img src="https://github.com/jrayoub/miniRT42/blob/main/rendred_scenes/checker.png?raw=true" alt="Image 1" style="width: 100%;">
     </figure>
   </div>
   <div style="flex: 20%;">
     <figure style="">
-      <img src="https://i.imgur.com/sDwp7Fy.jpg" alt="Image 2" style=" object-fit: fill;">
+      <img src="https://github.com/jrayoub/miniRT42/blob/main/rendred_scenes/cone.png?raw=true" alt="Image 2" style=" object-fit: fill;">
     </figure>
   </div>
     <div style="flex:100%;">
     <figure>
-      <img src="https://i.imgur.com/sDwp7Fy.jpg" alt="Image 3" style="width: 100%;">
+      <img src="https://github.com/jrayoub/miniRT42/blob/main/rendred_scenes/sp.png?raw=true" alt="Image 3" style="width: 100%;">
     </figure>
   </div>
 </div>
@@ -120,9 +120,9 @@ Light transport is a fundamental principle in ray tracing, enabling the simulati
       <img src="https://www.scratchapixel.com/images/ray-tracing-refresher/rt-refraction2.gif?" alt="Image 2" style=" width: 100%;">
     </figure>
   </div>
-  <div style="flex: 33.33%;">
+    <div style="flex:100%;">
     <figure>
-      <img src="https://i.imgur.com/sDwp7Fy.jpg" alt="Image 3" style="width: 100%;">
+      <img src="https://github.com/jrayoub/miniRT42/blob/main/rendred_scenes/reflection.png?raw=true" alt="Image 3" style="width: 100%;">
     </figure>
   </div>
 </div>

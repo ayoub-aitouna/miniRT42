@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:43:38 by clyamani          #+#    #+#             */
-/*   Updated: 2023/08/03 22:09:05 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/04 21:52:47 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	set_up_material_proprieties(char *mt_coefficient, char *texture,
 	if (double_ptr_size(r_c) != 2 || double_ptr_size(t_c) != 2)
 		err("mt rc||tc:  error in args\n");
 	obj->reflection = vec2(atof(r_c[0]), atof(r_c[1]));
-	exit_f_out_of_range(obj->reflection, 1, 100);
+	exit_f_out_of_range(obj->reflection, 1, 200);
 	obj->refraction = vec2(atof(t_c[0]), atof(t_c[1]));
 	exit_f_out_of_range(obj->refraction, 1, 4);
 	if (!ft_strncmp(texture, "NON", ft_strlen(texture)))

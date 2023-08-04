@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 21:57:57 by clyamani          #+#    #+#             */
-/*   Updated: 2023/08/03 21:16:53 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/04 21:56:03 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ t_vector	*vec_range_check(char **list, double max, double min)
 int	f_in_range(double value, double max, double min)
 {
 	if (value < min || value > max)
+	{
+		printf("value : %f , range [%f, %f]", value, min, max);
 		err("out of range \n");
+	}
 	return (TRUE);
 }
 
