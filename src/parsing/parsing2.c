@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 21:59:43 by clyamani          #+#    #+#             */
-/*   Updated: 2023/08/03 21:17:40 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/04 00:21:47 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,7 @@ t_scene_object	*handle_ambient(char **elements)
 
 	obj = init_t_scene_object();
 	if (double_ptr_size(elements) != 3)
-	{
-		printf("%d\n", double_ptr_size(elements));
-		err("1error in args\n");
-	}
+		err("error in args\n");
 	obj->type = ft_strdup(elements[0]);
 	obj->intensity = atof(elements[1]);
 	f_in_range(obj->intensity, 1, 0);

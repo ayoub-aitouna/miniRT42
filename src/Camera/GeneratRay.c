@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 20:19:53 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/07/16 20:21:33 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/04 01:02:53 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	calculat_geometry(t_camera *this)
 
 	aligment = minus(this->loockat, this->position);
 	normalize(aligment);
-		this->screen_u = cross(*aligment, *this->up);
+	this->screen_u = cross(*aligment, *this->up);
 	normalize(this->screen_u);
-		this->screen_v = cross(*this->screen_u, *aligment);
+	this->screen_v = cross(*this->screen_u, *aligment);
 	normalize(this->screen_v);
 	this->screen_center = ms_addition(this->position,
 			ms_num_muliplication(aligment, this->lenght), 1);

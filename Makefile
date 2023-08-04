@@ -9,8 +9,8 @@ BONUS_OBJ   	:= $(OBJ_DIR)/App/BonusApp.o
 OBJ				:= $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC))
 Sanitize		:= #-g -fsanitize=address
 
-cc				:= gcc ${Sanitize}
-CFLAGS  		:= -Werror -Wall -Wextra
+cc				:= cc 
+CFLAGS  		:= -Werror -Wall -Wextra ${Sanitize}
 MLXFLAG 		:= -lmlx
 
 GREEN			:= \033[32m

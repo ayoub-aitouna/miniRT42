@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:48 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/03 22:02:43 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/04 01:35:37 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 int	m_exit(t_mt *m_mt)
 {
 	mlx_destroy_window(m_mt->mlx, m_mt->mlx_win);
-	printf("ESC Clicked \n");
+	printf("See You Next Time Friend :D .\n");
 	exit(0);
 }
 
@@ -47,7 +47,6 @@ int	main(int ac, char **av)
 	m_mt.image = render(m_mt.scene, m_mt.mlx, m_mt.mlx_win);
 	display(m_mt.mlx, m_mt.mlx_win, m_mt.image);
 	deletescene(m_mt.scene);
-	system("leaks miniRT");
 	mlx_key_hook(m_mt.mlx_win, key_hook, &m_mt);
 	mlx_hook(m_mt.mlx_win, 17, 0l, m_exit, &m_mt);
 	mlx_loop(m_mt.mlx);

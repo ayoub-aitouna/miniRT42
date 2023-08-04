@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScenesObjects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 00:29:11 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/03 22:15:07 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/04 01:03:25 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,37 @@
 void	_set_up_material_configurations(t_object *this, float *coefficient,
 			t_textures *texture);
 
+t_vector	*get_rotation_vec(t_vector *nrml)
+{
+	if (nrml)
+		return (vector(atan2(nrml->z, sqrt(pow(nrml->x, 2) + pow(nrml->y, 2))),
+				atan2(-nrml->x, sqrt(pow(nrml->y, 2) + pow(nrml->z, 2))),
+				atan2(nrml->y, nrml->x)));
+	else
+		return (vector(0, 0, 0));
+}
+
 t_object	*get_object_by_type(t_scene_object *s_obj)
 {
+	t_vector	*rotation_vec;
+
+	rotation_vec = get_rotation_vec(s_obj->normal);
 	if (str_equal(s_obj->type, "sp"))
-		return (create_sphere(s_obj->position, vector(0, 0, 0), s_obj->scal,
+		return (create_sphere(s_obj->position, rotation_vec, s_obj->scal,
 				convert_vec_color(s_obj->color)));
 	if (str_equal(s_obj->type, "cy"))
-		return (cylinder(s_obj->position, vector(-1.57, 0.0, 0.0), s_obj->scal,
+		return (cylinder(s_obj->position, rotation_vec, s_obj->scal,
 				convert_vec_color(s_obj->color)));
 	if (str_equal(s_obj->type, "co"))
-		return (cone(s_obj->position, vector(0, 0, 0), s_obj->scal,
+		return (cone(s_obj->position, rotation_vec, s_obj->scal,
 				convert_vec_color(s_obj->color)));
 	if (str_equal(s_obj->type, "pl"))
-		return (plane(s_obj->position, vector(0, 0, 0), vector(16.0, 16.0, 1.0),
+		return (plane(s_obj->position, rotation_vec, vector(1.0, 1.0, 1.0),
 				convert_vec_color(s_obj->color)));
 	if (str_equal(s_obj->type, "torus"))
-		return (torus(s_obj->position, vector(0, 0, 0), s_obj->scal,
+		return (torus(s_obj->position, rotation_vec, s_obj->scal,
 				convert_vec_color(s_obj->color)));
+	free(rotation_vec);
 	return (NULL);
 }
 

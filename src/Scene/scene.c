@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:53 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/02 11:29:37 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/04 01:21:12 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	set_upcamera(t_scene *this, t_scene_object *val)
 	this->m_camera = camera(val->field_of_view / 100, 1,
 			(double)WIDTH / (double)HEIGHT);
 	set_position(this->m_camera, val->position);
-	set_up(this->m_camera, vector(0.0, 0.0, 1.0));
+	set_up(this->m_camera, vector(0.001, 0.001, 1.0));
 	set_loock_at(this->m_camera, val->normal);
 	calculat_geometry(this->m_camera);
 }

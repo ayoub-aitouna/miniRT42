@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clyamani <clyamani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:22:21 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/02 10:59:47 by clyamani         ###   ########.fr       */
+/*   Updated: 2023/08/04 01:02:32 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,11 @@ double	normalize(t_vector *v)
 	double	l;
 
 	l = vector_lenght(*v);
-	v->x /= l;
-	v->y /= l;
-	v->z /= l;
+	if (l != 0)
+	{
+		v->x /= l;
+		v->y /= l;
+		v->z /= l;
+	}
 	return (l);
 }
