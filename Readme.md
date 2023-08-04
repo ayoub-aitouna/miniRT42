@@ -64,38 +64,27 @@ Light transport is a fundamental principle in ray tracing, enabling the simulati
 
 
 ## Demo
-<div style="display: flex; flex-wrap: wrap;">
-  <div style="flex: 20%">
-    <figure>
-      <img src="https://github.com/jrayoub/miniRT42/blob/main/rendred_scenes/mt_light.png?raw=true" alt="Image 1" style="width: 100%;">
-    </figure>
-  </div>
-  <div style="flex: 20%;">
-    <figure style="">
-      <img src="https://github.com/jrayoub/miniRT42/blob/main/rendred_scenes/bm.png?raw=true" alt="Image 2" style=" object-fit: fill;">
-    </figure>
-  </div>
-    <div style="flex:100%;">
-    <figure>
-      <img src="https://github.com/jrayoub/miniRT42/blob/main/rendred_scenes/bmpmap.png?raw=true" alt="Image 3" style="width: 100%;">
-    </figure>
-  </div>
-   <div style="flex: 20%">
-    <figure>
-      <img src="https://github.com/jrayoub/miniRT42/blob/main/rendred_scenes/checker.png?raw=true" alt="Image 1" style="width: 100%;">
-    </figure>
-  </div>
-  <div style="flex: 20%;">
-    <figure style="">
-      <img src="https://github.com/jrayoub/miniRT42/blob/main/rendred_scenes/cone.png?raw=true" alt="Image 2" style=" object-fit: fill;">
-    </figure>
-  </div>
-    <div style="flex:100%;">
-    <figure>
-      <img src="https://github.com/jrayoub/miniRT42/blob/main/rendred_scenes/sp.png?raw=true" alt="Image 3" style="width: 100%;">
-    </figure>
-  </div>
-</div>
+
+|         |        |
+|---------|---------|
+| ![Image 1](https://github.com/jrayoub/miniRT42/blob/main/rendred_scenes/bm.png?raw=true) | ![Image 2](https://github.com/jrayoub/miniRT42/blob/main/rendred_scenes/bmpmap.png?raw=true) |
+
+
+|         |        |
+|---------|---------|
+| ![Image 1](https://github.com/jrayoub/miniRT42/blob/main/rendred_scenes/checker.png?raw=true) | ![Image 2](https://github.com/jrayoub/miniRT42/blob/main/rendred_scenes/cone.png?raw=true) |
+
+
+
+|         |        |
+|---------|---------|
+| ![Image 1](https://github.com/jrayoub/miniRT42/blob/main/rendred_scenes/mt_light.png?raw=true) | ![Image 2](https://github.com/jrayoub/miniRT42/blob/main/rendred_scenes/sp.png?raw=true) |
+
+| |
+|---------|
+| ![Image 3](https://github.com/jrayoub/miniRT42/blob/main/rendred_scenes/reflection.png?raw=true)
+
+
 
 ## How To Use
 
