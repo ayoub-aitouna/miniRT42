@@ -6,21 +6,22 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 00:29:11 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/04 01:03:25 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/04 20:06:15 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/scene.h"
 
-void	_set_up_material_configurations(t_object *this, float *coefficient,
-			t_textures *texture);
+void		_set_up_material_configurations(t_object *this, float *coefficient,
+				t_textures *texture);
 
 t_vector	*get_rotation_vec(t_vector *nrml)
 {
 	if (nrml)
 		return (vector(atan2(nrml->z, sqrt(pow(nrml->x, 2) + pow(nrml->y, 2))),
-				atan2(-nrml->x, sqrt(pow(nrml->y, 2) + pow(nrml->z, 2))),
-				atan2(nrml->y, nrml->x)));
+						atan2(-nrml->x, sqrt(pow(nrml->y, 2) + pow(nrml->z,
+										2))),
+						atan2(nrml->y, nrml->x)));
 	else
 		return (vector(0, 0, 0));
 }
@@ -40,7 +41,7 @@ t_object	*get_object_by_type(t_scene_object *s_obj)
 		return (cone(s_obj->position, rotation_vec, s_obj->scal,
 				convert_vec_color(s_obj->color)));
 	if (str_equal(s_obj->type, "pl"))
-		return (plane(s_obj->position, rotation_vec, vector(1.0, 1.0, 1.0),
+		return (plane(s_obj->position, rotation_vec, vector(16.0, 16.0, 1.0),
 				convert_vec_color(s_obj->color)));
 	if (str_equal(s_obj->type, "torus"))
 		return (torus(s_obj->position, rotation_vec, s_obj->scal,
@@ -90,10 +91,10 @@ t_list	*objects(void *mlx, t_list *parsed)
 			if (s_obj->normal)
 				obj->normal = s_obj->normal;
 			if (s_obj->reflection && s_obj->refraction)
-				_set_up_material_configurations(obj, (float [])
-				{s_obj->reflection->x,
-					s_obj->reflection->y, s_obj->refraction->x,
-					s_obj->refraction->y}, get_texture(mlx, s_obj));
+				_set_up_material_configurations(obj,
+						(float[]){s_obj->reflection->x, s_obj->reflection->y,
+						s_obj->refraction->x, s_obj->refraction->y},
+						get_texture(mlx, s_obj));
 			else
 				_set_up_material_configurations(obj, NULL, NULL);
 			push_back(&data, ft_lstnew(obj));
@@ -111,7 +112,7 @@ void	_set_up_material_configurations(t_object *this, float *coefficient,
 	if (coefficient)
 		local_coefficient = coefficient;
 	else
-		local_coefficient = (float []){0, 0, 0, 0};
+		local_coefficient = (float[]){0, 0, 0, 0};
 	this->material->reflection_coefficient = local_coefficient[0];
 	this->material->shininess_coefficient = local_coefficient[1];
 	this->material->transparency_coefficient = local_coefficient[2];

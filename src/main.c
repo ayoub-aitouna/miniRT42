@@ -6,7 +6,7 @@
 /*   By: aaitouna <aaitouna@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 23:23:48 by aaitouna          #+#    #+#             */
-/*   Updated: 2023/08/04 01:35:37 by aaitouna         ###   ########.fr       */
+/*   Updated: 2023/08/04 19:56:22 by aaitouna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		err("invalide args !!\n");
+	check_for_file(av[1]);
 	l_scene = parse_scene(av[1]);
 	m_mt = (t_mt){.scene = NULL, .image = NULL};
 	m_mt.image = NULL;
