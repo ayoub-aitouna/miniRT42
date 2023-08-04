@@ -23,12 +23,12 @@ degree of visual realism.
 
 ## Demo
 <div style="display: flex; flex-wrap: wrap;">
-  <div style="flex: 50%">
+  <div style="flex: 20%">
     <figure>
       <img src="https://i.imgur.com/sDwp7Fy.jpg" alt="Image 1" style="width: 100%;">
     </figure>
   </div>
-  <div style="flex: 50%;">
+  <div style="flex: 20%;">
     <figure style="">
       <img src="https://i.imgur.com/sDwp7Fy.jpg" alt="Image 2" style=" object-fit: fill;">
     </figure>
@@ -38,12 +38,12 @@ degree of visual realism.
       <img src="https://i.imgur.com/sDwp7Fy.jpg" alt="Image 3" style="width: 100%;">
     </figure>
   </div>
-   <div style="flex: 50%">
+   <div style="flex: 20%">
     <figure>
       <img src="https://i.imgur.com/sDwp7Fy.jpg" alt="Image 1" style="width: 100%;">
     </figure>
   </div>
-  <div style="flex: 50%;">
+  <div style="flex: 20%;">
     <figure style="">
       <img src="https://i.imgur.com/sDwp7Fy.jpg" alt="Image 2" style=" object-fit: fill;">
     </figure>
