@@ -29,5 +29,6 @@ t_scene_object	*bns_handle_plane(char **elements);
 void			hepler_bns_handle_cycone(char **elements, t_utils *utils);
 t_scene_object	*bns_handle_cy_cone(char **elements);
 t_scene_object	*bns_handle_sphere(char **elements);
+t_scene_object	*bns_handle_torus(char **elements);
 t_list			*get_bns_file_content(int fd);
 #endif

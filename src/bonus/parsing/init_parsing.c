@@ -60,6 +60,8 @@ t_scene_object	*handle_line_bonus(char *line, t_list *list)
 		object = bns_handle_sphere(splited);
 	if (ft_strncmp(splited[0], "pl", ft_strlen(splited[0])) == 0)
 		object = bns_handle_plane(splited);
+	if (ft_strncmp(splited[0], "torus", ft_strlen(splited[0])) == 0)
+		object = bns_handle_torus(splited);
 	free_list_str(splited);
 	return (object);
 }

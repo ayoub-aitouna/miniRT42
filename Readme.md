@@ -76,6 +76,10 @@ Light transport is a fundamental principle in ray tracing, enabling the simulati
 | |
 |---------|
 | ![Image 3](https://github.com/jrayoub/miniRT42/blob/main/rendred_scenes/reflection.png?raw=true)
+| |
+|---------|
+| ![Image 4](https://github.com/jrayoub/miniRT42/blob/main/rendred_scenes/torus.png?raw=true)
+
 
 
 

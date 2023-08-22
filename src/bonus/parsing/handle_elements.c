@@ -55,6 +55,30 @@ void	hepler_bns_handle_cycone(char **elements, t_utils *utils)
 	utils->obj->normal = vec_range_check(ft_split(elements[2], ','), 1, -1);
 }
 
+
+
+t_scene_object	*bns_handle_torus(char **elements)
+{
+	t_utils	utils;
+
+	hepler_bns_handle_cycone(elements, &utils);
+	if (!utils.obj->normal)
+		err("Cone/Cylinder Normal out of range\n");
+	utils.diameter = atof(elements[3]);
+	utils.height = atof(elements[4]);
+	if (ft_strncmp(elements[0], "cy", ft_strlen(elements[0])) == 0)
+		utils.obj->scal = vector(utils.diameter / 2, utils.diameter / 2,
+				utils.height / 2);
+	else
+		utils.obj->scal = vector(utils.diameter / 2, utils.diameter / 2,
+				utils.height);
+	utils.obj->color = vec_range_check(ft_split(elements[5], ','), 255, 0);
+	if (!utils.obj->color)
+		err("Cone/Cylinder Color out of range\n");
+	set_up_material_proprieties(elements[6], elements[7], utils.obj);
+	return (utils.obj);
+}
+
 t_scene_object	*bns_handle_cy_cone(char **elements)
 {
 	t_utils	utils;
